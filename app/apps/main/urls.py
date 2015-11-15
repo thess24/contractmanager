@@ -14,7 +14,7 @@ urlpatterns = patterns('',
 	
 	url(r'^contracts/new/$', views.newcontract, name='newcontract'),
 	url(r'^contracts/all/$', views.allcontracts, name='allcontracts'),
-	
+
 	url(r'^contracts/analyze/$', views.analyzecontracts, name='analyzecontracts'),
 	url(r'^contracts/analyze/expiration/$', views.contractsexpiration, name='contractsexpiration'),
 	url(r'^contracts/analyze/progress/$', views.contractsprogress, name='contractsprogress'),
@@ -25,8 +25,5 @@ urlpatterns = patterns('',
 
 	url(r'^addtemplate/$', views.addtemplate, name='addtemplate'),
 
-	(r'^media/(?P<path>.*)$', 'django.views.static.serve',
-		{'document_root': MEDIA_ROOT}),
-	# move this outside only if in debug mode
 )
 
