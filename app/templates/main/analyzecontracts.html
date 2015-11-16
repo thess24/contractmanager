@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+
+    {% block head %}
+
+    <style type="text/css">
+
+    </style>
+
+    {% endblock %}
+
+
+
+    {% block content %}
+
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-12">
+                    <h2>Contract Analysis</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="index.html">Advocate Healthcare</a>
+                        </li>
+                        <li>
+                            <a>Contracts</a>
+                        </li>
+                        <li>
+                            <a>Analyze</a>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+
+
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="jumbotron">
+                        <h1>Contract Analysis</h1>
+                        <p>Look into analyzing all contracts</p>
+                    </div>
+                </div>
+
+            </div>
+
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                           <!--  <div class="ibox-title">
+                                <h5>Analysis Areas</h5>
+                            </div> -->
+                            <div class="ibox-content">
+                                <div class="row">
+                                    <div class="col-lg-9">
+
+                                        <h2>
+                                            <a href="{% url 'contractsexpiration' %}">
+                                                Expiration Analysis
+                                            </a>
+                                        </h2>
+
+                                        <p>Explore when contracts are expiring to better plan for the future. </p>
+  
+                                        <br>
+                                        <h2>
+                                            <a href="{% url 'contractsprogress' %}">
+                                                Progress and Status Analysis
+                                            </a>
+                                        </h2>
+                                        <p>Review statisitcs on the contract management process.  This includes looking at times to completion broken down by group for each contract type, as well as by individual.</p>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+        </div>
+
+
+    {% endblock %}
+
+    {% block scripts %}
+    <!-- Page-Level Scripts -->
+
+    {% endblock %}

@@ -70,27 +70,26 @@
                     <a href="{% url 'group' 1 %}"><i class="fa fa-diamond"></i> <span class="nav-label">My Team</span></a>
                 </li>
                 <li>
-                    <a href="{% url 'groups' %}"><i class="fa fa-diamond"></i> <span class="nav-label">All Groups</span></a>
+                    <a href="{% url 'groups' %}"><i class="fa fa-sitemap"></i> <span class="nav-label">All Groups</span></a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Contracts</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li><a href="">Add a contract</a></li>
                         <li><a href="{% url 'allcontracts' %}">View all contracts</a></li>
-                        <li><a href="">View Grabbed</a></li>
                     </ul>
                 </li>
 
                 <li>
-                    <a href="grid_options.html"><i class="fa fa-laptop"></i> <span class="nav-label">Analysis</span></a>
+                    <a href="{% url 'analyzecontracts' %}"><i class="fa fa-laptop"></i> <span class="nav-label">Analysis</span></a>
                 </li>
-                <li class="active">
+               <!--  <li class="active">
                     <a href="#"><i class="fa fa-table"></i> <span class="nav-label">Workflow</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a href="">Process Measurement</a></li>
                         <li class="active"><a href="table_data_tables.html">Analysis</a></li>
                     </ul>
-                </li>
+                </li> -->
             
             </ul>
 

@@ -54,7 +54,7 @@
                                 <div class="col-lg-4">
                                     <dl class="dl-horizontal">
 
-                                        <dt>Current Holder:</dt> <dd>Alex Smith</dd>
+                                        <dt>Current Holder:</dt> <dd>Taylor Hess</dd>
                                         <dt>Amount:</dt> <dd>  $20,000</dd>
                                         <dt>Contract Type:</dt> <dd>Medical Directorship</dd>
                                         <dt>Version:</dt> <dd>  v1.4.2 </dd>
@@ -141,8 +141,7 @@
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>Current Contract</h5>
-                            <button id="edit" class="btn btn-primary btn-xs m-l-sm" onclick="edit()" type="button">Edit</button>
-                            <button id="save" class="btn btn-primary  btn-xs" onclick="save()" type="button">Save</button>
+                            <a id="edit" class="btn btn-primary btn-xs m-l-sm" href="{% url 'editcontract' 1 %}" type="button">Edit</a>
                             <button id="save" class="btn btn-danger pull-right btn-xs" type="button"><span class='fa fa-file-pdf-o'></span>  Export to PDF</button>
                         </div>
                         <div class="ibox-content no-padding">
@@ -194,21 +193,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="gradeX">
-                        <td>
-                            <span class='btn btn-xs btn-primary table-btn'>View</span>
-                            <span class='btn btn-xs btn-warning table-btn'>Differences</span>
-                        </td>
-                        <td>5</td>
-                        <td>Trident</td>
-                        <td>12/1/2014
-                        </td>
-                        <td>Taylor</td>
-                    </tr>
                     <tr class="gradeC">
                         <td>
                             <span class='btn btn-xs btn-primary table-btn'>View</span>
-                            <span class='btn btn-xs btn-warning table-btn'>Differences</span>
+                            <a class='btn btn-xs btn-warning table-btn' href="{% url 'diffcontracts' 1 2 %}">Differences</a>
                         </td>
                         <td>4</td>
                         <td>Trident</td>
@@ -219,7 +207,7 @@
                     <tr class="gradeA">
                         <td>
                             <span class='btn btn-xs btn-primary table-btn'>View</span>
-                            <span class='btn btn-xs btn-warning table-btn'>Differences</span>
+                            <a class='btn btn-xs btn-warning table-btn' href="{% url 'diffcontracts' 1 2 %}">Differences</a>
                         </td>
                         <td>3</td>
                         <td>Trident</td>
@@ -230,7 +218,7 @@
                     <tr class="gradeA">
                         <td>
                             <span class='btn btn-xs btn-primary table-btn'>View</span>
-                            <span class='btn btn-xs btn-warning table-btn'>Differences</span>
+                            <a class='btn btn-xs btn-warning table-btn' href="{% url 'diffcontracts' 1 2 %}">Differences</a>
                         </td>
                         <td>2</td>
                         <td>Presto</td>
@@ -240,7 +228,7 @@
                     <tr class="gradeA">
                         <td>
                             <span class='btn btn-xs btn-primary table-btn'>View</span>
-                            <span class='btn btn-xs btn-warning table-btn'>Differences</span>
+                            <a class='btn btn-xs btn-warning table-btn' href="{% url 'diffcontracts' 1 2 %}">Differences</a>
                         </td>
                         <td>1</td>
                         <td>Presto</td>
