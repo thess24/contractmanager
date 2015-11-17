@@ -3,6 +3,9 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 
 
+def test(request):
+	context= {}
+	return render(request, 'main/test.html', context)
 
 def index(request):
 	context= {}

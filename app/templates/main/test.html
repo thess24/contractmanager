@@ -1,0 +1,203 @@
+{% extends 'base.html' %}
+
+
+    {% block head %}
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/summernote/0.6.16/summernote.min.css">
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/summernote/0.6.16/summernote-bs3.min.css">
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.1/skins/all.css">
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+
+    
+    {% endblock %}
+
+
+
+    {% block content %}
+
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-12">
+                    <h2>Template Testing</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="index.html">Advocate Healthcare</a>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+
+
+            <div class='row'>
+                <div class="col-lg-12">
+
+                    <div class="ibox float-e-margins">
+
+                        <div class="ibox-content">
+
+
+
+        <label for="inputname" class=" control-label">Name</label>
+          <input type="text" class="form-control" id="inputname" placeholder="Name">
+        <label for="inputcontract_type" class="control-label">Contract Type</label>
+          <input type="text" class="form-control" id="inputcontract_type" placeholder="Contract Type">
+
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+            <div class="row">
+                <div class="col-lg-6">
+
+                    <div class="ibox float-e-margins">
+
+                        <div class="ibox-content">
+
+                            <h3>Template Area</h3>
+                            <div class="summernote">
+                                <h3>Lorem Ipsum is simply</h3>
+                                dummy text of the printing and typesetting industry. <strong>Lorem Ipsum has been the industry's</strong> standard dummy text ever since the 1500s,
+                                when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic
+                                typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with
+                                <br/>
+                                <br/>
+                                <ul>
+                                    <li>Remaining essentially unchanged</li>
+                                    <li>Make a type specimen book</li>
+                                    <li>Unknown printer</li>
+                                </ul>
+                                <p>Name: {% templatetag openvariable %}name{% templatetag closevariable %}</p>
+                                <p>Contract Type: {% templatetag openvariable %}contract_type{% templatetag closevariable %}</p>                                
+                            </div>
+
+                            <button class='btn btn-primary' id='renderpreview'>Render Preview</button>
+
+
+                        </div>
+                    </div>
+                </div>
+  
+                <div class="col-lg-6">
+
+                    <div class="ibox float-e-margins">
+
+                        <div class="ibox-content">
+
+                            <h3>Live Contract Preview:</h3>
+                            <div class="outputarea">
+                                <h3>Lorem Ipsum is simply</h3>
+                                dummy text of the printing and typesetting industry. <strong>Lorem Ipsum has been the industry's</strong> standard dummy text ever since the 1500s,
+                                when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic
+                                typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with
+                                <br/>
+                                <br/>
+                                <ul>
+                                    <li>Remaining essentially unchanged</li>
+                                    <li>Make a type specimen book</li>
+                                    <li>Unknown printer</li>
+                                </ul>
+                                <p>Name: </p>
+                                <p>Contract Type: </p>
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                           
+
+            </div>
+            <!-- end row -->
+
+        </div>
+        <!-- end wrapper -->
+
+
+
+
+
+
+       
+
+
+    {% endblock %}
+
+    {% block scripts %}
+
+    <!-- Page-Level Scripts -->
+    <script type="text/javascript" src='//cdnjs.cloudflare.com/ajax/libs/summernote/0.6.16/summernote.min.js'></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.1/icheck.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
+    <script type="text/javascript" src='//cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.0/mustache.min.js'></script>
+
+
+
+    <script>
+
+
+        $(document).ready(function(){
+
+            $('.summernote').summernote();
+
+       });
+        var edit = function() {
+            $('.click2edit').summernote({focus: true});
+        };
+        var save = function() {
+            var aHTML = $('.click2edit').code(); //save HTML If you need(aHTML: array).
+            $('.click2edit').destroy();
+        };
+
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+
+
+
+
+    // Rendering Mustache Views
+
+
+      $(document).ready(function(){
+
+            $('#renderpreview').click( function(){
+
+                var cname = $('#inputname').val();
+                var ctype = $('#inputcontract_type').val();
+                var template = $('.note-editable')[0].innerHTML;
+                var output = Mustache.render(template, {name:cname, contract_type:ctype});
+                $('.outputarea').html(output);
+                console.log(cname);
+            });
+
+      });
+
+
+    </script>
+
+    {% endblock %}
+
+
+
+
