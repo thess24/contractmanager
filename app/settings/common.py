@@ -258,8 +258,8 @@ WSGI_APPLICATION = 'wsgi.application'
 
 # ########## ALL AUTH
 
-# LOGIN_REDIRECT_URL = "/"
-# ACCOUNT_EMAIL_REQUIRED = True
+LOGIN_REDIRECT_URL = "/"
+ACCOUNT_EMAIL_REQUIRED = True
 # # default settings are very good
 
 
