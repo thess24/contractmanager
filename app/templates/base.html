@@ -81,15 +81,30 @@
                 </li>
 
                 <li>
-                    <a href="{% url 'analyzecontracts' %}"><i class="fa fa-laptop"></i> <span class="nav-label">Analysis</span></a>
+                    <a href="{% url 'analyzecontracts' %}"><i class="fa fa-area-chart"></i> <span class="nav-label">Analysis</span></a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-table"></i> <span class="nav-label">Templates</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li><a href="{% url 'addtemplate' %}">Add A Template</a></li>
+                        <li><a href="{% url 'viewtemplates' %}">View All Templates</a></li>
                     </ul>
                 </li>
-            
+                <li>
+                    <a href="#"><i class="fa fa-code-fork"></i> <span class="nav-label">Workflows</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="{% url 'newcontract' %}">Manage Current Workflows</a></li>
+                        <li><a href="{% url 'allcontracts' %}">Add New Workflows</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-bell"></i> <span class="nav-label">Alerts</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="{% url 'newcontract' %}">Manage Alerts</a></li>
+                        <li><a href="{% url 'allcontracts' %}">Add alerts</a></li>
+                    </ul>
+                </li>
+
             </ul>
 
         </div>

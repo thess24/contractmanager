@@ -19,6 +19,10 @@
 
 <style type="text/css">
 
+#tagarea{
+    padding: 20px;
+}
+
 </style>
     {% endblock %}
 
@@ -51,20 +55,20 @@
 
                     <div class="ibox-content">
 
-                    <form method="get">
-
-<!--                         <div style='padding:30px'>
-                            <div class='formlabel'>Template Name:</div>
-                                <div class="form-group">
-                                    <div class="col-sm-10"><input type="text" class="form-control"></div>
-
-                                </div>
-
-                        </div> -->
+                    <!-- <form method=""> -->
                         
                         <h3>Template Name:</h3>
                         <input type='text' class='form-control'>
                         <br>
+
+
+                        <div class="i-checks">
+                                        <label> <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios"> Base Contract</label>
+                                        <label> <input type="radio" value="option2" id="optionsRadios2" name="optionsRadios"> Add On Template</label>
+
+                        </div>
+                        <br>
+
                         <h3>Template Content:</h3>
                         <div class="summernote">
                             <h3>Lorem Ipsum is simply</h3>
@@ -80,8 +84,14 @@
                             </ul>
                         </div>
 
+                        <br>
+                        <h3>Inputs:</h3>
+                        <div id='tagarea'></div>
+
                         <button class='btn btn-danger btn-lrg'>Create New Template</button>
-                    </form>
+                        <button class='btn' onclick="go()">Render Template</button>
+
+                    <!-- </form> -->
 
 
 
@@ -225,9 +235,43 @@
 
 
 
+
+
+
+
+
+// Template tag parsing and rendering of inputs and highlighting data
+
+    function parseTemplateTags() {
+        s = $('.note-editable').html();
+        var tags = s.match(/{\{\s?\w+\s?}\}/g);
+        return tags;
+    };
+
+    function renderTags(tags){
+        tags.forEach( function(element){
+            var htmltoadd = "<span class='label' style='display:inline-block'>"+element+"</span>";
+            $('#tagarea').append(htmltoadd);
+        });
+    };
+
+    function highlightTags() {
+        var highlightedtags = s.replace(/{\{\s?\w+\s?}\}/g,"<b>$&</b>");
+        $('.note-editable').html(highlightedtags);
+    };
+
+    function go(){
+        var tags = parseTemplateTags();
+        highlightTags();
+        renderTags(tags);
+    };
+
+
+// need to remove "go" and make this work on keyup when typing.  Need to add tags to array and only add
+// to tags area if it was not in array before (or delete all and reload)
+// make sure labels load without braces {{}}
+
     </script>
     {% endblock %}
-
-
 
 

@@ -43,6 +43,10 @@ def contractsprogress(request):
 	context= {}
 	return render(request, 'main/contractsprogress.html', context)
 
+def compensationcompare(request):
+	context= {}
+	return render(request, 'main/compensationcompare.html', context)
+
 def diffcontracts(request, contractid1, contractid2):
 	context= {'contractid1':contractid1, 'contractid2': contractid2}
 	return render(request, 'main/diffcontracts.html', context)
@@ -55,6 +59,18 @@ def contract(request, contractid):
 	context= {}
 	return render(request, 'main/contract.html', context)
 
+def workflows(request):
+	context= {}
+	return render(request, 'main/workflows.html', context)
+
+def alerts(request):
+	context= {}
+	return render(request, 'main/alerts.html', context)
+
 def addtemplate(request):
 	context= {}
 	return render(request, 'main/addtemplate.html', context)
+
+def viewtemplates(request):
+	context= {}
+	return render(request, 'main/viewtemplates.html', context)

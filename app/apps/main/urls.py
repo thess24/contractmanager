@@ -19,12 +19,18 @@ urlpatterns = patterns('',
 	url(r'^contracts/analyze/$', views.analyzecontracts, name='analyzecontracts'),
 	url(r'^contracts/analyze/expiration/$', views.contractsexpiration, name='contractsexpiration'),
 	url(r'^contracts/analyze/progress/$', views.contractsprogress, name='contractsprogress'),
+	url(r'^contracts/analyze/compensation/$', views.compensationcompare, name='compensationcompare'),
 
 	url(r'^contracts/diff/(?P<contractid1>.+)/(?P<contractid2>.+)/$', views.diffcontracts, name='diffcontracts'),
 	url(r'^contracts/(?P<contractid>.+)/edit$', views.editcontract, name='editcontract'),
 	url(r'^contracts/(?P<contractid>.+)/$', views.contract, name='contract'),
 
+	url(r'^workflows/$', views.workflows, name='workflows'),
+
+	url(r'^alerts/$', views.alerts, name='alerts'),
+
 	url(r'^addtemplate/$', views.addtemplate, name='addtemplate'),
+	url(r'^viewtemplates/$', views.viewtemplates, name='viewtemplates'),
 
 )
 
