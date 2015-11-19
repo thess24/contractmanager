@@ -63,7 +63,15 @@ def workflows(request):
 	context= {}
 	return render(request, 'main/workflows.html', context)
 
+def addworkflow(request):
+	context= {}
+	return render(request, 'main/addworkflow.html', context)
+
 def alerts(request):
+	context= {}
+	return render(request, 'main/alerts.html', context)
+
+def alerthistory(request):
 	context= {}
 	return render(request, 'main/alerts.html', context)
 

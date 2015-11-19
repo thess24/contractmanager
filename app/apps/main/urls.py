@@ -26,8 +26,10 @@ urlpatterns = patterns('',
 	url(r'^contracts/(?P<contractid>.+)/$', views.contract, name='contract'),
 
 	url(r'^workflows/$', views.workflows, name='workflows'),
+	url(r'^workflows/add/$', views.addworkflow, name='addworkflow'),
 
 	url(r'^alerts/$', views.alerts, name='alerts'),
+	url(r'^alerts/history$', views.alerthistory, name='alerthistory'),
 
 	url(r'^addtemplate/$', views.addtemplate, name='addtemplate'),
 	url(r'^viewtemplates/$', views.viewtemplates, name='viewtemplates'),

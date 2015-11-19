@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+
+
+    {% block head %}
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.1/skins/all.css">
+    <style type="text/css">
+
+    .alerts-btn{
+        margin-bottom: 0px;
+    }
+
+    </style>
+
+    {% endblock %}
+
+
+
+    {% block content %} 
+
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-12">
+                    <h2>Alerts</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="">Advocate Healthcare</a>
+                        </li>
+                        <li>
+                            <a>Alerts</a>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+
+        <div class='wrapper wrapper-content animated fadeInRight'
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">
+                           
+
+
+
+
+
+                        <div class="vote-item">
+                            <div class="row">
+                                <div class="col-md-10">
+
+                                    <a href="#" class="vote-title">
+                                        A new contract was just sent to you
+                                    </a>
+                                    <div class="vote-info">
+                                        <i class="fa fa-clock-o"></i> <a href="#">1 Hours ago</a>
+                                        <i class="fa fa-edit"></i> <a href="{% url 'contract' 1 %}">123124124 Dr Sacks - Medical Directorship</a>
+                                        <button class='btn btn-xs alerts-btn'>Mark as Handled</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 ">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="vote-item">
+                            <div class="row">
+                                <div class="col-md-10">
+
+                                    <a href="#" class="vote-title">
+                                        This contract is expiring in 8 Days
+                                    </a>
+                                    <div class="vote-info">
+                                        <i class="fa fa-clock-o"></i> <a href="#">1 Hours ago</a>
+                                        <i class="fa fa-edit"></i> <a href="{% url 'contract' 1 %}">123124124 Dr Sacks - Medical Directorship</a>
+                                        <button class='btn btn-xs alerts-btn' >Mark as Handled</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 ">
+                                    <div class="vote-icon">
+                                        <i class="fa fa-warning"style='color:orange'> </i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                               <div class="vote-item">
+                            <div class="row">
+                                <div class="col-md-10">
+
+                                    <a href="#" class="vote-title">
+                                        This contract has not been signed in two weeks
+                                    </a>
+                                    <div class="vote-info">
+                                        <i class="fa fa-clock-o"></i> <a href="#">1 Hours ago</a>
+                                        <i class="fa fa-edit"></i> <a href="{% url 'contract' 1 %}">123124124 Dr Sacks - Medical Directorship</a>
+                                        <button class='btn btn-xs alerts-btn'>Mark as Handled</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 ">
+                                    <div class="vote-icon">
+                                        <i class="fa fa-warning" style='color:red'> </i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    {% endblock %}
+
+    {% block scripts %}
+    <!-- Page-Level Scripts -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.1/icheck.min.js"></script>
+    <script>
+
+        $(document).ready(function() {
+            $('.dataTables-example').DataTable({
+            });
+
+        });
+
+       $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+
+
+    </script>
+    {% endblock %}
