@@ -34,5 +34,28 @@ urlpatterns = patterns('',
 	url(r'^addtemplate/$', views.addtemplate, name='addtemplate'),
 	url(r'^viewtemplates/$', views.viewtemplates, name='viewtemplates'),
 
+	
+
+	url(r'^addteam/$', views.addteam, name='addteam'),
+	url(r'^adduser/$', views.adduser, name='adduser'),
+	url(r'^addphysician/$', views.addphysician, name='addphysician'),
+	url(r'^addphysiciangroup/$', views.addphysiciangroup, name='addphysiciangroup'),
+	url(r'^addsite/$', views.addsite, name='addsite'),
+
+
+	url(r'^settings/$', views.settings, name='settings'),
+
 )
 
+
+
+
+
+################## TODO #################
+
+# edit / delete of...
+	# sites
+	# teams
+# filter people you can add based on system they are in
+# make forms look good
+# physician form is takes two forms and adds them together

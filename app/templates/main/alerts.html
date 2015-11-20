@@ -40,10 +40,26 @@
                         <div class="ibox-content">
                            
 
+                        {% for alert in alerts %}
+                        <div class="vote-item">
+                            <div class="row">
+                                <div class="col-md-10">
 
+                                    <a href="#" class="vote-title">
+                                        {{alert.name}}
+                                    </a>
+                                    <div class="vote-info">
+                                        <span><i class="fa fa-clock-o"></i> {{alert.created_at}}</span>
+                                        <i class="fa fa-edit"></i> <a href="{% url 'contract' alert.contract.id %}">{{alert.contract}}</a>
+                                        <button class='btn btn-xs alerts-btn'>Mark as Handled</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 ">
 
-
-
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
                         <div class="vote-item">
                             <div class="row">
                                 <div class="col-md-10">
