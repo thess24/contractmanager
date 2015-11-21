@@ -10,12 +10,8 @@
 
     }
 
-    #current-input-fields{
 
-    }
-
-
-    </style>
+    </style> 
 
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/summernote/0.6.16/summernote.min.css">
 
@@ -224,75 +220,23 @@
                                 <th></th>
                                 <th>Name</th>
                                 <th>Date</th>
-                                <th>Preview</th>
+                                <th>Add On?</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>
-                                    <div class="i-checks">
-                                        <input type="checkbox" >
-                                    </div>
-                                </td>
-                                <td>Template 1
-                                </td>
-                                <td>1/1/2009</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal5">Preview</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="i-checks">
-                                        <input type="checkbox" >
-                                    </div>
-                                </td>
-                                <td>Template 1
-                                </td>
-                                <td>1/1/2009</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal5">Preview</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="i-checks">
-                                        <input type="checkbox" >
-                                    </div>
-                                </td>
-                                <td>Template 1
-                                </td>
-                                <td>1/1/2009</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal5">Preview</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="i-checks">
-                                        <input type="checkbox" >
-                                    </div>
-                                </td>
-                                <td>Template 1
-                                </td>
-                                <td>1/1/2009</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal5">Preview</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="i-checks">
-                                        <input type="checkbox" >
-                                    </div>
-                                </td>
-                                <td>Template 1
-                                </td>
-                                <td>1/1/2009</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal5">Preview</button>
-                                </td>
-                            </tr>
+                            {% for t in addon_templates %}
+                                <tr>
+                                    <td>
+                                        <div class="i-checks">
+                                            <input type="checkbox" >
+                                        </div>
+                                    </td>
+                                    <td>{{t.name}}</td>
+                                    <td>{{t.created_at}}</td>
+                                    <td>{{t.add_on}}</td>
+                                    <td><span class="btn btn-xs btn-primary table-btn">View</span></td>
+                                </tr>
+                            {% endfor %}
                             </tbody>
                             </table>
                         </div>

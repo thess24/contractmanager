@@ -56,6 +56,12 @@ urlpatterns = patterns('',
 # edit / delete of...
 	# sites
 	# teams
+	# phys
+	# physgroup
+	# users
 # filter people you can add based on system they are in
 # make forms look good
-# physician form is takes two forms and adds them together
+# physician/user forms takes two forms and adds them together
+# ability for admin to reset user password
+# finish addtemplate html file- modal popup from ajax, copy data on load, render on pageup
+# fix footer

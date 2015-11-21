@@ -55,44 +55,45 @@
 
                     <div class="ibox-content">
 
-                    <!-- <form method=""> -->
                         
-                        <h3>Template Name:</h3>
-                        <input type='text' class='form-control'>
-                        <br>
+                        <form method='post' id='new_template_form'> {% csrf_token %}
+
+                                {{form.non_field_errors}}
+
+                                {{form.name.errors}}
+                                <h3>Template Name:</h3>
+                                {{form.name}}
+                                <br>
+
+                                {{form.short_desc.erros}}
+                                <h3>Template Short Description:</h3>
+                                {{form.short_desc}}
+                                <br>
+
+                                {{form.html}}
+                                {{form.add_on}}
+                                <div class="i-checks">
+                                                <label> <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios"> Base Contract</label>
+                                                <label> <input type="radio" value="option2" id="optionsRadios2" name="optionsRadios"> Add On Template</label>
+
+                                </div>
+                                <br>
+
+                                {{form.html.errors}}
+                                <h3>Template Content:</h3>
+                                <div class="summernote">
+
+                                </div>
+
+                                <br>
+                                <h3>Inputs:</h3>
+                                <div id='tagarea'></div>
+
+                                <button class='btn btn-danger btn-lrg' type='submit' name='add_template'>Create New Template</button>
+                                <button class='btn' onclick="go()">Render Template</button>
 
 
-                        <div class="i-checks">
-                                        <label> <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios"> Base Contract</label>
-                                        <label> <input type="radio" value="option2" id="optionsRadios2" name="optionsRadios"> Add On Template</label>
-
-                        </div>
-                        <br>
-
-                        <h3>Template Content:</h3>
-                        <div class="summernote">
-                            <h3>Lorem Ipsum is simply</h3>
-                            dummy text of the printing and typesetting industry. <strong>Lorem Ipsum has been the industry's</strong> standard dummy text ever since the 1500s,
-                            when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic
-                            typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with
-                            <br/>
-                            <br/>
-                            <ul>
-                                <li>Remaining essentially unchanged</li>
-                                <li>Make a type specimen book</li>
-                                <li>Unknown printer</li>
-                            </ul>
-                        </div>
-
-                        <br>
-                        <h3>Inputs:</h3>
-                        <div id='tagarea'></div>
-
-                        <button class='btn btn-danger btn-lrg'>Create New Template</button>
-                        <button class='btn' onclick="go()">Render Template</button>
-
-                    <!-- </form> -->
-
+                        </form>
 
 
                     </div>
@@ -111,6 +112,8 @@
                     </div>
                     <div class="ibox-content">
 
+
+
                         <div class="table-responsive">
                             <table class="table table-hover " >
                             <thead>
@@ -118,72 +121,29 @@
                                 <th></th>
                                 <th>Name</th>
                                 <th>Date</th>
-                                <th>Preview</th>
+                                <th>Add On?</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>
-                                    <div class="i-checks">
-                                        <input type="checkbox" >
-                                    </div>
-                                </td>
-                                <td>Template 1
-                                </td>
-                                <td>1/1/2009</td>
-                                <td><span class="btn btn-xs btn-primary table-btn">View</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="i-checks">
-                                        <input type="checkbox" >
-                                    </div>
-                                </td>
-                                <td>Template 1
-                                </td>
-                                <td>1/1/2009</td>
-                                <td><span class="btn btn-xs btn-primary table-btn">View</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="i-checks">
-                                        <input type="checkbox" >
-                                    </div>
-                                </td>
-                                <td>Template 1
-                                </td>
-                                <td>1/1/2009</td>
-                                <td><span class="btn btn-xs btn-primary table-btn">View</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="i-checks">
-                                        <input type="checkbox" >
-                                    </div>
-                                </td>
-                                <td>Template 1
-                                </td>
-                                <td>1/1/2009</td>
-                                <td><span class="btn btn-xs btn-primary table-btn">View</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="i-checks">
-                                        <input type="checkbox" >
-                                    </div>
-                                </td>
-                                <td>Template 1
-                                </td>
-                                <td>1/1/2009</td>
-                                <td><span class="btn btn-xs btn-primary table-btn">View</span></td>
-                            </tr>
+                            {% for t in templates %}
+                                <tr>
+                                    <td>
+                                        <div class="i-checks">
+                                            <input type="checkbox" >
+                                        </div>
+                                    </td>
+                                    <td>{{t.name}}</td>
+                                    <td>{{t.created_at}}</td>
+                                    <td>{{t.add_on}}</td>
+                                    <td><span class="btn btn-xs btn-primary table-btn">View</span></td>
+                                </tr>
+                            {% endfor %}
                             </tbody>
                             </table>
                         </div>
 
 
 
-                        <button class='btn btn-lg'>Add to Template Content</button>
                     </div>
                 </div>
 
@@ -267,6 +227,38 @@
     };
 
 
+
+
+
+$('#new_template_form').submit(function() {
+    // do these right before form submit
+    
+    // copies from summernote area into form
+    function copySummerNoteToTextArea() {
+        var s = $('.note-editable').html();
+        $('#id_html').val(s);
+    };
+
+
+    // sets addon value from other (better looking) buttons
+    function setAddOn() {
+       if ($('#optionsRadios2').is(':checked')){
+            $("#id_add_on").prop("checked", true);
+       }
+    };
+
+
+    copySummerNoteToTextArea();
+    setAddOn();
+
+    return true
+})
+
+
+//  !!!!!! NEED TO COPY what is in hidden html area into SUMMERNOT DIV ON PAGE LOAD
+
+
+// need to make modal work for viewing templates (w/ ajax? or just load all?)
 // need to remove "go" and make this work on keyup when typing.  Need to add tags to array and only add
 // to tags area if it was not in array before (or delete all and reload)
 // make sure labels load without braces 

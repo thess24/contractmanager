@@ -45,22 +45,28 @@
                             </h2> -->
 
                             <form method='post'> {% csrf_token %}
-                                {{form}}
+                                {{userform}}
+                                {{namesform}} 
+                                {{physicianform}}
                                 <button type='submit' name='addphysician'>Add Site</button>
                             </form>
-                           
+                            
 
                         <div class="table-responsive">
                             <table class="table table-hover" >
                             <thead>
                             <tr>
-                                <th>Name</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
 
                             </tr>
                             </thead>
                             <tbody>
                             {% for doc in doctors %}    
                             <tr>
+                                <td>{{doc.user.first_name}}</td>
+                                <td>{{doc.user.last_name}}</td>
                                 <td>{{doc.user.email}}</td>
                                 <td>
                                     <span class="btn btn-xs btn-warning">Edit</span>

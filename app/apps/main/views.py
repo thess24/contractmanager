@@ -2,6 +2,10 @@ from django.shortcuts import render, get_object_or_404, render_to_response
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 import models
+from django.contrib.auth.forms import UserCreationForm
+
+
+
 
 def test(request):
 	context= {}
@@ -24,7 +28,11 @@ def group(request, groupname):
 	return render(request, 'main/group.html', context)
 
 def newcontract(request):
-	context= {}
+	all_templates = models.Template.objects.filter(system=request.user.userprofile.system)
+	addon_templates = all_templates.filter(add_on=True)
+	base_templates = all_templates.filter(add_on=False)
+
+	context= {'addon_templates':addon_templates, 'base_templates':base_templates}
 	return render(request, 'main/newcontract.html', context)
 
 def allcontracts(request):
@@ -68,17 +76,29 @@ def addworkflow(request):
 	return render(request, 'main/addworkflow.html', context)
 
 def alerts(request):
-	alerts = models.Alert.objects.filter(user=request.user,active=True)
+	alerts = models.Alert.objects.filter(user=request.user, active=True)
 	context= {'alerts':alerts}
 	return render(request, 'main/alerts.html', context)
 
 def alerthistory(request):
-	alerts = models.Alert.objects.filter(user=request.user,active=False)
+	alerts = models.Alert.objects.filter(user=request.user, active=False)
 	context= {'alerts':alerts}
 	return render(request, 'main/alerts.html', context)
 
 def addtemplate(request):
-	context= {}
+	templates = models.Template.objects.filter(system=request.user.userprofile.system)
+	form = models.TemplateForm()
+
+	if request.method=='POST':
+		if 'add_template' in request.POST:
+			form = models.TemplateForm(request.POST)
+			if form.is_valid():
+				instance = form.save(commit=False)
+				instance.system = request.user.userprofile.system
+				instance.save()
+
+
+	context= {'form':form, 'templates':templates}	
 	return render(request, 'main/addtemplate.html', context)
 
 def viewtemplates(request):
@@ -86,7 +106,7 @@ def viewtemplates(request):
 	return render(request, 'main/viewtemplates.html', context)
 
 def addteam(request):
-	teams = models.Team.objects.filter(system = request.user.userprofile.system)
+	teams = models.Team.objects.filter(system=request.user.userprofile.system)
 	form = models.TeamForm()
 
 	if request.method=='POST':
@@ -100,38 +120,58 @@ def addteam(request):
 	context= {'form':form, 'teams':teams}
 	return render(request, 'main/addteam.html', context)
 
-
-	context = {'expert':expert,'requestform':requestform, 'talktimeform':talktimeform}
-	return render(request, 'main/requesttalk.html',context)
-
 def adduser(request):
-	users = models.UserProfile.objects.filter(system = request.user.userprofile.system)
-	form = models.UserForm()
+	users = models.UserProfile.objects.filter(system=request.user.userprofile.system)
+	userform = UserCreationForm()
+	namesform = models.NamesForm()
+	userprofileform = models.UserProfileForm()
 
 	if request.method=='POST':
 		if 'add_user' in request.POST:
-			form = models.UserForm(request.POST)
-			if form.is_valid():
-				instance = form.save(commit=False)
+			userform = UserCreationForm(request.POST)
+			namesform = models.NamesForm(request.POST)
+			userprofileform = models.UserProfileForm(request.POST)
+
+			if all([userprofileform.is_valid(), userform.is_valid(), namesform.is_valid()]):
+				user = userform.save(commit=False)
+				user.first_name = namesform.cleaned_data['first_name']
+				user.last_name = namesform.cleaned_data['last_name']
+				user.email = namesform.cleaned_data['email']
+				user.save()
+
+				instance = userprofileform.save(commit=False)
+				instance.user = user
 				instance.system = request.user.userprofile.system
 				instance.save()
 
-	context= {'users':users, 'form':form}
+	context= {'users':users, 'userprofileform':userprofileform, 'namesform':namesform, 'userform':userform}
 	return render(request, 'main/adduser.html', context)
 
 def addphysician(request):
-	doctors = models.Physician.objects.filter(system = request.user.userprofile.system)
-	form = models.PhysicianForm()
+	doctors = models.Physician.objects.filter(system=request.user.userprofile.system)
+	userform = UserCreationForm()
+	namesform = models.NamesForm()
+	physicianform = models.PhysicianForm()
 
 	if request.method=='POST':
 		if 'addphysician' in request.POST:
-			form = models.PhysicianForm(request.POST)
-			if form.is_valid():
-				instance = form.save(commit=False)
+			userform = UserCreationForm(request.POST)
+			namesform = models.NamesForm(request.POST)
+			physicianform = models.PhysicianForm(request.POST)
+
+			if all([physicianform.is_valid(), userform.is_valid(), namesform.is_valid()]):
+				user = userform.save(commit=False)
+				user.first_name = namesform.cleaned_data['first_name']
+				user.last_name = namesform.cleaned_data['last_name']
+				user.email = namesform.cleaned_data['email']
+				user.save()
+
+				instance = physicianform.save(commit=False)
 				instance.system = request.user.userprofile.system
+				instance.user = user
 				instance.save()
 
-	context= {'doctors':doctors, 'form':form}
+	context = {'doctors':doctors, 'physicianform':physicianform, 'namesform':namesform, 'userform':userform}
 	return render(request, 'main/addphysician.html', context)
 
 # def addphysician(request):
