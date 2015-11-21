@@ -6,6 +6,8 @@ import os
 from django.core.exceptions import ValidationError
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.conf import settings
+from django.contrib.auth.forms import UserCreationForm
+
 
 class HealthSystem(models.Model):
 	name = models.CharField(max_length=100)
@@ -265,31 +267,38 @@ class NamesForm(forms.Form):
 	# consider doing this instead
 	# http://jessenoller.com/blog/2011/12/19/quick-example-of-extending-usercreationform-in-django
 
-# class ExtendedUserCreateForm(UserCreationForm):
-#     email = forms.EmailField(required=True)
-# 	first_name = forms.CharField(max_length=30, required=True)
-# 	last_name = forms.CharField(max_length=30, required=True)
+class ExtendedUserCreateForm(UserCreationForm):
+	email = forms.EmailField(required=True)
+	first_name = forms.CharField(max_length=30, required=True)
+	last_name = forms.CharField(max_length=30, required=True)
 
-#     class Meta:
-#         model = User
-#         fields = ("username", "email", "password1", "password2", "first_name", "last_name")
-# 		widgets = {
-# 			'username': forms.TextInput(attrs={'class': 'form-control'}),
-# 			'email': forms.EmailInput(attrs={'class': 'form-control'}),
-# 			'password1': forms.TextInput(attrs={'class': 'form-control'}),
-# 			'password2': forms.TextInput(attrs={'class': 'form-control'}),
-# 			'first_name': forms.TextInput(attrs={'class': 'form-control'}),
-# 			'last_name': forms.TextInput(attrs={'class': 'form-control'}),
-# 		}
+	class Meta:
+		model = User
+		fields = ("username", "email", "password1", "password2", "first_name", "last_name")
+		# for some reason, widgets do not work when inheriting from usercreationform, need to user init
+		# to set attributes
 
-#     def save(self, commit=True):
-#         user = super(UserCreateForm, self).save(commit=False)
-#         user.email = self.cleaned_data["email"]
-#         user.first_name = self.cleaned_data["first_name"]
-#         user.last_name = self.cleaned_data["last_name"]
-#         if commit:
-#             user.save()
-#         return user
+	def __init__(self, *args, **kwargs):
+		super(ExtendedUserCreateForm, self).__init__(*args, **kwargs)
+		print self.fields
+		self.fields['username'].widget.attrs['class'] = 'form-control'
+		self.fields['email'].widget.attrs['class'] = 'form-control'
+		self.fields['password1'].widget.attrs['class'] = 'form-control'
+		self.fields['password2'].widget.attrs['class'] = 'form-control'
+		self.fields['first_name'].widget.attrs['class'] = 'form-control'
+		self.fields['last_name'].widget.attrs['class'] = 'form-control'
+
+		# probably cleaner to look through fields and set to form-control. Could be used on all forms
+
+
+	def save(self, commit=True):
+		user = super(ExtendedUserCreateForm, self).save(commit=False)
+		user.email = self.cleaned_data["email"]
+		user.first_name = self.cleaned_data["first_name"]
+		user.last_name = self.cleaned_data["last_name"]
+		if commit:
+			user.save()
+		return user
 
 class UserProfileForm(ModelForm):
 	class Meta:
@@ -300,13 +309,14 @@ class PhysicianForm(ModelForm):
 	class Meta:
 		model = Physician
 		exclude = ('system','user')
-
 		widgets = {
 			'physiciangroup': forms.Select(attrs={'class': 'form-control'}),
 		}
-
 
 class PhysicianGroupForm(ModelForm):
 	class Meta:
 		model = PhysicianGroup
 		exclude = ('system',)
+		widgets = {
+			'name': forms.TextInput(attrs={'class': 'form-control'}),
+		}

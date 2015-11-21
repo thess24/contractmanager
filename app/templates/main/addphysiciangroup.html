@@ -46,7 +46,9 @@
 
                             <form method='post'> {% csrf_token %}
                                 {{form}}
-                                <button type='submit' name='add_physician_group'>Add Physician Group</button>
+                                <br>
+                                <button type='submit' name='add_physician_group' class='btn btn-lg'>Add Physician Group</button>
+                                <br>
                             </form>
                            
 
@@ -55,10 +57,7 @@
                             <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Street</th>
-                                <th>City</th>
-                                <th>State</th>
-                                <th>Zipcode</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>

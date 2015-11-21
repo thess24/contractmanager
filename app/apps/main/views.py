@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, render_to_response
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 import models
-from django.contrib.auth.forms import UserCreationForm
+
 
 
 
@@ -20,7 +20,9 @@ def user(request):
 	return render(request, 'main/user.html', context)
 
 def groups(request):
-	context= {}
+	teams = models.Team.objects.filter(system=request.user.userprofile.system)
+
+	context= {'teams':teams}
 	return render(request, 'main/groups.html', context)
 
 def group(request, groupname):
@@ -122,73 +124,71 @@ def addteam(request):
 
 def adduser(request):
 	users = models.UserProfile.objects.filter(system=request.user.userprofile.system)
-	userform = UserCreationForm()
-	namesform = models.NamesForm()
+	extuserform = models.ExtendedUserCreateForm()
 	userprofileform = models.UserProfileForm()
 
 	if request.method=='POST':
 		if 'add_user' in request.POST:
-			userform = UserCreationForm(request.POST)
-			namesform = models.NamesForm(request.POST)
+			extuserform = models.ExtendedUserCreateForm(request.POST)
 			userprofileform = models.UserProfileForm(request.POST)
 
-			if all([userprofileform.is_valid(), userform.is_valid(), namesform.is_valid()]):
-				user = userform.save(commit=False)
-				user.first_name = namesform.cleaned_data['first_name']
-				user.last_name = namesform.cleaned_data['last_name']
-				user.email = namesform.cleaned_data['email']
-				user.save()
+			if all([userprofileform.is_valid(), extuserform.is_valid()]):
+				user = extuserform.save()
 
 				instance = userprofileform.save(commit=False)
 				instance.user = user
 				instance.system = request.user.userprofile.system
 				instance.save()
 
-	context= {'users':users, 'userprofileform':userprofileform, 'namesform':namesform, 'userform':userform}
+	context= {'users':users, 'userprofileform':userprofileform, 'extuserform':extuserform}
 	return render(request, 'main/adduser.html', context)
 
 def addphysician(request):
 	doctors = models.Physician.objects.filter(system=request.user.userprofile.system)
-	userform = UserCreationForm()
-	namesform = models.NamesForm()
+	extuserform = models.ExtendedUserCreateForm()
 	physicianform = models.PhysicianForm()
 
 	if request.method=='POST':
 		if 'addphysician' in request.POST:
-			userform = UserCreationForm(request.POST)
-			namesform = models.NamesForm(request.POST)
+			extuserform = models.ExtendedUserCreateForm(request.POST)
 			physicianform = models.PhysicianForm(request.POST)
 
-			if all([physicianform.is_valid(), userform.is_valid(), namesform.is_valid()]):
-				user = userform.save(commit=False)
-				user.first_name = namesform.cleaned_data['first_name']
-				user.last_name = namesform.cleaned_data['last_name']
-				user.email = namesform.cleaned_data['email']
-				user.save()
+			if all([physicianform.is_valid(), extuserform.is_valid()]):
+				user = extuserform.save()
 
 				instance = physicianform.save(commit=False)
 				instance.system = request.user.userprofile.system
 				instance.user = user
 				instance.save()
 
-	context = {'doctors':doctors, 'physicianform':physicianform, 'namesform':namesform, 'userform':userform}
+	context = {'doctors':doctors, 'physicianform':physicianform, 'extuserform':extuserform}
 	return render(request, 'main/addphysician.html', context)
 
 # def addphysician(request):
-# 	doctors = models.Physician.objects.filter(system = request.user.userprofile.system)
-# 	physician_form = models.PhysicianForm()
-# 	user_form = 
+# 	doctors = models.Physician.objects.filter(system=request.user.userprofile.system)
+# 	userform = UserCreationForm()
+# 	namesform = models.NamesForm()
+# 	physicianform = models.PhysicianForm()
 
 # 	if request.method=='POST':
 # 		if 'addphysician' in request.POST:
-# 			physician_form = models.PhysicianForm(request.POST)
-# 			if all(physician_form.is_valid(),user_form.is_valid()):
-# 				newuser = user_form.save()
-# 				physician = physician_form.save(commit=False)
-# 				physician.system = request.user.userprofile.system
-# 				physician.save()
+# 			userform = UserCreationForm(request.POST)
+# 			namesform = models.NamesForm(request.POST)
+# 			physicianform = models.PhysicianForm(request.POST)
 
-# 	context= {'doctors':doctors, 'physician_form':physician_form, 'user_form':user_form}
+# 			if all([physicianform.is_valid(), userform.is_valid(), namesform.is_valid()]):
+# 				user = userform.save(commit=False)
+# 				user.first_name = namesform.cleaned_data['first_name']
+# 				user.last_name = namesform.cleaned_data['last_name']
+# 				user.email = namesform.cleaned_data['email']
+# 				user.save()
+
+# 				instance = physicianform.save(commit=False)
+# 				instance.system = request.user.userprofile.system
+# 				instance.user = user
+# 				instance.save()
+
+# 	context = {'doctors':doctors, 'physicianform':physicianform, 'namesform':namesform, 'userform':userform}
 # 	return render(request, 'main/addphysician.html', context)
 
 def addphysiciangroup(request):

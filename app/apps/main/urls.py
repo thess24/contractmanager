@@ -61,7 +61,6 @@ urlpatterns = patterns('',
 	# users
 # filter people you can add based on system they are in
 # make forms look good
-# physician/user forms takes two forms and adds them together
 # ability for admin to reset user password
 # finish addtemplate html file- modal popup from ajax, copy data on load, render on pageup
 # fix footer

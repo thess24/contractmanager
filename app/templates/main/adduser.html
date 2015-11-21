@@ -42,10 +42,11 @@
                         <div class="ibox-content">
 
                             <form method='post'> {% csrf_token %}
-                                {{namesform}}
-                                {{userform}}
+                                {{extuserform}}
                                 {{userprofileform}}
-                                <button type='submit' name='add_user'>Add User</button>
+                                <br>
+                                <button type='submit' name='add_user' class='btn btn-lg'>Add User</button>
+                                <br>
                             </form>
                            
 

@@ -54,38 +54,17 @@
 
                             <h2>All Groups</h2>
 
+                            {% for t in teams %}
                             <div class="hr-line-dashed"></div>
                             <div class="search-result">
-                                <h3><a href="legal">Legal</a></h3>
+                                <h3><a href="legal">{{t.name}}</a></h3>
                                 <div class='group-data'>12 members, 10 pending documents</div>
                                 <p>
-                                    This is the group where the legal things happen. This is the group where the legal things happenThis is the group where the legal things happenThis is the group where the legal things happenThis is the group where the legal things happenThis is the group where the legal things happenThis is the group where the legal things happenThis is the group where the 
+                                    {{t.description}}
                                 </p>
                             </div>
-                            <div class="hr-line-dashed"></div>
-                            <div class="search-result">
-                                <h3><a href="legal">Finance</a></h3>
-                                <div class='group-data'>12 members, 10 pending documents</div>
-                                <p>
-                                    This is the group where the Finance things happen. This is the group where the Finance things happenThis is the group where the Finance things happenThis is the group where the Finance things happenThis is the 
-                                </p>
-                            </div>
-                            <div class="hr-line-dashed"></div>
-                            <div class="search-result">
-                                <h3><a href="legal">Compliance</a></h3>
-                                <div class='group-data'>12 members, 10 pending documents</div>
-                                <p>
-                                    This is the group where the Comliance things happen. This is the group where the Comliance things happenThis is the group where the Comliance things happenThis is the group where the Comliance things happenThis is the group where the Comliance things happenThis is the group 
-                                </p>
-                            </div>
-                            <div class="hr-line-dashed"></div>
-                            <div class="search-result">
-                                <h3><a href="legal">Site</a></h3>
-                                <div class='group-data'>12 members, 10 pending documents</div>
-                                <p>
-                                    This is the group where the Site things happen. This is the group where the Site things happenThis is the group where the Site things happenThis is the group where the Site things happenThis is the group where the Site things happenThis is the group 
-                                </p>
-                            </div>
+                            {% endfor %}
+
                             <div class="hr-line-dashed"></div>
 
 

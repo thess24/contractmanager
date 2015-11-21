@@ -45,10 +45,11 @@
                             </h2> -->
 
                             <form method='post'> {% csrf_token %}
-                                {{userform}}
-                                {{namesform}} 
+                                {{extuserform}} 
                                 {{physicianform}}
-                                <button type='submit' name='addphysician'>Add Site</button>
+                                <br>
+                                <button type='submit' name='addphysician' class='btn btn-lg'>Add Site</button>
+                                <br>
                             </form>
                             
 
