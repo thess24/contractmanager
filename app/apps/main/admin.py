@@ -19,4 +19,7 @@ admin.site.register(Contract)
 admin.site.register(ContractInfo)
 admin.site.register(ContractApproval)
 admin.site.register(Alert)
+admin.site.register(PhysicianTimeLog)
+
+
 # admin.site.register(CallIn, CallInAdmin)

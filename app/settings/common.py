@@ -139,6 +139,7 @@ TEMPLATES = [
                 'django.core.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
                 'django.core.context_processors.request',
+                'apps.main.context_processors.alerts',
             ],
         },
     },
@@ -199,12 +200,11 @@ DJANGO_APPS = (
 
 THIRD_PARTY_APPS = (
 
-    # 'crispy_forms',
-    # 'taggit',
-
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+
+    'tastypie',
 
 
 )
@@ -260,11 +260,7 @@ WSGI_APPLICATION = 'wsgi.application'
 
 LOGIN_REDIRECT_URL = "/"
 ACCOUNT_EMAIL_REQUIRED = True
-# # default settings are very good
-
-
-# # this is used to extend signup form
-# ACCOUNT_SIGNUP_FORM_CLASS = 'apps.main.models.SignupForm'
+ACCOUNT_PASSWORD_MIN_LENGTH = 8
 
 
 

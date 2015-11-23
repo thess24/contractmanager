@@ -68,77 +68,36 @@
 
                     <h3>Contract Base:</h3>
 
+                {% if base_templates %}
                     <div class="table-responsive">
-                    <table class="table table-striped table-hover dataTables-example table-conden" >
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Added Date</th>
-                        <th>Added By</th>
-                        <th>Description</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>Stipend Base</td>
-                        <td>4/5/13</td>
-                        <td>Mike Meehan</td>
-                        <td>Generic stipend contract</td>
-                        <td>
-                            <button class='btn btn-xs btn-primary'>Preview</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Stipend Base</td>
-                        <td>4/5/13</td>
-                        <td>Mike Meehan</td>
-                        <td>Generic stipend contract</td>
-                        <td>
-                            <button class='btn btn-xs btn-primary'>Preview</button>
-                        </td>
-                    </tr>
-                                      <tr>
-                        <td>Stipend Base</td>
-                        <td>4/5/13</td>
-                        <td>Mike Meehan</td>
-                        <td>Generic stipend contract</td>
-                        <td>
-                            <button class='btn btn-xs btn-primary'>Preview</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Stipend Base</td>
-                        <td>4/5/13</td>
-                        <td>Mike Meehan</td>
-                        <td>Generic stipend contract</td>
-                        <td>
-                            <button class='btn btn-xs btn-primary'>Preview</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Medical Directorship Base</td>
-                        <td>4/5/13</td>
-                        <td>Mike Meehan</td>
-                        <td>Generic Medical Directorship contract</td>
-                        <td>
-                            <button class='btn btn-xs btn-primary'>Preview</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Call Pay Base</td>
-                        <td>4/5/13</td>
-                        <td>Mike Meehan</td>
-                        <td>Generic call pay contract</td>
-                        <td>
-                            <button class='btn btn-xs btn-primary'>Preview</button>
-                        </td>
-                    </tr>                  
-                    </tbody>
+                        <table class="table table-striped table-hover dataTables-example table-conden" >
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Added Date</th>
+                            <th>Description</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for b in base_templates %}
+                        <tr>
+                            <td>{{b.name}}</td>
+                            <td>{{b.created_at}}</td>
+                            <td>{{b.short_desc}}</td>
+                            <td>
+                                <button class='btn btn-xs btn-primary'>Preview</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
 
-                    </table>
-                        </div>
+                        </table>
+                    </div>
 
+                {% else %}
+                <div>No Base Templates Yet!</div>
+                {% endif %}
 
 
                         <br>

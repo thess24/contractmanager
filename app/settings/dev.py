@@ -11,8 +11,6 @@ from common import *
 DEBUG = True
 THUMBNAIL_DEBUG = True
 
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
-# TEMPLATE_DEBUG = DEBUG
 ########## END DEBUG CONFIGURATION
 
 
@@ -24,16 +22,28 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ########## DATABASE CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': normpath(join(DJANGO_ROOT, 'default.db')),
+#         'USER': '',
+#         'PASSWORD': '',
+#         'HOST': '',
+#         'PORT': '',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': normpath(join(DJANGO_ROOT, 'default.db')),
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'cmdb',
+        'USER': 'taylor',
+        'PASSWORD': 'developmentpassword',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
+
 ########## END DATABASE CONFIGURATION
 
 
@@ -45,32 +55,6 @@ CACHES = {
     }
 }
 ########## END CACHE CONFIGURATION
-
-
-########## CELERY CONFIGURATION
-# See: http://docs.celeryq.org/en/latest/configuration.html#celery-always-eager
-CELERY_ALWAYS_EAGER = True
-
-# See: http://docs.celeryproject.org/en/latest/configuration.html#celery-eager-propagates-exceptions
-CELERY_EAGER_PROPAGATES_EXCEPTIONS = True
-########## END CELERY CONFIGURATION
-
-
-########## TOOLBAR CONFIGURATION
-# See: https://github.com/django-debug-toolbar/django-debug-toolbar#installation
-INSTALLED_APPS += (
-    # 'debug_toolbar',
-)
-
-# See: https://github.com/django-debug-toolbar/django-debug-toolbar#installation
-INTERNAL_IPS = ('127.0.0.1',)
-
-# See: https://github.com/django-debug-toolbar/django-debug-toolbar#installation
-MIDDLEWARE_CLASSES += (
-    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
-)
-########## END TOOLBAR CONFIGURATION
-
 
 
 

@@ -9,6 +9,7 @@ from django.conf import settings
 from django.contrib.auth.forms import UserCreationForm
 
 
+
 class HealthSystem(models.Model):
 	name = models.CharField(max_length=100)
 	street = models.CharField(max_length=100)
@@ -16,10 +17,11 @@ class HealthSystem(models.Model):
 	state = models.CharField(max_length=30)
 	zipcode = models.CharField(max_length=5)
 	created_at = models.DateTimeField(auto_now_add=True)
+	# logo = 
+	# shorthand = models.CharField(max_length=6)
 
 	def __unicode__(self):
 		return self.name
-
 
 class HealthSite(models.Model):
 	name = models.CharField(max_length=100)
@@ -32,8 +34,6 @@ class HealthSite(models.Model):
 
 	def __unicode__(self):
 		return self.name
-
-
 
 
 
@@ -67,11 +67,11 @@ class PhysicianGroup(models.Model):
 
 class Physician(models.Model):
 	user = models.OneToOneField(User)
-	# npi = models.CharField(max_length=100)
-	# payroll_num = models.CharField(max_length=100)
-	# med_liscence_num = models.CharField(max_length=100)
-	# med_liscence_state = models.CharField(max_length=100)
-	# med_degree = models.CharField(max_length=255)
+	npi = models.CharField(max_length=100)
+	payroll_num = models.CharField(max_length=100)
+	med_liscence_num = models.CharField(max_length=100)
+	med_liscence_state = models.CharField(max_length=100)
+	med_degree = models.CharField(max_length=255)
 	system = models.ForeignKey(HealthSystem)
 	physiciangroup = models.ForeignKey(PhysicianGroup, blank=True, null=True)
 	created_at = models.DateTimeField(auto_now_add=True)
@@ -87,7 +87,7 @@ class PhysicianTimeLog(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True)
 
 	def __unicode__(self):
-		return '{} - {} - {}'.format(doctor, category, date)
+		return '{} - {} - {}'.format(self.doctor, self.category, self.date)
 
 class Template(models.Model):
 	''' done I think'''
@@ -166,12 +166,20 @@ class ContractInfo(models.Model):
 	max_monthly_hours = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
 	performance_linked = models.BooleanField(default=False)
 	performance_metrics = models.TextField(blank=True, null=True)
-	# contract_file = 
+	contract_file = models.FileField(upload_to='contracts')
 	# address of lease agreement - maybe make another column
 
 	def __unicode__(self):
 		return self.name
 
+class ContractAttachment(models.Model):
+	'''attachements to the contract, not the actual contract file'''
+	contract = models.ForeignKey(Contract)
+	name = models.CharField(max_length=100, blank=True, null=True)
+	attachment = models.FileField(upload_to='attachments')
+
+	def __unicode__(self):
+		return self.contract.name	
 
 class ContractApproval(models.Model):
 	contract = models.ForeignKey(Contract)
@@ -320,3 +328,11 @@ class PhysicianGroupForm(ModelForm):
 		widgets = {
 			'name': forms.TextInput(attrs={'class': 'form-control'}),
 		}
+
+
+
+
+
+
+
+

@@ -50,12 +50,18 @@
                 <li class="nav-header">
                     <div class="dropdown profile-element">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Sheila Kessler</strong>
-                             </span> <span class="text-muted text-xs block">Legal <b class="caret"></b></span> </span> </a>
+                            <span class="clear"> 
+
+                            {% if user.is_authenticated %}
+                            <span class="block m-t-xs"> <strong class="font-bold">{{user.first_name}} {{user.last_name}}</strong></span> 
+                            {% endif %}
+                            <!-- <span class="text-muted text-xs block">Legal <b class="caret"></b></span> </span>  -->
+
+                        </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
                             <li><a href="">Profile</a></li>
                             <li class="divider"></li>
-                            <li><a href="login.html">Logout</a></li>
+                            <li><a href="/accounts/logout">Logout</a></li>
                         </ul>
                     </div>
                     <div class="logo-element">
@@ -115,71 +121,23 @@
         <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
             <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                            
+            {% if user.is_authenticated %}
+            <div id='company_name'>{{user.userprofile.system}}</div>
+            {% endif %}
 
-            <div id='company_name'>Advocate Healthcare</div>
         </div>
             <ul class="nav navbar-top-links navbar-right">
                 <li>
                     <span class="m-r-sm text-muted welcome-message">Welcome to Contract Manager</span>
                 </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                        <i class="fa fa-envelope"></i>  <span class="label label-warning">3</span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-messages">
-                        <li>
-                            <a href="profile.html">
-                                <div>
-                                    <i class="fa fa-twitter fa-fw"></i> 6 New Contracts
-                                </div>
-                            </a>
-                        </li>
-                     
-                        <li class="divider"></li>
-                        <li>
-                            <div class="text-center link-block">
-                                <a href="mailbox.html">
-                                    <i class="fa fa-envelope"></i> <strong>View Messages</strong>
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-alerts">
-                        <li>
-                            <a href="mailbox.html">
-                                <div>
-                                    <i class="fa fa-envelope fa-fw"></i> 4 Contracts up for Renewal
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="profile.html">
-                                <div>
-                                    <i class="fa fa-twitter fa-fw"></i> 3 Contracts in Progress
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <div class="text-center link-block">
-                                <a href="notifications.html">
-                                    <strong>See All Alerts</strong>
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-
-
                 <li>
-                    <a href="login.html">
+                    <a class="count-info" href="{% url 'alerts' %}">
+                        <i class="fa fa-bell"></i>  <span class="label label-primary">{{num_alerts}}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/accounts/logout">
                         <i class="fa fa-sign-out"></i> Log out
                     </a>
                 </li>

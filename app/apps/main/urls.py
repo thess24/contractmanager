@@ -2,7 +2,6 @@ from django.conf.urls import patterns, url
 from apps.main import views
 from django.conf import settings
 from django.conf.urls.static import static
-from settings.common import MEDIA_ROOT 
 
 
 urlpatterns = patterns('',
@@ -64,3 +63,12 @@ urlpatterns = patterns('',
 # ability for admin to reset user password
 # finish addtemplate html file- modal popup from ajax, copy data on load, render on pageup
 # fix footer
+# authentication/security on api
+# page for a physician to show all contracts
+# page to add contracts
+# redirect all pages to proper areas
+# alerts should show warning color based on level of alert
+# password reset html
+
+
+# dont allow creating accounts at signin page
