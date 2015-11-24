@@ -38,7 +38,27 @@ def newcontract(request):
 	addon_templates = all_templates.filter(add_on=True)
 	base_templates = all_templates.filter(add_on=False)
 
-	context= {'addon_templates':addon_templates, 'base_templates':base_templates}
+	contractform = models.ContractForm()
+	contractinfoform = models.ContractInfoForm()
+
+	if request.method=='POST':
+		if 'add_contract' in request.POST:
+			contractform = models.ContractForm(request.POST)
+			contractinfoform = models.ContractInfoForm(request.POST)
+
+			if all([contractform.is_valid(), contractinfoform.is_valid()]):
+				contract = contractform.save(commit=False)
+				contract.system = request.user.userprofile.system
+				contract.save()
+
+				contractinfo = contractinfoform.save(commit=False)
+				contractinfo.contract = contract
+				contractinfo.version = 1
+				contractinfo.created_by = request.user
+				contractinfo.save()
+
+
+	context= {'addon_templates':addon_templates, 'base_templates':base_templates, 'contractform':contractform, 'contractinfoform': contractinfoform}
 	return render(request, 'main/newcontract.html', context)
 
 @login_required

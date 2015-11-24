@@ -68,7 +68,18 @@ urlpatterns = patterns('',
 # page to add contracts
 # redirect all pages to proper areas
 # alerts should show warning color based on level of alert
-# password reset html
 
 
-# dont allow creating accounts at signin page
+
+
+
+# look into task runner to drop and add database
+
+
+#### DROP/ADD DB Instructions
+# All in terminal
+# 1. dropdb cmdb
+# 2. createdb cmdb
+# 3. python manage.py migrate auth
+# 4. python manage.py migrate
+# 5. python manage.py createsuperuser --username=joe --email=joe@example.com

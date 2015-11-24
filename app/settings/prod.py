@@ -47,7 +47,7 @@ DEBUG = False
 
 
 ########## DATABASE CONFIGURATION
-# DATABASES = postgresify()
+DATABASES = postgresify()
 ########## END DATABASE CONFIGURATION
 
 

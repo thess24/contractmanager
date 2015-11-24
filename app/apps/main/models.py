@@ -17,8 +17,8 @@ class HealthSystem(models.Model):
 	state = models.CharField(max_length=30)
 	zipcode = models.CharField(max_length=5)
 	created_at = models.DateTimeField(auto_now_add=True)
-	# logo = 
-	# shorthand = models.CharField(max_length=6)
+	logo = models.ImageField(upload_to='logos', blank=True, null=True)
+	shorthand = models.CharField(max_length=6)
 
 	def __unicode__(self):
 		return self.name
@@ -51,6 +51,7 @@ class Team(models.Model):
 class UserProfile(models.Model):
 	user = models.OneToOneField(User)
 	system = models.ForeignKey(HealthSystem)
+	# team = models.ForeignKey(Team)
 	# belong to group here? or another way?
 
 	def __unicode__(self):
@@ -68,9 +69,9 @@ class PhysicianGroup(models.Model):
 class Physician(models.Model):
 	user = models.OneToOneField(User)
 	npi = models.CharField(max_length=100)
-	payroll_num = models.CharField(max_length=100)
-	med_liscence_num = models.CharField(max_length=100)
-	med_liscence_state = models.CharField(max_length=100)
+	payroll_num = models.CharField(max_length=100, blank=True, null=True)
+	med_license_num = models.CharField(max_length=100)
+	med_license_state = models.CharField(max_length=100)
 	med_degree = models.CharField(max_length=255)
 	system = models.ForeignKey(HealthSystem)
 	physiciangroup = models.ForeignKey(PhysicianGroup, blank=True, null=True)
@@ -94,7 +95,6 @@ class Template(models.Model):
 	system = models.ForeignKey(HealthSystem)
 	name = models.CharField(max_length=100)
 	short_desc = models.CharField(max_length=100, blank=True, null=True)
-	description = models.TextField(blank=True, null=True)  # remove
 	created_at = models.DateTimeField(auto_now_add=True)
 	add_on = models.BooleanField(default=False)
 	html = models.TextField()
@@ -131,7 +131,7 @@ class Contract(models.Model):
 	workflow = models.ForeignKey(Workflow, blank=True, null=True)
 	created_at = models.DateTimeField(auto_now_add=True)
 	physician = models.ForeignKey(Physician, blank=True, null=True)
-	physician_group = models.ForeignKey(PhysicianGroup, blank=True, null=True, )
+	physician_group = models.ForeignKey(PhysicianGroup, blank=True, null=True)
 	next_user = models.ForeignKey(User, blank=True, null=True, related_name='contract_next_user')
 	next_group = models.ForeignKey(User, blank=True, null=True, related_name='contract_next_group')
 	current_user = models.ForeignKey(User, blank=True, null=True, related_name='contract_current_user')
@@ -154,7 +154,7 @@ class ContractInfo(models.Model):
 	)
 
 	contract = models.ForeignKey(Contract)
-	version = models.IntegerField()  # change maybe
+	version = models.CharField(max_length=10)
 	contract_type = models.CharField(max_length=100, choices=CONTRACT_TYPES)
 	html = models.TextField()
 	created_at = models.DateTimeField(auto_now_add=True)
@@ -164,9 +164,13 @@ class ContractInfo(models.Model):
 	services_lines = models.CharField(max_length=255, blank=True, null=True)
 	num_physicians = models.IntegerField(blank=True, null=True)
 	max_monthly_hours = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+	# amount = models.IntegerField(blank=True, null=True)
 	performance_linked = models.BooleanField(default=False)
 	performance_metrics = models.TextField(blank=True, null=True)
 	contract_file = models.FileField(upload_to='contracts')
+	auto_renew = models.BooleanField(default=False)
+	# signed = models.BooleanField(default=False)
+
 	# address of lease agreement - maybe make another column
 
 	def __unicode__(self):
@@ -244,6 +248,30 @@ class TemplateForm(ModelForm):
 		}
 
 
+class ContractForm(ModelForm):
+	class Meta:
+		model = Contract
+		exclude = ('system', 'current_user', 'current_group')
+
+	def __init__(self, *args, **kwargs):
+		super(ContractForm, self).__init__(*args, **kwargs)
+		for i in self.fields:
+			self.fields[i].widget.attrs['class'] = 'form-control'
+
+class ContractInfoForm(ModelForm):
+	class Meta:
+		model = ContractInfo
+		exclude = ('contract', 'version', 'created_by')
+
+		widgets = {
+			'html': forms.Textarea(attrs={'style': 'display:none'}),
+		}
+
+	def __init__(self, *args, **kwargs):
+		super(ContractInfoForm, self).__init__(*args, **kwargs)
+		for i in self.fields:
+			self.fields[i].widget.attrs['class'] = 'form-control'
+
 class TeamForm(ModelForm):
 	class Meta:
 		model = Team
@@ -288,15 +316,8 @@ class ExtendedUserCreateForm(UserCreationForm):
 
 	def __init__(self, *args, **kwargs):
 		super(ExtendedUserCreateForm, self).__init__(*args, **kwargs)
-		print self.fields
-		self.fields['username'].widget.attrs['class'] = 'form-control'
-		self.fields['email'].widget.attrs['class'] = 'form-control'
-		self.fields['password1'].widget.attrs['class'] = 'form-control'
-		self.fields['password2'].widget.attrs['class'] = 'form-control'
-		self.fields['first_name'].widget.attrs['class'] = 'form-control'
-		self.fields['last_name'].widget.attrs['class'] = 'form-control'
-
-		# probably cleaner to look through fields and set to form-control. Could be used on all forms
+		for i in self.fields:
+			self.fields[i].widget.attrs['class'] = 'form-control'
 
 
 	def save(self, commit=True):

@@ -114,65 +114,23 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="gradeX">
+                    {% for c in checked_out_contracts %}
+                    <tr>
                         <td>
                             <a class='btn btn-xs btn-primary' href="{% url 'contract' 1 %}">View</a>
                             <button class='btn btn-xs btn-warning checkin-button'>Check In</button>
                         </td>
-                        <td>2345214 Dr Sacks</td>
-                        <td>12/1/2014</td>
-                        <td>Taylor</td>
-                        <td>Legal</td>
-                        <td>$20,000</td>
-                        <td>Yes</td>
-                        <td>1/1/2017</td>
+                        <td>{{c.name}}</td>
+                        <td>{{c.created_at}}</td>
+                        <td>{{c.created_by}}</td>
+                        <td>{{c.contract.current_group}}</td>
+                        <td>{{c.amount}}</td>
+                        <td>{{c.signed}}</td>
+                        <td>{{c.end_date}}</td>
                         <td><span class="label label-warning">In Progress</span></td>
                     </tr>
-                    <tr class="gradeX">
-                        <td>
-                            <a class='btn btn-xs btn-primary' href="{% url 'contract' 1 %}">View</a>
-                            <button class='btn btn-xs btn-warning checkin-button'>Check In</button>
+                    {% endfor %}
 
-                        </td>
-                        <td>5486524 Dr Jordan</td>
-                        <td>12/1/2014</td>
-                        <td>Taylor</td>
-                        <td>Legal</td>
-                        <td>$9,500</td>
-                        <td>Yes</td>
-                        <td>1/1/2017</td>
-                        <td><span class="label label-warning">In Progress</span></td>
-                    </tr>
-                    <tr class="gradeX">
-                        <td>
-                            <a class='btn btn-xs btn-primary' href="{% url 'contract' 1 %}">View</a>
-                            <button class='btn btn-xs btn-warning checkin-button'>Check In</button>
-
-                        </td>
-                        <td>9334654 Dr Williams</td>
-                        <td>12/1/2014</td>
-                        <td>Taylor</td>
-                        <td>Legal</td>
-                        <td>$15,000</td>
-                        <td>No</td>
-                        <td>1/1/2017</td>
-                        <td><span class="label label-warning">In Progress</span></td>
-                    </tr>                    
-                    <tr class="gradeX">
-                        <td>
-                            <a class='btn btn-xs btn-primary' href="{% url 'contract' 1 %}">View</a>
-                            <button class='btn btn-xs btn-warning checkin-button'>Check In</button>
-
-                        </td>
-                        <td>1346524 Dr Gupta</td>
-                        <td>12/1/2014</td>
-                        <td>Taylor</td>
-                        <td>Legal</td>
-                        <td>$20,000</td>
-                        <td>Yes</td>
-                        <td>1/1/2017</td>
-                        <td><span class="label label-warning">In Progress</span></td>
-                    </tr>
                     </tbody>
 
                     </table>

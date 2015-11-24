@@ -21,6 +21,10 @@
 
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
 
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.min.css">
+
+
+
 
 <style type="text/css">
 
@@ -56,12 +60,10 @@
 
                     <div class="ibox-content">
 
-                    <form method="get">
+                    <form method="post" name="add_contract"  id='add_contract_form'>
                         
-
-                        <h3>Contract Name:</h3>
-                        <input type='text' class='form-control'>
-                        <br>
+                        {{contractform}}
+                        {{contractinfoform}}
                         <br>
                         <br>
 
@@ -248,6 +250,9 @@
     <script type="text/javascript" src='//cdnjs.cloudflare.com/ajax/libs/summernote/0.6.16/summernote.min.js'></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.1/icheck.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.min.js"></script>
+
+
 
     <script>
 
@@ -286,6 +291,38 @@
         $('#addtemplate').click( function() {
                 $( ".note-editable" ).append( '<br><br><TABLE STYLE="BORDER-COLLAPSE:COLLAPSE" BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%"><TR><TD WIDTH="4%"><FONT SIZE="1">&nbsp;</FONT></TD><TD WIDTH="4%" VALIGN="top" ALIGN="left"><FONT STYLE="font-family:Times New Roman" SIZE="2">3.6</FONT></TD><TD ALIGN="left" VALIGN="top"> <P ALIGN="left"><FONT STYLE="font-family:Times New Roman" SIZE="2"><U>Independent Contractor Status</U>. It is the express intention of the parties that Physician is an independent contractor. Nothing in this Agreement shall in any way be construed to indicate that Physician is an employee of the Company. Physician will be expected and required to use his unique background, training, and skills to carry out his duties. Physician will have the discretion to determine the method, means, and location of performing his duties, and the Company has no right to and will not control or determine the method, means, or place of the performance of Physician&#146;s duties, except as otherwise explicitly set forth in this </FONT></P></TD></TR></TABLE><p STYLE="margin-top:0px;margin-bottom:0px"><FONT SIZE="1">&nbsp;</FONT></P> Agreement. As an independent contractor, Physician shall not be eligible to participate in any employee benefit plan, including but not limited to health, disability, life insurance or retirement contribution. Company may provide for its employees. Physician shall also be responsible for payment of all licensing fees, professional dues, publications, subscriptions, and related professional expenses.' );
         });
+
+
+
+        // $('#add_contract_form').submit(function() {
+        //     // do these right before form submit
+            
+        //     // copies from summernote area into form
+        //     function copySummerNoteToTextArea() {
+        //         var s = $('.note-editable').html();
+        //         $('#id_html').val(s);
+        //     };
+
+
+        //     // sets addon value from other (better looking) buttons
+        //     // function setAddOn() {
+        //     //    if ($('#optionsRadios2').is(':checked')){
+        //     //         $("#id_add_on").prop("checked", true);
+        //     //    }
+        //     // };
+        //     // setAddOn();
+
+
+        //     copySummerNoteToTextArea();
+
+        //     return true
+        // })
+
+
+        
+    $('#id_start_date').datepicker()
+    $('#id_end_date').datepicker()
+
 
     </script>
     {% endblock %}
