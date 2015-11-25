@@ -82,9 +82,12 @@ class Physician(models.Model):
 
 class PhysicianTimeLog(models.Model):
 	doctor = models.ForeignKey(Physician)
-	date = models.DateTimeField()
-	mins_worked = models.IntegerField()
+	date = models.DateTimeField(blank=True, null=True)
+	start_time = models.DateTimeField(blank=True, null=True)
+	end_time = models.DateTimeField(blank=True, null=True)
+	mins_worked = models.IntegerField(blank=True, null=True)
 	category = models.CharField(max_length=100)
+	notes = models.TextField(blank=True, null=True)
 	created_at = models.DateTimeField(auto_now_add=True)
 
 	def __unicode__(self):
@@ -120,10 +123,22 @@ class WorkflowItem(models.Model):
 	team = models.ForeignKey(Team, blank=True, null=True)
 	position = models.IntegerField()
 
-
 	def __unicode__(self):
 		return self.workflow.name
 
+class ContractType(models.Model):
+	system = models.ForeignKey(HealthSystem)
+	name = models.CharField(max_length=100)
+
+	def __unicode__(self):
+		return self.name
+
+class ContractSubType(models.Model):
+	contract_type = models.ForeignKey(ContractType)
+	name = models.CharField(max_length=100)
+
+	def __unicode__(self):
+		return self.name
 
 class Contract(models.Model):
 	system = models.ForeignKey(HealthSystem)
@@ -132,44 +147,70 @@ class Contract(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True)
 	physician = models.ForeignKey(Physician, blank=True, null=True)
 	physician_group = models.ForeignKey(PhysicianGroup, blank=True, null=True)
-	next_user = models.ForeignKey(User, blank=True, null=True, related_name='contract_next_user')
-	next_group = models.ForeignKey(User, blank=True, null=True, related_name='contract_next_group')
-	current_user = models.ForeignKey(User, blank=True, null=True, related_name='contract_current_user')
-	current_group = models.ForeignKey(User, blank=True, null=True, related_name='contract_current_group')
+	contract_type = models.ForeignKey(ContractType, blank=True, null=True)
+	contract_subtype = models.ForeignKey(ContractSubType, blank=True, null=True)
+	contract_file = models.FileField(upload_to='contracts')
+	status = models.CharField(max_length=50, default='In Progress')
+	signed = models.BooleanField(default=False)
+
+	# should these be in contract info??
 
 	def __unicode__(self):
 		return self.name
 
-
 class ContractInfo(models.Model):
 
-	CONTRACT_TYPES = (
-		('Professional Services / Employment', 'Professional Services / Employment'),
-		('Physician Coverage / Stipends', 'Physician Coverage / Stipends'),
-		('Administrative / Medical Directorships', 'Administrative / Medical Directorships'),
-		('Teaching / Residency', 'Teaching / Residency'),
-		('Call Pay', 'Call Pay'),
-		('Income Guarantee', 'Income Guarantee'),
-		('Real Estate / Lease Agreements', 'Real Estate / Lease Agreements'),
-	)
+	# CONTRACT_TYPES = (
+	# 	('Professional Services / Employment', 'Professional Services / Employment'),
+	# 	('Physician Coverage / Stipends', 'Physician Coverage / Stipends'),
+	# 	('Administrative / Medical Directorships', 'Administrative / Medical Directorships'),
+	# 	('Teaching / Residency', 'Teaching / Residency'),
+	# 	('Call Pay', 'Call Pay'),
+	# 	('Income Guarantee', 'Income Guarantee'),
+	# 	('Real Estate / Lease Agreements', 'Real Estate / Lease Agreements'),
+	# )
 
 	contract = models.ForeignKey(Contract)
 	version = models.CharField(max_length=10)
-	contract_type = models.CharField(max_length=100, choices=CONTRACT_TYPES)
-	html = models.TextField()
 	created_at = models.DateTimeField(auto_now_add=True)
 	created_by = models.ForeignKey(User)
-	start_date = models.DateTimeField()
-	end_date = models.DateTimeField()
-	services_lines = models.CharField(max_length=255, blank=True, null=True)
+	html = models.TextField()
+	html_output = models.TextField()
+
+	next_user = models.ForeignKey(User, blank=True, null=True, related_name='contract_next_user')
+	next_group = models.ForeignKey(User, blank=True, null=True, related_name='contract_next_group')
+	current_user = models.ForeignKey(User, blank=True, null=True, related_name='contract_current_user')
+	current_group = models.ForeignKey(User, blank=True, null=True, related_name='contract_current_group')
+	prev_user = models.ForeignKey(User, blank=True, null=True, related_name='contract_past_user')
+	prev_group = models.ForeignKey(User, blank=True, null=True, related_name='contract_past_group')
+
+	site = models.ForeignKey(HealthSite)
+	region = models.CharField(max_length=100, blank=True, null=True)
+	specialty = models.CharField(max_length=100, blank=True, null=True)
+	contracting_entity = models.CharField(max_length=100, blank=True, null=True)
+	start_date = models.DateTimeField(blank=True, null=True)
+	end_date = models.DateTimeField(blank=True, null=True)
+	type_of_services = models.CharField(max_length=255, blank=True, null=True)
+	type_of_admin_services = models.TextField(blank=True, null=True)
+	admin_services_title = models.CharField(max_length=255, blank=True, null=True)
 	num_physicians = models.IntegerField(blank=True, null=True)
 	max_monthly_hours = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
-	# amount = models.IntegerField(blank=True, null=True)
+	amount = models.IntegerField(blank=True, null=True)
 	performance_linked = models.BooleanField(default=False)
-	performance_metrics = models.TextField(blank=True, null=True)
-	contract_file = models.FileField(upload_to='contracts')
+	performance_criteria = models.TextField(blank=True, null=True)
+	responsible_party = models.CharField(max_length=100, blank=True, null=True)
+	responsible_party_secondary = models.CharField(max_length=100, blank=True, null=True)
+	termination_days_notice = models.IntegerField(blank=True, null=True)
+	malpractice_coverage_party = models.CharField(max_length=100, blank=True, null=True)
+	malpractice_limits= models.IntegerField(blank=True, null=True)
+	type_of_malpractice_coverage = models.CharField(max_length=100, blank=True, null=True)
+	physician_tail_responsibility = models.BooleanField(default=False)
+	right_to_bill = models.CharField(max_length=100, blank=True, null=True)
+	non_compete = models.BooleanField(default=False)
+	non_solicitation = models.BooleanField(default=False)
 	auto_renew = models.BooleanField(default=False)
-	# signed = models.BooleanField(default=False)
+	renewal_date = models.DateTimeField(blank=True, null=True)
+
 
 	# address of lease agreement - maybe make another column
 
