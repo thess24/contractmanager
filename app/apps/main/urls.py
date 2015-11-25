@@ -64,17 +64,21 @@ urlpatterns = patterns('',
 # finish addtemplate html file- modal popup from ajax, copy data on load, render on pageup
 # fix footer
 # authentication/security on api
-# page for a physician to show all contracts
 # page to add contracts
-# redirect all pages to proper areas
 # alerts should show warning color based on level of alert
 
-
-
+### BIG
+# redirect all pages to proper areas
+# figure out how to save in db
+# get alert system and contract log up and running
+# page for a physician to show all contracts
+# Work on contract flow and adding/passing contracts along pipeline
+	# 1. get contract submit and passing to work w/o js stuff
+	# 2. all js on contract create page done
+	# 3. js and submitting on current contracts done
 
 
 # look into task runner to drop and add database
-
 
 #### DROP/ADD DB Instructions
 # All in terminal
