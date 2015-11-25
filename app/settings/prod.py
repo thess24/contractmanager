@@ -140,7 +140,7 @@ ALLOWED_HOSTS = ['.herokuapp.com']
 
 ############ ALL AUTH
 
-ACCOUNT_EMAIL_VERIFICATION='mandatory'
+# ACCOUNT_EMAIL_VERIFICATION='mandatory'
 
 
 
