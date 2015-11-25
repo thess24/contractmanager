@@ -9,7 +9,7 @@ from postgresify import postgresify
 from common import *
 
 
-DEBUG = False
+DEBUG = True
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
 # TEMPLATE_DEBUG = DEBUG
