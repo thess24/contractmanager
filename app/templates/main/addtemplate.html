@@ -60,23 +60,26 @@
 
                                 {{form.non_field_errors}}
 
-                                {{form.name.errors}}
-                                <h3>Template Name:</h3>
-                                {{form.name}}
-                                <br>
+                                <div id='input_area'>
+                                    {{form.name.errors}}
+                                    <h3>Template Name:</h3>
+                                    {{form.name}}
+                                    <br>
 
-                                {{form.short_desc.erros}}
-                                <h3>Template Short Description:</h3>
-                                {{form.short_desc}}
-                                <br>
+                                    {{form.short_desc.erros}}
+                                    <h3>Template Short Description:</h3>
+                                    {{form.short_desc}}
+                                    <br>
 
-                                {{form.html}}
-                                {{form.add_on}}
-                                <div class="i-checks">
-                                                <label> <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios"> Base Contract</label>
-                                                <label> <input type="radio" value="option2" id="optionsRadios2" name="optionsRadios"> Add On Template</label>
+                                    {{form.html}}
+                                    {{form.add_on}}
+                                    <div class="i-checks">
+                                                    <label> <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios"> Base Contract</label>
+                                                    <label> <input type="radio" value="option2" id="optionsRadios2" name="optionsRadios"> Add On Template</label>
 
+                                    </div>
                                 </div>
+
                                 <br>
 
                                 {{form.html.errors}}
@@ -208,10 +211,48 @@
         return tags;
     };
 
+    function stripTags(tags) {
+        cleanTags = [];
+        tags.forEach(function(tag){
+            tag = tag.replace(/[{}]/g,'');
+            tag = tag.trim();
+            cleanTags.push(tag);
+        })
+
+        return cleanTags;
+    };
+
+    function createInputs(cleantags) {
+
+        $('.useraddedinput').remove();
+        
+        cleantags.forEach( function(tag){
+            var tag_id = 'id_'+tag;
+            var label_html = "<h3 class='useraddedinput'>"+ tag +"</h3>";
+            var input_html = "<input type='text' class='form-control useraddedinput' id=" + tag_id + ">";
+
+            var htmlToAdd = label_html + input_html;
+            $('#input_area').append(htmlToAdd);
+        })
+    };
+
+    function startit(){
+        // these create inputs based on the tags
+        var tags = parseTemplateTags();
+        var cleanTags = stripTags(tags);
+        createInputs(cleanTags);
+    };
+
+
+
+
+
+
+
     function renderTags(tags){
         tags.forEach( function(element){
-            var htmltoadd = "<span class='label' style='display:inline-block'>"+element+"</span>";
-            $('#tagarea').append(htmltoadd);
+            var htmlToAdd = "<span class='label' style='display:inline-block'>"+element+"</span>";
+            $('#tagarea').append(htmlToAdd);
         });
     };
 
@@ -257,7 +298,7 @@ $('#new_template_form').submit(function() {
 
 //  !!!!!! NEED TO COPY what is in hidden html area into SUMMERNOT DIV ON PAGE LOAD
 
-
+// NEED to ALERT when tag is not in proper form
 // need to make modal work for viewing templates (w/ ajax? or just load all?)
 // need to remove "go" and make this work on keyup when typing.  Need to add tags to array and only add
 // to tags area if it was not in array before (or delete all and reload)
