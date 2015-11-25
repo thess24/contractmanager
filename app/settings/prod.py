@@ -146,9 +146,9 @@ ACCOUNT_EMAIL_VERIFICATION='mandatory'
 
 ############ SSL
 
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+# SECURE_SSL_REDIRECT = True
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
 
 ## ssl will not work if debug=True
 ## https://github.com/rdegges/django-sslify
