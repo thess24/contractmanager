@@ -4,7 +4,7 @@
 from os import environ
 # from memcacheify import memcacheify
 from postgresify import postgresify
-from S3 import CallingFormat
+# from S3 import CallingFormat
 
 from common import *
 
@@ -117,10 +117,10 @@ INSTALLED_APPS += (
 
 # # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 # S3_URL = 'https://s3.amazonaws.com/%s' % AWS_STORAGE_BUCKET_NAME
-STATIC_URL = S3_URL + '/static/'
-MEDIA_URL = S3_URL + '/media/'
+# STATIC_URL = S3_URL + '/static/'
+# MEDIA_URL = S3_URL + '/media/'
 
-COMPRESS_URL = STATIC_URL 
+# COMPRESS_URL = STATIC_URL 
 ########## END STORAGE CONFIGURATION
 
 
