@@ -68,8 +68,9 @@ urlpatterns = patterns('',
 # alerts should show warning color based on level of alert
 
 ### BIG
-# redirect all pages to proper areas
 # figure out how to save in db
+# ability to grab contracts/ release contracts
+# messaging that form has submitted
 # get alert system and contract log up and running
 # page for a physician to show all contracts
 # Work on contract flow and adding/passing contracts along pipeline
@@ -79,6 +80,11 @@ urlpatterns = patterns('',
 
 
 # look into task runner to drop and add database
+
+
+
+
+
 
 #### DROP/ADD DB Instructions
 # All in terminal

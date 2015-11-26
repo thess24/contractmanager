@@ -33,7 +33,7 @@
                         <tbody>
                         <tr>
                             <td>
-                                <strong><a href="{% url 'group' 1 %}">My Group</a></strong>
+                                <strong><a href="{% url 'group' request.user.userprofile.team.name %}">My Group</a></strong>
                             </td>
                             <td>
                                 <strong><a href="{% url 'groups' %}">All Groups</a></strong>
@@ -120,10 +120,10 @@
                             <a class='btn btn-xs btn-primary' href="{% url 'contract' 1 %}">View</a>
                             <button class='btn btn-xs btn-warning checkin-button'>Check In</button>
                         </td>
-                        <td>{{c.name}}</td>
+                        <td>{{c.contract.name}}</td>
                         <td>{{c.created_at}}</td>
                         <td>{{c.created_by}}</td>
-                        <td>{{c.contract.current_group}}</td>
+                        <td>{{c.contract.current_team}}</td>
                         <td>{{c.amount}}</td>
                         <td>{{c.signed}}</td>
                         <td>{{c.end_date}}</td>

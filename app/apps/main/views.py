@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404, render_to_response
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 import models
-
+import datetime
 
 
 
@@ -12,7 +13,11 @@ def test(request):
 
 @login_required
 def index(request):
-	context= {}
+	checked_out_contracts = models.ContractInfo.objects.filter(current_user=request.user)
+	contract_history = models.ContractInfo.objects.filter(current_user=request.user)
+
+
+	context= {'checked_out_contracts':checked_out_contracts,'contract_history':contract_history}
 	return render(request, 'main/index.html', context)
 
 @login_required
@@ -29,7 +34,22 @@ def groups(request):
 
 @login_required
 def group(request, groupname):
-	context= {}
+	team = get_object_or_404(models.Team, system=request.user.userprofile.system, name=groupname)
+	contracts = models.ContractInfo.objects.filter(current_team=team)
+
+	if request.method=='POST':
+		print request.POST
+		if 'grab_contract' in request.POST:
+			for cid in  request.POST.getlist('grabbed_contract'):
+				grabbed_contract = models.ContractInfo.objects.get(id=cid)
+				grabbed_contract.current_user = request.user
+				grabbed_contract.grabbed_at = datetime.datetime.now()
+				grabbed_contract.save()
+				print grabbed_contract
+
+			return HttpResponseRedirect(reverse('group', args=(groupname,)))
+
+	context= {'contracts':contracts, 'team':team}
 	return render(request, 'main/group.html', context)
 
 @login_required
@@ -42,6 +62,7 @@ def newcontract(request):
 	contractinfoform = models.ContractInfoForm()
 
 	if request.method=='POST':
+		print request.POST
 		if 'add_contract' in request.POST:
 			contractform = models.ContractForm(request.POST)
 			contractinfoform = models.ContractInfoForm(request.POST)
@@ -49,13 +70,28 @@ def newcontract(request):
 			if all([contractform.is_valid(), contractinfoform.is_valid()]):
 				contract = contractform.save(commit=False)
 				contract.system = request.user.userprofile.system
+				contract.created_by = request.user
 				contract.save()
 
+
+
 				contractinfo = contractinfoform.save(commit=False)
+				# if not contractinfo.next_team:
+					# raise some error here and send back to form
+
+
 				contractinfo.contract = contract
 				contractinfo.version = 1
-				contractinfo.created_by = request.user
+				# contractinfo.sent_at = datetime.datetime.now()
+
+				contractinfo.current_team = contractinfo.next_team
+				contractinfo.current_user = contractinfo.next_user
+				contractinfo.prev_team = request.user.userprofile.team
+				contractinfo.prev_user = request.user
+
+
 				contractinfo.save()
+				return HttpResponseRedirect(reverse('newcontract'))
 
 
 	context= {'addon_templates':addon_templates, 'base_templates':base_templates, 'contractform':contractform, 'contractinfoform': contractinfoform}
@@ -136,6 +172,7 @@ def addtemplate(request):
 				instance.system = request.user.userprofile.system
 				instance.save()
 
+				return HttpResponseRedirect(reverse('addtemplate'))
 
 	context= {'form':form, 'templates':templates}	
 	return render(request, 'main/addtemplate.html', context)
@@ -156,7 +193,9 @@ def addteam(request):
 			if form.is_valid():
 				instance = form.save(commit=False)
 				instance.system = request.user.userprofile.system
-				instance.save()		
+				instance.save()	
+
+				return HttpResponseRedirect(reverse('addteam'))
 
 	context= {'form':form, 'teams':teams}
 	return render(request, 'main/addteam.html', context)
@@ -179,6 +218,8 @@ def adduser(request):
 				instance.user = user
 				instance.system = request.user.userprofile.system
 				instance.save()
+				
+				return HttpResponseRedirect(reverse('adduser'))
 
 	context= {'users':users, 'userprofileform':userprofileform, 'extuserform':extuserform}
 	return render(request, 'main/adduser.html', context)
@@ -202,6 +243,8 @@ def addphysician(request):
 				instance.user = user
 				instance.save()
 
+				return HttpResponseRedirect(reverse('addphysician'))
+
 	context = {'doctors':doctors, 'physicianform':physicianform, 'extuserform':extuserform}
 	return render(request, 'main/addphysician.html', context)
 
@@ -217,6 +260,8 @@ def addphysiciangroup(request):
 				instance = form.save(commit=False)
 				instance.system = request.user.userprofile.system
 				instance.save()
+				
+				return HttpResponseRedirect(reverse('addphysiciangroup'))
 
 	context= {'physician_groups':physician_groups, 'form':form}				
 	return render(request, 'main/addphysiciangroup.html', context)
@@ -234,10 +279,12 @@ def addsite(request):
 				instance.system = request.user.userprofile.system
 				instance.save()
 
-	context= {'form':form, 'sites':sites}
+				return HttpResponseRedirect(reverse('addsite'))
+
+	context = {'form':form, 'sites':sites}
 	return render(request, 'main/addsite.html', context)
 
 @login_required
 def settings(request):
-	context= {}
+	context = {}
 	return render(request, 'main/settings.html', context)

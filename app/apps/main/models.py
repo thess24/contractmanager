@@ -51,8 +51,8 @@ class Team(models.Model):
 class UserProfile(models.Model):
 	user = models.OneToOneField(User)
 	system = models.ForeignKey(HealthSystem)
-	# team = models.ForeignKey(Team)
-	# belong to group here? or another way?
+	team = models.ForeignKey(Team)
+	# belong to group here? or another way? --- add here and then do groups also - this is main group
 
 	def __unicode__(self):
 		return '{} {}'.format(self.user.first_name, self.user.last_name)
@@ -145,15 +145,14 @@ class Contract(models.Model):
 	name = models.CharField(max_length=100)
 	workflow = models.ForeignKey(Workflow, blank=True, null=True)
 	created_at = models.DateTimeField(auto_now_add=True)
+	created_by = models.ForeignKey(User)
 	physician = models.ForeignKey(Physician, blank=True, null=True)
 	physician_group = models.ForeignKey(PhysicianGroup, blank=True, null=True)
 	contract_type = models.ForeignKey(ContractType, blank=True, null=True)
 	contract_subtype = models.ForeignKey(ContractSubType, blank=True, null=True)
-	contract_file = models.FileField(upload_to='contracts')
+	contract_file = models.FileField(upload_to='contracts', blank=True, null=True)
 	status = models.CharField(max_length=50, default='In Progress')
 	signed = models.BooleanField(default=False)
-
-	# should these be in contract info??
 
 	def __unicode__(self):
 		return self.name
@@ -171,20 +170,24 @@ class ContractInfo(models.Model):
 	# )
 
 	contract = models.ForeignKey(Contract)
-	version = models.CharField(max_length=10)
+	version = models.IntegerField(default=0)
 	created_at = models.DateTimeField(auto_now_add=True)
-	created_by = models.ForeignKey(User)
-	html = models.TextField()
-	html_output = models.TextField()
+	html = models.TextField(blank=True, null=True)
+	html_output = models.TextField(blank=True, null=True)
+	change_made = models.CharField(max_length=255)
 
+
+	grabbed_at = models.DateTimeField(blank=True, null=True)
 	next_user = models.ForeignKey(User, blank=True, null=True, related_name='contract_next_user')
-	next_group = models.ForeignKey(User, blank=True, null=True, related_name='contract_next_group')
+	next_team= models.ForeignKey(Team, blank=True, null=True, related_name='contract_next_team')
+	sent_at = models.DateTimeField(blank=True, null=True)
 	current_user = models.ForeignKey(User, blank=True, null=True, related_name='contract_current_user')
-	current_group = models.ForeignKey(User, blank=True, null=True, related_name='contract_current_group')
+	current_team = models.ForeignKey(Team, blank=True, null=True, related_name='contract_current_team')
 	prev_user = models.ForeignKey(User, blank=True, null=True, related_name='contract_past_user')
-	prev_group = models.ForeignKey(User, blank=True, null=True, related_name='contract_past_group')
+	prev_team = models.ForeignKey(Team, blank=True, null=True, related_name='contract_past_team')
 
-	site = models.ForeignKey(HealthSite)
+
+	site = models.ForeignKey(HealthSite, blank=True, null=True)
 	region = models.CharField(max_length=100, blank=True, null=True)
 	specialty = models.CharField(max_length=100, blank=True, null=True)
 	contracting_entity = models.CharField(max_length=100, blank=True, null=True)
@@ -196,7 +199,7 @@ class ContractInfo(models.Model):
 	num_physicians = models.IntegerField(blank=True, null=True)
 	max_monthly_hours = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
 	amount = models.IntegerField(blank=True, null=True)
-	performance_linked = models.BooleanField(default=False)
+	performance_linked = models.NullBooleanField(default=None, blank=True, null=True)
 	performance_criteria = models.TextField(blank=True, null=True)
 	responsible_party = models.CharField(max_length=100, blank=True, null=True)
 	responsible_party_secondary = models.CharField(max_length=100, blank=True, null=True)
@@ -204,18 +207,18 @@ class ContractInfo(models.Model):
 	malpractice_coverage_party = models.CharField(max_length=100, blank=True, null=True)
 	malpractice_limits= models.IntegerField(blank=True, null=True)
 	type_of_malpractice_coverage = models.CharField(max_length=100, blank=True, null=True)
-	physician_tail_responsibility = models.BooleanField(default=False)
+	physician_tail_responsibility = models.NullBooleanField(default=None, blank=True, null=True)
 	right_to_bill = models.CharField(max_length=100, blank=True, null=True)
-	non_compete = models.BooleanField(default=False)
-	non_solicitation = models.BooleanField(default=False)
-	auto_renew = models.BooleanField(default=False)
+	non_compete = models.NullBooleanField(default=None, blank=True, null=True)
+	non_solicitation = models.NullBooleanField(default=None, blank=True, null=True)
+	auto_renew = models.NullBooleanField(default=None, blank=True, null=True)
 	renewal_date = models.DateTimeField(blank=True, null=True)
 
 
 	# address of lease agreement - maybe make another column
 
 	def __unicode__(self):
-		return self.name
+		return '{} (version {})'.format(self.contract.name, self.version)
 
 class ContractAttachment(models.Model):
 	'''attachements to the contract, not the actual contract file'''
@@ -292,7 +295,7 @@ class TemplateForm(ModelForm):
 class ContractForm(ModelForm):
 	class Meta:
 		model = Contract
-		exclude = ('system', 'current_user', 'current_group')
+		exclude = ('system','created_by')
 
 	def __init__(self, *args, **kwargs):
 		super(ContractForm, self).__init__(*args, **kwargs)
@@ -302,7 +305,7 @@ class ContractForm(ModelForm):
 class ContractInfoForm(ModelForm):
 	class Meta:
 		model = ContractInfo
-		exclude = ('contract', 'version', 'created_by')
+		exclude = ('contract', 'version', 'created_by', 'prev_team', 'prev_user', 'sent_at')
 
 		widgets = {
 			'html': forms.Textarea(attrs={'style': 'display:none'}),

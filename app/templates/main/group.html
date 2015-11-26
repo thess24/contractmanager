@@ -25,13 +25,13 @@
 
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-12">
-                    <h2>Legal Department</h2>
+                    <h2>{{team.name}}</h2>
                     <ol class="breadcrumb">
                         <li>
                             <a href="">Advocate Healthcare</a>
                         </li>
                         <li>
-                            <a>Groups</a>
+                            <a href="{% url 'groups' %}">Groups</a>
                         </li>
                         <li>
                             <a>Legal</a>
@@ -83,95 +83,51 @@
                         </div>
                         <div class="ibox-content">
 
-                            <div class="table-responsive">
-                        <table class="table table-bordered table-hover table-conden" >
-                        <thead>
-                        <tr>
-                            <th style='width:40px'>
-                            </th>
-                            <th>Name</th>
-                            <th>Sent From</th>
-                            <th>Sent At</th>
-                            <th>Edited By</th>
-                            <th>Grabbed By</th>
-                            <th>Grabbed At</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr class="gradeX muted-row">
-                            <td>
-                            </td>
-                            <td>5</td>
-                            <td>Finance (Steve Legler)</td>
-                            <td>12/1/2014</td>
-                            <td>Taylor</td>
-                            <td>Taylor</td>
-                            <td>11/1/2015</td>
-                        </tr>
-                        <tr class="gradeC">
-                            <td>
-                                <div class="i-checks">
-                                    <input type="checkbox" >
-                                </div>
-                            </td>
-                            <td>4</td>
-                            <td>Finance (Steve Legler)</td>
-                            <td>12/1/2014
-                            </td>
-                            <td>Taylor</td>
-                            <td></td>
-                            <td>11/1/2015</td>
+                        <form method='post'>
+                            {% csrf_token %}
+                                    <div class="table-responsive">
+                                <table class="table table-bordered table-hover table-conden" >
+                                <thead>
+                                <tr>
+                                    <th style='width:40px'>
+                                    </th>
+                                    <th>Name</th>
+                                    <th>Sent From</th>
+                                    <th>Sent At</th>
+                                    <th>Grabbed By</th>
+                                    <th>Grabbed At</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for c in contracts %}
 
-                        </tr>
-                        <tr class="gradeA">
-                            <td>
-                                <div class="i-checks">
-                                    <input type="checkbox" >
-                                </div>
-                            </td>
-                            <td>3</td>
-                            <td>Finance (Steve Legler)</td>
-                            <td>12/1/2014
-                            </td>
-                            <td>Taylor</td>
-                            <td></td>
-                            <td>11/1/2015</td>
+                                    {% if c.current_user %}
+                                <tr class="muted-row">
+                                    <td></td>
+                                    {% else %}
+                                <tr>
+                                    <td>
+                                        <div class="i-checks">
+                                            <input type="checkbox" value='{{c.id}}' name='grabbed_contract'>
+                                        </div>
+                                    </td>
+                                    {% endif %}
 
-                        </tr>
-                        <tr class="gradeA muted-row">
-                            <td>
-                            </td>
-                            <td>2</td>
-                            <td>Finance (Steve Legler)</td>
-                            <td>11/25/2014</td>
-                            <td>Taylor</td>
-                            <td>Rick</td>
-                            <td>11/1/2015</td>
+                                    <td>{{c.contract.name}}</td>
+                                    <td>{{c.prev_group}} ({{c.prev_user}})</td>
+                                    <td>{{c.sent_at}}</td>
+                                    <td>{{c.current_user}}</td>
+                                    <td>{{c.grabbed_at}}</td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
 
-                        </tr>
-                        <tr class="gradeA">
-                            <td>
-                                <div class="i-checks">
-                                    <input type="checkbox" >
-                                </div>
-                            </td>
-                            <td>1</td>
-                            <td>Finance (Fitz)
-                                <!-- <i class='fa fa-heart'></i> -->
-                            </td>
-                            <td>11/25/2014</td>
-                            <td>Taylor</td>
-                            <td></td>
-                            <td>11/1/2015</td>
-                            
-                        </tr>
-                        </tbody>
+                                </table>
+                                    </div>
 
-                        </table>
-                            </div>
+                        <button class='btn btn-lg btn-primary' name='grab_contract'>Grab Document(s)</button>
+                        </form>
 
-
-                        <button class='btn btn-lg btn-primary'>Grab Document(s)</button>
                         </div>
                     </div>
                 </div>
@@ -245,12 +201,6 @@
     <!-- Page-Level Scripts -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.1/icheck.min.js"></script>
     <script>
-
-        $(document).ready(function() {
-            $('.dataTables-example').DataTable({
-            });
-
-        });
 
        $(document).ready(function () {
             $('.i-checks').iCheck({

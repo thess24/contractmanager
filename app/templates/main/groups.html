@@ -57,7 +57,7 @@
                             {% for t in teams %}
                             <div class="hr-line-dashed"></div>
                             <div class="search-result">
-                                <h3><a href="legal">{{t.name}}</a></h3>
+                                <h3><a href="{% url 'group' t.name %}">{{t.name}}</a></h3>
                                 <div class='group-data'>12 members, 10 pending documents</div>
                                 <p>
                                     {{t.description}}
@@ -82,12 +82,6 @@
     <!-- Page-Level Scripts -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.1/icheck.min.js"></script>
     <script>
-
-        $(document).ready(function() {
-            $('.dataTables-example').DataTable({
-            });
-
-        });
 
        $(document).ready(function () {
             $('.i-checks').iCheck({
