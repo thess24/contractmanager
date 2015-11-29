@@ -19,7 +19,7 @@
 
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-12">
-                    <h2>Dr. Dobrez - Contract 12949113</h2>
+                    <h2>{{latest_contract.contract.name}}</h2>
                     <ol class="breadcrumb">
                         <li>
                             <a href="index.html">Advocate Healthcare</a>
@@ -28,9 +28,9 @@
                             <a>Contracts</a>
                         </li>
                         <li>
-                            <a>Dr. Dobrez - Contract 12949113</a>
+                            <a>{{latest_contract.contract.name}}</a>
                         </li>
-                    <span class='pull-right'>Last Updated 12/12/2014</span>
+                    <span class='pull-right'>Last Updated {{latest_contract.created_at}}</span>
                     </ol>
                 </div>
             </div>
@@ -43,10 +43,10 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="m-b-md">
-                                        <h2>Contract with Dr. Dobrez</h2>
+                                        <h2>Contract with {{latest_contract.contract.physician}}</h2>
                                     </div>
                                     <dl class="dl-horizontal">
-                                        <dt>Status:</dt> <dd><span class="label label-primary">Active</span></dd>
+                                        <dt>Status:</dt> <dd><span class="label label-primary">{{latest_contract.contract.status}}</span></dd>
                                     </dl>
                                 </div>
                             </div>
@@ -54,18 +54,19 @@
                                 <div class="col-lg-4">
                                     <dl class="dl-horizontal">
 
-                                        <dt>Current Holder:</dt> <dd>Taylor Hess</dd>
+                                        <dt>Current Holder:</dt> <dd>{{latest_contract.current_team}} ({{latest_contract.current_user}})</dd>
                                         <dt>Amount:</dt> <dd>  $20,000</dd>
-                                        <dt>Contract Type:</dt> <dd>Medical Directorship</dd>
-                                        <dt>Version:</dt> <dd>  v1.4.2 </dd>
+                                        <dt>Contract Type:</dt> <dd>{{latest_contract.contract.contract_type}}</dd>
+                                        <dt>Version:</dt> <dd>  {{latest_contract.version}} </dd>
                                     </dl>
                                 </div>
                                 <div class="col-lg-4" id="cluster_info">
                                     <dl class="dl-horizontal">
 
-                                        <dt>Last Updated:</dt> <dd>8/16/2014 12:15:57</dd>
-                                        <dt>Created:</dt> <dd>  7/17/2014 23:36:57 </dd>
-                                        <dt>Expires:</dt> <dd>  7/17/2016 23:36:57 </dd>
+                                        <dt>Last Updated:</dt> <dd>{{latest_contract.created_at}}</dd>
+                                        <dt>Created:</dt> <dd> {{latest_contract.contract.created_at}}</dd>
+                                        <dt>Start Date:</dt> <dd> {{latest_contract.start_date}}</dd>
+                                        <dt>End Date:</dt> <dd> {{latest_contract.end_date}}</dd>
                                         <dt>Signed:</dt> <dd> <i class="fa fa-check text-navy"></i> 8/16/2014 </dd>
                                         
                                     </dl>
@@ -147,120 +148,8 @@
                         <div class="ibox-content no-padding">
 
                             <div class="click2edit wrapper p-md">
-                                <P STYLE="margin-top:0px;margin-bottom:0px" ALIGN="right"><FONT STYLE="font-family:Times New Roman" SIZE="2"><B>Exhibit 10.15 </B></FONT></P> <P STYLE="margin-top:12px;margin-bottom:0px" ALIGN="center"><FONT
-STYLE="font-family:Times New Roman" SIZE="2"><B>MEDICAL DIRECTOR AGREEMENT </B></FONT></P> <P STYLE="margin-top:12px;margin-bottom:0px; text-indent:4%;padding-bottom:0px;"><FONT STYLE="font-family:Times New Roman" SIZE="2"><B>THIS MEDICAL
-</B><B>DIRECTOR AGREEMENT</B> (this &#147;Agreement&#148;) is entered into this 28</FONT><FONT STYLE="font-family:Times New Roman" SIZE="1"><SUP STYLE="vertical-align:baseline; position:relative; bottom:.8ex">th</SUP></FONT><FONT
-STYLE="font-family:Times New Roman" SIZE="2"> day of January, 2011 (the &#147;Effective Date&#148;), by and between Advocate Healthcare, Inc., a Illinois corporation (&#147;Company&#148;), and Nicholas Dobrez, D.O. (&#147;Physician&#148;)
-</FONT></P> <P STYLE="margin-top:18px;margin-bottom:0px" ALIGN="center"><FONT STYLE="font-family:Times New Roman" SIZE="2"><B>RECITALS: </B></FONT></P> <P STYLE="margin-top:12px;margin-bottom:0px; text-indent:4%"><FONT
-STYLE="font-family:Times New Roman" SIZE="2"><B>WHEREAS,</B> Company has entered into previous Medical Oversight and Supervisor Agreements with the Physician and the parties agree that that all such agreements will terminate as of the Effective Date
-of this Agreement; </FONT></P> <P STYLE="margin-top:12px;margin-bottom:0px; text-indent:4%"><FONT STYLE="font-family:Times New Roman" SIZE="2"><B>WHEREAS,</B> Company provides healthcare services to individuals in their homes and offices through
-licensed nurse practitioners; </FONT></P> <P STYLE="margin-top:12px;margin-bottom:0px; text-indent:4%"><FONT STYLE="font-family:Times New Roman" SIZE="2"><B>WHEREAS,</B> Company desires to engage Physician to provide medical director services,
-including appropriate supervision of nurse practitioners; </FONT></P> <P STYLE="margin-top:12px;margin-bottom:0px; text-indent:4%"><FONT STYLE="font-family:Times New Roman" SIZE="2"><B>WHEREAS,</B> Physician, who is duly licensed in the State of
-Illinois and qualified to provide the medical director services, desires to serve in the position of medical director of Company in accordance with the terms and conditions of this Agreement. </FONT></P>
-<P STYLE="margin-top:12px;margin-bottom:0px; text-indent:4%"><FONT STYLE="font-family:Times New Roman" SIZE="2"><B>NOW, THEREFORE,</B> in consideration of the mutual promises and covenants entered into and other good and valuable consideration, the
-sufficiency and adequacy of which is hereby acknowledged, the parties hereto agree to the following terms and conditions: </FONT></P> <P STYLE="font-size:18px;margin-top:0px;margin-bottom:0px">&nbsp;</P>
-<TABLE STYLE="BORDER-COLLAPSE:COLLAPSE" BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%">
-<TR>
-<TD WIDTH="4%" VALIGN="top" ALIGN="left"><FONT STYLE="font-family:Times New Roman" SIZE="2"><B>1.</B></FONT></TD>
-<TD ALIGN="left" VALIGN="top"><FONT STYLE="font-family:Times New Roman" SIZE="2"><B>Scope of Services </B></FONT></TD></TR></TABLE> <P STYLE="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</P>
-<TABLE STYLE="BORDER-COLLAPSE:COLLAPSE" BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%">
-<TR>
-<TD WIDTH="4%"><FONT SIZE="1">&nbsp;</FONT></TD>
-<TD WIDTH="4%" VALIGN="top" ALIGN="left"><FONT STYLE="font-family:Times New Roman" SIZE="2">1.1</FONT></TD>
-<TD ALIGN="left" VALIGN="top"><FONT STYLE="font-family:Times New Roman" SIZE="2">Company hereby engages and retains Physician to provide the Services (defined below) described herein. </FONT></TD></TR></TABLE>
-<P STYLE="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</P>
-<TABLE STYLE="BORDER-COLLAPSE:COLLAPSE" BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%">
-<TR>
-<TD WIDTH="4%"><FONT SIZE="1">&nbsp;</FONT></TD>
-<TD WIDTH="4%" VALIGN="top" ALIGN="left"><FONT STYLE="font-family:Times New Roman" SIZE="2">1.2</FONT></TD>
-<TD ALIGN="left" VALIGN="top"><FONT STYLE="font-family:Times New Roman" SIZE="2">Physician hereby accepts such engagement and agrees to provide the Services described herein. Physician shall provide the Services in a professional manner.
-</FONT></TD></TR></TABLE> <P STYLE="font-size:18px;margin-top:0px;margin-bottom:0px">&nbsp;</P>
-<TABLE STYLE="BORDER-COLLAPSE:COLLAPSE" BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%">
-<TR>
-<TD WIDTH="4%" VALIGN="top" ALIGN="left"><FONT STYLE="font-family:Times New Roman" SIZE="2"><B>2.</B></FONT></TD>
-<TD ALIGN="left" VALIGN="top"><FONT STYLE="font-family:Times New Roman" SIZE="2"><B>Responsibilities of Company </B></FONT></TD></TR></TABLE> <P STYLE="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</P>
-<TABLE STYLE="BORDER-COLLAPSE:COLLAPSE" BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%">
-<TR>
-<TD WIDTH="4%"><FONT SIZE="1">&nbsp;</FONT></TD>
-<TD WIDTH="4%" VALIGN="top" ALIGN="left"><FONT STYLE="font-family:Times New Roman" SIZE="2">2.1</FONT></TD>
-<TD ALIGN="left" VALIGN="top"><FONT STYLE="font-family:Times New Roman" SIZE="2">Company shall furnish Physician with reasonable administrative support to accomplish his duties and responsibilities under this Agreement, but not in support of
-Physician&#146;s activities beyond the scope of this Agreement. </FONT></TD></TR></TABLE> <P STYLE="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</P>
-<TABLE STYLE="BORDER-COLLAPSE:COLLAPSE" BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%">
-<TR>
-<TD WIDTH="4%"><FONT SIZE="1">&nbsp;</FONT></TD>
-<TD WIDTH="4%" VALIGN="top" ALIGN="left"><FONT STYLE="font-family:Times New Roman" SIZE="2">2.2</FONT></TD>
-<TD ALIGN="left" VALIGN="top"><FONT STYLE="font-family:Times New Roman" SIZE="2">Company shall periodically evaluate Physician&#146;s performance under this Agreement. </FONT></TD></TR></TABLE>
-
-<p Style='page-break-before:always'>
-<HR  SIZE="3" style="COLOR:#999999" WIDTH="100%" ALIGN="CENTER">
-
-
-<TABLE STYLE="BORDER-COLLAPSE:COLLAPSE" BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%">
-<TR>
-<TD WIDTH="4%" VALIGN="top" ALIGN="left"><FONT STYLE="font-family:Times New Roman" SIZE="2"><B>3.</B></FONT></TD>
-<TD ALIGN="left" VALIGN="top"><FONT STYLE="font-family:Times New Roman" SIZE="2"><B>Responsibilities of Physician </B></FONT></TD></TR></TABLE> <P STYLE="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</P>
-<TABLE STYLE="BORDER-COLLAPSE:COLLAPSE" BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%">
-<TR>
-<TD WIDTH="4%"><FONT SIZE="1">&nbsp;</FONT></TD>
-<TD WIDTH="4%" VALIGN="top" ALIGN="left"><FONT STYLE="font-family:Times New Roman" SIZE="2">3.1</FONT></TD>
-<TD ALIGN="left" VALIGN="top"><FONT STYLE="font-family:Times New Roman" SIZE="2">Physician is hereby retained to work for the Company and agrees to devote such time, energy and skill as his duties hereunder shall require. </FONT></TD></TR></TABLE>
-<P STYLE="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</P>
-<TABLE STYLE="BORDER-COLLAPSE:COLLAPSE" BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%">
-<TR>
-<TD WIDTH="4%"><FONT SIZE="1">&nbsp;</FONT></TD>
-<TD WIDTH="4%" VALIGN="top" ALIGN="left"><FONT STYLE="font-family:Times New Roman" SIZE="2">3.2</FONT></TD>
-<TD ALIGN="left" VALIGN="top"><FONT STYLE="font-family:Times New Roman" SIZE="2">Physician shall be responsible for overall supervision of healthcare services to Company&#146;s patients (the &#147;Services&#148;). Physician agrees to perform such
-duties as are customarily performed by persons acting in a similar capacity and/or such duties as may be assigned by the Company. Physician shall devote such time as is necessary and his best efforts to the performance of his duties and the
-furtherance of the interests of the Company. </FONT></TD></TR></TABLE> <P STYLE="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</P>
-<TABLE STYLE="BORDER-COLLAPSE:COLLAPSE" BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%">
-<TR>
-<TD WIDTH="4%"><FONT SIZE="1">&nbsp;</FONT></TD>
-<TD WIDTH="4%" VALIGN="top" ALIGN="left"><FONT STYLE="font-family:Times New Roman" SIZE="2">3.3</FONT></TD>
-<TD ALIGN="left" VALIGN="top"><FONT STYLE="font-family:Times New Roman" SIZE="2"><U>Records and Reports</U>. As part of the Services, Physician shall also maintain such records and furnish such reports of Services as may be requested by Company.
-Physician shall submit to Company monthly reports of Services provided by Physician pursuant to this Agreement. </FONT></TD></TR></TABLE> <P STYLE="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</P>
-<TABLE STYLE="BORDER-COLLAPSE:COLLAPSE" BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%">
-<TR>
-<TD WIDTH="4%"><FONT SIZE="1">&nbsp;</FONT></TD>
-<TD WIDTH="4%" VALIGN="top" ALIGN="left"><FONT STYLE="font-family:Times New Roman" SIZE="2">3.4</FONT></TD>
-<TD ALIGN="left" VALIGN="top"><FONT STYLE="font-family:Times New Roman" SIZE="2"><U>Qualifications of Physician</U>. </FONT></TD></TR></TABLE> <P STYLE="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</P>
-<TABLE STYLE="BORDER-COLLAPSE:COLLAPSE" BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%">
-<TR>
-<TD WIDTH="8%"><FONT SIZE="1">&nbsp;</FONT></TD>
-<TD WIDTH="5%" VALIGN="top" ALIGN="left"><FONT STYLE="font-family:Times New Roman" SIZE="2">3.4.1</FONT></TD>
-<TD ALIGN="left" VALIGN="top"><FONT STYLE="font-family:Times New Roman" SIZE="2"><U>Licenses/Permits</U>. Physician at all times during the term of this Agreement shall: (1)&nbsp;possess an active license in good standing to practice medicine in
-Illinois (2)&nbsp;possess active unrestricted federal and state DEA registration. </FONT></TD></TR></TABLE> <P STYLE="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</P>
-<TABLE STYLE="BORDER-COLLAPSE:COLLAPSE" BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%">
-<TR>
-<TD WIDTH="8%"><FONT SIZE="1">&nbsp;</FONT></TD>
-<TD WIDTH="5%" VALIGN="top" ALIGN="left"><FONT STYLE="font-family:Times New Roman" SIZE="2">3.4.2</FONT></TD>
-<TD ALIGN="left" VALIGN="top"><FONT STYLE="font-family:Times New Roman" SIZE="2"><U>Compliance With Laws, Regulations and Standards</U>. Physician shall comply with the standards and requirements of all applicable federal, state, local and other
-laws, rules and regulations governing the Services, applicable professional standards and all applicable Company policies and procedures, including Company&#146;s compliance program. </FONT></TD></TR></TABLE>
-<P STYLE="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</P>
-<TABLE STYLE="BORDER-COLLAPSE:COLLAPSE" BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%">
-<TR>
-<TD WIDTH="4%"><FONT SIZE="1">&nbsp;</FONT></TD>
-<TD WIDTH="4%" VALIGN="top" ALIGN="left"><FONT STYLE="font-family:Times New Roman" SIZE="2">3.5</FONT></TD>
-<TD ALIGN="left" VALIGN="top"><FONT STYLE="font-family:Times New Roman" SIZE="2"><U>Managed Care Contracts</U>. Physician hereby agrees to participate in all relationships established by or maintained by Company with institutional health care
-providers and third-party payors. Physician hereby agrees and acknowledges that he may not negotiate or enter into any relationship with institutional health care providers and third-party payors under the name of Company. Any attempt to do so shall
-be null and void. </FONT></TD></TR></TABLE> <P STYLE="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</P>
-<TABLE STYLE="BORDER-COLLAPSE:COLLAPSE" BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%">
-<TR>
-<TD WIDTH="4%"><FONT SIZE="1">&nbsp;</FONT></TD>
-<TD WIDTH="4%" VALIGN="top" ALIGN="left"><FONT STYLE="font-family:Times New Roman" SIZE="2">3.6</FONT></TD>
-<TD ALIGN="left" VALIGN="top"> <P ALIGN="left"><FONT STYLE="font-family:Times New Roman" SIZE="2"><U>Independent Contractor Status</U>. It is the express intention of the parties that Physician is an independent contractor. Nothing in this Agreement
-shall in any way be construed to indicate that Physician is an employee of the Company. Physician will be expected and required to use his unique background, training, and skills to carry out his duties. Physician will have the discretion to
-determine the method, means, and location of performing his duties, and the Company has no right to and will not control or determine the method, means, or place of the performance of Physician&#146;s duties, except as otherwise explicitly set forth
-in this </FONT></P></TD></TR></TABLE>
- <p STYLE="margin-top:0px;margin-bottom:0px"><FONT SIZE="1">&nbsp;</FONT></P> <P STYLE="margin-top:0px;margin-bottom:0px" ALIGN="center"><FONT STYLE="font-family:Times New Roman" SIZE="2">2 </FONT></P>
-
-
-<p Style='page-break-before:always'>
-<HR  SIZE="3" style="COLOR:#999999" WIDTH="100%" ALIGN="CENTER">
-
-
-
-Continued...
-
+                               
+                                {{latest_contract.html_output}}
 
 
                             </div>
@@ -273,7 +162,7 @@ Continued...
 
 
             <div class="row">
-                <div class="col-lg-5">
+                <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>Past Versions</h5>
@@ -289,132 +178,39 @@ Continued...
                     <table class="table table-striped table-bordered table-hover dataTables-example table-conden" >
                     <thead>
                     <tr>
-                        <th>
-                        </th>
+                        <th></th>
+                        <th>Change Made</th>
                         <th>Version</th>
-                        <th>Name</th>
                         <th>Last Edited</th>
                         <th>Edited By</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="gradeC">
-                        <td>
-                            <span class='btn btn-xs btn-primary table-btn'>View</span>
-                            <a class='btn btn-xs btn-warning table-btn' href="{% url 'diffcontracts' 1 2 %}">Differences</a>
-                        </td>
-                        <td>4</td>
-                        <td>12949113 Dr. Dobrez</td>
-                        <td>12/1/2014
-                        </td>
-                        <td>Taylor</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td>
-                            <span class='btn btn-xs btn-primary table-btn'>View</span>
-                            <a class='btn btn-xs btn-warning table-btn' href="{% url 'diffcontracts' 1 2 %}">Differences</a>
-                        </td>
-                        <td>3</td>
-                        <td>12949113 Dr. Dobrez</td>
-                        <td>12/1/2014
-                        </td>
-                        <td>Taylor</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td>
-                            <span class='btn btn-xs btn-primary table-btn'>View</span>
-                            <a class='btn btn-xs btn-warning table-btn' href="{% url 'diffcontracts' 1 2 %}">Differences</a>
-                        </td>
-                        <td>2</td>
-                        <td>12949113 Dr. Dobrez</td>
-                        <td>11/25/2014</td>
-                        <td>Rick</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td>
-                            <span class='btn btn-xs btn-primary table-btn'>View</span>
-                            <a class='btn btn-xs btn-warning table-btn' href="{% url 'diffcontracts' 1 2 %}">Differences</a>
-                        </td>
-                        <td>1</td>
-                        <td>12949113 Dr. Dobrez</td>
-                        <td>11/25/2014</td>
-                        <td>Rick</td>
-                    </tr>
-                    </tbody>
-
-                    </table>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <!-- </div> -->
-
-
-            <!-- <div class="row"> -->
-                <div class="col-lg-7">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Change Log</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="ibox-content">
-
-                        <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover dataTables-example" >
-                    <thead>
+                    {% for c in contract_versions %}
                     <tr>
-                        <th>Change Made</th>
-                        <th>Date</th>
-                        <th>Changed By</th>
-                        <th>Notes</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="gradeX">
-                        <td>Added Signatures and Uploaded
+                        <td>
+                            <span class='btn btn-xs btn-primary table-btn'>View</span>
+                            <a class='btn btn-xs btn-warning table-btn' href="{% url 'diffcontracts' 1 2 %}">Differences</a>
                         </td>
-                        <td>11/1/2015</td>
-                        <td class="center">Taylor Hess</td>
-                        <td class="center">-</td>
-                    </tr>
-                    <tr class="gradeC">
-                        <td>Approved by Finance
+                        <td>{{c.change_made}}</td>
+                        <td>{{c.version}}</td>
+                        <td>{{c.created_at}}
                         </td>
-                        <td>10/14/15</td>
-                        <td class="center">Taylor Hess</td>
-                        <td class="center">-</td>
+                        <td>{{c.current_user}}</td>
                     </tr>
-                    <tr class="gradeA">
-                        <td>Added Exhibit
-                        </td>
-                        <td>10/5/15</td>
-                        <td class="center">Taylor Hess</td>
-                        <td class="center">-</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td>Approved By HR</td>
-                        <td>9/18/15</td>
-                        <td class="center">Taylor Hess</td>
-                        <td class="center">-</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td>Contract Created</td>
-                        <td>9/3/15</td>
-                        <td class="center">Taylor Hess</td>
-                        <td class="center">-</td>
-                    </tr>
+                    {% endfor %}
+
                     </tbody>
+
                     </table>
                         </div>
 
                     </div>
                 </div>
             </div>
+
+
+
             </div>
         </div>
 

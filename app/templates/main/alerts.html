@@ -51,7 +51,10 @@
                                     <div class="vote-info">
                                         <span><i class="fa fa-clock-o"></i> {{alert.created_at}}</span>
                                         <i class="fa fa-edit"></i> <a href="{% url 'contract' alert.contract.id %}">{{alert.contract}}</a>
-                                        <button class='btn btn-xs alerts-btn'>Mark as Handled</button>
+                                        <form method='post' style='display:inline'> {% csrf_token %}
+                                            <input type='hidden' name='alert_id' value='{{alert.id}}'>
+                                            <button class='btn btn-xs alerts-btn' type='submit' name='mark_handled'>Mark as Handled</button>
+                                        </form>
                                     </div>
                                 </div>
                                 <div class="col-md-2 ">

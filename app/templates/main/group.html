@@ -103,7 +103,8 @@
 
                                     {% if c.current_user %}
                                 <tr class="muted-row">
-                                    <td></td>
+                                    <td>
+                                    </td>
                                     {% else %}
                                 <tr>
                                     <td>
@@ -148,33 +149,16 @@
 
                         <div class="table-responsive">
                             <table class="table table-hover " >
-<!--                             <thead>
-                            <tr>
-                                <th></th>
-                                <th>Name</th>
-                            </tr>
-                            </thead> -->
+
                             <tbody>
+                                {% for member in team_members %}
                             <tr>
-                                <td>Taylor Hess</td>
-                                <td>taylor.hess@advocatehealth.com</td>
+                                <td>{{member.user.first_name}} {{member.user.last_name}}</td>
+                                <td>{{member.user.email}}</td>
                             </tr>
-                            <tr>
-                                <td>Joan Klein</td>
-                                <td>joan.klein@advocatehealth.com</td>
-                            </tr>
-                            <tr>
-                                <td>Randy Savage</td>
-                                <td>randy.savage@advocatehealth.com</td>
-                            </tr>
-                            <tr>
-                                <td>Jill Joy</td>
-                                <td>jill.joy@advocatehealth.com</td>
-                            </tr>
-                            <tr>
-                                <td>Emily Beeker</td>
-                                <td>emily.beeker@advocatehealth.com</td>
-                            </tr>
+                                {% empty %}
+                            No Members!
+                                {% endfor %}
                             </tbody>
                             </table>
                         </div>

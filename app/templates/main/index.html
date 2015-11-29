@@ -98,7 +98,7 @@
                                         <div class="ibox-content">
 
                     <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover table-conden" >
+                    <table class="table table-bordered table-hover table-conden" >
                     <thead>
                     <tr>
                         <th>
@@ -117,8 +117,11 @@
                     {% for c in checked_out_contracts %}
                     <tr>
                         <td>
-                            <a class='btn btn-xs btn-primary' href="{% url 'contract' 1 %}">View</a>
-                            <button class='btn btn-xs btn-warning checkin-button'>Check In</button>
+                            <a class='btn btn-xs btn-primary' href="{% url 'contract' c.id %}">View</a>
+                            <form method='post' style='display:inline'> {% csrf_token %}
+                            <input type='hidden' value='{{c.id}}' name='contractid'/>
+                            <button class='btn btn-xs btn-warning checkin-button' name='checkin_contract'  type='submit'>Check In</button>
+                            </form>
                         </td>
                         <td>{{c.contract.name}}</td>
                         <td>{{c.created_at}}</td>
@@ -158,7 +161,7 @@
                                         <div class="ibox-content">
 
                     <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover table-conden" >
+                    <table class="table table-bordered table-hover table-conden" >
                     <thead>
                     <tr>
                         <th>
@@ -211,19 +214,19 @@
 
         });
 
-        $('.checkin-button').click(function () {
-            swal({
-                title: "Are you sure?",
-                text: "You are checking in this contract back to your group.",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Yes, check it in!",
-                closeOnConfirm: false
-            }, function () {
-                swal("Done!", "You have checked in this document.", "success");
-            });
-        });
+        // $('.checkin-button').click(function () {
+        //     swal({
+        //         title: "Are you sure?",
+        //         text: "You are checking in this contract back to your group.",
+        //         type: "warning",
+        //         showCancelButton: true,
+        //         confirmButtonColor: "#DD6B55",
+        //         confirmButtonText: "Yes, check it in!",
+        //         closeOnConfirm: false
+        //     }, function () {
+        //         swal("Done!", "You have checked in this document.", "success");
+        //     });
+        // });
 
     </script>
     {% endblock %}

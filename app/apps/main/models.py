@@ -29,7 +29,7 @@ class HealthSite(models.Model):
 	street = models.CharField(max_length=100, blank=True, null=True)
 	city = models.CharField(max_length=100, blank=True, null=True)
 	state = models.CharField(max_length=30, blank=True, null=True)
-	zipcode = models.CharField(max_length=5)
+	zipcode = models.CharField(max_length=5)  # blank and null = True
 	created_at = models.DateTimeField(auto_now_add=True)
 
 	def __unicode__(self):
@@ -38,7 +38,7 @@ class HealthSite(models.Model):
 
 
 class Team(models.Model):
-	'''done I think'''
+	''' a department/group/team within a healthsystem '''
 	system = models.ForeignKey(HealthSystem)
 	name = models.CharField(max_length=100)
 	description = models.TextField()
@@ -49,6 +49,7 @@ class Team(models.Model):
 
 
 class UserProfile(models.Model):
+	''' info about a user '''
 	user = models.OneToOneField(User)
 	system = models.ForeignKey(HealthSystem)
 	team = models.ForeignKey(Team)
@@ -81,7 +82,7 @@ class Physician(models.Model):
 		return self.user.username
 
 class PhysicianTimeLog(models.Model):
-	doctor = models.ForeignKey(Physician)
+	physician = models.ForeignKey(Physician)
 	date = models.DateTimeField(blank=True, null=True)
 	start_time = models.DateTimeField(blank=True, null=True)
 	end_time = models.DateTimeField(blank=True, null=True)
@@ -91,10 +92,10 @@ class PhysicianTimeLog(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True)
 
 	def __unicode__(self):
-		return '{} - {} - {}'.format(self.doctor, self.category, self.date)
+		return '{} - {} - {}'.format(self.physician, self.category, self.date)
 
 class Template(models.Model):
-	''' done I think'''
+	''' a template for creating contracts '''
 	system = models.ForeignKey(HealthSystem)
 	name = models.CharField(max_length=100)
 	short_desc = models.CharField(max_length=100, blank=True, null=True)
@@ -127,6 +128,7 @@ class WorkflowItem(models.Model):
 		return self.workflow.name
 
 class ContractType(models.Model):
+	''' the types of contracts that a health system has '''
 	system = models.ForeignKey(HealthSystem)
 	name = models.CharField(max_length=100)
 
@@ -141,6 +143,7 @@ class ContractSubType(models.Model):
 		return self.name
 
 class Contract(models.Model):
+	''' contract info that does not change / isn't verisioned '''
 	system = models.ForeignKey(HealthSystem)
 	name = models.CharField(max_length=100)
 	workflow = models.ForeignKey(Workflow, blank=True, null=True)
@@ -153,12 +156,13 @@ class Contract(models.Model):
 	contract_file = models.FileField(upload_to='contracts', blank=True, null=True)
 	status = models.CharField(max_length=50, default='In Progress')
 	signed = models.BooleanField(default=False)
+	# signed_at = models.DateTimeField(blank=True, null=True)
 
 	def __unicode__(self):
 		return self.name
 
 class ContractInfo(models.Model):
-
+	''' information about a contract that would be changed in new versions '''
 	# CONTRACT_TYPES = (
 	# 	('Professional Services / Employment', 'Professional Services / Employment'),
 	# 	('Physician Coverage / Stipends', 'Physician Coverage / Stipends'),
@@ -240,23 +244,45 @@ class ContractApproval(models.Model):
 
 
 class Alert(models.Model):
-	''' done I think'''
+	''' alert to user that something happened that concerns them '''
 	user = models.ForeignKey(User)
 	contract = models.ForeignKey(Contract)
 	name = models.CharField(max_length=255)
 	created_at = models.DateTimeField(auto_now_add=True)
 	active = models.BooleanField(default=True)
-	level = models.IntegerField()
+	level = models.IntegerField(default=2) # higher is more serious
 
 	def __unicode__(self):
 		return self.name
 
 
+# class Action(models.Model):
+# 	''' log of all actions taken
+
+# 	ex.
+# 		- create template
+# 		- edit contract / create contract
+# 		- check out / check in contract
+# 		- create user / Physician / workflow
+# 		- create site / group
+
+# 	 '''
+# 	user = models.ForeignKey(User)
+# 	action_taken = models.CharField(max_length=255)
+# 	contract = models.ForeignKey(ContractInfo, blank=True, null=True)
+# 	template = models.ForeignKey(Template, blank=True, null=True)
+# 	created_at = models.DateTimeField(auto_now_add=True)
+
+# 	def __unicode__(self):
+# 		return self.action_taken
 
 
 
-
-
+#### Permissions
+# can add a site / physician
+# can add users
+# can do analysis (see all data)
+# only can edit contracts
 
 
 ##################################
@@ -305,7 +331,7 @@ class ContractForm(ModelForm):
 class ContractInfoForm(ModelForm):
 	class Meta:
 		model = ContractInfo
-		exclude = ('contract', 'version', 'created_by', 'prev_team', 'prev_user', 'sent_at')
+		exclude = ('contract', 'version', 'created_by', 'prev_team', 'prev_user', 'grabbed_at', 'sent_at', 'current_user', 'current_team')
 
 		widgets = {
 			'html': forms.Textarea(attrs={'style': 'display:none'}),
@@ -342,10 +368,7 @@ class TeamForm(ModelForm):
 class NamesForm(forms.Form):
 	first_name = forms.CharField(max_length=30, required=True)
 	last_name = forms.CharField(max_length=30, required=True)
-	email = forms.EmailField() # emails not required with this setup
-
-	# consider doing this instead
-	# http://jessenoller.com/blog/2011/12/19/quick-example-of-extending-usercreationform-in-django
+	email = forms.EmailField() # emails not required with this setup - they need to be
 
 class ExtendedUserCreateForm(UserCreationForm):
 	email = forms.EmailField(required=True)

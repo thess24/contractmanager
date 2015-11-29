@@ -73,7 +73,7 @@
                     <a href="/"><i class="fa fa-flask"></i> <span class="nav-label">Home</span></a>
                 </li>
                 <li>
-                    <a href="{% url 'group' 1 %}"><i class="fa fa-diamond"></i> <span class="nav-label">My Team</span></a>
+                    <a href="{% url 'group' user.userprofile.team.name %}"><i class="fa fa-diamond"></i> <span class="nav-label">My Team</span></a>
                 </li>
                 <li>
                     <a href="{% url 'groups' %}"><i class="fa fa-sitemap"></i> <span class="nav-label">Groups</span></a>

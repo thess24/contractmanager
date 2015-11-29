@@ -170,188 +170,24 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="gradeX">
+                    {% for c in contracts %}
+                    <tr>
                         <td>
                             <a class='btn btn-xs btn-primary' href="{% url 'contract' 1 %}">View</a>
                         </td>
-                        <td>2346524 Dr Sacks</td>
+                        <td>{{c.name}}</td>
                         <td>12/1/2014</td>
                         <td>Taylor</td>
                         <td>Legal</td>
                         <td>$20,000</td>
-                        <td>Yes</td>
+                        <td>{{c.signed}}</td>
                         <td>1/1/2017</td>
-                        <td><span class="label label-primary">Completed</span></td>
+                        <td><span class="label label-primary">{{c.status}}</span></td>
                     </tr>
-                    <tr class="gradeX">
-                        <td>
-                            <a class='btn btn-xs btn-primary' href="{% url 'contract' 1 %}">View</a>
-                        </td>
-                        <td>2346524 Dr Sacks</td>
-                        <td>12/1/2014</td>
-                        <td>Taylor</td>
-                        <td>Legal</td>
-                        <td>$20,000</td>
-                        <td>Yes</td>
-                        <td>1/1/2017</td>
-                        <td><span class="label label-primary">Completed</span></td>
-                    </tr>
-                    <tr class="gradeX">
-                        <td>
-                            <a class='btn btn-xs btn-primary' href="{% url 'contract' 1 %}">View</a>
-                        </td>
-                        <td>2346524 Dr Sacks</td>
-                        <td>12/1/2014</td>
-                        <td>Taylor</td>
-                        <td>Legal</td>
-                        <td>$20,000</td>
-                        <td>Yes</td>
-                        <td>1/1/2017</td>
-                        <td><span class="label label-primary">Completed</span></td>
-                    </tr>                    
-                    <tr class="gradeX">
-                        <td>
-                            <a class='btn btn-xs btn-primary' href="{% url 'contract' 1 %}">View</a>
-                        </td>
-                        <td>2346524 Dr Sacks</td>
-                        <td>12/1/2014</td>
-                        <td>Taylor</td>
-                        <td>Legal</td>
-                        <td>$20,000</td>
-                        <td>Yes</td>
-                        <td>1/1/2017</td>
-                        <td><span class="label label-primary">Completed</span></td>
-                    </tr>
-                    <tr class="gradeX">
-                        <td>
-                            <a class='btn btn-xs btn-primary' href="{% url 'contract' 1 %}">View</a>
-                        </td>
-                        <td>2346524 Dr Sacks</td>
-                        <td>12/1/2014</td>
-                        <td>Taylor</td>
-                        <td>Legal</td>
-                        <td>$20,000</td>
-                        <td>Yes</td>
-                        <td>1/1/2017</td>
-                        <td><span class="label label-primary">Completed</span></td>
-                    </tr>
-                    <tr class="gradeX">
-                        <td>
-                           <a class='btn btn-xs btn-primary' href="{% url 'contract' 1 %}">View</a>
-                        </td>
-                        <td>2346524 Dr Sacks</td>
-                        <td>12/1/2014</td>
-                        <td>Taylor</td>
-                        <td>Legal</td>
-                        <td>$20,000</td>
-                        <td>Yes</td>
-                        <td>1/1/2017</td>
-                        <td><span class="label label-primary">Completed</span></td>
-                    </tr>                    
-                    <tr class="gradeX">
-                        <td>
-                           <a class='btn btn-xs btn-primary' href="{% url 'contract' 1 %}">View</a>
-                        </td>
-                        <td>2346524 Dr Sacks</td>
-                        <td>12/1/2014</td>
-                        <td>Taylor</td>
-                        <td>Legal</td>
-                        <td>$20,000</td>
-                        <td>Yes</td>
-                        <td>1/1/2017</td>
-                        <td><span class="label label-primary">Completed</span></td>
-                    </tr>
-                    <tr class="gradeX">
-                        <td>
-                           <a class='btn btn-xs btn-primary' href="{% url 'contract' 1 %}">View</a>
-                        </td>
-                        <td>2346524 Dr Sacks</td>
-                        <td>12/1/2014</td>
-                        <td>Taylor</td>
-                        <td>Legal</td>
-                        <td>$20,000</td>
-                        <td>Yes</td>
-                        <td>1/1/2017</td>
-                        <td><span class="label label-primary">Completed</span></td>
-                    </tr>
-                    <tr class="gradeX">
-                        <td>
-                           <a class='btn btn-xs btn-primary' href="{% url 'contract' 1 %}">View</a>
-                        </td>
-                        <td>2346524 Dr Sacks</td>
-                        <td>12/1/2014</td>
-                        <td>Taylor</td>
-                        <td>Legal</td>
-                        <td>$20,000</td>
-                        <td>Yes</td>
-                        <td>1/1/2017</td>
-                        <td><span class="label label-warning">In Progress</span></td>
-                    </tr>                    
-                    <tr class="gradeX">
-                        <td>
-                           <a class='btn btn-xs btn-primary' href="{% url 'contract' 1 %}">View</a>
-                        </td>
-                        <td>2346524 Dr Sacks</td>
-                        <td>12/1/2014</td>
-                        <td>Taylor</td>
-                        <td>Legal</td>
-                        <td>$20,000</td>
-                        <td>Yes</td>
-                        <td>1/1/2017</td>
-                        <td><span class="label label-warning">In Progress</span></td>
-                    </tr>
-                    <tr class="gradeX">
-                        <td>
-                          <a class='btn btn-xs btn-primary' href="{% url 'contract' 1 %}">View</a>
-                        </td>
-                        <td>2346524 Dr Sacks</td>
-                        <td>12/1/2014</td>
-                        <td>Taylor</td>
-                        <td>Legal</td>
-                        <td>$20,000</td>
-                        <td>Yes</td>
-                        <td>1/1/2017</td>
-                        <td><span class="label label-primary">Completed</span></td>
-                    </tr>
-                    <tr class="gradeX">
-                        <td>
-                           <a class='btn btn-xs btn-primary' href="{% url 'contract' 1 %}">View</a>
-                        </td>
-                        <td>2346524 Dr Sacks</td>
-                        <td>12/1/2014</td>
-                        <td>Taylor</td>
-                        <td>Legal</td>
-                        <td>$20,000</td>
-                        <td>Yes</td>
-                        <td>1/1/2017</td>
-                        <td><span class="label label-primary">Completed</span></td>
-                    </tr>
-                    <tr class="gradeX">
-                        <td>
-                            <a class='btn btn-xs btn-primary' href="{% url 'contract' 1 %}">View</a>
-                        </td>
-                        <td>2346524 Dr Sacks</td>
-                        <td>12/1/2014</td>
-                        <td>Taylor</td>
-                        <td>Legal</td>
-                        <td>$20,000</td>
-                        <td>Yes</td>
-                        <td>1/1/2017</td>
-                        <td><span class="label label-warning">In Progress</span></td>
-                    </tr>                    
-                    <tr class="gradeX">
-                        <td>
-                           <a class='btn btn-xs btn-primary' href="{% url 'contract' 1 %}">View</a>
-                        </td>
-                        <td>2346524 Dr Sacks</td>
-                        <td>12/1/2014</td>
-                        <td>Taylor</td>
-                        <td>Legal</td>
-                        <td>$20,000</td>
-                        <td>Yes</td>
-                        <td>1/1/2017</td>
-                        <td><span class="label label-warning">In Progress</span></td>
-                    </tr>
+                    {% empty %}
+
+                    {% endfor %}
+
                     </tbody>
 
                     </table>

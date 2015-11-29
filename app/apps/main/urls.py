@@ -67,9 +67,15 @@ urlpatterns = patterns('',
 # page to add contracts
 # alerts should show warning color based on level of alert
 
+
+# new contract page
+# edit contract page
+# api takes in data
+# manage workflows page
+
+
 ### BIG
 # figure out how to save in db
-# ability to grab contracts/ release contracts
 # messaging that form has submitted
 # get alert system and contract log up and running
 # page for a physician to show all contracts
@@ -79,12 +85,12 @@ urlpatterns = patterns('',
 	# 3. js and submitting on current contracts done
 
 
+
+
+
+
+
 # look into task runner to drop and add database
-
-
-
-
-
 
 #### DROP/ADD DB Instructions
 # All in terminal
