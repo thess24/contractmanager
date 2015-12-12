@@ -1,0 +1,386 @@
+{% extends 'frontbase.html' %}
+
+
+
+{% block head %}
+<style type="text/css">
+    .btn-demo{
+        background-color: #FFFFFF;
+        border-color: #1ab394;
+        color: #7B7B7B;
+        font-size: 14px;
+        padding: 20px 50px;
+    }
+
+.frontpage-header-style{
+
+    background-image: linear-gradient(90deg, rgb(22, 160, 133) 24%, rgb(41, 128, 185) 100%);
+    background-image: -moz-linear-gradient(left, rgb(22, 160, 133) 24%, rgb(41, 128, 185) 100%);
+    background-image: -webkit-linear-gradient(left, rgb(22, 160, 133) 24%, rgb(41, 128, 185) 100%);
+    background-image: -o-linear-gradient(left, rgb(22, 160, 133) 24%, rgb(41, 128, 185) 100%);
+    background-image: -ms-linear-gradient(left, rgb(22, 160, 133) 24%, rgb(41, 128, 185) 100%);
+}
+
+
+</style>
+{% endblock %}
+
+{% block content %}
+<div id="inSlider" class="carousel carousel-fade" data-ride="carousel">
+<!--     <ol class="carousel-indicators">
+        <li data-target="#inSlider" data-slide-to="0" class="active"></li>
+        <li data-target="#inSlider" data-slide-to="1"></li>
+    </ol> -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active frontpage-header-style">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>Healthcare Compliance <br/>
+                        Software</h1>
+                    <p>Keep track of your physician arrangements</p>
+                </div>
+                <div class="carousel-image wow zoomIn">
+                    <img src="{{ STATIC_URL }}img/laptop.png" alt="laptop"/>
+                </div>
+            </div>
+            <!-- Set background for slide in css -->
+            <!-- <div class="header-back one"></div> -->
+
+        </div>
+<!--         <div class="item">
+            <div class="container">
+                <div class="carousel-caption blank">
+                    <h1>We create meaningful <br/> interfaces that inspire.</h1>
+                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
+                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
+                </div>
+            </div>
+            <div class="header-back two"></div>
+        </div> -->
+    </div>
+<!--     <a class="left carousel-control" href="#inSlider" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#inSlider" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a> -->
+</div>
+
+
+<section id="features" class="container services">
+<!--     <div class="row">
+        <div class="col-sm-12" style='font-size:2em;padding-bottom:50px'>
+            With the current state of healthcare, compliance is more important now than ever.  Don't be the next bad headline. The OIG is cracking down on Fraud, Kickback, and STARK violations.
+        </div>
+    </div> -->
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <div class="navy-line"></div>
+            <h1>Our Products</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <h2>Contract Manager</h2>
+            <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus.</p>
+            <p><a class="navy-link" href="{% url 'products_contractmanager' %}" role="button">Details &raquo;</a></p>
+        </div>
+        <div class="col-sm-4">
+            <h2>Physician Time Tracker</h2>
+            <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus.</p>
+            <p><a class="navy-link" href="{% url 'products_timetracker' %}" role="button">Details &raquo;</a></p>
+        </div>
+        <div class="col-sm-4">
+            <h2>Contract Analytics</h2>
+            <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus.</p>
+            <p><a class="navy-link" href="{% url 'products_analytics' %}" role="button">Details &raquo;</a></p>
+        </div>
+    </div>
+</section>
+
+<section  class="container features">
+
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <div class="navy-line"></div>
+            <h1>Discover great feautres</h1>
+            <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. </p>
+        </div>
+    </div>
+    <div class="row features-block">
+        <div class="col-lg-6 features-text wow fadeInLeft">
+            <small>INSPINIA</small>
+            <h2>Perfectly designed </h2>
+            <p>INSPINIA Admin Theme is a premium admin dashboard template with flat design concept. It is fully responsive admin dashboard template built with Bootstrap 3+ Framework, HTML5 and CSS3, Media query. It has a huge collection of reusable UI components and integrated with latest jQuery plugins.</p>
+            <a href="" class="btn btn-primary">Learn more</a>
+        </div>
+        <div class="col-lg-6 text-right wow fadeInRight">
+            <img src="img/landing/dashboard.png" alt="dashboard" class="img-responsive pull-right">
+        </div>
+    </div>
+</section>
+
+<section id="team" class="gray-section team">
+    <div class="container">
+        <div class="row m-b-lg">
+            <div class="col-lg-12 text-center">
+                <div class="navy-line"></div>
+                <h1>Our Team</h1>
+                <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 wow fadeInLeft">
+                <div class="team-member">
+                    <img src="img/landing/avatar3.jpg" class="img-responsive img-circle img-small" alt="">
+                    <h4><span class="navy">Amelia</span> Smith</h4>
+                    <p>Lorem ipsum dolor sit amet, illum fastidii dissentias quo ne. Sea ne sint animal iisque, nam an soluta sensibus. </p>
+                    <ul class="list-inline social-icon">
+                        <li><a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="team-member wow zoomIn">
+                    <img src="img/landing/avatar1.jpg" class="img-responsive img-circle" alt="">
+                    <h4><span class="navy">John</span> Novak</h4>
+                    <p>Lorem ipsum dolor sit amet, illum fastidii dissentias quo ne. Sea ne sint animal iisque, nam an soluta sensibus.</p>
+                    <ul class="list-inline social-icon">
+                        <li><a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-4 wow fadeInRight">
+                <div class="team-member">
+                    <img src="img/landing/avatar2.jpg" class="img-responsive img-circle img-small" alt="">
+                    <h4><span class="navy">Peter</span> Johnson</h4>
+                    <p>Lorem ipsum dolor sit amet, illum fastidii dissentias quo ne. Sea ne sint animal iisque, nam an soluta sensibus.</p>
+                    <ul class="list-inline social-icon">
+                        <li><a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center m-t-lg m-b-lg">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section id="testimonials" class="navy-section testimonials" style="margin-top: 0">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center wow zoomIn">
+                <i class="fa fa-comment big-icon"></i>
+                <h1>
+                    Try Us Out
+                </h1>
+                <div class="testimonials-text">
+                    <i>Want to learn more about what we can do for you?  Check out our site and book a demo by clicking below</i>
+                </div>
+                <br>
+                <a href="{% url 'contact' %}" class='btn btn-lg btn-demo'>Book A Demo</a>
+
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section class="comments gray-section" style="margin-top: 0">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="navy-line"></div>
+                <h1>What our partners say</h1>
+                <p>Donec sed odio dui. Etiam porta sem malesuada. </p>
+            </div>
+        </div>
+        <div class="row features-block">
+            <div class="col-lg-4">
+                <div class="bubble">
+                    "Uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
+                </div>
+                <div class="comments-avatar">
+                    <a href="" class="pull-left">
+                        <img alt="image" src="img/landing/avatar3.jpg">
+                    </a>
+                    <div class="media-body">
+                        <div class="commens-name">
+                            Andrew Williams
+                        </div>
+                        <small class="text-muted">Company X from California</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="bubble">
+                    "Uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
+                </div>
+                <div class="comments-avatar">
+                    <a href="" class="pull-left">
+                        <img alt="image" src="img/landing/avatar1.jpg">
+                    </a>
+                    <div class="media-body">
+                        <div class="commens-name">
+                            Andrew Williams
+                        </div>
+                        <small class="text-muted">Company X from California</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="bubble">
+                    "Uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
+                </div>
+                <div class="comments-avatar">
+                    <a href="" class="pull-left">
+                        <img alt="image" src="img/landing/avatar2.jpg">
+                    </a>
+                    <div class="media-body">
+                        <div class="commens-name">
+                            Andrew Williams
+                        </div>
+                        <small class="text-muted">Company X from California</small>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+</section>
+
+<section class="features">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="navy-line"></div>
+                <h1>More and more extra great feautres</h1>
+                <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-5 col-lg-offset-1 features-text">
+                <small>INSPINIA</small>
+                <h2>Perfectly designed </h2>
+                <i class="fa fa-bar-chart big-icon pull-right"></i>
+                <p>INSPINIA Admin Theme is a premium admin dashboard template with flat design concept. It is fully responsive admin dashboard template built with Bootstrap 3+ Framework, HTML5 and CSS3, Media query. It has a huge collection of reusable UI components and integrated with.</p>
+            </div>
+            <div class="col-lg-5 features-text">
+                <small>INSPINIA</small>
+                <h2>Perfectly designed </h2>
+                <i class="fa fa-bolt big-icon pull-right"></i>
+                <p>INSPINIA Admin Theme is a premium admin dashboard template with flat design concept. It is fully responsive admin dashboard template built with Bootstrap 3+ Framework, HTML5 and CSS3, Media query. It has a huge collection of reusable UI components and integrated with.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-5 col-lg-offset-1 features-text">
+                <small>INSPINIA</small>
+                <h2>Perfectly designed </h2>
+                <i class="fa fa-clock-o big-icon pull-right"></i>
+                <p>INSPINIA Admin Theme is a premium admin dashboard template with flat design concept. It is fully responsive admin dashboard template built with Bootstrap 3+ Framework, HTML5 and CSS3, Media query. It has a huge collection of reusable UI components and integrated with.</p>
+            </div>
+            <div class="col-lg-5 features-text">
+                <small>INSPINIA</small>
+                <h2>Perfectly designed </h2>
+                <i class="fa fa-users big-icon pull-right"></i>
+                <p>INSPINIA Admin Theme is a premium admin dashboard template with flat design concept. It is fully responsive admin dashboard template built with Bootstrap 3+ Framework, HTML5 and CSS3, Media query. It has a huge collection of reusable UI components and integrated with.</p>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+
+
+{% endblock %}
+
+
+
+
+
+{% block scripts %}
+<script>
+
+    $(document).ready(function () {
+
+        $('body').scrollspy({
+            target: '.navbar-fixed-top',
+            offset: 80
+        });
+
+        // Page scrolling feature
+        $('a.page-scroll').bind('click', function(event) {
+            var link = $(this);
+            $('html, body').stop().animate({
+                scrollTop: $(link.attr('href')).offset().top - 50
+            }, 500);
+            event.preventDefault();
+        });
+    });
+
+    var cbpAnimatedHeader = (function() {
+        var docElem = document.documentElement,
+                header = document.querySelector( '.navbar-default' ),
+                didScroll = false,
+                changeHeaderOn = 200;
+        function init() {
+            window.addEventListener( 'scroll', function( event ) {
+                if( !didScroll ) {
+                    didScroll = true;
+                    setTimeout( scrollPage, 250 );
+                }
+            }, false );
+        }
+        function scrollPage() {
+            var sy = scrollY();
+            if ( sy >= changeHeaderOn ) {
+                $(header).addClass('navbar-scroll')
+            }
+            else {
+                $(header).removeClass('navbar-scroll')
+            }
+            didScroll = false;
+        }
+        function scrollY() {
+            return window.pageYOffset || docElem.scrollTop;
+        }
+        init();
+
+    })();
+
+    // Activate WOW.js plugin for animation on scrol
+    new WOW().init();
+
+</script>
+
+    {% endblock %}
+
+

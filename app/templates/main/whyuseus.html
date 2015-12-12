@@ -1,0 +1,178 @@
+{% extends 'frontbase.html' %}
+
+{% block content %}
+<div class="carousel front-header">
+
+    <div class="carousel-inner">
+        <div class="item active front-header">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>Why Use Us?</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<section  class="container features">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <div class="navy-line"></div>
+            <h1>Focused On Your Healthcare Compliance Needs</h1>
+            <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. </p>
+        </div>
+    </div>
+    <div class="row features-block">
+        <div class="col-lg-12 features-text wow fadeInLeft">
+            <h2>Perfectly designed </h2>
+            <p>INSPINIA Admin Theme is a premium admin dashboard template with flat design concept. It is fully responsive admin dashboard template built with Bootstrap 3+ Framework, HTML5 and CSS3, Media query. It has a huge collection of reusable UI components and integrated with latest jQuery plugins.</p>
+        </div>
+    </div>
+    <div class="row features-block">
+        <div class="col-lg-12 features-text wow fadeInLeft">
+            <h2>Perfectly designed </h2>
+            <p>INSPINIA Admin Theme is a premium admin dashboard template with flat design concept. It is fully responsive admin dashboard template built with Bootstrap 3+ Framework, HTML5 and CSS3, Media query. It has a huge collection of reusable UI components and integrated with latest jQuery plugins.</p>
+        </div>
+    </div>
+    <div class="row features-block">
+        <div class="col-lg-12 features-text wow fadeInLeft">
+            <h2>Perfectly designed </h2>
+            <p>INSPINIA Admin Theme is a premium admin dashboard template with flat design concept. It is fully responsive admin dashboard template built with Bootstrap 3+ Framework, HTML5 and CSS3, Media query. It has a huge collection of reusable UI components and integrated with latest jQuery plugins.</p>
+        </div>
+    </div>
+</section>
+
+<section id="team" class="gray-section team">
+    <div class="container">
+        <div class="row m-b-lg">
+            <div class="col-lg-12 text-center">
+                <div class="navy-line"></div>
+                <h1>Cutting Edge Technology</h1>
+            </div>
+        </div>
+    <div class="row features-block">
+        <div class="col-lg-12 features-text wow fadeInLeft">
+            <h2>Build on modern technology</h2>
+            <p>Our software is built on a service called Amazon AWS -- the same one that NASA and Netflix use.  That means we can achieve the same scalability, site uptime, speed, and storage capacity as these massively popular sites, all while keeping the site secure.</p>
+        </div>
+    </div>
+    <div class="row features-block">
+        <div class="col-lg-12 features-text wow fadeInLeft">
+            <h2>Easy and Intuitive Design</h2>
+            <p>Enterprise software is known for its terrible design, poor user interface, and outdated look--we have none of that!  Our site focuses on design as a way to make the contract management process easy and intuitive.</p>
+        </div>
+    </div>
+    <div class="row features-block m-b-lg">
+        <div class="col-lg-12 features-text wow fadeInLeft">
+            <h2>Quick To Get Up and Running</h2>
+            <p>Our <b>SAAS</b> solution will you get you up and running in no time.  With our focus on simple, elegent designs, users can get up to speed quickly and intuitively understand how our software works from the first day they log in.</p>
+        </div>
+    </div>
+    </div>
+</section>
+
+<section class="features">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="navy-line"></div>
+                <h1>Focus on Security</h1>
+                <p>We make security a top priority</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 features-text">
+                <h2>HIPAA Compliant</h2>
+                <i class="fa fa-lock big-icon pull-right"></i>
+                <p>Our SAAS service complies with all HIPAA standards.  That means you don't have to worry about any healthcare regulation</p>
+            </div>
+            <div class="col-lg-6 features-text">
+                <h2>256 Bit End to End SSL Encryption</h2>
+                <i class="fa fa-bolt big-icon pull-right"></i>
+                <p>We transport all data in the most secure environment possible -- always over HTTPS so no one can see your data but you</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 features-text">
+                <h2>100% Developed in US</h2>
+                <i class="fa fa-globe big-icon pull-right"></i>
+                <p>All of our development is done by developers based in the US.  You don't need to worry about security breaches from abroad</p>
+            </div>
+            <div class="col-lg-6 features-text">
+                <h2>Penetration Tested</h2>
+                <i class="fa fa-users big-icon pull-right"></i>
+                <p>We are constantly stress testing our app and finding ways that hackers could attempt to break in</p>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+
+{% endblock %}
+
+
+
+
+
+{% block scripts %}
+<script>
+
+    $(document).ready(function () {
+
+        $('body').scrollspy({
+            target: '.navbar-fixed-top',
+            offset: 80
+        });
+
+        // Page scrolling feature
+        $('a.page-scroll').bind('click', function(event) {
+            var link = $(this);
+            $('html, body').stop().animate({
+                scrollTop: $(link.attr('href')).offset().top - 50
+            }, 500);
+            event.preventDefault();
+        });
+    });
+
+    var cbpAnimatedHeader = (function() {
+        var docElem = document.documentElement,
+                header = document.querySelector( '.navbar-default' ),
+                didScroll = false,
+                changeHeaderOn = 200;
+        function init() {
+            window.addEventListener( 'scroll', function( event ) {
+                if( !didScroll ) {
+                    didScroll = true;
+                    setTimeout( scrollPage, 250 );
+                }
+            }, false );
+        }
+        function scrollPage() {
+            var sy = scrollY();
+            if ( sy >= changeHeaderOn ) {
+                $(header).addClass('navbar-scroll')
+            }
+            else {
+                $(header).removeClass('navbar-scroll')
+            }
+            didScroll = false;
+        }
+        function scrollY() {
+            return window.pageYOffset || docElem.scrollTop;
+        }
+        init();
+
+    })();
+
+    // Activate WOW.js plugin for animation on scrol
+    new WOW().init();
+
+</script>
+
+    {% endblock %}
+
+

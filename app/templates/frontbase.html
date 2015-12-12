@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    {% block title %}
+    <title>Contract Manager</title>
+    {% endblock %}
+ 
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href="{{ STATIC_URL }}css/animate.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/style.css" rel="stylesheet">
+
+    <style type="text/css">
+    .front-header{
+        height: 300px!important;
+        background-image: linear-gradient(90deg, rgb(142, 68, 173) 7%, rgb(52, 152, 219) 100%);
+        background-image: -moz-linear-gradient(left, rgb(142, 68, 173) 7%, rgb(52, 152, 219) 100%);
+        background-image: -webkit-linear-gradient(left, rgb(142, 68, 173) 7%, rgb(52, 152, 219) 100%);
+        background-image: -o-linear-gradient(left, rgb(142, 68, 173) 7%, rgb(52, 152, 219) 100%);
+        background-image: -ms-linear-gradient(left, rgb(142, 68, 173) 7%, rgb(52, 152, 219) 100%);
+    }
+
+    .secondary-header-style{
+        background-image: linear-gradient(90deg, rgb(41, 128, 185) 15%, rgb(22, 160, 133) 100%);
+        background-image: -moz-linear-gradient(left, rgb(41, 128, 185) 15%, rgb(22, 160, 133) 100%);
+        background-image: -webkit-linear-gradient(left, rgb(41, 128, 185) 15%, rgb(22, 160, 133) 100%);
+        background-image: -o-linear-gradient(left, rgb(41, 128, 185) 15%, rgb(22, 160, 133) 100%);
+        background-image: -ms-linear-gradient(left, rgb(41, 128, 185) 15%, rgb(22, 160, 133) 100%);
+    }
+
+    .front-footer{
+        background:#272727;
+        margin-top:300px!important;
+    }
+
+    .signin-label{
+        padding: 10px !important;
+        margin: 21px 0px 0px 21px;
+        background-color: #1AB394;
+        border: 0px !important;
+    }
+
+    .signin-label:hover{
+        background-color: #1AB394 !important;
+        color: inherit !important;
+        border: 0px !important;
+    }
+
+    .navbar-dropdown{
+        color: #676a6c!important;
+    }
+
+    </style>
+    {% block head %}
+    {% endblock %}
+
+</head>
+<body id="page-top" class="landing-page no-skin-config">
+<div class="navbar-wrapper">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header page-scroll">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">WEBAPPLAYERS</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="{% url 'landing' %}">Home</a></li>
+                        <!-- <li><a class="page-scroll" href="#page-top">Home</a></li> -->
+                        <li><a href="{% url 'about' %}">About Us</a></li>
+                        <li><a href="{% url 'whyuseus' %}">Why Use Us?</a></li>
+                        <!-- <li><a href="{% url 'products' %}">Products</a></li> -->
+
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Products <span class="caret"></span></a>
+                          <ul class="dropdown-menu">
+
+                            <li><a href="{% url 'products' %}" class='navbar-dropdown'>Overview</a></li>
+                            <li role="separator" class="divider"></li>
+
+                            <li><a href="{% url 'products_contractmanager' %}" class='navbar-dropdown'>Contract Manager</a></li>
+
+                            <li><a href="{% url 'products_timetracker' %}" class='navbar-dropdown'>Physician Time Tracker</a></li>
+
+                            <li><a href="{% url 'products_analytics' %}" class='navbar-dropdown'>Compliance Analytics</a></li>
+                          </ul>
+                        </li>
+
+                        <li><a href="{% url 'contact' %}">Contact</a></li>
+                        <li>
+                            <a href="/accounts/login">
+                            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+                            Sign In</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+</div>
+
+
+{% block content %}
+{% endblock %}
+
+
+
+
+<section id="contact" class="contact front-footer">
+    <div class="container">
+        <div class="row m-b-lg">
+            <div class="col-lg-12 text-center">
+                <div class="navy-line"></div>
+                <h1>Contact Us</h1>
+            </div>
+        </div>
+        <div class="row m-b-lg">
+            <div class="col-lg-3 col-lg-offset-3">
+                <address>
+                    <strong><span class="navy">Company name, Inc.</span></strong><br/>
+                    Chicago, IL<br/>
+                    <abbr title="Phone">P:</abbr> (123) 456-7890
+                </address>
+            </div>
+            <div class="col-lg-4">
+                <p class="text-color">
+                    Consectetur adipisicing elit. Aut eaque, totam corporis laboriosam veritatis quis ad perspiciatis, totam corporis laboriosam veritatis, consectetur adipisicing elit quos non quis ad perspiciatis, totam corporis ea,
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <a href="mailto:test@email.com" class="btn btn-primary">Contact Us</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center m-t-lg m-b-lg">
+                <p><strong>&copy; 2015 Company Name</strong><br/> consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Mainly scripts -->
+    <script src="//code.jquery.com/jquery-2.1.2.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="{{ STATIC_URL }}js/metisMenu.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+    <script src="{{ STATIC_URL }}js/inspinia.js"></script>
+    <script src="{{ STATIC_URL }}js/pace.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+
+
+    {% block scripts %}
+    {% endblock %}
+    
+
+</body>
+</html>

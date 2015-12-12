@@ -61,7 +61,3 @@ class PhysicianTimeLogResource(ModelResource):
 		'''creates the object from the data passed in'''
 		physician = Physician.objects.get(user=bundle.request.user)
 		return super(PhysicianTimeLogResource, self).obj_create(bundle, physician = physician)
-
-
-# Test post with curl (no password)
-# curl -X POST -H "Content-Type: application/json" -d '{"physician":"/api/v1/physician/1/","mins_worked":44,"category":"Med Dir"}' http://127.0.0.1:8000/api/v1/physiciantimelog/

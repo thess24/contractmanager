@@ -1,0 +1,167 @@
+{% extends 'frontbase.html' %}
+
+{% block content %}
+<div class="carousel front-header">
+
+    <div class="carousel-inner">
+        <div class="item active front-header  secondary-header-style">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>Products: Compliance Analytics</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<section id="features" class="container services">
+    <div class="row">
+        <div class="col-sm-3">
+            <h2>Full responsive</h2>
+            <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus.</p>
+            <p><a class="navy-link" href="#" role="button">Details &raquo;</a></p>
+        </div>
+        <div class="col-sm-3">
+            <h2>LESS/SASS Files</h2>
+            <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus.</p>
+            <p><a class="navy-link" href="#" role="button">Details &raquo;</a></p>
+        </div>
+        <div class="col-sm-3">
+            <h2>6 Charts Library</h2>
+            <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus.</p>
+            <p><a class="navy-link" href="#" role="button">Details &raquo;</a></p>
+        </div>
+        <div class="col-sm-3">
+            <h2>Advanced Forms</h2>
+            <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus.</p>
+            <p><a class="navy-link" href="#" role="button">Details &raquo;</a></p>
+        </div>
+    </div>
+</section>
+
+<section  class="container features">
+
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <div class="navy-line"></div>
+            <h1>Contract Type Analysis</h1>
+            <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. </p>
+        </div>
+    </div>
+    <div class="row features-block">
+        <div class="col-lg-7 features-text wow fadeInLeft">
+            <h2>Perfectly designed </h2>
+            <p>INSPINIA Admin Theme is a premium admin dashboard template with flat design concept. It is fully responsive admin dashboard template built with Bootstrap 3+ Framework, HTML5 and CSS3, Media query. It has a huge collection of reusable UI components and integrated with latest jQuery plugins.</p>
+        </div>
+        <div class="col-lg-5 text-right wow fadeInRight">
+            <img src="{{ STATIC_URL }}img/dashboard.png" alt="dashboard" class="img-responsive pull-right">
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <div class="navy-line"></div>
+            <h1>Expiration Analysis</h1>
+                <p>Plan for the future by viewing contracts coming due soon</p>
+        </div>
+    </div>
+    <div class="row features-block">
+        <div class="col-lg-5 text-right wow fadeInRight">
+            <img src="{{ STATIC_URL }}img/dashboard.png" alt="dashboard" class="img-responsive pull-left">
+        </div>
+        <div class="col-lg-7 features-text wow fadeInLeft">
+            <h2>Perfectly designed </h2>
+            <p>INSPINIA Admin Theme is a premium admin dashboard template with flat design concept. It is fully responsive admin dashboard template built with Bootstrap 3+ Framework, HTML5 and CSS3, Media query. It has a huge collection of reusable UI components and integrated with latest jQuery plugins.</p>
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <div class="navy-line"></div>
+            <h1>Physician Compensation Compare</h1>
+            <p>Use your data to compare physician compensation and ensure market value</p>
+        </div>
+    </div>
+    <div class="row features-block">
+        <div class="col-lg-7 features-text wow fadeInLeft">
+            <h2>Perfectly designed </h2>
+            <p>INSPINIA Admin Theme is a premium admin dashboard template with flat design concept. It is fully responsive admin dashboard template built with Bootstrap 3+ Framework, HTML5 and CSS3, Media query. It has a huge collection of reusable UI components and integrated with latest jQuery plugins.</p>
+        </div>
+        <div class="col-lg-5 text-right wow fadeInRight">
+            <img src="{{ STATIC_URL }}img/dashboard.png" alt="dashboard" class="img-responsive pull-right">
+        </div>
+    </div>
+
+
+</section>
+
+
+{% endblock %}
+
+
+
+
+
+{% block scripts %}
+<script>
+
+    $(document).ready(function () {
+
+        $('body').scrollspy({
+            target: '.navbar-fixed-top',
+            offset: 80
+        });
+
+        // Page scrolling feature
+        $('a.page-scroll').bind('click', function(event) {
+            var link = $(this);
+            $('html, body').stop().animate({
+                scrollTop: $(link.attr('href')).offset().top - 50
+            }, 500);
+            event.preventDefault();
+        });
+    });
+
+    var cbpAnimatedHeader = (function() {
+        var docElem = document.documentElement,
+                header = document.querySelector( '.navbar-default' ),
+                didScroll = false,
+                changeHeaderOn = 200;
+        function init() {
+            window.addEventListener( 'scroll', function( event ) {
+                if( !didScroll ) {
+                    didScroll = true;
+                    setTimeout( scrollPage, 250 );
+                }
+            }, false );
+        }
+        function scrollPage() {
+            var sy = scrollY();
+            if ( sy >= changeHeaderOn ) {
+                $(header).addClass('navbar-scroll')
+            }
+            else {
+                $(header).removeClass('navbar-scroll')
+            }
+            didScroll = false;
+        }
+        function scrollY() {
+            return window.pageYOffset || docElem.scrollTop;
+        }
+        init();
+
+    })();
+
+    // Activate WOW.js plugin for animation on scrol
+    new WOW().init();
+
+</script>
+
+    {% endblock %}
+
+

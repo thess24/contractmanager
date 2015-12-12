@@ -9,7 +9,7 @@ from django.conf import settings
 from django.contrib.auth.forms import UserCreationForm
 
 
-
+ 
 class HealthSystem(models.Model):
 	name = models.CharField(max_length=100)
 	street = models.CharField(max_length=100)
@@ -331,11 +331,8 @@ class ContractForm(ModelForm):
 class ContractInfoForm(ModelForm):
 	class Meta:
 		model = ContractInfo
-		exclude = ('contract', 'version', 'created_by', 'prev_team', 'prev_user', 'grabbed_at', 'sent_at', 'current_user', 'current_team')
+		exclude = ('contract', 'html', 'html_output', 'version', 'created_by', 'prev_team', 'prev_user', 'grabbed_at', 'sent_at', 'current_user', 'current_team')
 
-		widgets = {
-			'html': forms.Textarea(attrs={'style': 'display:none'}),
-		}
 
 	def __init__(self, *args, **kwargs):
 		super(ContractInfoForm, self).__init__(*args, **kwargs)

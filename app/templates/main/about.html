@@ -1,0 +1,155 @@
+{% extends 'frontbase.html' %}
+
+{% block content %}
+
+<div class="carousel front-header">
+
+    <div class="carousel-inner">
+        <div class="item active front-header">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>About Us</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+ 
+
+<section class="features">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="navy-line"></div>
+                <h1>How We Got Started</h1>
+            </div>
+        </div>
+        <div class="row features-block">
+            <div class="col-lg-12 features-text wow fadeInLeft">
+                Xxx was started by a healthcare professional working on a compliance project looking for software that fit all of the projects needs.   While a few solutions existed in the market, there were none that covered all of the projects needs while also being affordable, user friendly, and easy to use.  Xxxx was born out of this to provide a full package of healthcare compliance software that not only solved all of the compliance issues, but did so at a lower cost and with better results.  
+
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+<section id="team" class="gray-section team">
+    <div class="container">
+        <div class="row m-b-lg">
+            <div class="col-lg-12 text-center">
+                <div class="navy-line"></div>
+                <h1>Our Philosophy</h1>
+            </div>
+        </div>
+        <div class="row features-block">
+            <div class="col-lg-12 features-text wow fadeInLeft">
+
+                <h2>Simplicity</h2>
+                <p>We strive to make everything we do as simple as possible for our customers.  Our products are designed to be as user friendly as possible—we believe that the best software is software that people will enjoy using.  By keeping things simple and intuitive, users of our products can get more done!  We truly carry this philosophy through everything we do- from design, to pricing, to contract negotiation.</p>
+
+                <h2>Security</h2>
+                <p>Our phone and web applications are built with the highest security standards in mind. As a HIPAA compliant SAAS solution, we offer 256bit SSL end to end security.  By delivering all of our data in a secure way, you don’t have to worry about data breaches and can sleep peacefully at night.</p>
+
+                <h2>Cutting Edge Technology</h2>
+                <p>Software moves fast, and xxxx is built on the latest technology.  With the latest technology, we can quickly adapt to changing customer needs and quickly release new features.  This also means our software is fast, scalable, and backedup.  In fact, we built xxxx on Amazon AWS –the same service that NASA and Netflix use.</p>
+            </div>
+
+        </div>
+
+        <div class='row features-block text-center m-b-lg'>
+            Like what we have to say?  Reach out to us <a href="">here</a>
+        </div>
+
+    </div>
+</section>
+
+
+<section id="" class="">
+    <div class="container">
+        <div class="row m-b-lg">
+            <div class="col-lg-12 text-center">
+                <div class="navy-line"></div>
+                <h1>Our Goal</h1>
+            </div>
+        </div>
+        <div class="row features-block">
+            <div class="col-lg-12 features-text wow fadeInLeft">
+
+                <h2>Our goal is to provide the #1 healthcare compliance software in the market and to continually get better! </h2>
+          
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+
+{% endblock %}
+
+
+
+
+
+{% block scripts %}
+<script>
+
+    $(document).ready(function () {
+
+        $('body').scrollspy({
+            target: '.navbar-fixed-top',
+            offset: 80
+        });
+
+        // Page scrolling feature
+        $('a.page-scroll').bind('click', function(event) {
+            var link = $(this);
+            $('html, body').stop().animate({
+                scrollTop: $(link.attr('href')).offset().top - 50
+            }, 500);
+            event.preventDefault();
+        });
+    });
+
+    var cbpAnimatedHeader = (function() {
+        var docElem = document.documentElement,
+                header = document.querySelector( '.navbar-default' ),
+                didScroll = false,
+                changeHeaderOn = 200;
+        function init() {
+            window.addEventListener( 'scroll', function( event ) {
+                if( !didScroll ) {
+                    didScroll = true;
+                    setTimeout( scrollPage, 250 );
+                }
+            }, false );
+        }
+        function scrollPage() {
+            var sy = scrollY();
+            if ( sy >= changeHeaderOn ) {
+                $(header).addClass('navbar-scroll')
+            }
+            else {
+                $(header).removeClass('navbar-scroll')
+            }
+            didScroll = false;
+        }
+        function scrollY() {
+            return window.pageYOffset || docElem.scrollTop;
+        }
+        init();
+
+    })();
+
+    // Activate WOW.js plugin for animation on scrol
+    new WOW().init();
+
+</script>
+
+    {% endblock %}
+
+

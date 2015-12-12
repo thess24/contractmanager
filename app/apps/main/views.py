@@ -6,10 +6,44 @@ import models
 import datetime
 
 
-
+ 
 def test(request):
 	context= {}
 	return render(request, 'main/test.html', context)
+
+def landing(request):
+	context= {}
+	return render(request, 'main/landing.html', context)
+
+def contact(request):
+	context= {}
+	return render(request, 'main/contact.html', context)
+
+def about(request):
+	context= {}
+	return render(request, 'main/about.html', context)
+
+def products(request):
+	context= {}
+	return render(request, 'main/products.html', context)
+
+def whyuseus(request):
+	context= {}
+	return render(request, 'main/whyuseus.html', context)
+
+
+def products_analytics(request):
+	context= {}
+	return render(request, 'main/products_analytics.html', context)
+
+def products_timetracker(request):
+	context= {}
+	return render(request, 'main/products_timetracker.html', context)
+
+def products_contractmanager(request):
+	context= {}
+	return render(request, 'main/products_contractmanager.html', context)
+
 
 @login_required
 def index(request):
@@ -71,13 +105,14 @@ def newcontract(request):
 
 	contractform = models.ContractForm()
 	contractinfoform = models.ContractInfoForm()
+	print contractform
+	print contractinfoform
 
 	if request.method=='POST':
 		print request.POST
 		if 'add_contract' in request.POST:
 			contractform = models.ContractForm(request.POST)
 			contractinfoform = models.ContractInfoForm(request.POST)
-
 			if all([contractform.is_valid(), contractinfoform.is_valid()]):
 				contract = contractform.save(commit=False)
 				contract.system = request.user.userprofile.system
@@ -117,7 +152,7 @@ def newcontract(request):
 
 @login_required
 def allcontracts(request):
-	contracts = models.ContractInfo.objects.filter(system=request.user.userprofile.system)
+	contracts = models.ContractInfo.objects.filter(contract__system=request.user.userprofile.system)
 
 
 	context= {'contracts':contracts}

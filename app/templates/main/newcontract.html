@@ -118,21 +118,7 @@
                         <br>
 
                         <div id='current-input-fields'>
-                        <h3>Current Input Fields:</h3>
-                            <span class="label label-info">Physician Name</span>
-                            <span class="label label-info">NPI</span>
-                            <span class="label label-info">Contract Type</span>
-                            <span class="label label-info">Date</span>
-                            <span class="label label-info">Start Date</span>
-                            <span class="label label-info">End Date</span>
-                            <span class="label label-info">Term</span>
-                            <span class="label label-info">Hospitals</span>
-                            <span class="label label-info">Region</span>
-                            <span class="label label-info">Specialty</span>
-                            <span class="label label-info">Contract Status</span>
-                            <span class="label label-info">Contract Amount</span>
-                            <span class="label label-info">State for Liscence</span>
-                            <span class="label label-info">Medical Degree</span>
+                            <h3>Current Input Fields:</h3>
                         </div>
 
                         <br>
@@ -140,6 +126,20 @@
                         <br>
 
                         <h3>Live Contract Preview:</h3>
+
+
+                    <div class="tabs-container">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#edit-tab">Editing</a></li>
+                            <li class=""><a data-toggle="tab" href="#preview-tab">Preview</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="edit-tab" class="tab-pane active">
+                                <div class="panel-body">
+
+
+
+
                         <div class="summernote">
                             <h3>Lorem Ipsum is simply</h3>
                             dummy text of the printing and typesetting industry. <strong>Lorem Ipsum has been the industry's</strong> standard dummy text ever since the 1500s,
@@ -153,6 +153,25 @@
                                 <li>Unknown printer</li>
                             </ul>
                         </div>
+
+
+
+                                </div>
+                            </div>
+                            <div id="preview-tab" class="tab-pane">
+                                <div class="panel-body">
+                                    <div class="outputarea"></div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+
+
+
 
                         <button class='btn btn-danger btn-lrg' name="add_contract">Create New Contract!</button>
                     </form>
@@ -177,25 +196,14 @@
 
                         <div class="table-responsive">
                             <table class="table table-hover " >
-                            <thead>
-                            <tr>
-                                <th></th>
-                                <th>Name</th>
-                                <th>Date</th>
-                                <th>Add On?</th>
-                            </tr>
-                            </thead>
+
                             <tbody>
                             {% for t in addon_templates %}
                                 <tr>
                                     <td>
-                                        <div class="i-checks">
-                                            <input type="checkbox" >
-                                        </div>
+                                        <button class='btn btn-success btn-xs table-btn'>Add</button>
                                     </td>
                                     <td>{{t.name}}</td>
-                                    <td>{{t.created_at}}</td>
-                                    <td>{{t.add_on}}</td>
                                     <td><span class="btn btn-xs btn-primary table-btn">View</span></td>
                                 </tr>
                             {% endfor %}
@@ -204,8 +212,6 @@
                         </div>
 
 
-
-                        <button class='btn btn-lg' id='addtemplate'>Add to Contract Content</button>
                     </div>
                 </div>
 
@@ -252,6 +258,8 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.1/icheck.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src='//cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.0/mustache.min.js'></script>
+
 
 
 
@@ -268,6 +276,7 @@
         $(document).ready(function(){
 
             $('.summernote').summernote();
+            addInputFieldTags()
 
        });
         var edit = function() {
@@ -318,6 +327,120 @@
 
         //     return true
         // })
+
+
+
+    // Template tag parsing and rendering of inputs and highlighting data
+
+    function parseTemplateTags() {
+        s = $('.note-editable').html();
+        var tags = s.match(/{\{\s?\w+\s?}\}/g);
+        return tags;
+    };
+
+    function stripTags(tags) {
+        cleanTags = [];
+
+        if (tags!==null){
+
+            tags.forEach(function(tag){
+                tag = tag.replace(/[{}]/g,'');
+                tag = tag.trim();
+                cleanTags.push(tag);
+            })
+
+        };
+
+        return cleanTags;
+    };
+
+    // function createInputs(cleantags) {
+
+    //     $('.useraddedinput').remove();
+        
+    //     cleantags.forEach( function(tag){
+    //         var tag_id = 'id_'+tag;
+    //         var label_html = "<h3 class='useraddedinput'>"+ tag +"</h3>";
+    //         var input_html = "<input type='text' class='form-control useraddedinput' id=" + tag_id + ">";
+
+    //         var htmlToAdd = label_html + input_html;
+    //         $('#input_area').append(htmlToAdd);
+    //     })
+    // };
+
+    function startit(){
+        // these create inputs based on the tags
+        var tags = parseTemplateTags();
+        var cleanTags = stripTags(tags);
+        createInputs(cleanTags);
+    };
+
+
+
+
+
+
+
+    function renderTags(tags){
+        tags.forEach( function(element){
+            var htmlToAdd = "<span class='label label-info' style='display:inline-block'>"+element+"</span>";
+            $('#current-input-fields').append(htmlToAdd);
+        });
+    };
+
+
+
+    // function highlightTags() {
+    //     var highlightedtags = s.replace(/{\{\s?\w+\s?}\}/g,"<b>$&</b>");
+    //     $('.note-editable').html(highlightedtags);
+    // };
+
+    function addInputFieldTags(){
+        var tags = parseTemplateTags();
+        var cleanTags = stripTags(tags);
+        // highlightTags();
+        renderTags(cleanTags);
+    };
+
+
+
+    // TABS
+
+      $(document).ready(function(){
+
+            $('.nav-tabs a').click(function (e) {
+              e.preventDefault()
+
+                $('#current-input-fields span').remove()
+                addInputFieldTags();
+
+                var cname = $('#inputname').val();
+                var ctype = $('#inputcontract_type').val();
+
+                var template = $('.note-editable')[0].innerHTML;
+                var output = Mustache.render(template, {name:cname, contract_type:ctype});
+                $('.outputarea').html(output);
+            });
+
+      });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         

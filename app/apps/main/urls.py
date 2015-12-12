@@ -8,6 +8,18 @@ urlpatterns = patterns('',
 	url(r'^$', views.index, name='index'),
 	url(r'^test/$', views.test, name='test'),
 
+
+	# FRONT MARKETING PAGES
+	url(r'^landing/$', views.landing, name='landing'),
+	url(r'^contact/$', views.contact, name='contact'),
+	url(r'^about/$', views.about, name='about'),
+	url(r'^whyuseus/$', views.whyuseus, name='whyuseus'),
+	url(r'^products/$', views.products, name='products'),
+	url(r'^products/timetracker$', views.products_timetracker, name='products_timetracker'),
+	url(r'^products/contractmanager$', views.products_contractmanager, name='products_contractmanager'),
+	url(r'^products/analytics$', views.products_analytics, name='products_analytics'),
+
+
 	url(r'^user/$', views.user, name='user'),
 	url(r'^groups/$', views.groups, name='groups'),
 	url(r'^groups/(?P<groupname>.+)/$', views.group, name='group'),
@@ -48,7 +60,7 @@ urlpatterns = patterns('',
 
 
 
-
+ 
 
 ################## TODO #################
 
@@ -63,19 +75,34 @@ urlpatterns = patterns('',
 # ability for admin to reset user password
 # finish addtemplate html file- modal popup from ajax, copy data on load, render on pageup
 # fix footer
-# authentication/security on api
-# page to add contracts
 # alerts should show warning color based on level of alert
+# make admin display better
+# make addon template on form submit work (currently just adds to base template)
 
+
+
+# marketing pages
+	# - 
+	# - 
+	# - 
 
 # new contract page
+	# - forms display properly
+	# - added template tags actually display
+	# - current input field tags actually display
 # edit contract page
-# api takes in data
+	# - send to group/user makes popup and submits form
+	# - actual templates load on right
+	# - edit contract area - one tab for html, one tab from html_output
+	# - inputs all loaded at top of page
 # manage workflows page
+	# - groups actually loaded on right
+	# - ability to upload unknown number of inputs and create workflow object
+	# - Dragging box adds data to input
 
 
 ### BIG
-# figure out how to save in db
+# figure out how to save in db (EAV, jsonb, etc)
 # messaging that form has submitted
 # get alert system and contract log up and running
 # page for a physician to show all contracts
@@ -85,6 +112,12 @@ urlpatterns = patterns('',
 	# 3. js and submitting on current contracts done
 
 
+# PLAN
+# get marketing pages online and buy url
+# finish new and edit contract pages
+# finish workflow pages
+# get database setup
+# get analytics up and running
 
 
 
