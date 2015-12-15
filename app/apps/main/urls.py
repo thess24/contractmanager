@@ -132,3 +132,11 @@ urlpatterns = patterns('',
 # 3. python manage.py migrate auth
 # 4. python manage.py migrate
 # 5. python manage.py createsuperuser --username=joe --email=joe@example.com
+
+#### DROP/ADD DB Instructions in Heroku
+# 1. heroku pg:reset DATABASE_URL
+# 2. heroku run python manage.py migrate auth
+# 3. heroku run python manage.py migrate
+
+
+
