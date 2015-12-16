@@ -1,5 +1,22 @@
 {% extends 'frontbase.html' %}
 
+
+
+{% block head %}
+<style type="text/css">
+
+.philosophy h2{
+    font-weight: bold;
+    color: #1AB394;
+    font-size: 20px;
+}
+
+</style>
+
+{% endblock %}
+
+
+
 {% block content %}
 
 <div class="carousel front-header">
@@ -28,7 +45,7 @@
         <div class="row features-block">
 
             <div class="col-lg-2 features-text wow fadeInLeft p-lg-text">
-                <i class="fa fa-stethoscope" style='font-size:6em'></i>
+                <i class="icon ion-ios-medkit-outline" style='font-size:6em'></i>
             </div>
 
             <div class="col-lg-10 features-text wow fadeInLeft p-lg-text">
@@ -50,33 +67,20 @@
             </div>
         </div>
 
-        <div class="row features-block">
-            <div class="col-lg-1 features-text wow fadeInLeft p-lg-text">
-                <i class="fa fa-circle-o" style='font-size:4em; padding:10px'></i>
-            </div>
-            <div class="col-lg-11 features-text wow fadeInLeft p-lg-text">
-                <h2>Simplicity</h2>
-                We strive to make everything we do as simple as possible for our customers.  Our products are designed to be as user friendly as possible—we believe that the best software is software that people will enjoy using.  By keeping things simple and intuitive, users of our products can get more done!  We truly carry this philosophy through everything we do- from design, to pricing, to contract negotiation.
-            </div>
+    <div class="row" style='padding:40px 0px'>
+        <div class="col-sm-4 philosophy">
+            <h2><i class="fa fa-circle-o"></i> Simplicity</h2>
+            <p>We strive to make everything we do as simple as possible for our customers.  Our products are designed to be as user friendly as possible—we believe that the best software is software that people will enjoy using.  By keeping things simple and intuitive, users of our products can get more done!  We truly carry this philosophy through everything we do- from design, to pricing, to contract negotiation.</p>
         </div>
-        <div class="row features-block">
-            <div class="col-lg-1 features-text wow fadeInLeft p-lg-text">
-                <i class="fa fa-lock" style='font-size:4em; padding:10px'></i>
-            </div>
-            <div class="col-lg-11 features-text wow fadeInLeft p-lg-text">
-                <h2>Security</h2>
-                Our phone and web applications are built with the highest security standards in mind. As a HIPAA compliant SAAS solution, we offer 256bit SSL end to end security.  By delivering all of our data in a secure way, you don’t have to worry about data breaches and can sleep peacefully at night. 
-            </div>
+        <div class="col-sm-4 philosophy">
+            <h2><i class="fa fa-lock"></i> Security</h2>
+            <p>Our phone and web applications are built with the highest security standards in mind. As a HIPAA compliant SAAS solution, we offer 256bit SSL end to end security.  By delivering all of our data in a secure way, you don’t have to worry about data breaches and can sleep peacefully at night. </p>
         </div>
-        <div class="row features-block">
-            <div class="col-lg-1 features-text wow fadeInLeft p-lg-text">
-                <i class="fa fa-database" style='font-size:4em; padding:10px'></i>
-            </div>
-            <div class="col-lg-11 features-text wow fadeInLeft p-lg-text">
-                <h2>Cutting Edge Technology</h2>
-                Software moves fast, and xxxx is built on the latest technology.  With the latest technology, we can quickly adapt to changing customer needs and quickly release new features.  This also means our software is fast, scalable, and backedup.  In fact, we built xxxx on Amazon AWS –the same service that NASA and Netflix use. 
-            </div>
+        <div class="col-sm-4 philosophy">
+            <h2><i class="fa fa-database"></i> Cutting Edge Technology</h2>
+            <p>Software moves fast, and xxxx is built on the latest technology.  With the latest technology, we can quickly adapt to changing customer needs and quickly release new features.  This also means our software is fast, scalable, and backedup.  In fact, we built xxxx on Amazon AWS –the same service that NASA and Netflix use. </p>
         </div>
+    </div>
 
         <div class='row features-block text-center m-b-lg p-lg-text'>
             Like what we have to say?  Reach out to us <a href="{% url 'contact' %}">here</a>
@@ -100,7 +104,7 @@
             </div>
 
             <div class="col-lg-10 features-text wow fadeInLeft p-lg-text">
-                Our goal is to provide the #1 healthcare compliance software in the market and to continually get better!
+                Our goal is to provide the #1 healthcare compliance software in the market and to continually get better!  We truly believe that by helping other companies succeed, our company will succeed as well.
           
             </div>
 
