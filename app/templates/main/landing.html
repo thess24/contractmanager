@@ -36,6 +36,12 @@
         font-weight: 600;
     }
 
+    .product-outline{
+        outline: 1px solid #E8E8E8;
+        outline-offset: -8px;
+        padding: 15px 30px;
+}
+    }
 
 </style>
 {% endblock %}
@@ -69,33 +75,33 @@
             With the current state of healthcare, compliance is more important now than ever.  Don't be the next bad headline. The OIG is cracking down on Fraud, Kickback, and STARK violations.
         </div>
     </div> -->
-    <div class='row' style='padding:100px 0px'>
+    <div class='row' style='padding-top:100px'>
         <h1 id='violation-dollar-countup'>0</h1>
         <h3>Total fines for Stark Violations in 2015 alone</h3>
     </div>
     <div class='row'>
         <h1>Protect Yourself against Stark, Fraud, and Anti-Kickback Violations</h1>
     </div>
-    <div class="row">
+    <div class="row" style='padding:100px 0px 50px 0px'>
         <div class="col-lg-12 text-center">
             <div class="navy-line"></div>
             <h1>Our Products</h1>
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-4 product-outline">
             <h2>Contract Manager</h2>
             <p>Create, Manage, and Track Physician Arrangement Contracts</p>
             <p><a class="navy-link" href="{% url 'products_contractmanager' %}" role="button">Details &raquo;</a></p>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-4 product-outline">
             <h2>Physician Time Tracker</h2>
             <p>Tracking physician arrangement times couldn't be easier</p>
             <p><a class="navy-link" href="{% url 'products_timetracker' %}" role="button">Details &raquo;</a></p>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-4 product-outline">
             <h2>Analytics Suite</h2>
-            <p>Use your data to make decisions</p>
+            <p>Use your data to help you make strategic decisions</p>
             <p><a class="navy-link" href="{% url 'products_analytics' %}" role="button">Details &raquo;</a></p>
         </div>
     </div>
@@ -124,7 +130,14 @@
 </section>
 
 
-<section  class="container features" style='padding-top:100px'>
+<section  class="container features" style='padding-top:40px'>
+
+<div class="row">
+        <div class="col-lg-12 text-center">
+            <div class="navy-line"></div>
+            <h1>What We Do</h1>
+        </div>
+    </div>
 
     <div class="row features-block">
         <div class="col-lg-4 wow fadeInLeft">
