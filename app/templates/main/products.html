@@ -62,7 +62,47 @@
 
 </section>
 
-<section id="team" class="gray-section team">
+
+<section class="features gray-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="navy-line"></div>
+                <h1>Compliance Analytics</h1>
+                <p>Use your data to make decisions</p>
+            </div>
+        </div>
+
+        <div class='text-center'>
+
+            <div class="row" style='padding:80px 0px'>
+                <div class="col-sm-4">
+                    <i class='icon ion-compass' style='font-size:6em'></i>
+                    <h2>Expiration Analysis</h2>
+                    <p>View a snapshot of all contract areas to plan for contracts expiring soon</p>
+                </div>
+                <div class="col-sm-4">
+                    <i class='icon ion-map' style='font-size:6em'></i>
+                    <h2>Compare physician pay</h2>
+                    <p>Use your own data to graphically compare physician pay</p>
+                </div>
+                <div class="col-sm-4">
+                    <i class='icon ion-stats-bars' style='font-size:6em'></i>
+                    <h2>Deep dive into contracts</h2>
+                    <p>Filter your contracts to find exactly what you want to look at</p>
+                </div>
+            </div>
+
+            <a href="{% url 'products_analytics' %}" class="btn btn-primary">Learn More About Compliance Analytics</a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="team" class="team">
     <div class="container">
         <div class="row m-b-lg">
             <div class="col-lg-12 text-center">
@@ -85,7 +125,7 @@
                 </div>
             </div>
             <div class="col-md-6 text-center  wow zoomIn">
-                <img src="{{ STATIC_URL }}img/perspective.png" alt="dashboard" class="img-responsive">
+                <img src="{{ STATIC_URL }}img/iphone5_white.png" alt="dashboard" class="img-responsive" style='margin:auto;height:450px;padding-bottom:30px'>
             </div>
             <div class="col-md-3 text-center wow fadeInRight">
                 <div>
@@ -108,40 +148,6 @@
     </div>
 </section>
 
-<section class="features">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <div class="navy-line"></div>
-                <h1>Compliance Analytics</h1>
-                <p>Use your data to make decisions</p>
-            </div>
-        </div>
-
-        <div class='text-center'>
-
-            <div class="row" style='padding:80px 0px'>
-                <div class="col-sm-4">
-                    <h2>Expiration Analysis</h2>
-                    <p>View a snapshot of all contract areas to plan for contracts expiring soon</p>
-                </div>
-                <div class="col-sm-4">
-                    <h2>Compare physician pay</h2>
-                    <p>Use your own data to graphically compare physician pay</p>
-                </div>
-                <div class="col-sm-4">
-                    <h2>Deep dive into contracts</h2>
-                    <p>Filter your contracts to find exactly what you want to look at</p>
-                </div>
-            </div>
-
-            <a href="{% url 'products_analytics' %}" class="btn btn-primary">Learn More About Compliance Analytics</a>
-
-        </div>
-
-    </div>
-
-</section>
 
 
 {% endblock %}
