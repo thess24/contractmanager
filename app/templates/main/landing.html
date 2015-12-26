@@ -44,7 +44,12 @@
         outline: 1px solid #E8E8E8;
         outline-offset: -8px;
         padding: 15px 30px;
-}
+        text-align: center;
+    }
+
+    .product-outline i{
+        display: block;
+        font-size: 8em;
     }
 
 </style>
@@ -94,19 +99,20 @@
     </div>
     <div class="row">
         <div class="col-sm-4 product-outline">
+            <i class='ion-ios-copy-outline'></i>
             <h2>Contract Manager</h2>
             <p>Create, Manage, and Track Physician Arrangement Contracts</p>
             <p><a class="navy-link" href="{% url 'products_contractmanager' %}" role="button">Details &raquo;</a></p>
         </div>
         <div class="col-sm-4 product-outline">
+            <i class='ion-ios-time-outline'></i>
             <h2>Physician Time Tracker</h2>
             <p>Tracking physician arrangement times couldn't be easier</p>
             <p><a class="navy-link" href="{% url 'products_timetracker' %}" role="button">Details &raquo;</a></p>
         </div>
         <div class="col-sm-4 product-outline">
-
+            <i class='ion-ios-pulse'></i>
             <h2>Analytics Suite</h2>
-            <!-- <h2><i class='fa fa-bar-chart'></i> Analytics Suite</h2> -->
             <p>Use your data to help you make strategic decisions</p>
             <p><a class="navy-link" href="{% url 'products_analytics' %}" role="button">Details &raquo;</a></p>
         </div>
