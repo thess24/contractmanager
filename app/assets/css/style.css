@@ -6459,7 +6459,7 @@ body.landing-page {
   color: #179d82;
 }
 .landing-page section p {
-  color: #aeaeae;
+  /*color: #aeaeae;*/
   font-size: 13px;
 }
 .landing-page address {

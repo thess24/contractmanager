@@ -5,12 +5,11 @@ from django.conf.urls.static import static
 
 
 urlpatterns = patterns('',
-	url(r'^$', views.index, name='index'),
 	url(r'^test/$', views.test, name='test'),
 
 
 	# FRONT MARKETING PAGES
-	url(r'^landing/$', views.landing, name='landing'),
+	url(r'^$', views.landing, name='landing'),
 	url(r'^contact/$', views.contact, name='contact'),
 	url(r'^about/$', views.about, name='about'),
 	url(r'^whyuseus/$', views.whyuseus, name='whyuseus'),
@@ -24,6 +23,7 @@ urlpatterns = patterns('',
 	url(r'^groups/$', views.groups, name='groups'),
 	url(r'^groups/(?P<groupname>.+)/$', views.group, name='group'),
 	
+	url(r'^home/$', views.index, name='index'),
 	url(r'^contracts/new/$', views.newcontract, name='newcontract'),
 	url(r'^contracts/all/$', views.allcontracts, name='allcontracts'),
 

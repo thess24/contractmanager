@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     {% block title %}
-    <title>Contract Manager</title>
+    <title>Baldur Healthcare</title>
     {% endblock %}
  
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
@@ -70,7 +70,7 @@
                 </li>
          
                 <li class='special_link'>
-                    <a href="/"><i class="fa fa-flask"></i> <span class="nav-label">Home</span></a>
+                    <a href="{% url 'index' %}"><i class="fa fa-flask"></i> <span class="nav-label">Home</span></a>
                 </li>
                 <li>
                     <a href="{% url 'group' user.userprofile.team.name %}"><i class="fa fa-diamond"></i> <span class="nav-label">My Team</span></a>
@@ -129,7 +129,7 @@
         </div>
             <ul class="nav navbar-top-links navbar-right">
                 <li>
-                    <span class="m-r-sm text-muted welcome-message">Welcome to Contract Manager</span>
+                    <span class="m-r-sm text-muted welcome-message">Welcome to Baldur Healthcare</span>
                 </li>
                 <li>
                     <a class="count-info" href="{% url 'alerts' %}">
@@ -160,7 +160,7 @@
                 Contact Us
             </div>
             <div>
-                <strong>Copyright</strong> Contract Manager &copy; 2015
+                <strong>Copyright</strong> Baldur Healthcare &copy; 2015
             </div>
         </div> 
 

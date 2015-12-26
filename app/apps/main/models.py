@@ -285,6 +285,28 @@ class Alert(models.Model):
 # only can edit contracts
 
 
+
+
+
+class ContactRequest(models.Model):
+	first_name = models.CharField(max_length=255)
+	last_name = models.CharField(max_length=255)
+	email = models.EmailField()
+	phone_number = models.CharField(max_length=10, blank=True, null=True)
+	organization = models.CharField(max_length=255, blank=True, null=True)
+	city = models.CharField(max_length=255, blank=True, null=True)
+	state = models.CharField(max_length=100, blank=True, null=True)
+	zipcode = models.CharField(max_length=5, blank=True, null=True)
+	job_title = models.CharField(max_length=255, blank=True, null=True)
+	message = models.TextField()
+
+	date = models.DateTimeField(auto_now_add=True)
+	responded = models.BooleanField(default=False)
+	notes = models.TextField()
+
+	def __unicode__(self):
+		return self.email
+
 ##################################
 ##########    FORMS   ############
 ##################################
@@ -415,9 +437,13 @@ class PhysicianGroupForm(ModelForm):
 		}
 
 
+class ContactUsForm(ModelForm):
+	class Meta:
+		model = ContactRequest
+		exclude = ('phone_number','city','state','zipcode','job_title','responded','notes','date')
 
-
-
-
-
+	def __init__(self, *args, **kwargs):
+		super(ContactUsForm, self).__init__(*args, **kwargs)
+		for i in self.fields:
+			self.fields[i].widget.attrs['class'] = 'form-control'
 

@@ -16,7 +16,18 @@ def landing(request):
 	return render(request, 'main/landing.html', context)
 
 def contact(request):
-	context= {}
+	form = models.ContactUsForm()
+
+	if request.method=='POST':
+		form = models.ContactUsForm(request.POST)
+		if form.is_valid():
+			form.save()
+
+			print 'FAKE SEND EMAIL'
+
+			return HttpResponseRedirect(reverse('contact'))
+
+	context= {'form':form}
 	return render(request, 'main/contact.html', context)
 
 def about(request):
