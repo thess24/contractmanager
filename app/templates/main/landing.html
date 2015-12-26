@@ -45,11 +45,20 @@
         outline-offset: -8px;
         padding: 15px 30px;
         text-align: center;
+        -webkit-transition: outline 0.7s ease;
+         -moz-transition: outline 0.7s ease;
+           -o-transition: outline 0.7s ease;
+          -ms-transition: outline 0.7s ease;
+              transition: outline 0.7s ease; 
     }
 
     .product-outline i{
         display: block;
         font-size: 8em;
+    }
+
+    .product-outline:hover{
+        outline: 1px solid #1AB394;
     }
 
 </style>
@@ -67,7 +76,7 @@
                 <div class="carousel-caption">
                     <h1>Easy to Use Healthcare  <br/>
                         Compliance Software</h1>
-                    <p>Manage, Create, and Keep track of your physician arrangements</p>
+                    <p>Manage, Create, and Keep track of your <br/> physician arrangements</p>
                 </div>
                 <div class="carousel-image wow zoomIn">
                     <img src="{{ STATIC_URL }}img/laptop.png" alt="laptop"/>
@@ -78,19 +87,19 @@
 </div>
 
 
-<section id="features" class="container services" style='padding-bottom:180px'>
+<section id="features" class="container services" style='padding-bottom:100px'>
 <!--     <div class="row">
         <div class="col-sm-12" style='font-size:2em;padding-bottom:50px'>
             With the current state of healthcare, compliance is more important now than ever.  Don't be the next bad headline. The OIG is cracking down on Fraud, Kickback, and STARK violations.
         </div>
     </div> -->
-    <div class='row' style='padding-top:100px'>
+<!--     <div class='row' style='padding-top:100px'>
         <h1 id='violation-dollar-countup'>0</h1>
         <h3>Total fines for Stark Violations in 2015 alone</h3>
     </div>
     <div class='row'>
-        <h1>Protect Yourself against Stark, Fraud, and Anti-Kickback Violations</h1>
-    </div>
+        <h1>A Simple, Cost Effective, Feature Rich SaaS Compliance Solution</h1>
+    </div> -->
     <div class="row" style='padding:100px 0px 50px 0px'>
         <div class="col-lg-12 text-center">
             <div class="navy-line"></div>
@@ -119,6 +128,36 @@
     </div>
 </section>
 
+<section class="features"  style='padding-bottom:180px'>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="navy-line"></div>
+                <h1>A Simple, Cost Effective, Feature Rich SaaS Compliance Solution</h1>
+                <p>Baldur Healthcare does a lot!</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 features-text">
+                <h2>Easy to Use</h2>
+                <p>Our main focus in on simplicity.  While other solutions have steep learning curves and confusing interfaces, we pride ourselves on a simple, elegant design that makes things incredibly easy and intuitive</p>
+            </div>
+            <div class="col-lg-3 features-text">
+                <h2>Cost Effective</h2>
+                <p>The current state of healthcare is one filled with cost pressures.  We provide a top notch healthcare compliance solution that can fit in any budget.</p>
+            </div>
+            <div class="col-lg-3 features-text">
+                <h2>Technology Focused</h2>
+                <p>When it comes down to it, we are a technology company.  We strive to provide the best tech product on the market by utilizing up to date technologies and having a focus on security. </p>
+            </div>
+            <div class="col-lg-3 features-text">
+                <h2>100% Healthcare</h2>
+                <p>While other solutions may be able to solve similar problems after costly, extensive customization, our solution is built 100% for healthcare and is HIPAA compliant.</p>
+            </div>
+        </div>
+    </div>
+
+</section>
 
 <section id="tryus" class="navy-section testimonials" style="margin-top: 0">
 
