@@ -61,6 +61,27 @@
         outline: 1px solid #1AB394;
     }
 
+    #benefits-row h1{
+        text-align: center;
+    }
+
+    #benefit-main{
+        font-weight: bold;
+        margin-bottom: 45px;
+    }
+
+    #benefit-main h1{
+        font-weight: 500;
+    }
+
+    .main-benefit{
+        padding: 30px;
+    }
+
+    .main-benefit p{
+        font-size: 1.5em!important;
+    }
+
 </style>
 {% endblock %}
 
@@ -87,12 +108,46 @@
 </div>
 
 
-<section id="features" class="container services" style='padding-bottom:100px'>
-<!--     <div class="row">
-        <div class="col-sm-12" style='font-size:2em;padding-bottom:50px'>
-            With the current state of healthcare, compliance is more important now than ever.  Don't be the next bad headline. The OIG is cracking down on Fraud, Kickback, and STARK violations.
+<section id="features" class="container services" style='padding:100px 0px 100px 0px'>
+    <div class="row text-center" id='benefit-main'>
+        <h1>A Simple, Cost Effective, Feature Rich SaaS Compliance Solution</h1>
+    </div>
+    <div class="row" id="benefits-row">
+        <div class='col-lg-4'>
+            <h1>Save Time and Money</h1>
+            <p>With every contract at your fingertips and our advanced features, you can massively cut down on time spent on physician arrangements</p>
+        </div>
+        <div class='col-lg-4'>
+            <h1>Avoid Massive Fines</h1>
+            <p>There were over $350,000,000 in compliance related fines in 2015 - don't be a part of it.</p>
+        </div>
+        <div class='col-lg-4'>
+            <h1>Plan for the Future</h1>
+            <p>Strategically plan for future by having snapshots of all physician arrangements with our advanced reporting</p>
+        </div>
+    </div>
+
+<!--     <div class="row main-benefit">
+        <div class="col-lg-12">
+            <h1>Save Time and Money</h1>
+            <p>With every contract at your fingertips and our advanced features, you can massively cut down on time spent on physician arrangements</p>
+        </div>
+    </div>
+    <div class="row main-benefit">
+        <div class="col-lg-12">
+            <h1>Avoid Massive Fines</h1>
+            <p>There were over $350,000,000 in compliance related fines in 2015 -- don't be a part of it.</p>
+        </div>
+    </div>
+    <div class="row main-benefit">
+        <div class="col-lg-12">
+            <h1>Plan for the Future</h1>
+            <p>Strategically plan for future by having snapshots of all physician arrangements with our advanced reporting</p>
         </div>
     </div> -->
+    
+
+
 <!--     <div class='row' style='padding-top:100px'>
         <h1 id='violation-dollar-countup'>0</h1>
         <h3>Total fines for Stark Violations in 2015 alone</h3>
@@ -134,7 +189,6 @@
             <div class="col-lg-12 text-center">
                 <div class="navy-line"></div>
                 <h1>A Simple, Cost Effective, Feature Rich SaaS Compliance Solution</h1>
-                <p>Baldur Healthcare does a lot!</p>
             </div>
         </div>
         <div class="row">
