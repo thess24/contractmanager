@@ -17,6 +17,37 @@
     padding: 30px 0px;
 }
 
+.benefit-outline{
+    text-align: center;
+    padding: 25px;
+    outline: 1px solid #E8E8E8;
+        outline-offset: -8px;
+        text-align: center;
+        -webkit-transition: outline 0.7s ease;
+         -moz-transition: outline 0.7s ease;
+           -o-transition: outline 0.7s ease;
+          -ms-transition: outline 0.7s ease;
+              transition: outline 0.7s ease; 
+}
+
+.benefit-outline i{
+    color: #1ab394 !important;
+    font-size: 7em;
+}
+
+.benefit-outline h2{
+    margin-top: 0px;
+}
+
+.benefits-area{
+    margin-top: 75px;
+    margin-bottom: 130px;
+}
+
+.main-color{
+    color: #1ab394;
+}
+
 </style>
 
 {% endblock %}
@@ -47,8 +78,25 @@
             <h1>Create, Manage, and Track Physician Arrangement Contracts</h1>
         </div>
     </div>
+    <div class="row benefits-area">
+        <div class="col-sm-4 benefit-outline wow fadeInLeft">
+            <i class='ion-ios-copy-outline'></i>
+            <h2>Stop Compliance Violations In Their Tracks</h2>
+        </div>
+        <div class="col-sm-4 benefit-outline wow fadeInUp">
+            <i class='ion-ios-time-outline'></i>
+            <h2>Avoid the huge fines caused by Stark Violations, Fraud, and Anti Kickback</h2>
+        </div>
+        <div class="col-sm-4 benefit-outline wow fadeInRight">
+            <i class='ion-ios-pulse'></i>
+            <h2>Prevent Compliance Issues That Could Lead to Jail Time</h2>
+        </div>
+    </div>
+
     <div class="row features-block">
+
         <div class="col-lg-6 features-text wow fadeInLeft">
+            <h3 class='main-color'>About ContractManager</h3>
             <p>ContractManager is a SaaS tool to collaboratively create, manage, and track physician contracts in order to have overview into all contracts, ensure compliance, and strategically plan for the future. Our software allows you to dynamically create contracts, keep track of changes, view past versions, manage the workflow of the contracts, and set custom alerts at key times in the contracts history.</p>
         </div>
         <div class="col-lg-6 text-right wow fadeInRight">
@@ -58,9 +106,24 @@
 </section>
 
 
-<section  class="container features">
-   
-    <div class="row features-block">
+<section  class="container benefits-section">
+
+ <!--    <div class="row">
+        <div class="col-sm-4 benefit-outline">
+            <i class='ion-ios-copy-outline'></i>
+            <h2>Stop Compliance Violations In Their Tracks</h2>
+        </div>
+        <div class="col-sm-4 benefit-outline">
+            <i class='ion-ios-time-outline'></i>
+            <h2>Avoid the huge fines caused by Stark Violations, Fraud, and Anti Kickback</h2>
+        </div>
+        <div class="col-sm-4 benefit-outline">
+            <i class='ion-ios-pulse'></i>
+            <h2>Prevent Jail Time</h2>
+        </div>
+    </div> -->
+
+<!--     <div class="row features-block">
         <div class="col-lg-1 features-text wow fadeInLeft">
             <i class="fa fa-hand-stop-o big-icon"></i>
         </div>
@@ -85,7 +148,7 @@
         <div class="col-lg-11 features-text wow fadeInLeft">
             <h1>Prevent Jail Time</h1>
         </div>
-    </div>
+    </div> -->
 </section>
 
 

@@ -19,6 +19,36 @@
     padding: 30px 0px;
 }
 
+.benefit-outline{
+    text-align: center;
+    padding: 25px;
+    outline: 1px solid #E8E8E8;
+        outline-offset: -8px;
+        text-align: center;
+        -webkit-transition: outline 0.7s ease;
+         -moz-transition: outline 0.7s ease;
+           -o-transition: outline 0.7s ease;
+          -ms-transition: outline 0.7s ease;
+              transition: outline 0.7s ease; 
+}
+
+.benefit-outline i{
+    color: #1ab394 !important;
+    font-size: 7em;
+}
+
+.benefit-outline h2{
+    margin-top: 0px;
+}
+
+.benefits-area{
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+.main-color{
+    color: #1ab394;
+}
 </style>
 
 {% endblock %}
@@ -50,6 +80,9 @@
             <h1>Tracking physician arrangement times couldn't be easier</h1>
         </div>
     </div>
+
+
+
     <div class="row features-block">
         <div class="col-lg-6 features-text wow fadeInLeft">
             <p>TimeTracker consists of the web application, iPhone app, and Android app to track physician times, avoid compliance issues, and allow for incredibly easy auditing </p>
@@ -63,9 +96,25 @@
             <img src="{{ STATIC_URL }}img/iphone5_two.png" alt="dashboard" class="img-responsive pull-right">
         </div>
     </div>
+
+
+    <div class="row benefits-area">
+        <div class="col-sm-4 benefit-outline wow fadeInUp">
+            <i class='ion-ios-monitor-outline'></i>
+            <h2>100% digital solution - No More Paper</h2>
+        </div>
+        <div class="col-sm-4 benefit-outline wow fadeInLeft">
+            <i class='ion-ios-circle-outline'></i>
+            <h2>Simplify the auditing and tracking process</h2>
+        </div>
+        <div class="col-sm-4 benefit-outline wow fadeInRight">
+            <i class='ion-iphone'></i>
+            <h2>Native phone and web applications</h2>
+        </div>
+    </div>
 </section>
 
-<section  class="container features">
+<!-- <section  class="container features">
    
     <div class="row features-block">
         <div class="col-lg-1 features-text wow fadeInLeft">
@@ -93,7 +142,7 @@
             <h1>Native phone applications and web application</h1>
         </div>
     </div>
-</section>
+</section> -->
 
 
 <section id="team" class="gray-section team">
