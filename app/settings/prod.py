@@ -9,7 +9,7 @@ from postgresify import postgresify
 from common import *
 
 
-DEBUG = True
+DEBUG = False
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
 # TEMPLATE_DEBUG = DEBUG
@@ -51,14 +51,14 @@ DEBUG = True
 DATABASES = {
 	'default': {
 		'ENGINE': 'django.db.backends.postgresql_psycopg2',
-		'NAME': os.environ['RDS_DB_NAME'],
-		'USER': os.environ['RDS_USERNAME'],
-		'PASSWORD': os.environ['RDS_PASSWORD'],
-		'HOST': os.environ['RDS_HOSTNAME'],
-		'PORT': os.environ['RDS_PORT'],
+		'NAME': environ['RDS_DB_NAME'],
+		'USER': environ['RDS_USERNAME'],
+		'PASSWORD': environ['RDS_PASSWORD'],
+		'HOST': environ['RDS_HOSTNAME'],
+		'PORT': environ['RDS_PORT'],
 	}
 }
-    
+
 ########## END DATABASE CONFIGURATION
 
 
@@ -143,7 +143,7 @@ SECRET_KEY = environ.get('SECRET_KEY', SECRET_KEY)
 
 ########## ALLOWED HOSTS CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['.herokuapp.com']
+ALLOWED_HOSTS = ['.herokuapp.com', '.elasticbeanstalk.com']
 ########## END ALLOWED HOST CONFIGURATION
 
 
