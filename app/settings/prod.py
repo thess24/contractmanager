@@ -76,12 +76,12 @@ INSTALLED_APPS += (
 )
 
 # See: http://django-storages.readthedocs.org/en/latest/backends/amazon-S3.html#settings
-STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+# STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 # had to do this to get a3 to serve static and media
-# DEFAULT_FILE_STORAGE = 'app.settings.s3utils.MediaRootS3BotoStorage'
-# STATICFILES_STORAGE = 'app.settings.s3utils.StaticRootS3BotoStorage'
+DEFAULT_FILE_STORAGE = 'app.settings.s3utils.MediaRootS3BotoStorage'
+STATICFILES_STORAGE = 'app.settings.s3utils.StaticRootS3BotoStorage'
 
 # # See: http://django-storages.readthedocs.org/en/latest/backends/amazon-S3.html#settings
 # AWS_CALLING_FORMAT = CallingFormat.SUBDOMAIN
@@ -101,7 +101,7 @@ AWS_STORAGE_BUCKET_NAME = environ.get('AWS_STORAGE_BUCKET_NAME', '')
 # }
 
 # # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
-S3_URL = 'https://s3.amazonaws.com/%s' % AWS_STORAGE_BUCKET_NAME
+S3_URL = '//' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
 STATIC_URL = S3_URL + '/static/'
 MEDIA_URL = S3_URL + '/media/'
 
