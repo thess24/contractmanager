@@ -101,7 +101,7 @@ AWS_STORAGE_BUCKET_NAME = environ.get('AWS_STORAGE_BUCKET_NAME', '')
 # }
 
 # # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
-S3_URL = '//' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
+S3_URL = '//' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com'
 STATIC_URL = S3_URL + '/static/'
 MEDIA_URL = S3_URL + '/media/'
 
