@@ -84,7 +84,7 @@ DEFAULT_FILE_STORAGE = 'app.settings.s3utils.MediaRootS3BotoStorage'
 STATICFILES_STORAGE = 'app.settings.s3utils.StaticRootS3BotoStorage'
 
 # # See: http://django-storages.readthedocs.org/en/latest/backends/amazon-S3.html#settings
-AWS_CALLING_FORMAT = CallingFormat.SUBDOMAIN
+# AWS_CALLING_FORMAT = CallingFormat.SUBDOMAIN
 
 # # See: http://django-storages.readthedocs.org/en/latest/backends/amazon-S3.html#settings
 AWS_ACCESS_KEY_ID = environ.get('AWS_ACCESS_KEY_ID', '')
