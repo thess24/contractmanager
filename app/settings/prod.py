@@ -83,8 +83,6 @@ INSTALLED_APPS += (
 DEFAULT_FILE_STORAGE = 'app.settings.s3utils.MediaRootS3BotoStorage'
 STATICFILES_STORAGE = 'app.settings.s3utils.StaticRootS3BotoStorage'
 
-# # See: http://django-storages.readthedocs.org/en/latest/backends/amazon-S3.html#settings
-# AWS_CALLING_FORMAT = CallingFormat.SUBDOMAIN
 
 # # See: http://django-storages.readthedocs.org/en/latest/backends/amazon-S3.html#settings
 AWS_ACCESS_KEY_ID = environ.get('AWS_ACCESS_KEY_ID', '')
@@ -94,18 +92,17 @@ AWS_STORAGE_BUCKET_NAME = environ.get('AWS_STORAGE_BUCKET_NAME', '')
 # AWS_QUERYSTRING_AUTH = False
 
 # # AWS cache settings, don't change unless you know what you're doing:
-# AWS_EXPIRY = 60 * 60 * 24 * 7
-# AWS_HEADERS = {
-#     'Cache-Control': 'max-age=%d, s-maxage=%d, must-revalidate' % (AWS_EXPIRY,
-#         AWS_EXPIRY)
-# }
+AWS_EXPIRY = 60 * 60 * 24 * 7
+AWS_HEADERS = {
+    'Cache-Control': 'max-age=%d, s-maxage=%d, must-revalidate' % (AWS_EXPIRY,
+        AWS_EXPIRY)
+}
 
 # # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 S3_URL = '//' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com'
 STATIC_URL = S3_URL + '/static/'
 MEDIA_URL = S3_URL + '/media/'
 
-# COMPRESS_URL = STATIC_URL 
 ########## END STORAGE CONFIGURATION
 
 
