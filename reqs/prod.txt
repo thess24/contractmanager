@@ -1,3 +1,4 @@
 -r common.txt
 gunicorn==19.3.0
-django-heroku-postgresify
+django-storages
+boto
