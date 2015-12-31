@@ -81,11 +81,6 @@ urlpatterns = patterns('',
 
 
 
-# marketing pages
-	# - 
-	# - 
-	# - 
-
 # new contract page
 	# - forms display properly
 	# - added template tags actually display
@@ -113,7 +108,6 @@ urlpatterns = patterns('',
 
 
 # PLAN
-# get marketing pages online and buy url
 # finish new and edit contract pages
 # finish workflow pages
 # get database setup

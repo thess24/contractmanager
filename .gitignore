@@ -4,6 +4,7 @@
 # SQLite3 database files:
 *.db
 
+
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
