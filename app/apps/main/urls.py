@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 
 
 urlpatterns = patterns('',
-	url(r'^.well-known/acme-challenge/KrI0MY6CnebLDRvJmB62MVz__5ZjFS5zeWQAnbEapqk/$', views.cert, name='cert'),
+	url(r'^.well-known/acme-challenge/spJ9p3uQ_1kWNcv6IIwcMF_tcV8ki6yOxqYg_UI5jXA/$', views.cert, name='cert'),
 
 	url(r'^test/$', views.test, name='test'),
 
