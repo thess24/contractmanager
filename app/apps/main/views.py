@@ -7,7 +7,7 @@ import datetime
 
 
 def cert(request):
-	return HttpResponse('iZN3jbuBmPq3BwrCXVotoIZ9BhFlDbkMhgcDbdEQJXQ.ykhmjOEbVLmR5wtFPDPc6ealaO9BwOcEON-6iGvjsbM', content_type='text/plain')
+	return HttpResponse('TGqfOUY9c_2vfh3cjiJfdyuIWaPVRbNxRQPKXcrat1c.ykhmjOEbVLmR5wtFPDPc6ealaO9BwOcEON-6iGvjsbM', content_type='text/plain')
 
 def test(request):
 	context= {}
