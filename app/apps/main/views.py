@@ -9,7 +9,7 @@ import datetime
 def cert1(request):
 	return HttpResponse('VZUHroaQdmmv552te0OX3pDqRIgzWRiaM3v_Gm6BwxY.ykhmjOEbVLmR5wtFPDPc6ealaO9BwOcEON-6iGvjsbM', content_type='text/plain')
 
-def cert1(request):
+def cert2(request):
 	return HttpResponse('', content_type='text/plain')
 
 
