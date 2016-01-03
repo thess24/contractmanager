@@ -126,14 +126,15 @@ ALLOWED_HOSTS = ['.herokuapp.com', '.elasticbeanstalk.com', '.baldurhealthcare.c
 
 
 
-############ SSL
+############ SECURITY
 
-# SECURE_SSL_REDIRECT = True
-# SESSION_COOKIE_SECURE = True
-# CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_SECONDS = 3600
+SECURE_SSL_REDIRECT = True
+SECURE_FRAME_DENY = True
 
-## ssl will not work if debug=True
-## https://github.com/rdegges/django-sslify
 
 
 

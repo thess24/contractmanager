@@ -6,13 +6,6 @@ import models
 import datetime
 
 
-def cert1(request):
-	return HttpResponse('VZUHroaQdmmv552te0OX3pDqRIgzWRiaM3v_Gm6BwxY.ykhmjOEbVLmR5wtFPDPc6ealaO9BwOcEON-6iGvjsbM', content_type='text/plain')
-
-def cert2(request):
-	return HttpResponse('1zBKuYFjPlSvdp5HEsvpBhK7tRMIedG6GdeTHMC5bA4.ykhmjOEbVLmR5wtFPDPc6ealaO9BwOcEON-6iGvjsbM', content_type='text/plain')
-
-
 def test(request):
 	context= {}
 	return render(request, 'main/test.html', context)
