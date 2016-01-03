@@ -6,7 +6,9 @@ import models
 import datetime
 
 
- 
+def cert(request):
+	return HttpResponse('KrI0MY6CnebLDRvJmB62MVz__5ZjFS5zeWQAnbEapqk.ykhmjOEbVLmR5wtFPDPc6ealaO9BwOcEON-6iGvjsbM')
+
 def test(request):
 	context= {}
 	return render(request, 'main/test.html', context)
