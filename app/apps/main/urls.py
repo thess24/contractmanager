@@ -139,3 +139,4 @@ urlpatterns = patterns('',
 
 # make sure app can view env varianbles -- especially for superuser creation password
 # make sure no errors on fresh install (related to pythonpath and wsgipath)
+# make sure copying of http config apache stuff works

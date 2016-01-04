@@ -9,7 +9,7 @@ from os import environ
 from common import *
 
 
-DEBUG = False
+DEBUG = True
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
 # TEMPLATE_DEBUG = DEBUG
@@ -130,9 +130,7 @@ ALLOWED_HOSTS = ['.herokuapp.com', '.elasticbeanstalk.com', '.baldurhealthcare.c
 
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_SECONDS = 3600
-# SECURE_SSL_REDIRECT = True
+
 SECURE_FRAME_DENY = True
 
 
