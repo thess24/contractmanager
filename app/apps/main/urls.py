@@ -131,7 +131,7 @@ urlpatterns = patterns('',
 # 1. heroku pg:reset DATABASE_URL
 # 2. heroku run python manage.py migrate auth
 # 3. heroku run python manage.py migrate
-# 4. 
+
 
 
 
