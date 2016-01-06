@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+<url>
+  <loc>https://www.baldurhealthcare.com/</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://www.baldurhealthcare.com/products/</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://www.baldurhealthcare.com/products/contractmanager</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://www.baldurhealthcare.com/products/timetracker</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://www.baldurhealthcare.com/products/analytics</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://www.baldurhealthcare.com/about/</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://www.baldurhealthcare.com/contact/</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://www.baldurhealthcare.com/accounts/login/</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://www.baldurhealthcare.com/accounts/password/reset/</loc>
+  <changefreq>weekly</changefreq>
+</url>
+</urlset>

@@ -55,6 +55,7 @@ urlpatterns = patterns('',
 
 
 	url(r'^settings/$', views.settings, name='settings'),
+	
 
 )
 
