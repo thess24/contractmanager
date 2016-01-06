@@ -140,3 +140,11 @@ urlpatterns = patterns('',
 # make sure app can view env varianbles -- especially for superuser creation password
 # make sure no errors on fresh install (related to pythonpath and wsgipath)
 # make sure copying of http config apache stuff works
+# make https://baldurhealthcare.com work
+# add hsts header in /etc/httpd/wsgi.conf
+
+
+
+# RewriteEngine On
+# RewriteCond %{HTTP:X-Forwarded-Proto} !https
+# RewriteRule / https://%{SERVER_NAME}%{REQUEST_URI} [L,R=301]
