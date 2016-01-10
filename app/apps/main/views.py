@@ -160,33 +160,66 @@ def newcontract(request):
 	context= {'addon_templates':addon_templates, 'base_templates':base_templates, 'contractform':contractform, 'contractinfoform': contractinfoform}
 	return render(request, 'main/newcontract.html', context)
 
+##### ANALYTICS AREA #####
+
 @login_required
 def allcontracts(request):
 	contracts = models.ContractInfo.objects.filter(contract__system=request.user.userprofile.system)
-
 
 	context= {'contracts':contracts}
 	return render(request, 'main/allcontracts.html', context)
 
 @login_required
-def analyzecontracts(request):
+def analytics_dollar_value(request):
 	context= {}
-	return render(request, 'main/analyzecontracts.html', context)
+	return render(request, 'main/analytics_dollar_value.html', context)
 
 @login_required
-def contractsexpiration(request):
+def analytics_expiration(request):
 	context= {}
-	return render(request, 'main/contractsexpiration.html', context)
+	return render(request, 'main/analytics_expiration.html', context)
+
+@login_required
+def analytics_physician_compare(request):
+	context= {}
+	return render(request, 'main/analytics_physician_compare.html', context)
+
+@login_required
+def analytics_physician_view(request):
+	context= {}
+	return render(request, 'main/analytics_physician_view.html', context)
+
+@login_required
+def analytics_service_lines(request):
+	context= {}
+	return render(request, 'main/analytics_service_lines.html', context)
+
+@login_required
+def analytics_sites(request):
+	context= {}
+	return render(request, 'main/analytics_sites.html', context)
+
+@login_required
+def analytics_snapshot(request):
+	context= {}
+	return render(request, 'main/analytics_snapshot.html', context)
 
 @login_required
 def contractsprogress(request):
 	context= {}
 	return render(request, 'main/contractsprogress.html', context)
 
+
 @login_required
-def compensationcompare(request):
+def analyzecontracts(request):
 	context= {}
-	return render(request, 'main/compensationcompare.html', context)
+	return render(request, 'main/analyzecontracts.html', context)
+
+
+######################## END ANALYTICS AREA  #######################
+
+
+
 
 @login_required
 def diffcontracts(request, contractid1, contractid2):

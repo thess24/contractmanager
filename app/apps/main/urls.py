@@ -19,6 +19,7 @@ urlpatterns = patterns('',
 	url(r'^products/analytics$', views.products_analytics, name='products_analytics'),
 
 
+	# INTERNAL APPLICATION PAGES
 	url(r'^user/$', views.user, name='user'),
 	url(r'^groups/$', views.groups, name='groups'),
 	url(r'^groups/(?P<groupname>.+)/$', views.group, name='group'),
@@ -27,10 +28,17 @@ urlpatterns = patterns('',
 	url(r'^contracts/new/$', views.newcontract, name='newcontract'),
 	url(r'^contracts/all/$', views.allcontracts, name='allcontracts'),
 
-	url(r'^contracts/analyze/$', views.analyzecontracts, name='analyzecontracts'),
-	url(r'^contracts/analyze/expiration/$', views.contractsexpiration, name='contractsexpiration'),
-	url(r'^contracts/analyze/progress/$', views.contractsprogress, name='contractsprogress'),
-	url(r'^contracts/analyze/compensation/$', views.compensationcompare, name='compensationcompare'),
+
+	url(r'^analyze/$', views.analyzecontracts, name='analyzecontracts'),
+	url(r'^analyze/progress/$', views.contractsprogress, name='contractsprogress'),
+	url(r'^analyze/physiciancompare/$', views.analytics_physician_compare, name='analytics_physician_compare'),
+	url(r'^analyze/expiration/$', views.analytics_expiration, name='analytics_expiration'),
+	url(r'^analyze/dollarvalue/$', views.analytics_dollar_value, name='analytics_dollar_value'),
+	url(r'^analyze/physician/$', views.analytics_physician_view, name='analytics_physician_view'),
+	url(r'^analyze/servicelines/$', views.analytics_service_lines, name='analytics_service_lines'),
+	url(r'^analyze/sites/$', views.analytics_sites, name='analytics_sites'),
+	url(r'^analyze/snapshot/$', views.analytics_snapshot, name='analytics_snapshot'),
+
 
 	url(r'^contracts/diff/(?P<contractid1>.+)/(?P<contractid2>.+)/$', views.diffcontracts, name='diffcontracts'),
 	url(r'^contracts/(?P<contractid>.+)/edit$', views.editcontract, name='editcontract'),

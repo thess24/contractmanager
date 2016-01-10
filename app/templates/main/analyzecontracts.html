@@ -5,6 +5,14 @@
 
     <style type="text/css">
 
+    .ibox i{
+        font-size: 5em;
+    }
+
+    .ibox{
+        text-align: center;
+    }
+
     </style>
 
     {% endblock %}
@@ -41,18 +49,16 @@
             </div>
 
 
-                <div class="row">
+<!--                 <div class="row">
                     <div class="col-lg-12">
                         <div class="ibox float-e-margins">
-                           <!--  <div class="ibox-title">
-                                <h5>Analysis Areas</h5>
-                            </div> -->
+
                             <div class="ibox-content">
                                 <div class="row">
                                     <div class="col-lg-9">
 
                                         <h2>
-                                            <a href="{% url 'contractsexpiration' %}">
+                                            <a href="">
                                                 Expiration Analysis
                                             </a>
                                         </h2>
@@ -61,7 +67,7 @@
   
                                         <br>
                                         <h2>
-                                            <a href="{% url 'contractsprogress' %}">
+                                            <a href="">
                                                 Progress and Status Analysis
                                             </a>
                                         </h2>
@@ -69,7 +75,7 @@
 
                                         <br>
                                         <h2>
-                                            <a href="{% url 'contractsprogress' %}">
+                                            <a href="">
                                                 Physican Compensation Compare
                                             </a>
                                         </h2>
@@ -79,6 +85,124 @@
                                 </div>
                             </div>
 
+                        </div>
+                    </div>
+                </div> -->
+
+<!--                 <div class="row">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-content">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <h2><a href="">Expiration Analysis </a></h2>
+                                        <p>Explore when contracts are expiring to better plan for the future. </p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <h2><a href="">Contract Exploration </a></h2>
+                                        <p>Explore when contracts are expiring to better plan for the future. </p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <h2><a href="">Dollar Value Analysis </a></h2>
+                                        <p>Explore when contracts are expiring to better plan for the future. </p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <h2><a href="">Physician Compare</a></h2>
+                                        <p>Explore when contracts are expiring to better plan for the future. </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <h2><a href="">Service Line Analysis</a></h2>
+                                        <p>Explore when contracts are expiring to better plan for the future. </p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <h2><a href="">Physician View</a></h2>
+                                        <p>Explore when contracts are expiring to better plan for the future. </p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <h2><a href="">System Snapshot </a></h2>
+                                        <p>Explore when contracts are expiring to better plan for the future. </p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <h2><a href="">Site Analysis</a></h2>
+                                        <p>Explore when contracts are expiring to better plan for the future. </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+ -->
+
+
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="ibox">
+                            <div class="ibox-content">
+                                <i class='fa fa-hourglass-half'></i>
+                                <h2><a href="{% url 'analytics_expiration' %}">Expiration Analysis </a></h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="ibox">
+                            <div class="ibox-content">
+                                <i class='fa fa-files-o'></i>
+                                <h2><a href="{% url 'allcontracts' %}">Contract Exploration </a></h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="ibox">
+                            <div class="ibox-content">
+                                <i class='fa fa-money'></i>
+                                <h2><a href="{% url 'analytics_dollar_value' %}">Dollar Value Analysis </a></h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="ibox">
+                            <div class="ibox-content">
+                                <i class='fa fa-users'></i>
+                                <h2><a href="{% url 'analytics_physician_compare' %}">Physician Compare</a></h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="ibox">
+                            <div class="ibox-content">
+                                <i class='fa fa-bar-chart'></i>
+                                <h2><a href="{% url 'analytics_service_lines' %}">Service Line Analysis</a></h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="ibox">
+                            <div class="ibox-content">
+                                <i class='fa fa-user-md'></i>
+                                <h2><a href="{% url 'analytics_physician_view' %}">Physician View</a></h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="ibox">
+                            <div class="ibox-content">
+                                <i class='fa fa-dashboard'></i>
+                                <h2><a href="{% url 'analytics_snapshot' %}">System Snapshot </a></h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="ibox">
+                            <div class="ibox-content">
+                                <i class='fa fa-hospital-o'></i>
+                                <h2><a href="{% url 'analytics_sites' %}">Site Analysis</a></h2>
+                            </div>
                         </div>
                     </div>
                 </div>
