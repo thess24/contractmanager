@@ -55,6 +55,18 @@ def products_contractmanager(request):
 	return render(request, 'main/products_contractmanager.html', context)
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 @login_required
 def index(request):
 	checked_out_contracts = models.ContractInfo.objects.filter(current_user=request.user)
@@ -115,11 +127,9 @@ def newcontract(request):
 
 	contractform = models.ContractForm()
 	contractinfoform = models.ContractInfoForm()
-	print contractform
-	print contractinfoform
 
 	if request.method=='POST':
-		print request.POST
+		# print request.POST
 		if 'add_contract' in request.POST:
 			contractform = models.ContractForm(request.POST)
 			contractinfoform = models.ContractInfoForm(request.POST)
@@ -159,6 +169,9 @@ def newcontract(request):
 
 	context= {'addon_templates':addon_templates, 'base_templates':base_templates, 'contractform':contractform, 'contractinfoform': contractinfoform}
 	return render(request, 'main/newcontract.html', context)
+
+
+
 
 ##### ANALYTICS AREA #####
 

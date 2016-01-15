@@ -10,6 +10,18 @@
 
     }
 
+    form .row{
+        margin-top: 10px;
+    }
+
+
+    .form-control{
+        background-color: #F7F7F7!important;
+    }
+
+    .errorlist{
+        color: red;
+    }
 
     </style> 
 
@@ -63,13 +75,281 @@
                     <form method="post" id='add_contract_form'>
                         {% csrf_token %}
 
-                        {{contractform}}
-                        {{contractinfoform}}
+                        <h2>Basic Info</h2>
+                        <div class='row'>
+                            <div class='col-md-6'>
+                                {{contractform.name.errors}}
+                                {{contractform.name.label_tag}}
+                                {{contractform.name}}
+                            </div>
+                            <div class='col-md-6'>
+                                {{contractform.workflow.errors}}
+                                {{contractform.workflow.label_tag}}
+                                {{contractform.workflow}}
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-6'>
+                                {{contractform.physician.errors}}
+                                {{contractform.physician.label_tag}}
+                                {{contractform.physician}}
+                            </div>
+                            <div class='col-md-6'>
+                                {{contractform.physician_group.errors}}
+                                {{contractform.physician_group.label_tag}}
+                                {{contractform.physician_group}}
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-4'>
+                                {{contractform.contract_type.errors}}
+                                {{contractform.contract_type.label_tag}}
+                                {{contractform.contract_type}}
+                            </div>
+                            <div class='col-md-4'>
+                                {{contractform.contract_subtype.errors}}
+                                {{contractform.contract_subtype.label_tag}}
+                                {{contractform.contract_subtype}}
+                            </div>
+                            <div class='col-md-4'>
+                                {{contractform.contract_file.errors}}
+                                {{contractform.contract_file.label_tag}}
+                                {{contractform.contract_file}}
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-6'>
+                                {{contractform.status.errors}}
+                                {{contractform.status.label_tag}}
+                                {{contractform.status}}
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-12'>
+                                {{contractform.signed.errors}}
+                                {{contractform.signed.label_tag}}
+                                <span class="i-checks">
+                                    <input id="id_signed" name="signed" type="checkbox">
+                                </span>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <h2> More Info </h2>
+                        <div class='row'>
+                            <div class='col-md-6'>
+                                {{contractinfoform.next_user.errors}}
+                                {{contractinfoform.next_user.label_tag}}
+                                {{contractinfoform.next_user}}
+                            </div>
+                            <div class='col-md-6'>
+                                {{contractinfoform.next_team.errors}}
+                                {{contractinfoform.next_team.label_tag}}
+                                {{contractinfoform.next_team}}
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-12'>
+                                {{contractinfoform.change_made.errors}}
+                                {{contractinfoform.change_made.label_tag}}
+                                {{contractinfoform.change_made}}
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-6'>
+                                {{contractinfoform.site.errors}}
+                                {{contractinfoform.site.label_tag}}
+                                {{contractinfoform.site}}
+                            </div>
+                            <div class='col-md-6'>
+                                {{contractinfoform.region.errors}}
+                                {{contractinfoform.region.label_tag}}
+                                {{contractinfoform.region}}
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-6'>
+                                {{contractinfoform.specialty.errors}}
+                                {{contractinfoform.specialty.label_tag}}
+                                {{contractinfoform.specialty}}
+                            </div>
+                            <div class='col-md-6'>
+                                {{contractinfoform.contracting_entity.errors}}
+                                {{contractinfoform.contracting_entity.label_tag}}
+                                {{contractinfoform.contracting_entity}}
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-6'>
+                                {{contractinfoform.start_date.errors}}
+                                {{contractinfoform.start_date.label_tag}}
+                                <div class="input-group"> 
+                                    <div class="input-group-btn"> 
+                                        <button type="button" class="btn btn-default" aria-label="Bold">
+                                            <i class='fa fa-calendar'></i>
+                                        </button> 
+                                    </div> 
+                                {{contractinfoform.start_date}}
+                                </div>
+                            </div>
+                            <div class='col-md-6'>
+                                {{contractinfoform.end_date.errors}}
+                                {{contractinfoform.end_date.label_tag}}
+                                <div class="input-group"> 
+                                    <div class="input-group-btn"> 
+                                        <button type="button" class="btn btn-default" aria-label="Bold">
+                                            <i class='fa fa-calendar'></i>
+                                        </button> 
+                                    </div> 
+                                {{contractinfoform.end_date}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-6'>
+                                {{contractinfoform.type_of_services.errors}}
+                                {{contractinfoform.type_of_services.label_tag}}
+                                {{contractinfoform.type_of_services}}
+                            </div>
+                            <div class='col-md-6'>
+                                {{contractinfoform.admin_services_title.errors}}
+                                {{contractinfoform.admin_services_title.label_tag}}
+                                {{contractinfoform.admin_services_title}}
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-12'>
+                                {{contractinfoform.type_of_admin_services.errors}}
+                                {{contractinfoform.type_of_admin_services.label_tag}}
+                                {{contractinfoform.type_of_admin_services}}
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-4'>
+                                {{contractinfoform.num_physicians.errors}}
+                                {{contractinfoform.num_physicians.label_tag}}
+                                {{contractinfoform.num_physicians}}
+                            </div>
+                            <div class='col-md-4'>
+                                {{contractinfoform.max_monthly_hours.errors}}
+                                <label for="id_max_monthly_hours">Maximum hours:</label>
+                                <div class="input-group"> 
+                                    <div class="input-group-btn"> 
+                                        <button type="button" class="btn btn-default" aria-label="Bold">Monthly</button> 
+                                        <button type="button" class="btn btn-default" aria-label="Italic">Weekly</button> 
+                                    </div> 
+                                        <input class="form-control" id="id_max_monthly_hours" name="max_monthly_hours" step="0.5" type="number"> 
+                                </div>
+                            </div>
+                            <div class='col-md-4'>
+                                {{contractinfoform.amount.errors}}
+                                {{contractinfoform.amount.label_tag}}
+                                <div class="input-group"> 
+                                    <div class="input-group-btn"> 
+                                        <button type="button" class="btn btn-default" aria-label="Bold">
+                                            <i class='fa fa-dollar'></i>
+                                        </button> 
+                                    </div> 
+                                {{contractinfoform.amount}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-12'>
+                                {{contractinfoform.performance_linked.errors}}
+                                {{contractinfoform.performance_linked.label_tag}}
+                                {{contractinfoform.performance_linked}}
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-12'>
+                                {{contractinfoform.performance_criteria.errors}}
+                                {{contractinfoform.performance_criteria.label_tag}}
+                                {{contractinfoform.performance_criteria}}
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-5'>
+                                {{contractinfoform.responsible_party.errors}}
+                                {{contractinfoform.responsible_party.label_tag}}
+                                {{contractinfoform.responsible_party}}
+                            </div>
+                            <div class='col-md-5'>
+                                {{contractinfoform.responsible_party_secondary.errors}}
+                                {{contractinfoform.responsible_party_secondary.label_tag}}
+                                {{contractinfoform.responsible_party_secondary}}
+                            </div>
+                            <div class='col-md-2'>
+                                {{contractinfoform.termination_days_notice.errors}}
+                                {{contractinfoform.termination_days_notice.label_tag}}
+                                {{contractinfoform.termination_days_notice}}
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-4'>
+                                {{contractinfoform.malpractice_coverage_party.errors}}
+                                {{contractinfoform.malpractice_coverage_party.label_tag}}
+                                {{contractinfoform.malpractice_coverage_party}}
+                            </div>
+                            <div class='col-md-4'>
+                                {{contractinfoform.malpractice_limits.errors}}
+                                {{contractinfoform.malpractice_limits.label_tag}}
+                                {{contractinfoform.malpractice_limits}}
+                            </div>
+                            <div class='col-md-4'>
+                                {{contractinfoform.type_of_malpractice_coverage.errors}}
+                                {{contractinfoform.type_of_malpractice_coverage.label_tag}}
+                                {{contractinfoform.type_of_malpractice_coverage}}
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-6'>
+                                {{contractinfoform.physician_tail_responsibility.errors}}
+                                {{contractinfoform.physician_tail_responsibility.label_tag}}
+                                {{contractinfoform.physician_tail_responsibility}}
+                            </div>
+                            <div class='col-md-6'>
+                                {{contractinfoform.right_to_bill.errors}}
+                                {{contractinfoform.right_to_bill.label_tag}}
+                                {{contractinfoform.right_to_bill}}
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-3'>
+                                {{contractinfoform.non_compete.errors}}
+                                {{contractinfoform.non_compete.label_tag}}
+                                {{contractinfoform.non_compete}}
+                            </div>
+                            <div class='col-md-3'>
+                                {{contractinfoform.non_solicitation.errors}}
+                                {{contractinfoform.non_solicitation.label_tag}}
+                                {{contractinfoform.non_solicitation}}
+                            </div>
+                            <div class='col-md-3'>
+                                {{contractinfoform.auto_renew.errors}}
+                                {{contractinfoform.auto_renew.label_tag}}
+                                {{contractinfoform.auto_renew}}
+                            </div>
+                            <div class='col-md-3'>
+                                {{contractinfoform.renewal_date.errors}}
+                                {{contractinfoform.renewal_date.label_tag}}
+                                <div class="input-group"> 
+                                    <div class="input-group-btn"> 
+                                        <button type="button" class="btn btn-default" aria-label="Bold">
+                                            <i class='fa fa-calendar'></i>
+                                        </button> 
+                                    </div> 
+                                        {{contractinfoform.renewal_date}}
+                                </div>
+                            </div>
+                        </div>
+                        
+
                         <br>
                         <br>
 
 
-                    <h3>Contract Base:</h3>
+                    <h2>Contract Base:</h2>
 
                 {% if base_templates %}
                     <div class="table-responsive">
@@ -141,17 +421,100 @@
 
 
                         <div class="summernote">
-                            <h3>Lorem Ipsum is simply</h3>
-                            dummy text of the printing and typesetting industry. <strong>Lorem Ipsum has been the industry's</strong> standard dummy text ever since the 1500s,
-                            when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic
-                            typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with
-                            <br/>
-                            <br/>
-                            <ul>
-                                <li>Remaining essentially unchanged</li>
-                                <li>Make a type specimen book</li>
-                                <li>Unknown printer</li>
-                            </ul>
+
+<p style="margin-top:0px;margin-bottom:0px" align="right"><font style="font-family:Times New Roman" size="2"><b>Exhibit 10.15 </b></font></p>
+ <p style="margin-top:12px;margin-bottom:0px" align="center"><font style="font-family:Times New Roman" size="2"><b>MEDICAL DIRECTOR AGREEMENT </b></font></p>
+ <p style="margin-top:12px;margin-bottom:0px; text-indent:4%;padding-bottom:0px;"><font style="font-family:Times New Roman" size="2"><b>THIS MEDICAL
+</b><b>DIRECTOR AGREEMENT</b> (this “Agreement”) is entered into this 28</font><font style="font-family:Times New Roman" size="1"><sup style="vertical-align:baseline; position:relative; bottom:.8ex">th</sup></font><font style="font-family:Times New Roman" size="2"> day of January, 2011 (the “Effective Date”), by and between Advocate Healthcare, Inc., a Illinois corporation (“Company”), and Nicholas Dobrez, D.O. (“Physician”)
+</font></p>
+ <p style="margin-top:18px;margin-bottom:0px" align="center"><font style="font-family:Times New Roman" size="2"><b>RECITALS: </b></font></p>
+ <p style="margin-top:12px;margin-bottom:0px; text-indent:4%"><font style="font-family:Times New Roman" size="2"><b>WHEREAS,</b> Company has entered into previous Medical Oversight and Supervisor Agreements with the Physician and the parties agree that that all such agreements will terminate as of the Effective Date
+of this Agreement; </font></p>
+ <p style="margin-top:12px;margin-bottom:0px; text-indent:4%"><font style="font-family:Times New Roman" size="2"><b>WHEREAS,</b> Company provides healthcare services to individuals in their homes and offices through
+licensed nurse practitioners; </font></p>
+ <p style="margin-top:12px;margin-bottom:0px; text-indent:4%"><font style="font-family:Times New Roman" size="2"><b>WHEREAS,</b> Company desires to engage Physician to provide medical director services,
+including appropriate supervision of nurse practitioners; </font></p>
+ <p style="margin-top:12px;margin-bottom:0px; text-indent:4%"><font style="font-family:Times New Roman" size="2"><b>WHEREAS,</b> Physician, who is duly licensed in the State of
+Illinois and qualified to provide the medical director services, desires to serve in the position of medical director of Company in accordance with the terms and conditions of this Agreement. </font></p>
+
+<p style="margin-top:12px;margin-bottom:0px; text-indent:4%"><font style="font-family:Times New Roman" size="2"><b>NOW, THEREFORE,</b> in consideration of the mutual promises and covenants entered into and other good and valuable consideration, the
+sufficiency and adequacy of which is hereby acknowledged, the parties hereto agree to the following terms and conditions: </font></p>
+ <p style="font-size:18px;margin-top:0px;margin-bottom:0px">&nbsp;</p>
+
+<table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%">
+
+<tbody>
+<tr>
+
+<td width="4%" valign="top" align="left"><font style="font-family:Times New Roman" size="2"><b>1.</b></font></td>
+
+<td align="left" valign="top"><font style="font-family:Times New Roman" size="2"><b>Scope of Services </b></font></td>
+</tr>
+</tbody>
+</table>
+
+<table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%">
+
+<tbody>
+<tr>
+
+<td width="4%"><font size="1">&nbsp;</font></td>
+
+<td width="4%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">8.14</font></td>
+
+<td align="left" valign="top"><font style="font-family:Times New Roman" size="2"><u>Copyrights, Trademarks.</u> All work produced pursuant to this Agreement, whether produced by Physician alone or with others, shall be considered work made for hire
+and the sole property of Company. Physician shall, during and subsequent to the term of this Agreement, assign to Company without further consideration all right, title, and interest in all trademarks and trade names and registration thereof,
+copyrights and registration, extensions, and renewals thereof on all such material, including any translations performed pursuant to this Agreement. All materials produced under this Agreement shall be and remain the exclusive property of Company
+whether or not registered. </font></td>
+</tr>
+</tbody>
+</table>
+ <p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p>
+
+<table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%">
+
+<tbody>
+<tr>
+
+<td width="4%"><font size="1">&nbsp;</font></td>
+
+<td width="4%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">8.15</font></td>
+
+<td align="left" valign="top"><font style="font-family:Times New Roman" size="2"><u>Non-Compete and Non-Solicitation</u>. </font></td>
+</tr>
+</tbody>
+</table>
+ <p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p>
+
+<table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%">
+
+<tbody>
+<tr>
+
+<td width="8%"><font size="1">&nbsp;</font></td>
+
+<td width="5%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">8.15.1&nbsp;</font></td>
+
+<td align="left" valign="top"><font style="font-family:Times New Roman" size="2">Physician agrees that during the term of this Agreement and for one (1)&nbsp;year after the termination date, Physician will not, without the Company’s express
+written consent: (i)&nbsp;directly or indirectly, for himself or on behalf of any other person, corporation, or entity, seek to employ, solicit, encourage, or attempt to induce to leave, any (A)&nbsp;current employee or consultant of Company, or
+(B)&nbsp;any person who, at any time during the three months prior to the termination date, was an employee or consultant of Company; (ii)&nbsp;solicit the business of any then current (at the time of the termination date) clients or customers
+(including parties which Company is engaged in business discussions) of Company relating, directly or indirectly, to the business of the company or competitive with the business of the Company, other than on behalf of Company, within a sixty
+(60)&nbsp;mile radius of any Company location where Physician actually performed services for Company; (iii)&nbsp;directly or indirectly acquire or hold any ownership or investment interest in or contract to provide administrative or executive
+services to any person or entity providing the same or similar services as Company or (iv)&nbsp;otherwise compete with Company directly or in conjunction with any other person or entity. Nothing in this non-competition provision shall prohibit
+Physician from engaging in the practice of medicine in a clinical, non-executive capacity in an office-based or hospital-based practice following the termination of this Agreement. </font></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
                         </div>
 
 
@@ -172,8 +535,9 @@
 
 
 
-
-                        <button class='btn btn-danger btn-lrg' name="add_contract">Create New Contract!</button>
+                        <div style='margin:20px'>
+                        <button class='btn btn-danger btn-lg' name="add_contract">Create New Contract!</button>
+                        </div>
                     </form>
 
 
@@ -201,10 +565,12 @@
                             {% for t in addon_templates %}
                                 <tr>
                                     <td>
-                                        <button class='btn btn-success btn-xs table-btn'>Add</button>
+                                        <button class='btn btn-success btn-xs table-btn' id='addtemplate'>Add</button>
                                     </td>
                                     <td>{{t.name}}</td>
-                                    <td><span class="btn btn-xs btn-primary table-btn">View</span></td>
+                                    <td>
+                                        <button class="btn btn-xs btn-primary table-btn" id='viewtemplate' data-toggle="modal" data-target="#myModal5">View</button>
+                                    </td>
                                 </tr>
                             {% endfor %}
                             </tbody>
@@ -226,20 +592,20 @@
 
 
         <div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog"  aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-lg" style='width:900px!important'>
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">Template Preview</h4>
+                    <h4 class="modal-title">Terms and Termination - Standard Preview</h4>
                     <small class="font-bold">This is the preview of the template that displays what is included</small>
                 </div>
                 <div class="modal-body">
-                    <p><strong>Lorem Ipsum is simply dummy</strong> text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
-                        printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-                        remaining essentially unchanged.</p>
-                    <p><strong>Lorem Ipsum is simply dummy</strong> text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
-                        printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-                        remaining essentially unchanged.</p>
+                    
+<table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="4%" valign="top" align="left"><font style="font-family:Times New Roman" size="2"><b>7.</b></font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2"><b>Term And Termination </b></font></td></tr></tbody></table> <p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="4%"><font size="1">&nbsp;</font></td><td width="4%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">7.1</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2">The initial term of this Agreement shall be one year beginning with the Effective Date, and this Agreement shall automatically renew for additional one-year terms,unless sooner terminated as provided in this Section of the Agreement. </font></td></tr></tbody></table> <p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="4%"><font size="1">&nbsp;</font></td><td width="4%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">7.2</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2">This Agreement may be terminated as follows: </font></td></tr></tbody></table> <p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="8%"><font size="1">&nbsp;</font></td><td width="5%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">7.2.1</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2"><u>Voluntary Termination</u>. Company may terminate this Agreement at any time upon thirty (30)&nbsp;days’ prior written notice and the Physician may terminatethis Agreement with a {{termination_days_notice}} day written notice following any twelve (12)&nbsp;month term (e.g. 15 months). </font></td></tr></tbody></table> <p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="8%"><font size="1">&nbsp;</font></td><td width="5%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">7.2.2</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2"><u>Termination for Breach with Notice and Opportunity to Cure</u>. Either party may terminate this Agreement due to a material breach of any term of this Agreement bythe other party upon written notice of such breach to the breaching party, and the failure of the breaching party to cure such breach within thirty (30)&nbsp;days after receiving such notice. </font></td></tr></tbody></table><p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="8%"><font size="1">&nbsp;</font></td><td width="5%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">7.2.3</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2"><u>Immediate Termination for Cause</u>. Notwithstanding any other provision in this Agreement, Company shall have a right to terminate this Agreement immediately for“Cause” upon written notice to Physician. As used herein, “Cause” means the occurrence of any one of the following: </font></td></tr></tbody></table> <p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="13%"><font size="1">&nbsp;</font></td><td width="4%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">a.</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2">The suspension, revocation or limitation of Physician’s license to practice medicine; </font></td></tr></tbody></table><p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="13%"><font size="1">&nbsp;</font></td><td width="4%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">b.</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2">The loss or suspension of Physician’s federal or state registrations to prescribe and dispense controlled substances; </font></td></tr></tbody></table><p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="13%"><font size="1">&nbsp;</font></td><td width="4%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">c.</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2">A determination by Company, in its reasonable discretion, that Physician has committed professional misconduct; </font></td></tr></tbody></table><p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="13%"><font size="1">&nbsp;</font></td><td width="4%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">d.</font></td><td align="left" valign="top"><p><font style="font-family:Times New Roman" size="2">The death of Physician;</font></p><p><font style="font-family:Times New Roman" size="2"> </font></p></td></tr></tbody></table> <table border="0" cellpadding="0" cellspacing="0" width="100%" style="line-height: 1.42857;"><tbody><tr><td width="13%"><br></td><td width="4%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">e.</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2">The conviction of Physician, in any jurisdiction, of a felony or crime of moral turpitude;&nbsp;</font></td></tr></tbody></table><p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="13%"><font size="1">&nbsp;</font></td><td width="4%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">f.</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2">Physician sells his shares or otherwise ceases to be an owner of Company; or </font></td></tr></tbody></table><p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="13%"><font size="1">&nbsp;</font></td><td width="4%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">g.</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2">Physician becomes disabled or impaired to the extent that he is unable to perform the duties required under this Agreement. </font></td></tr></tbody></table><p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="8%"><font size="1">&nbsp;</font></td><td width="5%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">7.2.4</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2">In the event of a change in laws, regulations or the method or amount of reimbursement which materially adversely affects the economic benefit expected by either partyunder the terms this Agreement, a party, if it has been or will be materially adversely affected, shall have the right to request that the other party negotiate a modification to any of the terms of this Agreement to the extent and in the mannerreasonably necessary to accommodate such governmental action and to preserve the economic benefits hereof. If the parties are unable to reach an agreement concerning modification of this Agreement within thirty (30)&nbsp;days, either party mayimmediately terminate this Agreement upon written notice to the other party. </font></td></tr></tbody></table> <p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="8%"><font size="1">&nbsp;</font></td><td width="5%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">7.2.5</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2">In the event this Agreement is terminated pursuant to Section&nbsp;7.2 of this Agreement, Physician shall be paid for all services performed through the terminationdate of the Agreement, along with the bonus amounts due, if any, pursuant to Section&nbsp;5.1. Physician’s vesting or other rights to stock options shall be determined in accordance with the Stock Option Plan set forth in Section&nbsp;5.3.</font></td></tr></tbody></table>
+
+
+
+
                 </div>
 
                 <div class="modal-footer">
@@ -299,8 +665,12 @@
 
 
         $('#addtemplate').click( function() {
-                $( ".note-editable" ).append( '<br><br><TABLE STYLE="BORDER-COLLAPSE:COLLAPSE" BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%"><TR><TD WIDTH="4%"><FONT SIZE="1">&nbsp;</FONT></TD><TD WIDTH="4%" VALIGN="top" ALIGN="left"><FONT STYLE="font-family:Times New Roman" SIZE="2">3.6</FONT></TD><TD ALIGN="left" VALIGN="top"> <P ALIGN="left"><FONT STYLE="font-family:Times New Roman" SIZE="2"><U>Independent Contractor Status</U>. It is the express intention of the parties that Physician is an independent contractor. Nothing in this Agreement shall in any way be construed to indicate that Physician is an employee of the Company. Physician will be expected and required to use his unique background, training, and skills to carry out his duties. Physician will have the discretion to determine the method, means, and location of performing his duties, and the Company has no right to and will not control or determine the method, means, or place of the performance of Physician&#146;s duties, except as otherwise explicitly set forth in this </FONT></P></TD></TR></TABLE><p STYLE="margin-top:0px;margin-bottom:0px"><FONT SIZE="1">&nbsp;</FONT></P> Agreement. As an independent contractor, Physician shall not be eligible to participate in any employee benefit plan, including but not limited to health, disability, life insurance or retirement contribution. Company may provide for its employees. Physician shall also be responsible for payment of all licensing fees, professional dues, publications, subscriptions, and related professional expenses.' );
+                $( ".note-editable" ).append( '<table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="4%" valign="top" align="left"><font style="font-family:Times New Roman" size="2"><b>7.</b></font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2"><b>Term And Termination </b></font></td></tr></tbody></table> <p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="4%"><font size="1">&nbsp;</font></td><td width="4%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">7.1</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2">The initial term of this Agreement shall be one year beginning with the Effective Date, and this Agreement shall automatically renew for additional one-year terms,unless sooner terminated as provided in this Section of the Agreement. </font></td></tr></tbody></table> <p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="4%"><font size="1">&nbsp;</font></td><td width="4%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">7.2</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2">This Agreement may be terminated as follows: </font></td></tr></tbody></table> <p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="8%"><font size="1">&nbsp;</font></td><td width="5%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">7.2.1</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2"><u>Voluntary Termination</u>. Company may terminate this Agreement at any time upon thirty (30)&nbsp;days’ prior written notice and the Physician may terminatethis Agreement with a {{termination_days_notice}} day written notice following any twelve (12)&nbsp;month term (e.g. 15 months). </font></td></tr></tbody></table> <p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="8%"><font size="1">&nbsp;</font></td><td width="5%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">7.2.2</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2"><u>Termination for Breach with Notice and Opportunity to Cure</u>. Either party may terminate this Agreement due to a material breach of any term of this Agreement bythe other party upon written notice of such breach to the breaching party, and the failure of the breaching party to cure such breach within thirty (30)&nbsp;days after receiving such notice. </font></td></tr></tbody></table><p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="8%"><font size="1">&nbsp;</font></td><td width="5%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">7.2.3</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2"><u>Immediate Termination for Cause</u>. Notwithstanding any other provision in this Agreement, Company shall have a right to terminate this Agreement immediately for“Cause” upon written notice to Physician. As used herein, “Cause” means the occurrence of any one of the following: </font></td></tr></tbody></table> <p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="13%"><font size="1">&nbsp;</font></td><td width="4%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">a.</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2">The suspension, revocation or limitation of Physician’s license to practice medicine; </font></td></tr></tbody></table><p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="13%"><font size="1">&nbsp;</font></td><td width="4%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">b.</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2">The loss or suspension of Physician’s federal or state registrations to prescribe and dispense controlled substances; </font></td></tr></tbody></table><p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="13%"><font size="1">&nbsp;</font></td><td width="4%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">c.</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2">A determination by Company, in its reasonable discretion, that Physician has committed professional misconduct; </font></td></tr></tbody></table><p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="13%"><font size="1">&nbsp;</font></td><td width="4%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">d.</font></td><td align="left" valign="top"><p><font style="font-family:Times New Roman" size="2">The death of Physician;</font></p><p><font style="font-family:Times New Roman" size="2"> </font></p></td></tr></tbody></table> <table border="0" cellpadding="0" cellspacing="0" width="100%" style="line-height: 1.42857;"><tbody><tr><td width="13%"><br></td><td width="4%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">e.</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2">The conviction of Physician, in any jurisdiction, of a felony or crime of moral turpitude;&nbsp;</font></td></tr></tbody></table><p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="13%"><font size="1">&nbsp;</font></td><td width="4%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">f.</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2">Physician sells his shares or otherwise ceases to be an owner of Company; or </font></td></tr></tbody></table><p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="13%"><font size="1">&nbsp;</font></td><td width="4%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">g.</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2">Physician becomes disabled or impaired to the extent that he is unable to perform the duties required under this Agreement. </font></td></tr></tbody></table><p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="8%"><font size="1">&nbsp;</font></td><td width="5%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">7.2.4</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2">In the event of a change in laws, regulations or the method or amount of reimbursement which materially adversely affects the economic benefit expected by either partyunder the terms this Agreement, a party, if it has been or will be materially adversely affected, shall have the right to request that the other party negotiate a modification to any of the terms of this Agreement to the extent and in the mannerreasonably necessary to accommodate such governmental action and to preserve the economic benefits hereof. If the parties are unable to reach an agreement concerning modification of this Agreement within thirty (30)&nbsp;days, either party mayimmediately terminate this Agreement upon written notice to the other party. </font></td></tr></tbody></table> <p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="8%"><font size="1">&nbsp;</font></td><td width="5%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">7.2.5</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2">In the event this Agreement is terminated pursuant to Section&nbsp;7.2 of this Agreement, Physician shall be paid for all services performed through the terminationdate of the Agreement, along with the bonus amounts due, if any, pursuant to Section&nbsp;5.1. Physician’s vesting or other rights to stock options shall be determined in accordance with the Stock Option Plan set forth in Section&nbsp;5.3.</font></td></tr></tbody></table>' );
         });
+
+
+
+        
 
 
 
@@ -446,6 +816,7 @@
         
     $('#id_start_date').datepicker()
     $('#id_end_date').datepicker()
+    $('#id_renewal_date').datepicker()
 
 
     </script>

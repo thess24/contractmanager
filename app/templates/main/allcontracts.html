@@ -173,16 +173,16 @@
                     {% for c in contracts %}
                     <tr>
                         <td>
-                            <a class='btn btn-xs btn-primary' href="{% url 'contract' 1 %}">View</a>
+                            <a class='btn btn-xs btn-primary' href="{% url 'contract' c.id %}">View</a>
                         </td>
-                        <td>{{c.name}}</td>
-                        <td>12/1/2014</td>
-                        <td>Taylor</td>
-                        <td>Legal</td>
-                        <td>$20,000</td>
-                        <td>{{c.signed}}</td>
-                        <td>1/1/2017</td>
-                        <td><span class="label label-primary">{{c.status}}</span></td>
+                        <td>{{c.contract.name}} (v. {{c.version}})</td>
+                        <td>{{c.created_at}}</td>
+                        <td>{{c.current_user}}</td>
+                        <td>{{c.current_team}}</td>
+                        <td>{{c.amount}}</td>
+                        <td>{{c.contract.signed}}</td>
+                        <td>{{c.end_date}}</td>
+                        <td><span class="label label-primary">{{c.contract.status}}</span></td>
                     </tr>
                     {% empty %}
 

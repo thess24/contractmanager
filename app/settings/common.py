@@ -162,7 +162,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     
-    'django.middleware.security.SecurityMiddleware',
+    # 'django.middleware.security.SecurityMiddleware',
+    # https://docs.djangoproject.com/en/1.8/_modules/django/middleware/security/
 )
 ########## END MIDDLEWARE CONFIGURATION
 

@@ -14,6 +14,11 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
+    <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/font-awesome.css" rel="stylesheet">
+
+
+
     <!-- Data Tables -->
     <link href="{{ STATIC_URL }}css/dataTables.bootstrap.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/dataTables.responsive.css" rel="stylesheet">
@@ -96,13 +101,13 @@
                         <li><a href="{% url 'viewtemplates' %}">View All Templates</a></li>
                     </ul>
                 </li>
-                <li>
+<!--                 <li>
                     <a href="#"><i class="fa fa-code-fork"></i> <span class="nav-label">Workflows</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li><a href="{% url 'workflows' %}">Manage Current Workflows</a></li>
                         <li><a href="{% url 'addworkflow' %}">Add New Workflows</a></li>
                     </ul>
-                </li>
+                </li> -->
                 <li>
                     <a href="#"><i class="fa fa-bell"></i> <span class="nav-label">Alerts</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
@@ -172,6 +177,14 @@
     <!-- Mainly scripts -->
     <script src="//code.jquery.com/jquery-2.1.2.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
+    <script src="{{ STATIC_URL }}js/jquery.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+
+
+
+
     <script src="{{ STATIC_URL }}js/metisMenu.js"></script>
     <script src="{{ STATIC_URL }}js/jquery.slimscroll.min.js"></script>
 

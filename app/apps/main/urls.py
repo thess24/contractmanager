@@ -159,3 +159,5 @@ urlpatterns = patterns('',
 # RewriteEngine On
 # RewriteCond %{HTTP:X-Forwarded-Proto} !https
 # RewriteRule / https://%{SERVER_NAME}%{REQUEST_URI} [L,R=301]
+
+# Header always set Strict-Transport-Security "max-age=3000; includeSubDomains"

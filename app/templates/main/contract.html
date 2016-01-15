@@ -67,17 +67,29 @@
                                         <dt>Created:</dt> <dd> {{latest_contract.contract.created_at}}</dd>
                                         <dt>Start Date:</dt> <dd> {{latest_contract.start_date}}</dd>
                                         <dt>End Date:</dt> <dd> {{latest_contract.end_date}}</dd>
-                                        <dt>Signed:</dt> <dd> <i class="fa fa-check text-navy"></i> 8/16/2014 </dd>
+                                        <dt>Auto Renewal Date:</dt> <dd> {{latest_contract.renewal_date}}</dd>
                                         
                                     </dl>
                                 </div>
                                 <div class="col-lg-4" id="cluster_info">
                                     <dl class="dl-horizontal">
 
-                                        <dt>Last Updated:</dt> <dd>8/162014 12:15:57</dd>
-                                        <dt>Created:</dt> <dd>  7/17/2014 23:36:57 </dd>
-                                        <dt>Expires:</dt> <dd>  7/17/2016 23:36:57 </dd>
-                                        <dt>Signed:</dt> <dd>  yes </dd>
+                                        <dt>Site:</dt> <dd>{{latest_contract.site}}</dd>
+                                        <dt>Specialty:</dt> 
+                                        {% if latest_contract.specialty %}
+                                        <dd>{{latest_contract.specialty}}</dd>
+                                        {% else %}
+                                        <dd>None</dd>
+                                        {% endif %}
+
+                                        <dt>Number of Physicians:</dt> <dd> {{latest_contract.num_physicians}}</dd>
+                                        <dt>Performance Linked:</dt> <dd> {{latest_contract.performance_linked}}</dd>
+                                        <dt>Signed:</dt> 
+                                        {% if latest_contract.signed %}
+                                        <dd> <i class="fa fa-check text-navy"></i> {{latest_contract.signed_at}} </dd>
+                                        {% else %}
+                                        <dd> No </dd>
+                                        {% endif %}
                                         
                                     </dl>
                                 </div>
@@ -97,30 +109,21 @@
                                     </dl>
                                 </div>
                             </div>
-<!--                             <div class="row m-t-sm">
-                                <div class="col-lg-12">
-                                <div class="panel blank-panel">
 
-
-                                <div class="panel-body">
-
-
-
-                                </div>
-
-                                </div>
-                                </div>
-                            </div> -->
                         </div>
                     </div>
             </div>
             <div class="col-lg-3">
                 <div class="wrapper wrapper-content">
+                    <a href='{% url "editcontract" latest_contract.id %}' class='btn btn-lg btn-block btn-primary'> 
+                        <span class='fa fa-document'></span>
+                        Edit Contract
+                    </a>
                     <button class='btn btn-lg btn-block btn-danger' style='height:75px'> 
                         <span class='fa fa-file-pdf-o'></span>
                         Download Current PDF Contract
                     </button>
-                    <button class='btn btn-lg btn-block' style='border:5px dotted;height:100px'> 
+                    <button class='btn btn-lg btn-block' style='border:5px dotted;height:75px'> 
                         <span class='fa fa-file-pdf-o'></span>
                         Upload New PDF
                     </button>
@@ -142,8 +145,8 @@
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>Current Contract</h5>
-                            <a id="edit" class="btn btn-primary btn-xs m-l-sm" href="{% url 'editcontract' 1 %}" type="button">Edit</a>
-                            <button id="save" class="btn btn-danger pull-right btn-xs" type="button"><span class='fa fa-file-pdf-o'></span>  Export to PDF</button>
+                            <!-- <a id="edit" class="btn btn-primary btn-xs m-l-sm" href="{% url 'editcontract' 1 %}" type="button">Edit</a> -->
+                            <!-- <button id="save" class="btn btn-danger pull-right btn-xs" type="button"><span class='fa fa-file-pdf-o'></span>  Export to PDF</button> -->
                         </div>
                         <div class="ibox-content no-padding">
 
