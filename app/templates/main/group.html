@@ -34,7 +34,7 @@
                             <a href="{% url 'groups' %}">Groups</a>
                         </li>
                         <li>
-                            <a>Legal</a>
+                            <a>{{team.name}}</a>
                         </li>
                     <span class='pull-right'>Last Updated 12/12/2014</span>
                     </ol>
@@ -115,9 +115,9 @@
                                     {% endif %}
 
                                     <td>{{c.contract.name}}</td>
-                                    <td>{{c.prev_group}} ({{c.prev_user}})</td>
+                                    <td>{{c.prev_user}} ({{c.prev_user.userprofile.team}})</td>
                                     <td>{{c.sent_at}}</td>
-                                    <td>{{c.current_user}}</td>
+                                    <td>{{c.current_user.first_name}} {{c.current_user.last_name}}</td>
                                     <td>{{c.grabbed_at}}</td>
                                 </tr>
                                 {% endfor %}

@@ -32,7 +32,7 @@
             </div>
 
 
-        <div class='wrapper wrapper-content animated fadeInRight'
+        <div class='wrapper wrapper-content animated fadeInRight'>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
@@ -44,7 +44,6 @@
                             <div class="hr-line-dashed"></div>
                             <div class="search-result">
                                 <h3><a href="{% url 'group' user.userprofile.team.name %}">{{user.userprofile.team.name}}</a></h3>
-                                <div class='group-data'>12 members, 10 pending documents</div>
                                 <p>
                                     {{user.userprofile.team.description}}
                                 </p>
@@ -57,10 +56,10 @@
                             {% for t in teams %}
                             <div class="hr-line-dashed"></div>
                             <div class="search-result">
-                                <h3><a href="{% url 'group' t.name %}">{{t.name}}</a></h3>
-                                <div class='group-data'>12 members, 10 pending documents</div>
+                                <h3><a href="{% url 'group' t.team__name %}">{{t.team__name}}</a></h3>
+                                <div class='group-data'>{{t.user_count}} members</div>
                                 <p>
-                                    {{t.description}}
+                                    {{t.team__description}}
                                 </p>
                             </div>
                             {% endfor %}

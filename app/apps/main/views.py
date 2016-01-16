@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, render_to_response
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.db.models import Count
 import models
 import datetime
 
@@ -93,7 +94,17 @@ def user(request):
 
 @login_required
 def groups(request):
-	teams = models.Team.objects.filter(system=request.user.userprofile.system)
+	# teams = models.Team.objects.filter(system=request.user.userprofile.system)
+	# teams = models.Team.objects.filter(system=request.user.userprofile.system).annotate(user_count=Count())
+
+	teams = models.UserProfile.objects.filter(system=request.user.userprofile.system).values('team__name', 'team__description').annotate(user_count=Count('user'))
+	# import ipdb;ipdb.set_trace()
+
+	
+	# teams = models.UserInfo.objects.filter(system=request.user.userprofile.system)
+
+	# query agg for num people in each team
+	# query count of all contracts in each team currently 
 
 	context= {'teams':teams}
 	return render(request, 'main/groups.html', context)
@@ -241,7 +252,11 @@ def diffcontracts(request, contractid1, contractid2):
 
 @login_required
 def editcontract(request, contractid):
-	context= {}
+	contract = get_object_or_404(models.Contract, id=contractid)
+	contract_versions = models.ContractInfo.objects.filter(contract=contract).order_by('-created_at')
+	latest_contract = contract_versions.latest('created_at')
+
+	context= {'latest_contract':latest_contract, 'contract_versions':contract_versions}
 	return render(request, 'main/editcontract.html', context)
 
 @login_required
