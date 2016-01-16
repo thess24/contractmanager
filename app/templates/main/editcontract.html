@@ -6,6 +6,19 @@
     <style type="text/css">
 
 
+    form .row{
+        margin-top: 10px;
+    }
+
+
+    .form-control{
+        background-color: #F7F7F7!important;
+    }
+
+    .errorlist{
+        color: red;
+    }
+
 
     </style>
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/summernote/0.6.16/summernote.min.css">
@@ -52,72 +65,225 @@
                                 <div class="col-lg-12">
                                     <div class="m-b-md">
                                         <h2>Contract with Dr. Dobrez</h2>
+                                        <span>Status:  <span class="label label-primary">Active</span></span>
                                     </div>
-                                    <dl class="dl-horizontal">
-                                        <dt>Status:</dt> <dd><span class="label label-primary">Active</span></dd>
-                                    </dl>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <dl class="dl-horizontal">
 
-                                        <dt>Current Holder:</dt> <dd>Alex Smith</dd>
-                                        <dt>Amount:</dt> <dd>  $20,000</dd>
-                                        <dt>Contract Type:</dt> <dd>Medical Directorship</dd>
-                                        <dt>Version:</dt> <dd>  v1.4.2 </dd>
-                                    </dl>
-                                </div>
-                                <div class="col-lg-4" id="cluster_info">
-                                    <dl class="dl-horizontal">
-
-                                        <dt>Last Updated:</dt> <dd>8/16/2014 12:15:57</dd>
-                                        <dt>Created:</dt> <dd>  7/17/2014 23:36:57 </dd>
-                                        <dt>Expires:</dt> <dd>  7/17/2016 23:36:57 </dd>
-                                        <dt>Signed:</dt> <dd> <i class="fa fa-check text-navy"></i> 8/16/2014 </dd>
-                                        
-                                    </dl>
-                                </div>
-                                <div class="col-lg-4" id="cluster_info">
-                                    <dl class="dl-horizontal">
-
-                                        <dt>Last Updated:</dt> <dd>8/162014 12:15:57</dd>
-                                        <dt>Created:</dt> <dd>  7/17/2014 23:36:57 </dd>
-                                        <dt>Expires:</dt> <dd>  7/17/2016 23:36:57 </dd>
-                                        <dt>Signed:</dt> <dd>  yes </dd>
-                                        
-                                    </dl>
-                                </div>
-
-
-
-
-
+                    <form>
+                        <div class='row'>
+                            <div class='col-md-6'>
+                                {{contractinfoform.next_user.errors}}
+                                {{contractinfoform.next_user.label_tag}}
+                                {{contractinfoform.next_user}}
                             </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <dl class="dl-horizontal">
-                                        <dt>Approved By:</dt>
-                                        <dd>
-                                            Finance, Compliance
-                                        </dd>
-                                    </dl>
+                            <div class='col-md-6'>
+                                {{contractinfoform.next_team.errors}}
+                                {{contractinfoform.next_team.label_tag}}
+                                {{contractinfoform.next_team}}
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-12'>
+                                {{contractinfoform.change_made.errors}}
+                                {{contractinfoform.change_made.label_tag}}
+                                {{contractinfoform.change_made}}
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-6'>
+                                {{contractinfoform.site.errors}}
+                                {{contractinfoform.site.label_tag}}
+                                {{contractinfoform.site}}
+                            </div>
+                            <div class='col-md-6'>
+                                {{contractinfoform.region.errors}}
+                                {{contractinfoform.region.label_tag}}
+                                {{contractinfoform.region}}
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-6'>
+                                {{contractinfoform.specialty.errors}}
+                                {{contractinfoform.specialty.label_tag}}
+                                {{contractinfoform.specialty}}
+                            </div>
+                            <div class='col-md-6'>
+                                {{contractinfoform.contracting_entity.errors}}
+                                {{contractinfoform.contracting_entity.label_tag}}
+                                {{contractinfoform.contracting_entity}}
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-6'>
+                                {{contractinfoform.start_date.errors}}
+                                {{contractinfoform.start_date.label_tag}}
+                                <div class="input-group"> 
+                                    <div class="input-group-btn"> 
+                                        <button type="button" class="btn btn-default" aria-label="Bold">
+                                            <i class='fa fa-calendar'></i>
+                                        </button> 
+                                    </div> 
+                                {{contractinfoform.start_date}}
                                 </div>
                             </div>
-<!--                             <div class="row m-t-sm">
-                                <div class="col-lg-12">
-                                <div class="panel blank-panel">
-
-
-                                <div class="panel-body">
-
-
-
+                            <div class='col-md-6'>
+                                {{contractinfoform.end_date.errors}}
+                                {{contractinfoform.end_date.label_tag}}
+                                <div class="input-group"> 
+                                    <div class="input-group-btn"> 
+                                        <button type="button" class="btn btn-default" aria-label="Bold">
+                                            <i class='fa fa-calendar'></i>
+                                        </button> 
+                                    </div> 
+                                {{contractinfoform.end_date}}
                                 </div>
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-6'>
+                                {{contractinfoform.type_of_services.errors}}
+                                {{contractinfoform.type_of_services.label_tag}}
+                                {{contractinfoform.type_of_services}}
+                            </div>
+                            <div class='col-md-6'>
+                                {{contractinfoform.admin_services_title.errors}}
+                                {{contractinfoform.admin_services_title.label_tag}}
+                                {{contractinfoform.admin_services_title}}
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-12'>
+                                {{contractinfoform.type_of_admin_services.errors}}
+                                {{contractinfoform.type_of_admin_services.label_tag}}
+                                {{contractinfoform.type_of_admin_services}}
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-4'>
+                                {{contractinfoform.num_physicians.errors}}
+                                {{contractinfoform.num_physicians.label_tag}}
+                                {{contractinfoform.num_physicians}}
+                            </div>
+                            <div class='col-md-4'>
+                                {{contractinfoform.max_monthly_hours.errors}}
+                                <label for="id_max_monthly_hours">Maximum hours:</label>
+                                <div class="input-group"> 
+                                    <div class="input-group-btn"> 
+                                        <button type="button" class="btn btn-default" aria-label="Bold">Monthly</button> 
+                                        <button type="button" class="btn btn-default" aria-label="Italic">Weekly</button> 
+                                    </div> 
+                                        <input class="form-control" id="id_max_monthly_hours" name="max_monthly_hours" step="0.5" type="number"> 
+                                </div>
+                            </div>
+                            <div class='col-md-4'>
+                                {{contractinfoform.amount.errors}}
+                                {{contractinfoform.amount.label_tag}}
+                                <div class="input-group"> 
+                                    <div class="input-group-btn"> 
+                                        <button type="button" class="btn btn-default" aria-label="Bold">
+                                            <i class='fa fa-dollar'></i>
+                                        </button> 
+                                    </div> 
+                                {{contractinfoform.amount}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-12'>
+                                {{contractinfoform.performance_linked.errors}}
+                                {{contractinfoform.performance_linked.label_tag}}
+                                {{contractinfoform.performance_linked}}
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-12'>
+                                {{contractinfoform.performance_criteria.errors}}
+                                {{contractinfoform.performance_criteria.label_tag}}
+                                {{contractinfoform.performance_criteria}}
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-4'>
+                                {{contractinfoform.responsible_party.errors}}
+                                {{contractinfoform.responsible_party.label_tag}}
+                                {{contractinfoform.responsible_party}}
+                            </div>
+                            <div class='col-md-4'>
+                                {{contractinfoform.responsible_party_secondary.errors}}
+                                {{contractinfoform.responsible_party_secondary.label_tag}}
+                                {{contractinfoform.responsible_party_secondary}}
+                            </div>
+                            <div class='col-md-4'>
+                                {{contractinfoform.termination_days_notice.errors}}
+                                {{contractinfoform.termination_days_notice.label_tag}}
+                                {{contractinfoform.termination_days_notice}}
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-4'>
+                                {{contractinfoform.malpractice_coverage_party.errors}}
+                                {{contractinfoform.malpractice_coverage_party.label_tag}}
+                                {{contractinfoform.malpractice_coverage_party}}
+                            </div>
+                            <div class='col-md-4'>
+                                {{contractinfoform.malpractice_limits.errors}}
+                                {{contractinfoform.malpractice_limits.label_tag}}
+                                {{contractinfoform.malpractice_limits}}
+                            </div>
+                            <div class='col-md-4'>
+                                {{contractinfoform.type_of_malpractice_coverage.errors}}
+                                {{contractinfoform.type_of_malpractice_coverage.label_tag}}
+                                {{contractinfoform.type_of_malpractice_coverage}}
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-6'>
+                                {{contractinfoform.physician_tail_responsibility.errors}}
+                                {{contractinfoform.physician_tail_responsibility.label_tag}}
+                                {{contractinfoform.physician_tail_responsibility}}
+                            </div>
+                            <div class='col-md-6'>
+                                {{contractinfoform.right_to_bill.errors}}
+                                {{contractinfoform.right_to_bill.label_tag}}
+                                {{contractinfoform.right_to_bill}}
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-3'>
+                                {{contractinfoform.non_compete.errors}}
+                                {{contractinfoform.non_compete.label_tag}}
+                                {{contractinfoform.non_compete}}
+                            </div>
+                            <div class='col-md-3'>
+                                {{contractinfoform.non_solicitation.errors}}
+                                {{contractinfoform.non_solicitation.label_tag}}
+                                {{contractinfoform.non_solicitation}}
+                            </div>
+                            <div class='col-md-3'>
+                                {{contractinfoform.auto_renew.errors}}
+                                {{contractinfoform.auto_renew.label_tag}}
+                                {{contractinfoform.auto_renew}}
+                            </div>
+                            <div class='col-md-3'>
+                                {{contractinfoform.renewal_date.errors}}
+                                {{contractinfoform.renewal_date.label_tag}}
+                                <div class="input-group"> 
+                                    <div class="input-group-btn"> 
+                                        <button type="button" class="btn btn-default" aria-label="Bold">
+                                            <i class='fa fa-calendar'></i>
+                                        </button> 
+                                    </div> 
+                                        {{contractinfoform.renewal_date}}
+                                </div>
+                            </div>
+                        </div>
 
-                                </div>
-                                </div>
-                            </div> -->
+
+                    </form>
+
+
+
                         </div>
                     </div>
 
@@ -833,7 +999,6 @@ duly authorized officer as of the day, month and year first above written. <I></
                             <tr>
                                 <th></th>
                                 <th>Name</th>
-                                <th>Date</th>
                                 <th>Preview</th>
                             </tr>
                             </thead>
@@ -844,10 +1009,9 @@ duly authorized officer as of the day, month and year first above written. <I></
                                         <input type="checkbox" >
                                     </div>
                                 </td>
-                                <td>Exhibit - Compensation
+                                <td>Compensation
                                 </td>
-                                <td>1/1/2009</td>
-                                <td><span class="btn btn-xs btn-primary table-btn">View</span></td>
+                                <td><button class="btn btn-xs btn-primary table-btn">View</button></td>
                             </tr>
                             <tr>
                                 <td>
@@ -855,10 +1019,9 @@ duly authorized officer as of the day, month and year first above written. <I></
                                         <input type="checkbox" >
                                     </div>
                                 </td>
-                                <td>Exhibit - Multiple Hospitals
+                                <td>Term and Termination
                                 </td>
-                                <td>9/1/2009</td>
-                                <td><span class="btn btn-xs btn-primary table-btn">View</span></td>
+                                <td><button class="btn btn-xs btn-primary table-btn">View</button></td>
                             </tr>
                             <tr>
                                 <td>
@@ -866,10 +1029,9 @@ duly authorized officer as of the day, month and year first above written. <I></
                                         <input type="checkbox" >
                                     </div>
                                 </td>
-                                <td>Exhibit - 4A
+                                <td>Insurance
                                 </td>
-                                <td>1/9/2011</td>
-                                <td><span class="btn btn-xs btn-primary table-btn">View</span></td>
+                                <td><button class="btn btn-xs btn-primary table-btn">View</button></td>
                             </tr>
                             <tr>
                                 <td>
@@ -879,27 +1041,16 @@ duly authorized officer as of the day, month and year first above written. <I></
                                 </td>
                                 <td>Exhibit - Agreement
                                 </td>
-                                <td>8/1/2011</td>
-                                <td><span class="btn btn-xs btn-primary table-btn">View</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="i-checks">
-                                        <input type="checkbox" >
-                                    </div>
-                                </td>
-                                <td>Exhibit - Other B
-                                </td>
-                                <td>1/1/2013</td>
-                                <td><span class="btn btn-xs btn-primary table-btn">View</span></td>
+                                <td><button class="btn btn-xs btn-primary table-btn">View</button></td>
                             </tr>
                             </tbody>
                             </table>
                         </div>
 
 
-
+                        <div style='margin-top:30px'>
                         <button class='btn btn-lg'>Add to Contract</button>
+                        </div>
                     </div>
                 </div>
 
@@ -912,8 +1063,8 @@ duly authorized officer as of the day, month and year first above written. <I></
 
 
                         <button class='btn btn-block btn-primary approve-btn'>Issue Approval</button>
-                        <button class='btn btn-block'>Send to Group</button>
-                        <button class='btn btn-block'>Send to Person</button>
+                        <button class='btn btn-block'>Change Workflow</button>
+                        <button class='btn btn-danger btn-block'>Save Changes</button>
                     </div>
                 </div>      
 
@@ -975,7 +1126,7 @@ duly authorized officer as of the day, month and year first above written. <I></
         $('.approve-btn').click(function () {
             swal({
                 title: "Are you sure?",
-                text: "You are issuing your stamp of approval if you accept",
+                text: "You are issuing your stamp of approval if you accept.  This will send the contract to the following for approval, based on the current workflow of the contract: \n\n Sue Sloan (Compensation)",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",

@@ -94,16 +94,8 @@ def user(request):
 
 @login_required
 def groups(request):
-	# teams = models.Team.objects.filter(system=request.user.userprofile.system)
-	# teams = models.Team.objects.filter(system=request.user.userprofile.system).annotate(user_count=Count())
-
 	teams = models.UserProfile.objects.filter(system=request.user.userprofile.system).values('team__name', 'team__description').annotate(user_count=Count('user'))
-	# import ipdb;ipdb.set_trace()
 
-	
-	# teams = models.UserInfo.objects.filter(system=request.user.userprofile.system)
-
-	# query agg for num people in each team
 	# query count of all contracts in each team currently 
 
 	context= {'teams':teams}
@@ -255,8 +247,10 @@ def editcontract(request, contractid):
 	contract = get_object_or_404(models.Contract, id=contractid)
 	contract_versions = models.ContractInfo.objects.filter(contract=contract).order_by('-created_at')
 	latest_contract = contract_versions.latest('created_at')
+	contractinfoform = models.ContractInfoForm()
 
-	context= {'latest_contract':latest_contract, 'contract_versions':contract_versions}
+
+	context= {'latest_contract':latest_contract, 'contract_versions':contract_versions, 'contractinfoform':contractinfoform}
 	return render(request, 'main/editcontract.html', context)
 
 @login_required
