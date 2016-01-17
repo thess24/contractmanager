@@ -247,7 +247,7 @@ def editcontract(request, contractid):
 	contract = get_object_or_404(models.Contract, id=contractid)
 	contract_versions = models.ContractInfo.objects.filter(contract=contract).order_by('-created_at')
 	latest_contract = contract_versions.latest('created_at')
-	contractinfoform = models.ContractInfoForm()
+	contractinfoform = models.ContractInfoForm(instance=latest_contract)
 
 
 	context= {'latest_contract':latest_contract, 'contract_versions':contract_versions, 'contractinfoform':contractinfoform}

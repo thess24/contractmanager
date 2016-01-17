@@ -79,7 +79,7 @@ class Physician(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True)
 
 	def __unicode__(self):
-		return self.user.username
+		return '{} {}'.format(self.user.first_name, self.user.last_name)
 
 class PhysicianTimeLog(models.Model):
 	physician = models.ForeignKey(Physician)

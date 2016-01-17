@@ -43,7 +43,9 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="m-b-md">
-                                        <h2>Contract with {{latest_contract.contract.physician}}</h2>
+                                        <h2>Contract with {{latest_contract.contract.physician}}
+                                            <small>(NPI:  {{latest_contract.contract.physician.npi}})</small>
+                                        </h2>
                                     </div>
                                     <dl class="dl-horizontal">
                                         <dt>Status:</dt> <dd><span class="label label-primary">{{latest_contract.contract.status}}</span></dd>
@@ -51,29 +53,13 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-4">
+                                <div class="col-lg-6">
                                     <dl class="dl-horizontal">
 
                                         <dt>Current Holder:</dt> <dd>{{latest_contract.current_team}} ({{latest_contract.current_user}})</dd>
                                         <dt>Amount:</dt> <dd>  $20,000</dd>
                                         <dt>Contract Type:</dt> <dd>{{latest_contract.contract.contract_type}}</dd>
                                         <dt>Version:</dt> <dd>  {{latest_contract.version}} </dd>
-                                    </dl>
-                                </div>
-                                <div class="col-lg-4" id="cluster_info">
-                                    <dl class="dl-horizontal">
-
-                                        <dt>Last Updated:</dt> <dd>{{latest_contract.created_at}}</dd>
-                                        <dt>Created:</dt> <dd> {{latest_contract.contract.created_at}}</dd>
-                                        <dt>Start Date:</dt> <dd> {{latest_contract.start_date}}</dd>
-                                        <dt>End Date:</dt> <dd> {{latest_contract.end_date}}</dd>
-                                        <dt>Auto Renewal Date:</dt> <dd> {{latest_contract.renewal_date}}</dd>
-                                        
-                                    </dl>
-                                </div>
-                                <div class="col-lg-4" id="cluster_info">
-                                    <dl class="dl-horizontal">
-
                                         <dt>Site:</dt> <dd>{{latest_contract.site}}</dd>
                                         <dt>Specialty:</dt> 
                                         {% if latest_contract.specialty %}
@@ -81,20 +67,27 @@
                                         {% else %}
                                         <dd>None</dd>
                                         {% endif %}
-
-                                        <dt>Number of Physicians:</dt> <dd> {{latest_contract.num_physicians}}</dd>
-                                        <dt>Performance Linked:</dt> <dd> {{latest_contract.performance_linked}}</dd>
                                         <dt>Signed:</dt> 
                                         {% if latest_contract.signed %}
                                         <dd> <i class="fa fa-check text-navy"></i> {{latest_contract.signed_at}} </dd>
                                         {% else %}
-                                        <dd> No </dd>
-                                        {% endif %}
+                                        <dd> <i class="fa fa-times" style='color:#ed5565'></i> {{latest_contract.signed_at}} </dd>
+                                        {% endif %} 
+                                    </dl>
+                                </div>
+                                <div class="col-lg-6" id="cluster_info">
+                                    <dl class="dl-horizontal">
+
+                                        <dt>Last Updated:</dt> <dd>{{latest_contract.created_at}}</dd>
+                                        <dt>Created:</dt> <dd> {{latest_contract.contract.created_at}}</dd>
+                                        <dt>Start Date:</dt> <dd> {{latest_contract.start_date|date:"SHORT_DATE_FORMAT"}}</dd>
+                                        <dt>End Date:</dt> <dd> {{latest_contract.end_date|date:"SHORT_DATE_FORMAT"}}</dd>
+                                        <dt>Auto Renewal Date:</dt> <dd> {{latest_contract.renewal_date|date:"SHORT_DATE_FORMAT"}}</dd>
+                                        <dt>Number of Physicians:</dt> <dd> {{latest_contract.num_physicians}}</dd>
+                                        <dt>Performance Linked:</dt> <dd> {{latest_contract.performance_linked}}</dd>
                                         
                                     </dl>
                                 </div>
-
-
 
 
 

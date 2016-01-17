@@ -71,7 +71,7 @@
                             </div>
 
                     <form>
-                        <div class='row'>
+<!--                         <div class='row'>
                             <div class='col-md-6'>
                                 {{contractinfoform.next_user.errors}}
                                 {{contractinfoform.next_user.label_tag}}
@@ -89,7 +89,7 @@
                                 {{contractinfoform.change_made.label_tag}}
                                 {{contractinfoform.change_made}}
                             </div>
-                        </div>
+                        </div> -->
                         <div class='row'>
                             <div class='col-md-6'>
                                 {{contractinfoform.site.errors}}
@@ -162,7 +162,7 @@
                         <div class='row'>
                             <div class='col-md-4'>
                                 {{contractinfoform.num_physicians.errors}}
-                                {{contractinfoform.num_physicians.label_tag}}
+                                <label for="id_num_physicians">Number of physicians:</label>
                                 {{contractinfoform.num_physicians}}
                             </div>
                             <div class='col-md-4'>
@@ -173,7 +173,7 @@
                                         <button type="button" class="btn btn-default" aria-label="Bold">Monthly</button> 
                                         <button type="button" class="btn btn-default" aria-label="Italic">Weekly</button> 
                                     </div> 
-                                        <input class="form-control" id="id_max_monthly_hours" name="max_monthly_hours" step="0.5" type="number"> 
+                                    {{contractinfoform.max_monthly_hours}}
                                 </div>
                             </div>
                             <div class='col-md-4'>
@@ -292,16 +292,20 @@
                 <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>Current Contract</h5>
-                            <button id="edit" class="btn btn-primary btn-xs m-l-sm" onclick="edit()" type="button">Edit</button>
-                            <button id="save" class="btn btn-primary  btn-xs" onclick="save()" type="button">Save</button>
-                            <!-- <button id="save" class="btn btn-danger pull-right btn-xs" type="button"><span class='fa fa-file-pdf-o'></span>  Export to PDF</button> -->
                         </div>
-                        <div class="ibox-content no-padding">
 
-                            <div class="click2edit wrapper p-md">
+                    <div class='ibox-content'>
 
+                        <div class="tabs-container">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" href="#edit-tab">Editing</a></li>
+                                <li class=""><a data-toggle="tab" href="#preview-tab">Preview</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div id="edit-tab" class="tab-pane active">
+                                    <div class="panel-body">
 
-
+                                     <div class="summernote">
 
 
 
@@ -964,21 +968,28 @@ duly authorized officer as of the day, month and year first above written. <I></
 
 
 
-
-
-
-
-
-
-
-                            </div>
-
                         </div>
+
+
+
+                                </div>
+                            </div>
+                            <div id="preview-tab" class="tab-pane">
+                                <div class="panel-body">
+                                    <div class="outputarea"></div>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
 
 
 
 
+
+            </div>
+            </div>
             </div>
             <div class="col-lg-3">
 
@@ -1011,7 +1022,7 @@ duly authorized officer as of the day, month and year first above written. <I></
                                 </td>
                                 <td>Compensation
                                 </td>
-                                <td><button class="btn btn-xs btn-primary table-btn">View</button></td>
+                                <td><button class="btn btn-xs btn-primary table-btn"  data-toggle="modal" data-target="#myModal5">View</button></td>
                             </tr>
                             <tr>
                                 <td>
@@ -1021,7 +1032,7 @@ duly authorized officer as of the day, month and year first above written. <I></
                                 </td>
                                 <td>Term and Termination
                                 </td>
-                                <td><button class="btn btn-xs btn-primary table-btn">View</button></td>
+                                <td><button class="btn btn-xs btn-primary table-btn"  data-toggle="modal" data-target="#myModal5">View</button></td>
                             </tr>
                             <tr>
                                 <td>
@@ -1031,7 +1042,7 @@ duly authorized officer as of the day, month and year first above written. <I></
                                 </td>
                                 <td>Insurance
                                 </td>
-                                <td><button class="btn btn-xs btn-primary table-btn">View</button></td>
+                                <td><button class="btn btn-xs btn-primary table-btn"  data-toggle="modal" data-target="#myModal5">View</button></td>
                             </tr>
                             <tr>
                                 <td>
@@ -1041,7 +1052,7 @@ duly authorized officer as of the day, month and year first above written. <I></
                                 </td>
                                 <td>Exhibit - Agreement
                                 </td>
-                                <td><button class="btn btn-xs btn-primary table-btn">View</button></td>
+                                <td><button class="btn btn-xs btn-primary table-btn"  data-toggle="modal" data-target="#myModal5">View</button></td>
                             </tr>
                             </tbody>
                             </table>
@@ -1062,7 +1073,7 @@ duly authorized officer as of the day, month and year first above written. <I></
                     <div class="ibox-content">
 
 
-                        <button class='btn btn-block btn-primary approve-btn'>Issue Approval</button>
+                        <button class='btn btn-block btn-primary approve-btn'>Send and Issue Approval</button>
                         <button class='btn btn-block'>Change Workflow</button>
                         <button class='btn btn-danger btn-block'>Save Changes</button>
                     </div>
@@ -1073,16 +1084,38 @@ duly authorized officer as of the day, month and year first above written. <I></
         </div>
 
 
-        <div class="row">
-            <div class="col-lg-12">
 
+        </div>
+
+
+
+
+
+
+
+  <div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-lg" style='width:900px!important'>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Terms and Termination - Standard Preview</h4>
+                    <small class="font-bold">This is the preview of the template that displays what is included</small>
+                </div>
+                <div class="modal-body">
+                    
+<table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="4%" valign="top" align="left"><font style="font-family:Times New Roman" size="2"><b>7.</b></font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2"><b>Term And Termination </b></font></td></tr></tbody></table> <p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="4%"><font size="1">&nbsp;</font></td><td width="4%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">7.1</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2">The initial term of this Agreement shall be one year beginning with the Effective Date, and this Agreement shall automatically renew for additional one-year terms,unless sooner terminated as provided in this Section of the Agreement. </font></td></tr></tbody></table> <p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="4%"><font size="1">&nbsp;</font></td><td width="4%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">7.2</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2">This Agreement may be terminated as follows: </font></td></tr></tbody></table> <p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="8%"><font size="1">&nbsp;</font></td><td width="5%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">7.2.1</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2"><u>Voluntary Termination</u>. Company may terminate this Agreement at any time upon thirty (30)&nbsp;days’ prior written notice and the Physician may terminatethis Agreement with a {{termination_days_notice}} day written notice following any twelve (12)&nbsp;month term (e.g. 15 months). </font></td></tr></tbody></table> <p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="8%"><font size="1">&nbsp;</font></td><td width="5%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">7.2.2</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2"><u>Termination for Breach with Notice and Opportunity to Cure</u>. Either party may terminate this Agreement due to a material breach of any term of this Agreement bythe other party upon written notice of such breach to the breaching party, and the failure of the breaching party to cure such breach within thirty (30)&nbsp;days after receiving such notice. </font></td></tr></tbody></table><p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="8%"><font size="1">&nbsp;</font></td><td width="5%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">7.2.3</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2"><u>Immediate Termination for Cause</u>. Notwithstanding any other provision in this Agreement, Company shall have a right to terminate this Agreement immediately for“Cause” upon written notice to Physician. As used herein, “Cause” means the occurrence of any one of the following: </font></td></tr></tbody></table> <p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="13%"><font size="1">&nbsp;</font></td><td width="4%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">a.</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2">The suspension, revocation or limitation of Physician’s license to practice medicine; </font></td></tr></tbody></table><p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="13%"><font size="1">&nbsp;</font></td><td width="4%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">b.</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2">The loss or suspension of Physician’s federal or state registrations to prescribe and dispense controlled substances; </font></td></tr></tbody></table><p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="13%"><font size="1">&nbsp;</font></td><td width="4%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">c.</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2">A determination by Company, in its reasonable discretion, that Physician has committed professional misconduct; </font></td></tr></tbody></table><p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="13%"><font size="1">&nbsp;</font></td><td width="4%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">d.</font></td><td align="left" valign="top"><p><font style="font-family:Times New Roman" size="2">The death of Physician;</font></p><p><font style="font-family:Times New Roman" size="2"> </font></p></td></tr></tbody></table> <table border="0" cellpadding="0" cellspacing="0" width="100%" style="line-height: 1.42857;"><tbody><tr><td width="13%"><br></td><td width="4%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">e.</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2">The conviction of Physician, in any jurisdiction, of a felony or crime of moral turpitude;&nbsp;</font></td></tr></tbody></table><p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="13%"><font size="1">&nbsp;</font></td><td width="4%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">f.</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2">Physician sells his shares or otherwise ceases to be an owner of Company; or </font></td></tr></tbody></table><p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="13%"><font size="1">&nbsp;</font></td><td width="4%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">g.</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2">Physician becomes disabled or impaired to the extent that he is unable to perform the duties required under this Agreement. </font></td></tr></tbody></table><p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="8%"><font size="1">&nbsp;</font></td><td width="5%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">7.2.4</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2">In the event of a change in laws, regulations or the method or amount of reimbursement which materially adversely affects the economic benefit expected by either partyunder the terms this Agreement, a party, if it has been or will be materially adversely affected, shall have the right to request that the other party negotiate a modification to any of the terms of this Agreement to the extent and in the mannerreasonably necessary to accommodate such governmental action and to preserve the economic benefits hereof. If the parties are unable to reach an agreement concerning modification of this Agreement within thirty (30)&nbsp;days, either party mayimmediately terminate this Agreement upon written notice to the other party. </font></td></tr></tbody></table> <p style="font-size:6px;margin-top:0px;margin-bottom:0px">&nbsp;</p><table style="BORDER-COLLAPSE:COLLAPSE" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="8%"><font size="1">&nbsp;</font></td><td width="5%" valign="top" align="left"><font style="font-family:Times New Roman" size="2">7.2.5</font></td><td align="left" valign="top"><font style="font-family:Times New Roman" size="2">In the event this Agreement is terminated pursuant to Section&nbsp;7.2 of this Agreement, Physician shall be paid for all services performed through the terminationdate of the Agreement, along with the bonus amounts due, if any, pursuant to Section&nbsp;5.1. Physician’s vesting or other rights to stock options shall be determined in accordance with the Stock Option Plan set forth in Section&nbsp;5.3.</font></td></tr></tbody></table>
+
+
+
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
-
-
-
         </div>
-
 
     {% endblock %}
 
@@ -1092,6 +1125,9 @@ duly authorized officer as of the day, month and year first above written. <I></
     <script type="text/javascript" src='//cdnjs.cloudflare.com/ajax/libs/summernote/0.6.16/summernote.min.js'></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.1/icheck.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src='//cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.0/mustache.min.js'></script>
+
 
     <script>
 
@@ -1136,6 +1172,37 @@ duly authorized officer as of the day, month and year first above written. <I></
                 swal("Approved!", "You have approved this document.", "success");
             });
         });
+
+
+
+    // TABS
+
+      $(document).ready(function(){
+
+            $('.nav-tabs a').click(function (e) {
+              e.preventDefault()
+
+                $('#current-input-fields span').remove()
+                // addInputFieldTags();
+
+                var cname = $('#inputname').val();
+                var ctype = $('#inputcontract_type').val();
+
+                var template = $('.note-editable')[0].innerHTML;
+                var output = Mustache.render(template, {name:cname, contract_type:ctype});
+                $('.outputarea').html(output);
+            });
+
+      });
+
+        
+    $('#id_start_date').datepicker()
+    $('#id_end_date').datepicker()
+    $('#id_renewal_date').datepicker()
+
+
+
+
 
     </script>
     {% endblock %}
