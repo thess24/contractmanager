@@ -55,6 +55,7 @@ urlpatterns = patterns('',
 
 	url(r'^alerts/$', views.alerts, name='alerts'),
 	url(r'^alerts/history$', views.alerthistory, name='alerthistory'),
+	url(r'^alerts/manage$', views.alertmanage, name='alertmanage'),
 
 
 	url(r'^addtemplate/$', views.addtemplate, name='addtemplate'),

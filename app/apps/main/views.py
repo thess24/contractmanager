@@ -295,6 +295,12 @@ def alerthistory(request):
 	return render(request, 'main/alertshistory.html', context)
 
 @login_required
+def alertmanage(request):
+	alerts = models.Alert.objects.filter(user=request.user, active=False)
+	context= {'alerts':alerts}
+	return render(request, 'main/alertmanage.html', context)
+
+@login_required
 def addtemplate(request):
 	templates = models.Template.objects.filter(system=request.user.userprofile.system)
 	form = models.TemplateForm()
