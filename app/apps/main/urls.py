@@ -28,6 +28,10 @@ urlpatterns = patterns('',
 	url(r'^contracts/new/$', views.newcontract, name='newcontract'),
 	url(r'^contracts/all/$', views.allcontracts, name='allcontracts'),
 
+	url(r'^physician/new$', views.addphysician, name='addphysician'),
+	url(r'^physician/all/$', views.allphysicians, name='allphysicians'),
+	url(r'^physician/group/new/$', views.addphysiciangroup, name='addphysiciangroup'),
+	url(r'^physician/(?P<npi>.+)/$', views.viewphysician, name='viewphysician'),
 
 	url(r'^analyze/$', views.analyzecontracts, name='analyzecontracts'),
 	url(r'^analyze/progress/$', views.contractsprogress, name='contractsprogress'),
@@ -59,8 +63,6 @@ urlpatterns = patterns('',
 
 	url(r'^addteam/$', views.addteam, name='addteam'),
 	url(r'^adduser/$', views.adduser, name='adduser'),
-	url(r'^addphysician/$', views.addphysician, name='addphysician'),
-	url(r'^addphysiciangroup/$', views.addphysiciangroup, name='addphysiciangroup'),
 	url(r'^addsite/$', views.addsite, name='addsite'),
 
 

@@ -423,3 +423,20 @@ def addsite(request):
 def settings(request):
 	context = {}
 	return render(request, 'main/settings.html', context)
+
+
+
+@login_required
+def allphysicians(request):
+	physicians = models.Physician.objects.filter(system=request.user.userprofile.system)
+
+	context= {'physicians':physicians}		
+	return render(request, 'main/allphysicians.html', context)
+
+@login_required
+def viewphysician(request,npi):
+	physician = get_object_or_404(models.Physician, system=request.user.userprofile.system, npi=npi)
+
+
+	context= {'physician':physician}		
+	return render(request, 'main/physician.html', context)

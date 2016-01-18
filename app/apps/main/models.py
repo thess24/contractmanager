@@ -428,6 +428,11 @@ class PhysicianForm(ModelForm):
 			'physiciangroup': forms.Select(attrs={'class': 'form-control'}),
 		}
 
+	def __init__(self, *args, **kwargs):
+		super(PhysicianForm, self).__init__(*args, **kwargs)
+		for i in self.fields:
+			self.fields[i].widget.attrs['class'] = 'form-control'
+			
 class PhysicianGroupForm(ModelForm):
 	class Meta:
 		model = PhysicianGroup

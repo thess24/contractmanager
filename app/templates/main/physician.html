@@ -1,0 +1,301 @@
+{% extends 'base.html' %}
+
+
+    {% block head %}
+
+    <style type="text/css">
+
+    .top-m{
+        padding-top:50px;
+    }
+
+    </style>
+
+    {% endblock %}
+
+
+
+    {% block content %}
+ 
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-12">
+                    <h2>Physician View</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="index.html">Advocate Healthcare</a>
+                        </li>
+                        <li>
+                            <a>Physicians</a>
+                        </li>
+                        <li>
+                            <a>Dr. {{physician}}</a>
+                        </li>
+                        
+                    </ol>
+                </div>
+            </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="m-b-md">
+                                        <h2>Dr. {{physician}}
+                                            <small>(NPI:  {{physician.npi}})</small>
+                                            <small class='pull-right'><button class='btn btn-danger btn-xs'>Edit</button></small>
+                                        </h2>
+                                    </div>
+                                    <dl class="dl-horizontal">
+                                        <dt>Status:</dt> <dd><span class="label label-primary">Active</span></dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <dl class="dl-horizontal">
+
+                                        <dt>Name:</dt> <dd>{{physician}}</dd>
+                                        <dt>NPI:</dt> <dd> {{physician.npi}}</dd>
+                                        <dt>Payroll Number:</dt> <dd>{{physician.payroll_num}}</dd>
+                                        <dt>Group:</dt> <dd>{{physician.physiciangroup}}</dd>
+                                        <dt>Sites:</dt> <dd>Christ Medical Center</dd>
+                                        <dt>Specialty:</dt> 
+                                        
+                                        <dd>None</dd>
+                            
+                                         
+                                    </dl>
+                                </div>
+                                <div class="col-lg-6" id="cluster_info">
+                                    <dl class="dl-horizontal">
+
+                                        <dt>Medical Liscence State:</dt> <dd>{{physician.med_liscense_state}}</dd>
+                                        <dt>Liscence Number:</dt> <dd>{{physician.med_liscense_num}}</dd>
+                                        <dt>Medical Degree:</dt> <dd>{{physician.med_degree}}</dd>
+                                        
+                                    </dl>
+                                </div>
+
+                            </div>
+
+                <div class='row top-m'>
+                    <div class='col-md-12'>
+                        <h3>Contracts</h3>
+
+                        <div class="table-responsive">
+                            <table class="table table-hover dataTables-example table-conden" >
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>Name</th>
+                                <th>Area</th>
+                                <th>Date Created</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+
+                            <tr>
+                                <td>
+                                    <a class='btn btn-xs btn-primary' href="{% url 'contract' 1 %}">View</a>
+                                </td>
+                                <td>Dr. Perone - Contract 12351</td>
+                                <td>Medical Directorship</td>
+                                <td>12/11/2014</td>
+                                <td>1/1/2015</td>
+                                <td>1/1/2017</td>
+                                <td><span class="label label-success">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a class='btn btn-xs btn-primary' href="{% url 'contract' 1 %}">View</a>
+                                </td>
+                                <td>Dr. Perone - Contract 12351</td>
+                                <td>Call Pay</td>
+                                <td>12/11/2014</td>
+                                <td>1/1/2015</td>
+                                <td>1/1/2017</td>
+                                <td><span class="label label-success">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a class='btn btn-xs btn-primary' href="{% url 'contract' 1 %}">View</a>
+                                </td>
+                                <td>Dr. Perone - Contract 01234</td>
+                                <td>Medical Directorship</td>
+                                <td>12/15/2012</td>
+                                <td>1/1/2013</td>
+                                <td>1/1/2015</td>
+                                <td><span class="label label-danger">Expired</span></td>
+                            </tr>
+
+
+
+
+
+                            </tbody>
+
+                            </table>
+                        </div>
+
+                    <a href='{% url "newcontract" %}' class='btn btn-primary btn-sm'>Create New Contract</a>
+
+                    </div>
+                </div>
+
+
+                <div class='row top-m'>
+                    <div class='col-md-12'>
+                        <h3>Time Sheets</h3>
+
+                        <div class="table-responsive">
+                            <table class="table  table-hover dataTables-example table-conden" >
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>Area</th>
+                                <th>Time Period</th>
+                                <th>Date Submitted</th>
+                                <th>Date Approved</th>
+                                <th>Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+
+                            <tr>
+                                <td>
+                                    <a class='btn btn-xs btn-primary' href="">View</a>
+                                </td>
+                                <td>Call Pay</td>
+                                <td>December 2015</td>
+                                <td>1/14/16</td>
+                                <td>-</td>
+                                <td><span class="label label-warning">Pending</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <a class='btn btn-xs btn-primary' href="">View</a>
+                                </td>
+                                <td>Medical Directorship</td>
+                                <td>December 2015</td>
+                                <td>1/14/16</td>
+                                <td>1/15/16</td>
+                                <td><span class="label label-success">Approved</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a class='btn btn-xs btn-primary' href="">View</a>
+                                </td>
+                                <td>Call Pay</td>
+                                <td>November 2015</td>
+                                <td>12/9/15</td>
+                                <td>12/10/15</td>
+                                <td><span class="label label-success">Approved</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a class='btn btn-xs btn-primary' href="">View</a>
+                                </td>
+                                <td>Medical Directorship</td>
+                                <td>November 2015</td>
+                                <td>12/9/15</td>
+                                <td>12/11/15</td>
+                                <td><span class="label label-success">Approved</span></td>
+                            </tr>
+
+
+
+                            </tbody>
+
+                            </table>
+                        </div>
+
+
+                        <a class='btn btn-primary btn-sm'>View All Time Sheets</a>
+
+                    </div>
+                </div> <!-- end row -->
+
+
+
+
+                <div class='row top-m'>
+                    <div class='col-md-12'>
+                        <h3>Additional Documents</h3>
+
+                        <div class="table-responsive">
+                            <table class="table  table-hover dataTables-example table-conden" >
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Date Created</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+
+                            <tr>
+                                <td>
+                                    <a class='btn btn-xs btn-primary' href="">View</a>
+                                </td>
+                                <td>Job Description</td>
+                                <td>The most up to date version of the job description created for Dr. Perone</td>
+                                <td>3/12/2015</td>
+                            </tr>
+
+
+                            </tbody>
+
+                            </table>
+                        </div>
+
+
+                        <a class='btn btn-primary btn-sm'>Add New Documents</a>
+
+                    </div>
+                </div> <!-- end row -->
+
+
+
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    {% endblock %}
+
+    {% block scripts %}
+
+    <!-- Page-Level Scripts -->
+<script>
+
+        // $(document).ready(function() {
+        //     $('.dataTables-example').DataTable({
+        //     });
+
+        // });
+
+
+</script>
+
+
+    {% endblock %}
