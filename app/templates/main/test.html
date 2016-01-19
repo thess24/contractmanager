@@ -26,7 +26,7 @@
                             <a href="index.html">Advocate Healthcare</a>
                         </li>
                     </ol>
-                </div>
+                </div> 
             </div>
         <div class="wrapper wrapper-content animated fadeInRight">
 
@@ -168,19 +168,32 @@
     // Rendering Mustache Views
 
 
-      $(document).ready(function(){
+      // $(document).ready(function(){
 
-            $('#renderpreview').click( function(){
+      //       $('#renderpreview').click( function(){
 
+      //           var cname = $('#inputname').val();
+      //           var ctype = $('#inputcontract_type').val();
+      //           var template = $('.note-editable')[0].innerHTML;
+      //           var output = Mustache.render(template, {name:cname, contract_type:ctype});
+      //           $('.outputarea').html(output);
+      //           console.log(cname);
+      //       });
+
+      // });
+
+$(document).ready(function(){
+
+        window.setInterval(function(){
                 var cname = $('#inputname').val();
                 var ctype = $('#inputcontract_type').val();
                 var template = $('.note-editable')[0].innerHTML;
                 var output = Mustache.render(template, {name:cname, contract_type:ctype});
                 $('.outputarea').html(output);
-                console.log(cname);
-            });
 
-      });
+        }, 1000);
+
+});
 
 
     </script>

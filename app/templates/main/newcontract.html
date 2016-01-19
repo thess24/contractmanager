@@ -349,11 +349,13 @@
 
                         <h2> User Defined Fields </h2>
                         <div class='row'>
-                            <div class='col-md-12'>
-                            None Currently
+                            <div class='col-md-12' id='user_defined_field_area'>
                             </div>
+
                         </div>
 
+                        <br>
+                        <button onclick='startit()' class='btn btn-primary btn-sm' type='button'>Create New Inputs</button>
                         <br>
                         <br>
 
@@ -763,19 +765,36 @@ Physician from engaging in the practice of medicine in a clinical, non-executive
         return cleanTags;
     };
 
-    // function createInputs(cleantags) {
 
-    //     $('.useraddedinput').remove();
+
+
+    function createInputs(cleantags) {
+
+        var newtags = [];
+
+        for (var i=0;i < cleantags.length;++i){
+            var tag_id = "id_" + cleantags[i];
+
+                console.log($.inArray(tag_id, inputArray));
+            if ($.inArray(tag_id, inputArray) == -1){
+                console.log('aa');
+                newtags.push(cleantags[i]);
+                inputArray.push(tag_id);
+                console.log(inputArray);
+            }
+        }
+        // $('.useraddedinput').remove();
         
-    //     cleantags.forEach( function(tag){
-    //         var tag_id = 'id_'+tag;
-    //         var label_html = "<h3 class='useraddedinput'>"+ tag +"</h3>";
-    //         var input_html = "<input type='text' class='form-control useraddedinput' id=" + tag_id + ">";
+        console.log(newtags);
+        newtags.forEach( function(tag){
+            var tag_id = 'id_'+tag;
+            var label_html = "<h3 class='useraddedinput'>"+ tag +"</h3>";
+            var input_html = "<input type='text' class='form-control useraddedinput' id=" + tag_id + ">";
 
-    //         var htmlToAdd = label_html + input_html;
-    //         $('#input_area').append(htmlToAdd);
-    //     })
-    // };
+            var htmlToAdd = label_html + input_html;
+            $('#user_defined_field_area').append(htmlToAdd);
+        })
+    };
 
     function startit(){
         // these create inputs based on the tags
@@ -792,7 +811,7 @@ Physician from engaging in the practice of medicine in a clinical, non-executive
 
     function renderTags(tags){
         tags.forEach( function(element){
-            var htmlToAdd = "<span class='label label-info' style='display:inline-block'>"+element+"</span>";
+            var htmlToAdd = "<span class='label label-info' style='display:inline-block; margin-right:5px'>"+element+"</span>";
             $('#current-input-fields').append(htmlToAdd);
         });
     };
@@ -800,6 +819,8 @@ Physician from engaging in the practice of medicine in a clinical, non-executive
 
 
     // function highlightTags() {
+    // If enabled, this will bold everwhere there is a tag
+
     //     var highlightedtags = s.replace(/{\{\s?\w+\s?}\}/g,"<b>$&</b>");
     //     $('.note-editable').html(highlightedtags);
     // };
@@ -823,12 +844,6 @@ Physician from engaging in the practice of medicine in a clinical, non-executive
                 $('#current-input-fields span').remove()
                 addInputFieldTags();
 
-                var cname = $('#inputname').val();
-                var ctype = $('#inputcontract_type').val();
-
-                var template = $('.note-editable')[0].innerHTML;
-                var output = Mustache.render(template, {name:cname, contract_type:ctype});
-                $('.outputarea').html(output);
             });
 
       });
@@ -839,6 +854,49 @@ Physician from engaging in the practice of medicine in a clinical, non-executive
     $('#id_start_date').datepicker()
     $('#id_end_date').datepicker()
     $('#id_renewal_date').datepicker()
+
+
+
+
+
+$(document).ready(function(){
+
+
+
+
+
+
+
+
+    inputArray = [];
+
+     var inputs = document.getElementsByTagName('input');
+    for (var i = 0; i < inputs.length; ++i) {
+      inputArray.push(inputs[i].id)
+    }
+
+     var selects = document.getElementsByTagName('select');
+    for (var i = 0; i < selects.length; ++i) {
+      inputArray.push(selects[i].id)
+    }
+
+
+
+
+        window.setInterval(function(){
+                var cname = $('#id_name').val();
+                var cphys = $('#id_physician option:selected').text();
+                var csite = $('#id_site option:selected').text();
+                var ctype = $('#id_contract_type option:selected').text();
+
+                var template = $('.note-editable')[0].innerHTML;
+                var output = Mustache.render(template, {name:cname, contract_type:ctype, physician:cphys, site:csite});
+                $('.outputarea').html(output);
+
+        }, 1000);
+
+});
+
 
 
     </script>
