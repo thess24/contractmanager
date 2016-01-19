@@ -21,7 +21,7 @@
 
 
     </style>
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/summernote/0.6.16/summernote.min.css">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/summernote/0.6.16/summernote.min.css"> 
 
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/summernote/0.6.16/summernote-bs3.min.css">
 
@@ -280,9 +280,47 @@
                         </div>
 
 
+
+
+
                     </form>
 
 
+ <br>
+                        <br>
+                        <h2> User Defined Fields <i class='fa fa-question question-icon'   data-container="body" data-toggle="popover" data-trigger='click' data-placement="right" data-content="Press the 'Create New Inputs' button when you have added new tags in the template (tags are written with double curly brackets) and a new input will appear" style='font-size: .5em;'></i>
+                            
+                        </h2>
+                        <div class='row'>
+                            <div class='col-md-12' id='user_defined_field_area'>
+                            </div>
+
+                        </div>
+
+                        <br>
+                        <button onclick='startit()' class='btn btn-primary btn-sm' type='button'>Create New Inputs</button>
+                        <br>
+                        <br>
+
+
+
+
+                        <br>
+                        <br>
+                        <br>
+
+                        <div id='included-templates'>
+                            <h3>Added Templates:</h3>
+
+                            <span class="label label-warning" id='tt-tag'>Compensation - Standard</span>
+
+                        </div>
+
+                        <br>
+
+                        <div id='current-input-fields'>
+                            <h3>Current Input Fields:</h3>
+                        </div>
 
                         </div>
                     </div>
@@ -1170,6 +1208,8 @@ duly authorized officer as of the day, month and year first above written. <I></
                 closeOnConfirm: false
             }, function () {
                 swal("Approved!", "You have approved this document.", "success");
+                setTimeout( function(){window.location.href = "/home"}, 2000);
+                ;
             });
         });
 
