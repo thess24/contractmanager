@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+
+    {% block head %}
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.1/skins/all.css">
+    <style type="text/css">
+
+/*    table{
+        table-layout: auto;
+        width: auto;
+    }*/
+
+    .muted-row{
+        background-color: #E6E6E6;
+    }
+
+    </style>
+
+    {% endblock %}
+
+
+
+    {% block content %}
+
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-12">
+                    <h2>View Time Sheets</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="">Advocate Healthcare</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'groups' %}">Time Sheets</a>
+                        </li>
+                        <li>
+                            <a>By Physician</a>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Physician Time Sheet List</h5>
+                        </div>
+                        <div class="ibox-content">
+
+                    {% for p in physicians %}
+                        <h3>{{p}}</h3>
+                    {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    {% endblock %}
+
+    {% block scripts %}
+    <!-- Page-Level Scripts -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.1/icheck.min.js"></script>
+    <script>
+
+       $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+
+
+    </script>
+    {% endblock %}

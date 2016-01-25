@@ -161,6 +161,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'session_security.middleware.SessionSecurityMiddleware',
     
     # 'django.middleware.security.SecurityMiddleware',
     # https://docs.djangoproject.com/en/1.8/_modules/django/middleware/security/
@@ -208,6 +210,7 @@ THIRD_PARTY_APPS = (
     'allauth.socialaccount',
 
     'tastypie',
+    'session_security',
 
 
 )
@@ -272,3 +275,10 @@ ACCOUNT_PASSWORD_MIN_LENGTH = 8
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
+
+
+
+
+
+# Close the session when user closes the browser
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

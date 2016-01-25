@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+
+
+    {% block head %}
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
+
+    <style type="text/css">
+
+/*    table{
+        table-layout: auto;
+        width: auto;
+    }*/
+
+    .muted-row{
+        background-color: #E6E6E6;
+    }
+
+    .form-control{
+        background-color: #F7F7F7!important;
+    }
+
+    </style>
+
+    {% endblock %}
+
+
+
+    {% block content %}
+
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-12">
+                    <h2>Add Time Sheet</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="">Advocate Healthcare</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'timesheets_view' %}">Time Sheets</a>
+                        </li>
+                        <li>
+                            <a>Add</a>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Add Time Sheet</h5>
+                        </div>
+                        <div class="ibox-content">
+
+                        <form method='post'> {% csrf_token %}
+                            {% if form.non_field_errors %}
+                            <div class='alert alert-danger'>{{ form.non_field_errors }}</div>
+                            {% endif %}
+                            <div class='row'>
+                                <div class='col-md-4'>
+                                    {{form.start_time.errors}}
+                                    {{form.start_time.label_tag}}
+                                    <div class="input-group"> 
+                                        <div class="input-group-btn"> 
+                                            <button type="button" class="btn btn-default" aria-label="Bold">
+                                                <i class='glyphicon glyphicon-time'></i>
+                                            </button> 
+                                        </div> 
+                                        {{form.start_time}}
+                                    </div>  
+                                </div>
+                                <div class='col-md-4'>
+                                    {{form.end_time.errors}}
+                                    {{form.end_time.label_tag}}
+                                    <div class="input-group"> 
+                                        <div class="input-group-btn"> 
+                                            <button type="button" class="btn btn-default" aria-label="Bold">
+                                                <i class='glyphicon glyphicon-time'></i>
+                                            </button> 
+                                        </div> 
+                                        {{form.end_time}}
+                                    </div>  
+                                </div>
+                            </div>
+                            <div class='row'>
+                                <div class='col-md-4'>
+                                    {{form.date.errors}}
+                                    {{form.date.label_tag}}
+                                    <div class="input-group"> 
+                                        <div class="input-group-btn"> 
+                                            <button type="button" class="btn btn-default" aria-label="Bold">
+                                                <i class='fa fa-calendar'></i>
+                                            </button> 
+                                        </div> 
+                                        {{form.date}}
+                                    </div>  
+                                </div>
+                                <div class='col-md-4'>
+                                    {{form.mins_worked.errors}}
+                                    <label for="id_mins_worked">Minutes Worked:</label>
+                                    {{form.mins_worked}}
+                                </div>
+                            </div>
+                            <div class='row'>
+                                <div class='col-md-6'>
+                                    {{form.category.errors}}
+                                    {{form.category.label_tag}}
+                                    {{form.category}}
+                                </div>
+                            </div>
+                            <div class='row'>
+                                <div class='col-md-8'>
+                                    {{form.notes.errors}}
+                                    {{form.notes.label_tag}}
+                                    {{form.notes}}
+                                </div>
+                            </div>
+
+                            <br>
+                            <br>
+                            <button class='btn btn-primary' name='addtimesheet'>Add Time Sheet</button>
+                        </form>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    {% endblock %}
+
+    {% block scripts %}
+    <!-- Page-Level Scripts -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.1/moment.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+
+    <script>
+
+    $(function () {
+
+        $('#id_start_time').datetimepicker({
+            stepping: 5,
+            sideBySide: true,
+            format: 'YYYY-MM-DD HH:mm'
+        });
+        $('#id_end_time').datetimepicker({
+            useCurrent: false, //Important! See issue #1075
+            stepping: 5,
+            sideBySide: true,
+            format: 'YYYY-MM-DD HH:mm'
+        });
+        $("#id_start_time").on("dp.change", function (e) {
+            $('#id_end_time').data("DateTimePicker").minDate(e.date);
+        });
+        $("#id_end_time").on("dp.change", function (e) {
+            $('#id_start_time').data("DateTimePicker").maxDate(e.date);
+        });
+
+    });
+
+    $('#id_date').datepicker()
+
+    </script>
+    {% endblock %}

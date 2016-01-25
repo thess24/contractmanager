@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+
+    {% block head %}
+
+    <style type="text/css">
+
+/*    table{
+        table-layout: auto;
+        width: auto;
+    }*/
+
+    </style>
+
+    {% endblock %}
+
+
+
+    {% block content %}
+
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-12">
+                    <h2>View Periods</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="">Advocate Healthcare</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'groups' %}">Time Sheets</a>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">
+
+                            {% for t in timesheets %}
+                            <div class="vote-item">
+                                <div class="row">
+                                    <div class="col-md-10">
+
+                                        <a href="{% url 'timesheets_physician_one_period' t.month|floatformat:-1 t.year|floatformat:-1 %}" class="vote-title">
+                                            {{t.month|floatformat:-1}} / {{t.year|floatformat:-1}}
+                                        </a>
+
+                                        <div class='vote-info'>
+                                        {% for ts in tsperiods %}
+                                            {% if t.month|floatformat:-1 == ts.period|date:'n' and t.year|floatformat:-1 == ts.period|date:'Y' %}
+                                                {% if ts.approved_at %}
+                                                <span class='label label-primary' style='margin-right:3px' data-toggle="tooltip" data-placement="bottom" title="Approved on {{ts.approved_at|date}}">{{ts.category}}</span>
+                                                {% else %}
+                                                <span class='label' style='margin-right:3px' data-toggle="tooltip" data-placement="bottom" title="Submitted on {{ts.created_at|date}}">{{ts.category}}</span>
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 ">
+
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    {% endblock %}
+
+    {% block scripts %}
+    <!-- Page-Level Scripts -->
+    <script>
+
+    $('.label').tooltip();
+
+    </script>
+    {% endblock %}

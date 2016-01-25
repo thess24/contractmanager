@@ -58,8 +58,16 @@ urlpatterns = patterns('',
 	url(r'^alerts/manage$', views.alertmanage, name='alertmanage'),
 
 
-	url(r'^addtemplate/$', views.addtemplate, name='addtemplate'),
-	url(r'^viewtemplates/$', views.viewtemplates, name='viewtemplates'),
+	url(r'^templates/add/$', views.addtemplate, name='addtemplate'),
+	url(r'^templates/view/$', views.viewtemplates, name='viewtemplates'),
+	# url(r'^templates/edit/$', views.edittemplate, name='edittemplate'),
+
+	url(r'^timesheets/view/$', views.timesheets_view, name='timesheets_view'),
+	url(r'^timesheets/physicianview/$', views.timesheets_by_physician, name='timesheets_by_physician'),
+	url(r'^timesheets/physicianadd/$', views.timesheets_physician_add, name='timesheets_physician_add'),
+	url(r'^timesheets/physicianedit/(?P<timesheetid>.+)$', views.timesheets_physician_edit, name='timesheets_physician_edit'),
+	url(r'^timesheets/physicianperiods/$', views.timesheets_physician_view_periods, name='timesheets_physician_view_periods'),
+	url(r'^timesheets/physicianperiod/(?P<month>.+)/(?P<year>.+)$', views.timesheets_physician_one_period, name='timesheets_physician_one_period'),
 
 
 	url(r'^addteam/$', views.addteam, name='addteam'),
@@ -85,10 +93,8 @@ urlpatterns = patterns('',
 	# physgroup
 	# users
 # filter people you can add based on system they are in
-# make forms look good
 # ability for admin to reset user password
 # finish addtemplate html file- modal popup from ajax, copy data on load, render on pageup
-# fix footer
 # alerts should show warning color based on level of alert
 # make admin display better
 # make addon template on form submit work (currently just adds to base template)
@@ -96,25 +102,28 @@ urlpatterns = patterns('',
 
 
 # new contract page
-	# - forms display properly
-	# - added template tags actually display
-	# - current input field tags actually display
+	# - typing in data in all fields renders with tags (as opposed to select few)
+	# - all templates dynamically load
+	# - template tags render from templates (with templatetag in django)
+	# - save button works
 # edit contract page
 	# - send to group/user makes popup and submits form
 	# - actual templates load on right
-	# - edit contract area - one tab for html, one tab from html_output
-	# - inputs all loaded at top of page
+# view contract page
+	# - upload works
+	# - download / publish to pdf works
+	# - only can edit contract if you have it checked out
 # manage workflows page
 	# - groups actually loaded on right
 	# - ability to upload unknown number of inputs and create workflow object
 	# - Dragging box adds data to input
+# alerts
 
 
 ### BIG
 # figure out how to save in db (EAV, jsonb, etc)
 # messaging that form has submitted
 # get alert system and contract log up and running
-# page for a physician to show all contracts
 # Work on contract flow and adding/passing contracts along pipeline
 	# 1. get contract submit and passing to work w/o js stuff
 	# 2. all js on contract create page done
@@ -164,3 +173,10 @@ urlpatterns = patterns('',
 # RewriteRule / https://%{SERVER_NAME}%{REQUEST_URI} [L,R=301]
 
 # Header always set Strict-Transport-Security "max-age=3000; includeSubDomains"
+
+
+
+
+
+
+########## ISSUES

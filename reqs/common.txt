@@ -4,3 +4,4 @@ dj-static==0.0.6
 django-tastypie==0.12.2
 psycopg2==2.6.1
 Pillow==2.6.1
+django-session-security==2.3.1

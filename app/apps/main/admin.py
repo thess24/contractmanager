@@ -2,8 +2,8 @@ from django.contrib import admin
 from apps.main.models import *
 
 
-# class TalkAdmin(admin.ModelAdmin):
-#     list_display = ('user', 'expert', 'time', 'accepted','cancelled','requested','call_length')
+class PhysicianTimeLogAdmin(admin.ModelAdmin):
+    list_display = ('physician', 'date', 'mins_worked', 'category','created_at', 'active')
 
 
 admin.site.register(HealthSystem)
@@ -20,7 +20,8 @@ admin.site.register(ContractType)
 admin.site.register(ContractInfo)
 admin.site.register(ContractApproval)
 admin.site.register(Alert)
-admin.site.register(PhysicianTimeLog)
+admin.site.register(PhysicianTimeLog, PhysicianTimeLogAdmin)
+admin.site.register(PhysicianTimeLogPeriod)
 admin.site.register(ContactRequest)
 
 

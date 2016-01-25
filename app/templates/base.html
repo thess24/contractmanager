@@ -101,13 +101,13 @@
                         <li><a href="{% url 'viewtemplates' %}">View All Templates</a></li>
                     </ul>
                 </li>
-<!--                 <li>
+                <li>
                     <a href="#"><i class="fa fa-code-fork"></i> <span class="nav-label">Workflows</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li><a href="{% url 'workflows' %}">Manage Current Workflows</a></li>
                         <li><a href="{% url 'addworkflow' %}">Add New Workflows</a></li>
                     </ul>
-                </li> -->
+                </li>
                 <li>
                     <a href="#"><i class="fa fa-bell"></i> <span class="nav-label">Alerts</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
@@ -122,6 +122,15 @@
                         <li><a href="{% url 'allphysicians' %}">View All Physicians</a></li>
                         <li><a href="{% url 'addphysician' %}">Add Physician</a></li>
                         <li><a href="{% url 'addphysiciangroup' %}">Add Physician Group</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-file-o"></i> <span class="nav-label">Time Sheets</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="{% url 'timesheets_view' %}">View Time Sheets</a></li>
+                        <li><a href="{% url 'timesheets_by_physician' %}">View By Physician</a></li>
+                        <li><a href="{% url 'timesheets_physician_add' %}">Add Time Sheet</a></li>
+                        <li><a href="{% url 'timesheets_physician_view_periods' %}">View Periods</a></li>
                     </ul>
                 </li>
 
@@ -185,6 +194,7 @@
 
     <!-- Mainly scripts -->
     <script src="//code.jquery.com/jquery-2.1.2.min.js"></script>
+    {% include 'session_security/all.html' %}
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 

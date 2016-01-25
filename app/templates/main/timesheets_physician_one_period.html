@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+
+    {% block head %}
+
+    <style type="text/css">
+    #submitted-area{
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    </style>
+
+    {% endblock %}
+
+
+
+    {% block content %}
+
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-12">
+                    <h2>{{period|date:'F Y'}}</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="">Advocate Healthcare</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'timesheets_physician_view_periods' %}">Time Sheet Periods</a>
+                        </li>
+                        <li>
+                            <a>Period</a>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">
+                        {% if tsperiod %}
+                        <div class='alert alert-danger'> This time period has been submitted and can not be edited</div>
+                        {% endif %}
+
+                        <h3>Total Times:</h3>
+                        {% for ts in timesheet_agg %}
+                        <div>{{ts.category}}: {{ts.time_sum}} mins from {{ts.sheet_count}} timesheets</div>                        
+                        {% endfor %}
+                        <br>
+                        <h3>Submitted:</h3>
+                        <div id='submitted-area'>
+                            {% for tsp in tsperiod %}
+                                {% if tsp.approved_at %}
+                                <span class='label label-primary' style='margin-right:3px' data-toggle="tooltip" data-placement="bottom" title="Approved on {{tsp.approved_at|date}}">{{tsp.category}}</span>
+                                {% else %}
+                                <span class='label' style='margin-right:3px' data-toggle="tooltip" data-placement="bottom" title="Submitted on {{tsp.created_at|date}}">{{tsp.category}}</span>
+                                {% endif %}
+                            {% empty %}
+                                <span>None</span>
+                            {% endfor %}
+                        </div>
+
+                        <form method='post'>
+                            {% csrf_token %}
+                                    <div class="table-responsive">
+                                <table class="table table-bordered table-hover table-conden" >
+                                <thead>
+                                    <tr>
+                                        <th>Area</th>
+                                        <th>Date</th>
+                                        <th>Minutes Submitted</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for t in timesheets %}
+                                    <tr>
+                                        <td>{{t.category}}</td>
+                                        <td>{{t.date|date:'l,  F jS'}}</td>
+                                        <td>{{t.mins_worked}}</td>
+                                        <td>
+                                            <button class='btn btn-xs btn-primary'>View</button>
+                                            {% if not tsperiod %}
+                                            <a href="{% url 'timesheets_physician_edit' t.id %}" class='btn btn-xs'>Edit</a>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+
+                                </table>
+                                    </div>
+
+                            {% if tsperiod %}
+                            <button class='btn btn-primary' name='submittimesheet' type='button' disabled="disabled">Submit Time Sheet</button>
+                            {% else %}
+                            <button class='btn btn-primary' name='submittimesheet'>Submit Time Sheet</button>
+                            {% endif %}
+                        </form>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    {% endblock %}
+
+    {% block scripts %}
+    <!-- Page-Level Scripts -->
+    <script>
+
+    $('.label').tooltip();
+
+    </script>
+    {% endblock %}

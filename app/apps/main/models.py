@@ -7,7 +7,7 @@ from django.core.exceptions import ValidationError
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.conf import settings
 from django.contrib.auth.forms import UserCreationForm
-
+import datetime
 
  
 class HealthSystem(models.Model):
@@ -19,6 +19,10 @@ class HealthSystem(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True)
 	logo = models.ImageField(upload_to='logos', blank=True, null=True)
 	shorthand = models.CharField(max_length=6)
+
+	# add settings for the system here
+	# master_user = 
+
 
 	def __unicode__(self):
 		return self.name
@@ -81,18 +85,6 @@ class Physician(models.Model):
 	def __unicode__(self):
 		return '{} {}'.format(self.user.first_name, self.user.last_name)
 
-class PhysicianTimeLog(models.Model):
-	physician = models.ForeignKey(Physician)
-	date = models.DateTimeField(blank=True, null=True)
-	start_time = models.DateTimeField(blank=True, null=True)
-	end_time = models.DateTimeField(blank=True, null=True)
-	mins_worked = models.IntegerField(blank=True, null=True)
-	category = models.CharField(max_length=100)
-	notes = models.TextField(blank=True, null=True)
-	created_at = models.DateTimeField(auto_now_add=True)
-
-	def __unicode__(self):
-		return '{} - {} - {}'.format(self.physician, self.category, self.date)
 
 class Template(models.Model):
 	''' a template for creating contracts '''
@@ -256,6 +248,69 @@ class Alert(models.Model):
 		return self.name
 
 
+class PhysicianTimeLogCategory(models.Model):
+	physician = models.ForeignKey(Physician)
+	category = models.ForeignKey(ContractType)
+	workflow_default = models.ForeignKey(Workflow)
+
+	def __unicode__(self):
+		return '{} - {}'.format(self.category, self.physician)
+
+
+class PhysicianTimeLog(models.Model):
+	'''the individual time submitted by a physician for a days work in each category'''
+	physician = models.ForeignKey(Physician)
+	date = models.DateTimeField(blank=True, null=True)  # change to datefield
+	start_time = models.DateTimeField(blank=True, null=True)
+	end_time = models.DateTimeField(blank=True, null=True)
+	mins_worked = models.IntegerField(blank=True, null=True)
+	category = models.CharField(max_length=100) # change to fk for contracttype
+	notes = models.TextField(blank=True, null=True)
+	created_at = models.DateTimeField(auto_now_add=True)
+	active = models.BooleanField(default=True)
+
+	def __unicode__(self):
+		return '{} - {} - {}'.format(self.physician, self.category, self.date)
+
+
+class PhysicianTimeLogPeriod(models.Model):
+	'''
+	This is the snapshot of a period that will tell if a time period has been approved.
+
+	approved_at: 	the time it was fully approved at
+	active: 		whether the timelogperiod is the active record.  This should be false only if this timelogperiod was denied
+	current_user: 	the user who has to currently approve the record
+	approval_num:	the number of approvals so far -- in order to track position in workflowitems for passing purposes
+	'''
+	physician = models.ForeignKey(Physician)
+	category = models.ForeignKey(ContractType) # change to fk for phystimelogcategory
+	period = models.DateField()
+	mins_worked = models.IntegerField()
+	created_at = models.DateTimeField(auto_now_add=True)
+	approved_at = models.DateTimeField(blank=True,null=True)
+	approved_by = models.ForeignKey(User, blank=True, null=True, related_name='approver')
+	active = models.BooleanField(default=True)
+	edited_at = models.DateTimeField(blank=True,null=True) # do i need this for anything?
+	current_user = models.ForeignKey(User, blank=True, null=True, related_name='current')
+	workflow = models.ForeignKey(Workflow, blank=True, null=True)
+	approval_num = models.IntegerField(default=0)
+
+	def __unicode__(self):
+		return '{} - {} - {}'.format(self.physician, self.category, self.period)
+
+
+class PhysicianTimeLogApproval(models.Model):
+	''''''
+	user = models.ForeignKey(User)
+	physiciantimelogperiod = models.ForeignKey(PhysicianTimeLogPeriod)
+	created_at = models.DateTimeField(auto_now_add=True)
+	approved = models.BooleanField(default=True)  # true=approved, false=denied
+	note = models.TextField(blank=True,null=True)
+
+	def __unicode__(self):
+		return '{} - {} - {}'.format(self.physiciantimelogperiod, self.created_at, self.approved)
+
+
 # class Action(models.Model):
 # 	''' log of all actions taken
 
@@ -279,10 +334,12 @@ class Alert(models.Model):
 
 
 #### Permissions
-# can add a site / physician
+# can add a site / physician / physiciangroup
 # can add users
 # can do analysis (see all data)
-# only can edit contracts
+# only can edit contracts / can't create
+# 
+
 
 
 
@@ -306,6 +363,13 @@ class ContactRequest(models.Model):
 
 	def __unicode__(self):
 		return self.email
+
+
+
+
+
+
+
 
 ##################################
 ##########    FORMS   ############
@@ -381,7 +445,6 @@ class TeamForm(ModelForm):
 
 		# need to filter system 
 		# need to enforce that name doesnt match another name
-		# need to make look better, while still loading dropdowns (crispy?)
 
 
 class NamesForm(forms.Form):
@@ -452,3 +515,43 @@ class ContactUsForm(ModelForm):
 		for i in self.fields:
 			self.fields[i].widget.attrs['class'] = 'form-control'
 
+
+class PhysicianTimeLogForm(ModelForm):
+	class Meta:
+		model = PhysicianTimeLog
+		exclude = ('physician',)
+
+	def clean(self):
+		''' Make sure:
+			xx 1. end time later than start time
+			xx 2. mins worked is filled in and correct
+			xx 3. date is filled in
+		'''
+		cleaned_data = super(PhysicianTimeLogForm, self).clean()
+
+
+		start_time = cleaned_data.get('start_time',False)
+		end_time = cleaned_data.get('end_time',False)
+
+		if start_time and end_time:
+
+			# check that start_time is before end time
+			if end_time < start_time:
+				raise ValidationError("The start time cannot be before the end time")
+
+			# fill in date from start_time
+			date_to_add = datetime.datetime(start_time.year,start_time.month,start_time.day)
+			cleaned_data['date'] = date_to_add
+
+			# set mins_worked based on times
+			time_delta = end_time - start_time
+			time_delta_mins = int(time_delta.total_seconds()/60)
+			cleaned_data['mins_worked'] = time_delta_mins
+
+
+		return cleaned_data
+
+	def __init__(self, *args, **kwargs):
+		super(PhysicianTimeLogForm, self).__init__(*args, **kwargs)
+		for i in self.fields:
+			self.fields[i].widget.attrs['class'] = 'form-control'
