@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+
+    {% block head %}
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.1/skins/all.css">
+    <style type="text/css">
+
+/*    table{
+        table-layout: auto;
+        width: auto;
+    }*/
+
+    .muted-row{
+        background-color: #E6E6E6;
+    }
+
+    </style>
+
+    {% endblock %}
+
+
+
+    {% block content %}
+
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-12">
+                    <h2>Approve Time Sheets</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="">Advocate Healthcare</a>
+                        </li>
+                        <li>
+                            <a>Time Sheets</a>
+                        </li>
+                        <li>
+                            <a>Approve</a>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Pending Time Sheets</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+
+                        <form method='post'>
+                            {% csrf_token %}
+                                    <div class="table-responsive">
+                                <table class="table table-bordered table-hover table-conden" >
+                                <thead>
+                                    <tr>
+                                        <th>Physician</th>
+                                        <th>Area</th>
+                                        <th>Time Period</th>
+                                        <th>Contracted Time</th>
+                                        <th>Time Sheet Time</th>
+                                        <th>Date Submitted</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for t in timesheets %}
+                                    <tr>
+                                        <td><a href="{% url 'viewphysician' t.physician.npi %}">{{t.physician.user.first_name}} {{t.physician.user.last_name}}</a></td>
+                                        <td>{{t.category}}</td>
+                                        <td>{{t.period}}</td>
+                                        <td></td>
+                                        <td>{{t.mins_worked}}</td>
+                                        <td>{{t.created_at}}</td>
+                                        <td>
+                                            <button class='btn btn-xs'>View</button>
+                                            <form method='post' style='display: inline'>
+                                                <input type='hidden' value='{{t.id}}' name='timesheetperiod_id'>
+                                                <button class='btn btn-xs btn-primary' name='approvetimesheet'>Approve</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+
+                                </table>
+                                    </div>
+
+                        </form>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    {% endblock %}
+
+    {% block scripts %}
+    <!-- Page-Level Scripts -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.1/icheck.min.js"></script>
+    <script>
+
+       $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+
+
+    </script>
+    {% endblock %}

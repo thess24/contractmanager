@@ -3,6 +3,9 @@ from django.conf.urls import patterns, include, url
 from apps.main.api import PhysicianResource, PhysicianTimeLogResource, UserResource
 from tastypie.api import Api
 from django.views.generic import TemplateView
+from axes.decorators import watch_login
+from allauth.account.views import login 
+
 
 admin.autodiscover()
 
@@ -15,6 +18,7 @@ v1_api.register(UserResource())
 urlpatterns = patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^accounts/login/$', watch_login(login)),
     (r'^accounts/', include('allauth.urls')),
     url(r'session_security/', include('session_security.urls')),
     (r'^sitemap.xml$',TemplateView.as_view(template_name='sitemap.xml', content_type='text/xml')),

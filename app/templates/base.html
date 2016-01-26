@@ -127,6 +127,7 @@
                 <li>
                     <a href="#"><i class="fa fa-file-o"></i> <span class="nav-label">Time Sheets</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
+                        <li><a href="{% url 'timesheets_approve_view' %}">Approve Periods</a></li>
                         <li><a href="{% url 'timesheets_view' %}">View Time Sheets</a></li>
                         <li><a href="{% url 'timesheets_by_physician' %}">View By Physician</a></li>
                         <li><a href="{% url 'timesheets_physician_add' %}">Add Time Sheet</a></li>

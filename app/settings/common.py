@@ -163,6 +163,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     'session_security.middleware.SessionSecurityMiddleware',
+    'axes.middleware.FailedLoginMiddleware'
     
     # 'django.middleware.security.SecurityMiddleware',
     # https://docs.djangoproject.com/en/1.8/_modules/django/middleware/security/
@@ -211,7 +212,7 @@ THIRD_PARTY_APPS = (
 
     'tastypie',
     'session_security',
-
+    'axes',
 
 )
 
@@ -262,23 +263,38 @@ WSGI_APPLICATION = 'wsgi.application'
 ########## END WSGI CONFIGURATION
 
 
-# ########## ALL AUTH
+
+############ ALL AUTH
 
 LOGIN_REDIRECT_URL = "/home"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_PASSWORD_MIN_LENGTH = 8
 
+############ END ALL AUTH
 
 
-######### HEROKU SETTINGS
+
+############ SECURITY SETTINGS
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-
-
-
-
-
 # Close the session when user closes the browser
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+############ END SECURITY SETTINGS
+
+
+
+
+############ AXES SETTINGS
+# https://github.com/django-pci/django-axes#customizing-axes
+
+# cooloff time in hours - can also be python timedelta
+AXES_COOLOFF_TIME = 1 
+AXES_LOCK_OUT_BY_COMBINATION_USER_AND_IP = True
+AXES_USERNAME_FORM_FIELD = 'login'
+AXES_LOGIN_FAILURE_LIMIT = 12
+AXES_LOCKOUT_TEMPLATE = 'account/login_locked_out.html'
+
+############ END AXES SETTINGS

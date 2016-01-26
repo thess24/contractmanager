@@ -110,7 +110,9 @@ class Workflow(models.Model):
 
 
 class WorkflowItem(models.Model):
-	''' done I think'''
+	'''An individual chain in the workflow
+	postion:	index of workflowitem - starts at 0
+	'''
 	workflow = models.ForeignKey(Workflow)
 	user = models.ForeignKey(User, blank=True, null=True)
 	team = models.ForeignKey(Team, blank=True, null=True)
@@ -240,8 +242,8 @@ class Alert(models.Model):
 	user = models.ForeignKey(User)
 	contract = models.ForeignKey(Contract)
 	name = models.CharField(max_length=255)
-	created_at = models.DateTimeField(auto_now_add=True)
 	active = models.BooleanField(default=True)
+	created_at = models.DateTimeField(auto_now_add=True)
 	level = models.IntegerField(default=2) # higher is more serious
 
 	def __unicode__(self):
@@ -252,6 +254,7 @@ class PhysicianTimeLogCategory(models.Model):
 	physician = models.ForeignKey(Physician)
 	category = models.ForeignKey(ContractType)
 	workflow_default = models.ForeignKey(Workflow)
+	# created_at = models.DateTimeField(auto_now_add=True)
 
 	def __unicode__(self):
 		return '{} - {}'.format(self.category, self.physician)
@@ -281,6 +284,7 @@ class PhysicianTimeLogPeriod(models.Model):
 	active: 		whether the timelogperiod is the active record.  This should be false only if this timelogperiod was denied
 	current_user: 	the user who has to currently approve the record
 	approval_num:	the number of approvals so far -- in order to track position in workflowitems for passing purposes
+					zero based indexing, so when the first person 'has' the object, this should be 0
 	'''
 	physician = models.ForeignKey(Physician)
 	category = models.ForeignKey(ContractType) # change to fk for phystimelogcategory
@@ -288,7 +292,9 @@ class PhysicianTimeLogPeriod(models.Model):
 	mins_worked = models.IntegerField()
 	created_at = models.DateTimeField(auto_now_add=True)
 	approved_at = models.DateTimeField(blank=True,null=True)
-	approved_by = models.ForeignKey(User, blank=True, null=True, related_name='approver')
+	approved_by = models.ForeignKey(User, blank=True, null=True, related_name='approver')  
+	# rename to final approver? do i need at all or can i just get the last person who approved?
+
 	active = models.BooleanField(default=True)
 	edited_at = models.DateTimeField(blank=True,null=True) # do i need this for anything?
 	current_user = models.ForeignKey(User, blank=True, null=True, related_name='current')

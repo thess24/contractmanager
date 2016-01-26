@@ -460,6 +460,44 @@ def timesheets_view(request):
 	return render(request, 'main/timesheets_view.html', context)
 
 @login_required
+def timesheets_approve_view(request):
+	timesheets = models.PhysicianTimeLogPeriod.objects.filter(current_user=request.user, active=True, approved_at__isnull=True)
+
+	if request.method=='POST':
+		if 'approvetimesheet' in request.POST:
+
+			timesheetperiod_id = request.POST.get('timesheetperiod_id')
+			ts = timesheets.get(id=timesheetperiod_id)
+			ts.approval_num += 1
+
+			wf_id = ts.workflow.id
+			wf_items = models.WorkflowItem.objects.filter(workflow__id=wf_id)
+
+			# should move the .count to the database level to speed things up
+			if wf_items.count() == ts.approval_num: 
+				# if this item has been approved the same number of times as the number of steps in the workflow,
+				# then this is the final step of approval
+				ts.approved_by = request.user
+				ts.approved_at = datetime.datetime.now()
+				ts.save()
+
+			else:
+				next_user = wf_items.get(position=ts.approval_num).user
+				ts.current_user = next_user
+				ts.save()
+
+
+			ptla = models.PhysicianTimeLogApproval(user=request.user, physiciantimelogperiod=ts)
+			ptla.save()
+
+
+			return HttpResponseRedirect(reverse('timesheets_approve_view'))
+
+
+	context= {'timesheets':timesheets}		
+	return render(request, 'main/timesheets_approve_view.html', context)
+
+@login_required
 def timesheets_by_physician(request):
 	timesheets = models.PhysicianTimeLog.objects\
 		.extra(select={'year': "EXTRACT(year FROM date)", 'month': "EXTRACT(month from date)"})\

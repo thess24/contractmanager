@@ -5,3 +5,6 @@ django-tastypie==0.12.2
 psycopg2==2.6.1
 Pillow==2.6.1
 django-session-security==2.3.1
+django-axes==1.6.0
+
+

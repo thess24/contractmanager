@@ -63,6 +63,7 @@ urlpatterns = patterns('',
 	# url(r'^templates/edit/$', views.edittemplate, name='edittemplate'),
 
 	url(r'^timesheets/view/$', views.timesheets_view, name='timesheets_view'),
+	url(r'^timesheets/approve/$', views.timesheets_approve_view, name='timesheets_approve_view'),
 	url(r'^timesheets/physicianview/$', views.timesheets_by_physician, name='timesheets_by_physician'),
 	url(r'^timesheets/physicianadd/$', views.timesheets_physician_add, name='timesheets_physician_add'),
 	url(r'^timesheets/physicianedit/(?P<timesheetid>.+)$', views.timesheets_physician_edit, name='timesheets_physician_edit'),
@@ -98,7 +99,8 @@ urlpatterns = patterns('',
 # alerts should show warning color based on level of alert
 # make admin display better
 # make addon template on form submit work (currently just adds to base template)
-
+# test login attempts security - make sure all usernames arent banned and check timeframe attempts last for
+# version numbers for reqs/prod.txt
 
 
 # new contract page

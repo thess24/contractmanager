@@ -1,0 +1,22 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load account %}
+{% load url from future %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+
+<div class="middle-box text-center loginscreen animated fadeInDown">
+  <img src="{{ STATIC_URL }}img/logo.png" style='margin-left: -50px;padding: 50px 0px;'>
+
+  <h2>You have exceeded the maximum number of login attempts - try to log in again in 1 hour.</h2>
+
+</div>
+{% endblock %}
+
+
+
+
+    
