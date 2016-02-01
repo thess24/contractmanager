@@ -2,14 +2,20 @@ from django.contrib import admin
 from apps.main.models import *
 
 
+class PhysicianTimeLogApprovalAdmin(admin.ModelAdmin):
+    list_display = ('user', 'physiciantimelogperiod', 'approved', 'created_at') 
+
 class PhysicianTimeLogAdmin(admin.ModelAdmin):
-    list_display = ('physician', 'date', 'mins_worked', 'category','created_at', 'active')
+    list_display = ('timelog_category', 'date', 'mins_worked','created_at', 'active') 
 
 class PhysicianTimeLogPeriodAdmin(admin.ModelAdmin):
-    list_display = ('physician', 'category', 'period', 'mins_worked','active', 'current_user')
+    list_display = ('timelog_category', 'period', 'mins_worked','active', 'current_user')
 
 class WorkflowItemAdmin(admin.ModelAdmin):
     list_display = ('workflow', 'user', 'position', 'team')
+
+class PhysicianTimeLogCategoryAdmin(admin.ModelAdmin):
+    list_display = ('physician', 'category', 'hours_needed')
 
 
 admin.site.register(HealthSystem)
@@ -32,7 +38,8 @@ admin.site.register(Template)
 
 admin.site.register(PhysicianTimeLog, PhysicianTimeLogAdmin)
 admin.site.register(PhysicianTimeLogPeriod, PhysicianTimeLogPeriodAdmin)
-admin.site.register(PhysicianTimeLogApproval)
+admin.site.register(PhysicianTimeLogApproval, PhysicianTimeLogApprovalAdmin)
+admin.site.register(PhysicianTimeLogCategory, PhysicianTimeLogCategoryAdmin)
 
 admin.site.register(ContactRequest)
 

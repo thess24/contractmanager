@@ -428,6 +428,24 @@ def addsite(request):
 	return render(request, 'main/addsite.html', context)
 
 @login_required
+def addcontracttype(request):
+	contract_types = models.ContractType.objects.filter(system = request.user.userprofile.system)
+	form = models.ContractTypeForm()
+
+	if request.method=='POST':
+		if 'addcontracttype' in request.POST:
+			form = models.ContractTypeForm(request.POST)
+			if form.is_valid():
+				instance = form.save(commit=False)
+				instance.system = request.user.userprofile.system
+				instance.save()
+
+				return HttpResponseRedirect(reverse('addcontracttype'))
+
+	context = {'form':form, 'contract_types':contract_types}
+	return render(request, 'main/addcontracttype.html', context)
+
+@login_required
 def settings(request):
 	context = {}
 	return render(request, 'main/settings.html', context)
@@ -448,11 +466,23 @@ def viewphysician(request,npi):
 	context= {'physician':physician}		
 	return render(request, 'main/physician.html', context)
 
+
+
+
+
+# TIMESHEETS
+
+@login_required
+def timesheets(request):
+
+	context= {}		
+	return render(request, 'main/timesheets.html', context)
+
 @login_required
 def timesheets_view(request):
 	timesheets = models.PhysicianTimeLog.objects\
 		.extra(select={'year': "EXTRACT(year FROM date)", 'month': "EXTRACT(month from date)"})\
-		.values('category','month','year','physician__user__first_name','physician__user__last_name','physician__npi', 'created_at')\
+		.values('timelog_category__category','month','year','timelog_category__physician__user__first_name','timelog_category__physician__user__last_name','timelog_category__physician__npi', 'created_at', 'timelog_category__hours_needed')\
 		.annotate(time_sum=Sum('mins_worked'))
 
 
@@ -470,8 +500,9 @@ def timesheets_approve_view(request):
 			ts = timesheets.get(id=timesheetperiod_id)
 			ts.approval_num += 1
 
-			wf_id = ts.workflow.id
-			wf_items = models.WorkflowItem.objects.filter(workflow__id=wf_id)
+			import ipdb;ipdb.set_trace()
+			wf = ts.workflow
+			wf_items = models.WorkflowItem.objects.filter(workflow=wf)
 
 			# should move the .count to the database level to speed things up
 			if wf_items.count() == ts.approval_num: 
@@ -499,22 +530,59 @@ def timesheets_approve_view(request):
 
 @login_required
 def timesheets_by_physician(request):
-	timesheets = models.PhysicianTimeLog.objects\
-		.extra(select={'year': "EXTRACT(year FROM date)", 'month': "EXTRACT(month from date)"})\
-		.values('category','month','year','physician__user__first_name','physician__user__last_name','physician__npi', 'created_at')\
-		.annotate(time_sum=Sum('mins_worked'))
+	tlcategories = models.PhysicianTimeLogCategory.objects.filter(approving_users=request.user)
+	physicians = tlcategories.values('physician').distinct()
+	physician_ids = [i.values()[0] for i in physicians]
+	periods = models.PhysicianTimeLogPeriod.objects.filter(timelog_category__physician__id__in=physician_ids)
 
-	physicians = models.Physician.objects.all()
-
-
-	context= {'timesheets':timesheets, 'physicians':physicians}		
+	context= {'tlcategories':tlcategories, 'physicians':physicians, 'periods':periods}		
 	return render(request, 'main/timesheets_by_physician.html', context)
+
+
+@login_required
+def timesheets_add_physician_category(request):
+	form = models.PhysicianTimeLogCategoryForm()
+
+	if request.method=='POST':
+		if 'addcategory' in request.POST:
+			form = models.PhysicianTimeLogCategoryForm(request.POST)
+			if form.is_valid():
+				instance = form.save(commit=False)
+				instance.save()
+
+				return HttpResponseRedirect(reverse('timesheets_view'))
+
+	context= {'form':form}		
+	return render(request, 'main/timesheets_add_physician_category.html', context)
+
+@login_required
+def timesheets_physician_approvals(request):
+	approvals = models.PhysicianTimeLogApproval.objects.filter(physiciantimelogperiod__timelog_category__physician__user=request.user)
+
+	context= {'approvals':approvals}		
+	return render(request, 'main/timesheets_physician_approvals.html', context)
+
+@login_required
+def timesheets_physician_denials(request):
+	denials = models.PhysicianTimeLogApproval.objects.filter(physiciantimelogperiod__timelog_category__physician__user=request.user, approved=False, active=True)
+
+	context= {'denials':denials}		
+	return render(request, 'main/timesheets_physician_denials.html', context)
+
+@login_required
+def timesheets_history(request):
+	approvals = models.PhysicianTimeLogApproval.objects.filter(user=request.user)
+
+	context= {'approvals':approvals}		
+	return render(request, 'main/timesheets_history.html', context)
 
 @login_required
 def timesheets_physician_add(request):
 	physician = get_object_or_404(models.Physician, user=request.user)
 	form = models.PhysicianTimeLogForm()
-	tsperiods = models.PhysicianTimeLogPeriod.objects.filter(physician=physician, active=True)
+	form.fields["timelog_category"].queryset = models.PhysicianTimeLogCategory.objects.filter(physician=physician)
+
+	tsperiods = models.PhysicianTimeLogPeriod.objects.filter(timelog_category__physician=physician, active=True)
 
 	if request.method=='POST':
 		if 'addtimesheet' in request.POST:
@@ -543,14 +611,22 @@ def timesheets_physician_add(request):
 @login_required
 def timesheets_physician_edit(request,timesheetid):
 	physician = get_object_or_404(models.Physician, user=request.user)
-	timesheet_to_edit = get_object_or_404(models.PhysicianTimeLog, id=timesheetid, physician=physician, active=True)
-	# import ipdb;ipdb.set_trace()
+	timesheet_to_edit = get_object_or_404(models.PhysicianTimeLog, id=timesheetid, timelog_category__physician=physician, active=True)
 	ts_date = datetime.date(timesheet_to_edit.date.year,timesheet_to_edit.date.month,1)
-	tsperiod = models.PhysicianTimeLogPeriod.objects.filter(physician=physician,period=ts_date)
+	tsperiod = models.PhysicianTimeLogPeriod.objects.filter(timelog_category__physician=physician,period=ts_date)
+
+	# import ipdb;ipdb.set_trace()
+	denial = models.PhysicianTimeLogApproval.objects.get(physiciantimelogperiod__timelog_category__physician__user=request.user, approved=False, active=True, physiciantimelogperiod__period=ts_date)
+	
+	if denial:
+		tsperiod = []
 
 	form = models.PhysicianTimeLogForm(instance=timesheet_to_edit)
 
 	if request.method=='POST':
+
+		# DONT ALLOW SUBMITS IF tsperiods exist
+
 		if 'edittimesheet' in request.POST:
 			form = models.PhysicianTimeLogForm(request.POST, instance=timesheet_to_edit)
 			if form.is_valid():
@@ -565,7 +641,6 @@ def timesheets_physician_edit(request,timesheetid):
 					timesheet_to_edit.save()
 
 					# need to created new phystimelog model here with same attributes as form
-
 
 					
 				elif tsperiod.filter(active=True):
@@ -600,16 +675,16 @@ def timesheets_physician_edit(request,timesheetid):
 			return HttpResponseRedirect(reverse('timesheets_view'))
 
 
-	context= {'form':form, 'physician':physician}		
+	context= {'form':form, 'physician':physician, 'tsperiod':tsperiod, 'denial':denial}		
 	return render(request, 'main/timesheets_physician_edit.html', context)
 
 @login_required
 def timesheets_physician_view_periods(request):
 	physician = get_object_or_404(models.Physician, user=request.user)
-	tsperiods = models.PhysicianTimeLogPeriod.objects.filter(physician=physician, active=True)
+	tsperiods = models.PhysicianTimeLogPeriod.objects.filter(timelog_category__physician=physician, active=True)
 
 	timesheets = models.PhysicianTimeLog.objects\
-		.filter(physician=physician)\
+		.filter(timelog_category__physician=physician)\
 		.extra(select={'year': "EXTRACT(year FROM date)", 'month': "EXTRACT(month from date)"})\
 		.values('month','year')\
 		.annotate(time_sum=Sum('mins_worked'))
@@ -626,12 +701,21 @@ def timesheets_physician_one_period(request, month, year):
 		raise Http404
 
 	physician = get_object_or_404(models.Physician, user=request.user)
-	tsperiod = models.PhysicianTimeLogPeriod.objects.filter(period=period, physician=physician, active=True)
-	timesheets = models.PhysicianTimeLog.objects.filter(physician=physician, date__year=period.year, date__month=period.month, active=True)
+	tsperiod = models.PhysicianTimeLogPeriod.objects.filter(period=period, timelog_category__physician=physician, active=True)
+	timesheets = models.PhysicianTimeLog.objects.filter(timelog_category__physician=physician, date__year=period.year, date__month=period.month, active=True)
+	
+	try:
+		denial = models.PhysicianTimeLogApproval.objects.get(physiciantimelogperiod__timelog_category__physician__user=request.user, approved=False, active=True, physiciantimelogperiod__period=period)
+	 # denial should always only return one if the flow is properly set up
+	except models.PhysicianTimeLogApproval.DoesNotExist:
+		denial = []
+
+	if denial:
+		tsperiod = []
 
 	timesheet_agg = models.PhysicianTimeLog.objects\
-		.filter(physician=physician, date__year=period.year, date__month=period.month,active=True)\
-		.values('category')\
+		.filter(timelog_category__physician=physician, date__year=period.year, date__month=period.month,active=True)\
+		.values('timelog_category__category__name')\
 		.annotate(time_sum=Sum('mins_worked'), sheet_count=Count('mins_worked'))
 
 	if request.method=='POST':
@@ -641,12 +725,35 @@ def timesheets_physician_one_period(request, month, year):
 				# client side will make it hard to submit if this exists, so this is just in case
 				raise Http404  
 
+
+			# this occurs bc we need to set all other tsperiods to not active (this should only occur is a denial
+			# has happened)
+
+			# this can be refactored, because was make this same query twice
+			tsperiods = models.PhysicianTimeLogPeriod.objects.filter(period=period, timelog_category__physician=physician, active=True)
+			if tsperiods:
+				for t in tsperiods:
+					t.active = False
+					t.save()
+
+
 			for ts in timesheet_agg:
 				try:
-					# import ipdb;ipdb.set_trace()
-					category = models.ContractType.objects.get(name=ts['category'])
-					instance = models.PhysicianTimeLogPeriod(physician=physician, mins_worked=ts['time_sum'], period=period.date(), category=category)
+					c = models.ContractType.objects.get(name=ts['timelog_category__category__name'])
+					category = models.PhysicianTimeLogCategory.objects.get(category=c, physician=physician)
+
+					wf = category.workflow_default
+					wf_id = wf.id
+					wf_items = models.WorkflowItem.objects.filter(workflow__id=wf_id)
+					next_user = wf_items.get(position=0).user
+
+					instance = models.PhysicianTimeLogPeriod(mins_worked=ts['time_sum'], period=period.date(), timelog_category=category, current_user=next_user, workflow=wf)
 					instance.save()
+
+					if denial:
+						denial.active = False
+						denial.save()
+
 				except:
 					# this needs to be handled -- this should never happen if the category is correct
 					print 'error'
@@ -654,6 +761,6 @@ def timesheets_physician_one_period(request, month, year):
 
 			return HttpResponseRedirect(reverse('timesheets_physician_one_period', args=(month,year)))
 
-	context= {'physician':physician, 'timesheets':timesheets, 'period':period, 'timesheet_agg':timesheet_agg, 'tsperiod':tsperiod}		
+	context= {'physician':physician, 'timesheets':timesheets, 'period':period, 'timesheet_agg':timesheet_agg, 'tsperiod':tsperiod, 'denial':denial}		
 	return render(request, 'main/timesheets_physician_one_period.html', context)
 	

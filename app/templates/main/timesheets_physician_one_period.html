@@ -12,7 +12,7 @@
 
     {% endblock %}
 
-
+ 
 
     {% block content %}
 
@@ -24,7 +24,7 @@
                             <a href="">Advocate Healthcare</a>
                         </li>
                         <li>
-                            <a href="{% url 'timesheets_physician_view_periods' %}">Time Sheet Periods</a>
+                            <a href="{% url 'timesheets' %}">Time Sheet Periods</a>
                         </li>
                         <li>
                             <a>Period</a>
@@ -36,22 +36,26 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="ibox float-e-margins">
+                    <div class="ibox float-e-margins"> 
                         <div class="ibox-content">
                         {% if tsperiod %}
                         <div class='alert alert-danger'> This time period has been submitted and can not be edited</div>
                         {% endif %}
 
+                        {% if denial %}
+                        <div class='alert alert-warning'>This time period was denied -- please update!</div>
+                        {% endif %}
+
                         <h3>Total Times:</h3>
                         {% for ts in timesheet_agg %}
-                        <div>{{ts.category}}: {{ts.time_sum}} mins from {{ts.sheet_count}} timesheets</div>                        
+                        <div>{{ts.timelog_category__category__name}}: {{ts.time_sum}} mins from {{ts.sheet_count}} timesheets</div>                        
                         {% endfor %}
                         <br>
                         <h3>Submitted:</h3>
                         <div id='submitted-area'>
                             {% for tsp in tsperiod %}
                                 {% if tsp.approved_at %}
-                                <span class='label label-primary' style='margin-right:3px' data-toggle="tooltip" data-placement="bottom" title="Approved on {{tsp.approved_at|date}}">{{tsp.category}}</span>
+                                <span class='label label-primary' style='margin-right:3px' data-toggle="tooltip" data-placement="bottom" title="Approved on {{tsp.approved_at|date}}">{{tsp.timelog_category__category}}</span>
                                 {% else %}
                                 <span class='label' style='margin-right:3px' data-toggle="tooltip" data-placement="bottom" title="Submitted on {{tsp.created_at|date}}">{{tsp.category}}</span>
                                 {% endif %}
@@ -75,7 +79,7 @@
                                 <tbody>
                                     {% for t in timesheets %}
                                     <tr>
-                                        <td>{{t.category}}</td>
+                                        <td>{{t.timelog_category.category}}</td>
                                         <td>{{t.date|date:'l,  F jS'}}</td>
                                         <td>{{t.mins_worked}}</td>
                                         <td>

@@ -48,13 +48,31 @@
                             <h5>Physician Time Sheet List</h5>
                         </div>
                         <div class="ibox-content">
+                            {% regroup tlcategories by physician as phy %}
 
-                    {% for p in physicians %}
-                        <h3>{{p}}</h3>
-                    {% endfor %}
+                            {% for p in phy %}
+                                <h3>{{p.grouper}}</h3>
+                                {% for cat in p.list%}
 
+                                         <span class='label 
+                                         {% for per in periods %}
+                                             {% if per.timelog_category.physician == p.grouper and per.timelog_category.category == cat.category %}
+                                                 {% if per.approved_at %} 
+                                                    label-primary 
+                                                 {% elif not per.active %}
+                                                    label-danger
+                                                 {% else %}
+                                                    label-warning
+                                                 {% endif %}
+                                             {% endif %}
+                                         {% endfor %}' style='margin-right:5px'>
+                                            {{cat.category}}
+                                        </span>
+
+                                {% endfor %}
+                            {% endfor %}
                         </div>
-                    </div>
+                    </div> 
                 </div>
 
             </div>

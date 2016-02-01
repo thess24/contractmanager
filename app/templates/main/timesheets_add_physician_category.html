@@ -30,7 +30,7 @@
 
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-12">
-                    <h2>Edit Time Sheet</h2>
+                    <h2>Add Physician Category</h2>
                     <ol class="breadcrumb">
                         <li>
                             <a href="">Advocate Healthcare</a>
@@ -39,7 +39,7 @@
                             <a href="{% url 'timesheets_view' %}">Time Sheets</a>
                         </li>
                         <li>
-                            <a>Edit</a>
+                            <a>Add Category</a>
                         </li>
                     </ol>
                 </div>
@@ -50,17 +50,9 @@
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Edit Time Sheet</h5>
+                            <h5>Add Physician Category</h5>
                         </div>
                         <div class="ibox-content">
-
-                        {% if tsperiod %}
-                        <div class='alert alert-danger'> This time period has been submitted and can not be edited</div>
-                        {% endif %}
-
-                        {% if denial %}
-                        <div class='alert alert-warning'>This time period was denied -- you are allowed to update now if you need to!</div>
-                        {% endif %}
 
                         <form method='post'> {% csrf_token %}
                             {% if form.non_field_errors %}
@@ -68,74 +60,54 @@
                             {% endif %}
                             <div class='row'>
                                 <div class='col-md-4'>
-                                    {{form.start_time.errors}}
-                                    {{form.start_time.label_tag}}
+                                    {{form.physician.errors}}
+                                    {{form.physician.label_tag}}
                                     <div class="input-group"> 
                                         <div class="input-group-btn"> 
                                             <button type="button" class="btn btn-default" aria-label="Bold">
-                                                <i class='glyphicon glyphicon-time'></i>
+                                                <i class='fa fa-user-md'></i>
                                             </button> 
                                         </div> 
-                                        {{form.start_time}}
+                                        {{form.physician}}
                                     </div>  
                                 </div>
                                 <div class='col-md-4'>
-                                    {{form.end_time.errors}}
-                                    {{form.end_time.label_tag}}
-                                    <div class="input-group"> 
-                                        <div class="input-group-btn"> 
-                                            <button type="button" class="btn btn-default" aria-label="Bold">
-                                                <i class='glyphicon glyphicon-time'></i>
-                                            </button> 
-                                        </div> 
-                                        {{form.end_time}}
-                                    </div>  
-                                </div>
-                            </div>
-                            <div class='row'>
-                                <div class='col-md-4'>
-                                    {{form.date.errors}}
-                                    {{form.date.label_tag}}
-                                    <div class="input-group"> 
-                                        <div class="input-group-btn"> 
-                                            <button type="button" class="btn btn-default" aria-label="Bold">
-                                                <i class='fa fa-calendar'></i>
-                                            </button> 
-                                        </div> 
-                                        {{form.date}}
-                                    </div>  
-                                </div>
-                                <div class='col-md-4'>
-                                    {{form.mins_worked.errors}}
-                                    <label for="id_mins_worked">Minutes Worked:</label>
-                                    {{form.mins_worked}}
-                                </div>
-                            </div>
-                            <div class='row'>
-                                <div class='col-md-6'>
                                     {{form.category.errors}}
                                     {{form.category.label_tag}}
                                     {{form.category}}
                                 </div>
                             </div>
                             <div class='row'>
-                                <div class='col-md-8'>
-                                    {{form.notes.errors}}
-                                    {{form.notes.label_tag}}
-                                    {{form.notes}}
+                                <div class='col-md-4'>
+                                    {{form.workflow_default.errors}}
+                                    {{form.workflow_default.label_tag}}
+                                    <div class="input-group"> 
+                                        <div class="input-group-btn"> 
+                                            <button type="button" class="btn btn-default" aria-label="Bold">
+                                                <i class='fa fa-code-fork'></i>
+                                            </button> 
+                                        </div> 
+                                        {{form.workflow_default}}
+                                    </div>  
+                                </div>
+                                <div class='col-md-4'>
+                                    {{form.hours_needed.errors}}
+                                    {{form.hours_needed.label_tag}}
+                                    {{form.hours_needed}}
+                                </div>
+                            </div>
+                            <div class='row'>
+                                <div class='col-md-6'>
+                                    {{form.approving_users.errors}}
+                                    {{form.approving_users.label_tag}}
+                                    {{form.approving_users}}
                                 </div>
                             </div>
 
-                            <br>
-                            <br>
 
-                            {% if tsperiod %}
-                                <button class='btn btn-primary' name='edittimesheet' type='button' disabled="disabled">Edit Time Sheet</button>
-                                <button class='btn btn-danger' name='deletetimesheet' type='button' disabled="disabled">Delete</button>
-                            {% else %}
-                                <button class='btn btn-primary' name='edittimesheet'>Edit Time Sheet</button>
-                                <button class='btn btn-danger' name='deletetimesheet'>Delete</button>
-                            {% endif %}
+                            <br>
+                            <br>
+                            <button class='btn btn-primary' name='addcategory'>Add Physician Category</button>
                         </form>
 
                         </div>
@@ -177,6 +149,7 @@
         $("#id_end_time").on("dp.change", function (e) {
             $('#id_start_time').data("DateTimePicker").maxDate(e.date);
         });
+
     });
 
     $('#id_date').datepicker()

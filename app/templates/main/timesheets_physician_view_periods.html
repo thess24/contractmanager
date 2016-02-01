@@ -10,7 +10,7 @@
         width: auto;
     }*/
 
-    </style>
+    </style> 
 
     {% endblock %}
 
@@ -26,7 +26,7 @@
                             <a href="">Advocate Healthcare</a>
                         </li>
                         <li>
-                            <a href="{% url 'groups' %}">Time Sheets</a>
+                            <a href="{% url 'timesheets' %}">Time Sheets</a>
                         </li>
                     </ol>
                 </div>
@@ -51,9 +51,9 @@
                                         {% for ts in tsperiods %}
                                             {% if t.month|floatformat:-1 == ts.period|date:'n' and t.year|floatformat:-1 == ts.period|date:'Y' %}
                                                 {% if ts.approved_at %}
-                                                <span class='label label-primary' style='margin-right:3px' data-toggle="tooltip" data-placement="bottom" title="Approved on {{ts.approved_at|date}}">{{ts.category}}</span>
+                                                <span class='label label-primary' style='margin-right:3px' data-toggle="tooltip" data-placement="bottom" title="Approved on {{ts.approved_at|date}}">{{ts.timelog_category.category}}</span>
                                                 {% else %}
-                                                <span class='label' style='margin-right:3px' data-toggle="tooltip" data-placement="bottom" title="Submitted on {{ts.created_at|date}}">{{ts.category}}</span>
+                                                <span class='label' style='margin-right:3px' data-toggle="tooltip" data-placement="bottom" title="Submitted on {{ts.created_at|date}}">{{ts.timelog_category.category}}</span>
                                                 {% endif %}
                                             {% endif %}
                                         {% endfor %}

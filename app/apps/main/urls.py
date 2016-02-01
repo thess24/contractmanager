@@ -62,18 +62,24 @@ urlpatterns = patterns('',
 	url(r'^templates/view/$', views.viewtemplates, name='viewtemplates'),
 	# url(r'^templates/edit/$', views.edittemplate, name='edittemplate'),
 
+	url(r'^timesheets/$', views.timesheets, name='timesheets'),
 	url(r'^timesheets/view/$', views.timesheets_view, name='timesheets_view'),
 	url(r'^timesheets/approve/$', views.timesheets_approve_view, name='timesheets_approve_view'),
-	url(r'^timesheets/physicianview/$', views.timesheets_by_physician, name='timesheets_by_physician'),
-	url(r'^timesheets/physicianadd/$', views.timesheets_physician_add, name='timesheets_physician_add'),
-	url(r'^timesheets/physicianedit/(?P<timesheetid>.+)$', views.timesheets_physician_edit, name='timesheets_physician_edit'),
-	url(r'^timesheets/physicianperiods/$', views.timesheets_physician_view_periods, name='timesheets_physician_view_periods'),
-	url(r'^timesheets/physicianperiod/(?P<month>.+)/(?P<year>.+)$', views.timesheets_physician_one_period, name='timesheets_physician_one_period'),
+	url(r'^timesheets/addphysiciancategory/$', views.timesheets_add_physician_category, name='timesheets_add_physician_category'),
+	url(r'^timesheets/viewphysicians/$', views.timesheets_by_physician, name='timesheets_by_physician'),
+	url(r'^timesheets/viewhistory/$', views.timesheets_history, name='timesheets_history'),
+	url(r'^timesheets/physician/approvalhistory/$', views.timesheets_physician_approvals, name='timesheets_physician_approvals'),
+	url(r'^timesheets/physician/add/$', views.timesheets_physician_add, name='timesheets_physician_add'),
+	url(r'^timesheets/physician/denials/$', views.timesheets_physician_denials, name='timesheets_physician_denials'),
+	url(r'^timesheets/physician/edit/(?P<timesheetid>.+)$', views.timesheets_physician_edit, name='timesheets_physician_edit'),
+	url(r'^timesheets/physician/periods/$', views.timesheets_physician_view_periods, name='timesheets_physician_view_periods'),
+	url(r'^timesheets/physician/period/(?P<month>.+)/(?P<year>.+)$', views.timesheets_physician_one_period, name='timesheets_physician_one_period'),
 
 
 	url(r'^addteam/$', views.addteam, name='addteam'),
 	url(r'^adduser/$', views.adduser, name='adduser'),
 	url(r'^addsite/$', views.addsite, name='addsite'),
+	url(r'^addcontracttype/$', views.addcontracttype, name='addcontracttype'),
 
 
 	url(r'^settings/$', views.settings, name='settings'),
@@ -86,7 +92,7 @@ urlpatterns = patterns('',
  
 
 ################## TODO #################
-
+# user permission system
 # edit / delete of...
 	# sites
 	# teams

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+
+    {% block head %}
+
+    <style type="text/css">
+
+    </style>
+
+    {% endblock %}
+
+
+
+    {% block content %}
+
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-12">
+                    <h2>Time Sheets Home</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="">Advocate Healthcare</a>
+                        </li>
+                        <li>
+                            <a>Time Sheets</a>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+
+                        <div class="ibox-content">
+                            <div class='row'>
+                                <div class='col-lg-9'>
+                                <div>Next Timesheet Due: Feb 22nd</div>
+                                <h3>Times This Month</h3>
+                                <div>Medical Directorship: 10 hours / 15 hours</div>
+                                <div>Call Pay: 15 hours / 20 hours</div>
+                                </div>
+                            </div>
+                            <div class='row'>
+                                <div class='col-lg-3'>
+                                    <h2><a href="">Submit Current Month</a></h2>
+                                    <h2><a href="{% url 'timesheets_physician_add' %}">Add Times</a></h2>
+                                    <h2><a href="{% url 'timesheets_physician_view_periods' %}">View Timesheet Periods</a></h2>
+                                    <h2><a href="{% url 'timesheets_physician_denials' %}">View Denials</a></h2>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    {% endblock %}
+
+    {% block scripts %}
+    <!-- Page-Level Scripts -->
+    <script>
+
+
+    </script>
+    {% endblock %}

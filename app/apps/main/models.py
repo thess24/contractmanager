@@ -150,7 +150,7 @@ class Contract(models.Model):
 	contract_file = models.FileField(upload_to='contracts', blank=True, null=True)
 	status = models.CharField(max_length=50, default='In Progress')
 	signed = models.BooleanField(default=False)
-	# signed_at = models.DateTimeField(blank=True, null=True)
+	signed_at = models.DateTimeField(blank=True, null=True)
 
 	def __unicode__(self):
 		return self.name
@@ -251,10 +251,20 @@ class Alert(models.Model):
 
 
 class PhysicianTimeLogCategory(models.Model):
+	TIME_PERIODS = (
+		('Weekly', 'Weekly'),
+		('Monthly', 'Monthly'),
+	)
+
 	physician = models.ForeignKey(Physician)
 	category = models.ForeignKey(ContractType)
 	workflow_default = models.ForeignKey(Workflow)
-	# created_at = models.DateTimeField(auto_now_add=True)
+	hours_needed = models.DecimalField(blank=True,null=True,decimal_places=2, max_digits=8)
+	time_period = models.CharField(max_length = 30, choices=TIME_PERIODS, default='Monthly')
+	approving_users = models.ManyToManyField(User)
+	created_at = models.DateTimeField(auto_now_add=True)
+
+	# add unique constraint for physician - category?
 
 	def __unicode__(self):
 		return '{} - {}'.format(self.category, self.physician)
@@ -262,12 +272,11 @@ class PhysicianTimeLogCategory(models.Model):
 
 class PhysicianTimeLog(models.Model):
 	'''the individual time submitted by a physician for a days work in each category'''
-	physician = models.ForeignKey(Physician)
-	date = models.DateTimeField(blank=True, null=True)  # change to datefield
+	timelog_category = models.ForeignKey(PhysicianTimeLogCategory) 
+	date = models.DateField(blank=True, null=True)
 	start_time = models.DateTimeField(blank=True, null=True)
 	end_time = models.DateTimeField(blank=True, null=True)
 	mins_worked = models.IntegerField(blank=True, null=True)
-	category = models.CharField(max_length=100) # change to fk for contracttype
 	notes = models.TextField(blank=True, null=True)
 	created_at = models.DateTimeField(auto_now_add=True)
 	active = models.BooleanField(default=True)
@@ -285,24 +294,28 @@ class PhysicianTimeLogPeriod(models.Model):
 	current_user: 	the user who has to currently approve the record
 	approval_num:	the number of approvals so far -- in order to track position in workflowitems for passing purposes
 					zero based indexing, so when the first person 'has' the object, this should be 0
+
+
+	active and not approved - pending approval
+	approved - approved
+	not active - denied
 	'''
-	physician = models.ForeignKey(Physician)
-	category = models.ForeignKey(ContractType) # change to fk for phystimelogcategory
+
+	timelog_category = models.ForeignKey(PhysicianTimeLogCategory) 
 	period = models.DateField()
 	mins_worked = models.IntegerField()
 	created_at = models.DateTimeField(auto_now_add=True)
 	approved_at = models.DateTimeField(blank=True,null=True)
 	approved_by = models.ForeignKey(User, blank=True, null=True, related_name='approver')  
-	# rename to final approver? do i need at all or can i just get the last person who approved?
-
 	active = models.BooleanField(default=True)
-	edited_at = models.DateTimeField(blank=True,null=True) # do i need this for anything?
 	current_user = models.ForeignKey(User, blank=True, null=True, related_name='current')
 	workflow = models.ForeignKey(Workflow, blank=True, null=True)
 	approval_num = models.IntegerField(default=0)
+	paid_at = models.DateTimeField(blank=True,null=True)
+	paid_by = models.ForeignKey(User, blank=True, null=True, related_name='paying')  
 
 	def __unicode__(self):
-		return '{} - {} - {}'.format(self.physician, self.category, self.period)
+		return '{} - {} - {}'.format(self.timelog_category.physician, self.timelog_category.category, self.period)
 
 
 class PhysicianTimeLogApproval(models.Model):
@@ -312,9 +325,10 @@ class PhysicianTimeLogApproval(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True)
 	approved = models.BooleanField(default=True)  # true=approved, false=denied
 	note = models.TextField(blank=True,null=True)
+	active = models.BooleanField(default=True)
 
 	def __unicode__(self):
-		return '{} - {} - {}'.format(self.physiciantimelogperiod, self.created_at, self.approved)
+		return '{} - {}'.format(self.physiciantimelogperiod, self.approved)
 
 
 # class Action(models.Model):
@@ -396,6 +410,18 @@ class HealthSiteForm(ModelForm):
 			'state': forms.TextInput(attrs={'class': 'form-control', 'style':'width:200px'}),
 			'zipcode': forms.TextInput(attrs={'class': 'form-control', 'style':'width:200px'}),
 		}
+
+
+class ContractTypeForm(ModelForm):
+	class Meta:
+		model = ContractType
+		exclude = ('system',)
+
+	def __init__(self, *args, **kwargs):
+		super(ContractTypeForm, self).__init__(*args, **kwargs)
+		for i in self.fields:
+			self.fields[i].widget.attrs['class'] = 'form-control'
+
 
 class TemplateForm(ModelForm):
 	class Meta:
@@ -523,9 +549,10 @@ class ContactUsForm(ModelForm):
 
 
 class PhysicianTimeLogForm(ModelForm):
+
 	class Meta:
 		model = PhysicianTimeLog
-		exclude = ('physician',)
+		exclude = ('active',)
 
 	def clean(self):
 		''' Make sure:
@@ -559,5 +586,18 @@ class PhysicianTimeLogForm(ModelForm):
 
 	def __init__(self, *args, **kwargs):
 		super(PhysicianTimeLogForm, self).__init__(*args, **kwargs)
+		for i in self.fields:
+			self.fields[i].widget.attrs['class'] = 'form-control'
+
+
+
+
+class PhysicianTimeLogCategoryForm(ModelForm):
+	class Meta:
+		model = PhysicianTimeLogCategory
+		exclude = ('time_period',)
+
+	def __init__(self, *args, **kwargs):
+		super(PhysicianTimeLogCategoryForm, self).__init__(*args, **kwargs)
 		for i in self.fields:
 			self.fields[i].widget.attrs['class'] = 'form-control'

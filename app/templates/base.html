@@ -129,9 +129,22 @@
                     <ul class="nav nav-second-level collapse">
                         <li><a href="{% url 'timesheets_approve_view' %}">Approve Periods</a></li>
                         <li><a href="{% url 'timesheets_view' %}">View Time Sheets</a></li>
+                        <li><a href="{% url 'timesheets_add_physician_category' %}">Add Category</a></li>
                         <li><a href="{% url 'timesheets_by_physician' %}">View By Physician</a></li>
                         <li><a href="{% url 'timesheets_physician_add' %}">Add Time Sheet</a></li>
                         <li><a href="{% url 'timesheets_physician_view_periods' %}">View Periods</a></li>
+                        <li><a href="{% url 'timesheets_physician_approvals' %}">View Approval History (Doc)</a></li>
+                        <li><a href="{% url 'timesheets_history' %}">View Approval History (User)</a></li>
+                        <li><a href="{% url 'timesheets_physician_denials' %}">Denials</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-gears"></i> <span class="nav-label">Settings</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="{% url 'addsite' %}">Add Site</a></li>
+                        <li><a href="{% url 'adduser' %}">Add User</a></li>
+                        <li><a href="{% url 'addteam' %}">Add Team</a></li>
+                        <li><a href="{% url 'addcontracttype' %}">Add Contract Type</a></li>
                     </ul>
                 </li>
 

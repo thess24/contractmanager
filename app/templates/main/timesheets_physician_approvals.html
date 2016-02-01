@@ -51,37 +51,31 @@
                         </div>
                         <div class="ibox-content">
 
-                        <form method='post'>
-                            {% csrf_token %}
-                                    <div class="table-responsive">
+                                <div class="table-responsive">
                                 <table class="table table-bordered table-hover table-conden" >
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Area</th>
-                                        <th>Time Period</th>
-                                        <th>Contracted Time</th>
-                                        <th>Time Sheet Time</th>
-                                        <th>Date Submitted</th>
+                                        <th>Date</th>
+                                        <th>Category</th>
+                                        <th>Approved</th>
+                                        <th>Approving User</th>
+                                        <th>Notes</th>
+                                        <th>Completely Approved</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for t in timesheets %}
+                                    {% for a in approvals %}
                                     <tr>
-                                        <td><a href="{% url 'viewphysician' t.timelog_category__physician__npi %}">{{t.timelog_category__physician__user__first_name}} {{t.timelog_category__physician__user__last_name}}</a></td>
-                                        <td>{{t.timelog_category__category}}</td>
-                                        <td>{{t.month|floatformat:-1}} / {{t.year|floatformat:-1}}</td>
-                                        <td>{{t.timelog_category__hours_needed}}</td>
-                                        <td>{{t.time_sum}}</td>
-                                        <td>{{t.created_at}}</td>
+                                        <td>{{a.physiciantimelogperiod.period}}</td>
+                                        <td>{{a.physiciantimelogperiod.timelog_category.category}}</td>
+                                        <td>{{a.approved}}</td>
+                                        <td>{{a.user}}</td>
+                                        <td>{{a.notes}}</td>
+                                        <td>{{a.physiciantimelogperiod.approved_at}}</td>
                                         <td>
                                             <button class='btn btn-xs'>View</button>
-                                            <form method='post' style='display: inline'>
-                                                <input type='hidden' value='{{t.id}}'>
-                                                <button class='btn btn-xs btn-primary'>Approve</button>
-                                            </form>
-                                        </td>
+                                        </td> 
                                     </tr>
                                     {% endfor %}
                                 </tbody>
@@ -89,7 +83,6 @@
                                 </table>
                                     </div>
 
-                        </form>
 
                         </div>
                     </div>
