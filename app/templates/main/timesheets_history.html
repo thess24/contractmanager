@@ -28,10 +28,10 @@
                     <h2>Time Sheet Approve + Deny History</h2>
                     <ol class="breadcrumb">
                         <li>
-                            <a href="">Advocate Healthcare</a>
+                            <a>Advocate Healthcare</a>
                         </li>
                         <li>
-                            <a>Time Sheets</a>
+                            <a href="{% url 'timesheets' %}">Time Sheets</a>
                         </li>
                         <li>
                             <a>Approve + Deny History</a>
@@ -77,7 +77,7 @@
                                         <td>{{a.notes}}</td>
                                         <td>{{a.physiciantimelogperiod.approved_at}}</td>
                                         <td>
-                                            <button class='btn btn-xs'>View</button>
+                                            <a href="{% url 'timesheets_user_one_period' a.physiciantimelogperiod.id %}" class='btn btn-xs'>View</a>
                                         </td> 
                                     </tr>
                                     {% endfor %}

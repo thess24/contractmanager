@@ -11,14 +11,18 @@
     <title>Baldur Healthcare</title>
     {% endblock %}
  
+    <link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="{{ STATIC_URL }}img/favicon.ico" type="image/x-icon">
+
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
     <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/font-awesome.css" rel="stylesheet">
 
 
-
+ 
     <!-- Data Tables -->
     <link href="{{ STATIC_URL }}css/dataTables.bootstrap.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/dataTables.responsive.css" rel="stylesheet">
@@ -130,7 +134,7 @@
                         <li><a href="{% url 'timesheets_approve_view' %}">Approve Periods</a></li>
                         <li><a href="{% url 'timesheets_view' %}">View Time Sheets</a></li>
                         <li><a href="{% url 'timesheets_add_physician_category' %}">Add Category</a></li>
-                        <li><a href="{% url 'timesheets_by_physician' %}">View By Physician</a></li>
+                        <li><a href="">View By Physician</a></li>
                         <li><a href="{% url 'timesheets_physician_add' %}">Add Time Sheet</a></li>
                         <li><a href="{% url 'timesheets_physician_view_periods' %}">View Periods</a></li>
                         <li><a href="{% url 'timesheets_physician_approvals' %}">View Approval History (Doc)</a></li>
@@ -214,6 +218,7 @@
 
     <script src="{{ STATIC_URL }}js/jquery.js"></script>
     <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
 
 
@@ -234,6 +239,41 @@
     {% block scripts %}
     {% endblock %}
 
+
+    <script type="text/javascript">
+
+
+        toastr.options = {
+          "closeButton": false,
+          "debug": false,
+          "newestOnTop": false,
+          "progressBar": true,
+          "positionClass": "toast-top-right",
+          "preventDuplicates": false,
+          "onclick": null,
+          "showDuration": "300",
+          "hideDuration": "1000",
+          "timeOut": "5000",
+          "extendedTimeOut": "1000",
+          "showEasing": "swing",
+          "hideEasing": "linear",
+          "showMethod": "fadeIn",
+          "hideMethod": "fadeOut"
+        }
+
+
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+                        toastr.info('{{message}}');
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            
+
+
+
+    </script>
 
 </body>
 

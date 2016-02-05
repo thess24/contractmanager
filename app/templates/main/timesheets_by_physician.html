@@ -31,7 +31,7 @@
                             <a href="">Advocate Healthcare</a>
                         </li>
                         <li>
-                            <a href="{% url 'groups' %}">Time Sheets</a>
+                            <a href="{% url 'timesheets' %}">Time Sheets</a>
                         </li>
                         <li>
                             <a>By Physician</a>
@@ -54,23 +54,44 @@
                                 <h3>{{p.grouper}}</h3>
                                 {% for cat in p.list%}
 
-                                         <span class='label 
+                                         <a class='label 
                                          {% for per in periods %}
                                              {% if per.timelog_category.physician == p.grouper and per.timelog_category.category == cat.category %}
                                                  {% if per.approved_at %} 
-                                                    label-primary 
+                                                    label-primary' href="{% url 'timesheets_user_one_period' per.id %}"
                                                  {% elif not per.active %}
-                                                    label-danger
+                                                    label-danger' href="{% url 'timesheets_user_one_period' per.id %}"
                                                  {% else %}
-                                                    label-warning
+                                                    label-warning' href="{% url 'timesheets_user_one_period' per.id %}"
                                                  {% endif %}
                                              {% endif %}
-                                         {% endfor %}' style='margin-right:5px'>
+                                         {% endfor %} style='margin-right:5px'>
                                             {{cat.category}}
-                                        </span>
+                                        </a>
 
                                 {% endfor %}
                             {% endfor %}
+
+                            <table class='table'>
+                                <tr>
+                                    <td>phys</td>
+                                    <td>cat name</td>
+                                    <td>active</td>
+                                    <td>approvedat</td>
+                                    <td>pending</td>
+                                    <td>never submitted</td>
+                                </tr>
+                            {% for i in physician_categories %}
+                                <tr>
+                                    <td>{{i.timelog_category__physician}}</td>
+                                    <td>{{i.timelog_category__category__name}}</td>
+                                    <td>{{i.active}}</td>
+                                    <td>{{i.approved_at}}</td>
+                                    <td>{{i.pending}}</td>
+                                    <td>{{i.did_not_submit}}</td>
+                                </tr>
+                            {% endfor %}
+                            </table>
                         </div>
                     </div> 
                 </div>

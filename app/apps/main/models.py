@@ -282,7 +282,7 @@ class PhysicianTimeLog(models.Model):
 	active = models.BooleanField(default=True)
 
 	def __unicode__(self):
-		return '{} - {} - {}'.format(self.physician, self.category, self.date)
+		return '{} - {}'.format(self.timelog_category, self.date)
 
 
 class PhysicianTimeLogPeriod(models.Model):
@@ -312,7 +312,8 @@ class PhysicianTimeLogPeriod(models.Model):
 	workflow = models.ForeignKey(Workflow, blank=True, null=True)
 	approval_num = models.IntegerField(default=0)
 	paid_at = models.DateTimeField(blank=True,null=True)
-	paid_by = models.ForeignKey(User, blank=True, null=True, related_name='paying')  
+	paid_by = models.ForeignKey(User, blank=True, null=True, related_name='paying') 
+	note = models.TextField(blank=True, null=True)
 
 	def __unicode__(self):
 		return '{} - {} - {}'.format(self.timelog_category.physician, self.timelog_category.category, self.period)
@@ -601,3 +602,4 @@ class PhysicianTimeLogCategoryForm(ModelForm):
 		super(PhysicianTimeLogCategoryForm, self).__init__(*args, **kwargs)
 		for i in self.fields:
 			self.fields[i].widget.attrs['class'] = 'form-control'
+

@@ -3,13 +3,13 @@ from apps.main.models import *
 
 
 class PhysicianTimeLogApprovalAdmin(admin.ModelAdmin):
-    list_display = ('user', 'physiciantimelogperiod', 'approved', 'created_at') 
+    list_display = ('user', 'physiciantimelogperiod', 'approved', 'active', 'created_at') 
 
 class PhysicianTimeLogAdmin(admin.ModelAdmin):
     list_display = ('timelog_category', 'date', 'mins_worked','created_at', 'active') 
 
 class PhysicianTimeLogPeriodAdmin(admin.ModelAdmin):
-    list_display = ('timelog_category', 'period', 'mins_worked','active', 'current_user')
+    list_display = ('timelog_category', 'period', 'mins_worked','active', 'current_user', 'id')
 
 class WorkflowItemAdmin(admin.ModelAdmin):
     list_display = ('workflow', 'user', 'position', 'team')

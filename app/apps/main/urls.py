@@ -64,10 +64,12 @@ urlpatterns = patterns('',
 
 	url(r'^timesheets/$', views.timesheets, name='timesheets'),
 	url(r'^timesheets/view/$', views.timesheets_view, name='timesheets_view'),
+	url(r'^timesheets/view/(?P<timesheetid>.+)$', views.timesheets_view_one, name='timesheets_view_one'),
 	url(r'^timesheets/approve/$', views.timesheets_approve_view, name='timesheets_approve_view'),
 	url(r'^timesheets/addphysiciancategory/$', views.timesheets_add_physician_category, name='timesheets_add_physician_category'),
-	url(r'^timesheets/viewphysicians/$', views.timesheets_by_physician, name='timesheets_by_physician'),
+	url(r'^timesheets/viewphysicians/(?P<month>.+)/(?P<year>.+)$', views.timesheets_by_physician, name='timesheets_by_physician'),
 	url(r'^timesheets/viewhistory/$', views.timesheets_history, name='timesheets_history'),
+	url(r'^timesheets/viewperiod/(?P<periodid>.+)$', views.timesheets_user_one_period, name='timesheets_user_one_period'),
 	url(r'^timesheets/physician/approvalhistory/$', views.timesheets_physician_approvals, name='timesheets_physician_approvals'),
 	url(r'^timesheets/physician/add/$', views.timesheets_physician_add, name='timesheets_physician_add'),
 	url(r'^timesheets/physician/denials/$', views.timesheets_physician_denials, name='timesheets_physician_denials'),
@@ -175,7 +177,6 @@ urlpatterns = patterns('',
 # add hsts header in /etc/httpd/wsgi.conf
 
 
-
 # RewriteEngine On
 # RewriteCond %{HTTP:X-Forwarded-Proto} !https
 # RewriteRule / https://%{SERVER_NAME}%{REQUEST_URI} [L,R=301]
@@ -185,6 +186,4 @@ urlpatterns = patterns('',
 
 
 
-
-
-########## ISSUES
+########## ISSUE LOG

@@ -18,7 +18,7 @@
                     <h2>Time Sheets Home</h2>
                     <ol class="breadcrumb">
                         <li>
-                            <a href="">Advocate Healthcare</a>
+                            <a>Advocate Healthcare</a>
                         </li>
                         <li>
                             <a>Time Sheets</a>
@@ -40,15 +40,40 @@
                                 <div>Medical Directorship: 10 hours / 15 hours</div>
                                 <div>Call Pay: 15 hours / 20 hours</div>
                                 </div>
-                            </div>
+                            </div> 
                             <div class='row'>
-                                <div class='col-lg-3'>
-                                    <h2><a href="">Submit Current Month</a></h2>
+
+                                <div class='col-lg-6'>
+                                    <h2><a href="{% url 'timesheets_physician_one_period' prev_month_dt|date:'n' prev_month_dt|date:'Y' %}">Submit Last Month</a>
+                                        {% if periods_previous %}
+                                        <span class='badge badge-primary'>Submitted</span>
+                                        {% endif %}
+                                    </h2>
                                     <h2><a href="{% url 'timesheets_physician_add' %}">Add Times</a></h2>
                                     <h2><a href="{% url 'timesheets_physician_view_periods' %}">View Timesheet Periods</a></h2>
-                                    <h2><a href="{% url 'timesheets_physician_denials' %}">View Denials</a></h2>
+                                    <h2><a href="{% url 'timesheets_physician_denials' %}">View Denials
+                                        {% if denials_count %}
+                                        <span class='badge badge-primary'>{{denials_count}}</span>
+                                        {% endif %}
+                                    </a></h2>
                                 </div>
+
+                                <div class='col-lg-6'>
+
+                                    <h2><a href="{% url 'timesheets_approve_view' %}">Approve Periods</a></h2>
+                                    <h2><a href="{% url 'timesheets_by_physician' prev_month_dt|date:'n' prev_month_dt|date:'Y' %}">View My Physicians</a></h2>
+                                    <h2><a href="{% url 'timesheets_history' %}">View Approval History</a></h2>
+                                    <h2><a href="{% url 'timesheets_view' %}">View All Timesheets</a></h2>
+                                    <br>
+                                    <h2>Settings</h2>
+                                    <h2><a href="">Add Category</a></h2>
+                                    <h2><a href="">Add Workflow</a></h2>
+                                    <h2><a href="">Add Physician</a></h2>
+
+                                </div>
+
                             </div>
+
 
 
                         </div>
