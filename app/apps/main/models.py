@@ -45,7 +45,7 @@ class Team(models.Model):
 	''' a department/group/team within a healthsystem '''
 	system = models.ForeignKey(HealthSystem)
 	name = models.CharField(max_length=100)
-	description = models.TextField()
+	description = models.TextField() # make optional?
 	admin = models.ForeignKey(User)
 
 	def __unicode__(self):
@@ -57,6 +57,18 @@ class UserProfile(models.Model):
 	user = models.OneToOneField(User)
 	system = models.ForeignKey(HealthSystem)
 	team = models.ForeignKey(Team)
+	sites = models.ManyToManyField(HealthSite, blank=True) # remove blank and null
+
+	superuser = models.BooleanField(default=False)  # can do anything and edit users? / change site settings
+	master = models.BooleanField(default=False)  # can do anything for sites listed
+	analyst = models.BooleanField(default=False)  # allowed to access all data
+
+
+
+	# by default make it so you can only access contracts from sites youre subbed to--
+	# also have ability to blacklist? or blacklist and whitelist?
+	# contract_blacklist = 
+
 	# belong to group here? or another way? --- add here and then do groups also - this is main group
 
 	def __unicode__(self):
@@ -315,6 +327,25 @@ class PhysicianTimeLogPeriod(models.Model):
 	paid_by = models.ForeignKey(User, blank=True, null=True, related_name='paying') 
 	note = models.TextField(blank=True, null=True)
 
+	def is_pending(self):
+		if self.active and not self.approved_at:
+			return True
+		else:
+			return False
+
+	def is_approved(self):
+		if self.approved_at:
+			return True
+		else:
+			return False
+
+	def is_denied(self):
+		if not self.active:
+			return True
+		else:
+			return False
+
+
 	def __unicode__(self):
 		return '{} - {} - {}'.format(self.timelog_category.physician, self.timelog_category.category, self.period)
 
@@ -515,6 +546,10 @@ class UserProfileForm(ModelForm):
 	class Meta:
 		model = UserProfile
 		exclude = ('system','user')
+		widgets = {
+			'team': forms.Select(attrs={'class': 'form-control'}),
+			'sites': forms.Select(attrs={'class': 'form-control'}),
+		}
 
 class PhysicianForm(ModelForm):
 	class Meta:

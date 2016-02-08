@@ -79,10 +79,12 @@ urlpatterns = patterns('',
 
 
 	url(r'^addteam/$', views.addteam, name='addteam'),
+
 	url(r'^adduser/$', views.adduser, name='adduser'),
+	url(r'^edituser/(?P<userid>.+)$', views.edituser, name='edituser'),
+
 	url(r'^addsite/$', views.addsite, name='addsite'),
 	url(r'^addcontracttype/$', views.addcontracttype, name='addcontracttype'),
-
 
 	url(r'^settings/$', views.settings, name='settings'),
 	

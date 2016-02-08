@@ -140,6 +140,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.core.context_processors.request',
                 'apps.main.context_processors.alerts',
+                'apps.main.context_processors.system_name',
             ],
         },
     },

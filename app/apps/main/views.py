@@ -370,6 +370,27 @@ def adduser(request):
 	return render(request, 'main/adduser.html', context)
 
 @login_required
+def edituser(request, userid):
+	user_to_edit = get_object_or_404(models.UserProfile, system=request.user.userprofile.system, id=userid)
+	userprofileform = models.UserProfileForm(instance=user_to_edit)
+
+	if request.method=='POST':
+		if 'add_user' in request.POST:
+			userprofileform = models.UserProfileForm(request.POST)
+
+			if userprofileform.is_valid():
+
+				instance = userprofileform.save(commit=False)
+				instance.user = user
+				instance.system = request.user.userprofile.system
+				instance.save()
+				
+				return HttpResponseRedirect(reverse('edituser'))
+
+	context= {'user_to_edit':user_to_edit, 'userprofileform':userprofileform}
+	return render(request, 'main/edituser.html', context)
+
+@login_required
 def addphysician(request):
 	doctors = models.Physician.objects.filter(system=request.user.userprofile.system)
 	extuserform = models.ExtendedUserCreateForm()
@@ -476,27 +497,40 @@ def viewphysician(request,npi):
 
 @login_required
 def timesheets(request):
-	denials = models.PhysicianTimeLogApproval.objects.filter(physiciantimelogperiod__timelog_category__physician__user=request.user, approved=False, active=True)
-	denials_count = denials.count()
-	physician = get_object_or_404(models.Physician, user=request.user)
 
-	now = datetime.datetime.now()
-	last_month = now + relativedelta(months=-1)  # month that needs to be submitted -- aka last month
-	prev_month_dt = datetime.date(last_month.year,last_month.month,1)
+	# for physicians
+	try:
+		physician = models.Physician.objects.get(user=request.user)
+	except:
+		physician = None
 
-	periods_previous = models.PhysicianTimeLogPeriod.objects.filter(timelog_category__physician=physician, active=True, period=prev_month_dt)
+	context = {'physician':physician}
 
+	if physician:
+		denials = models.PhysicianTimeLogApproval.objects.filter(physiciantimelogperiod__timelog_category__physician__user=request.user, approved=False, active=True)
+		denials_count = denials.count()
 
-	context= {'denials_count':denials_count, 'periods_previous':periods_previous, 'prev_month_dt':prev_month_dt}		
+		now = datetime.datetime.now()
+		last_month = now + relativedelta(months=-1)  # month that needs to be submitted -- aka last month
+		prev_month_dt = datetime.date(last_month.year,last_month.month,1)
+		periods_previous = models.PhysicianTimeLogPeriod.objects.filter(timelog_category__physician=physician, active=True, period=prev_month_dt)
+
+	context.update({'denials_count':denials_count, 'periods_previous':periods_previous, 'prev_month_dt':prev_month_dt})
+	
+	if request.user.userprofile:
+		manager = True
+		context['manager'] = manager
+
+	if manager:
+		approval_count = models.PhysicianTimeLogPeriod.objects.filter(current_user=request.user, active=True, approved_at__isnull=True).count()
+		context['approval_count'] = approval_count
+
 	return render(request, 'main/timesheets.html', context)
 
 @login_required
 def timesheets_view(request):
-	timesheets = models.PhysicianTimeLog.objects\
-		.extra(select={'year': "EXTRACT(year FROM date)", 'month': "EXTRACT(month from date)"})\
-		.values('timelog_category__category__name','month','year','timelog_category__physician__user__first_name','timelog_category__physician__user__last_name','timelog_category__physician__npi', 'created_at', 'timelog_category__hours_needed')\
-		.annotate(time_sum=Sum('mins_worked'))
-
+	''' view all timesheets of physicians that a user has access to'''
+	timesheets = models.PhysicianTimeLogPeriod.objects.filter(timelog_category__approving_users=request.user)
 
 	context= {'timesheets':timesheets}		
 	return render(request, 'main/timesheets_view.html', context)
@@ -564,6 +598,8 @@ def timesheets_approve_view(request):
 
 @login_required
 def timesheets_by_physician(request, month, year):
+	month = int(month)
+	year = int(year)
 
 	monthyearperiod = '{}-{}'.format(month,year)
 	try:
@@ -571,39 +607,57 @@ def timesheets_by_physician(request, month, year):
 	except ValueError:
 		raise Http404
 
+	if month==12:
+		next_month = 1
+		last_month = 11
+		next_year = year + 1
+		last_year = year
+	elif month==1:
+		next_month = 2
+		last_month = 12
+		next_year = year
+		last_year = year - 1
+	else:
+		next_month = month + 1
+		last_month = month - 1
+		next_year = year
+		last_year = year
+
+
 	# physicians who *should submit
 	tlcategories = models.PhysicianTimeLogCategory.objects.filter(approving_users=request.user) 
 	# physicians who *did submit
 	periods = models.PhysicianTimeLogPeriod.objects.filter(timelog_category__approving_users=request.user, period=period) 
 
-	# need to create master list of physician categories/periods with (name, if submitted, (if approved, if denied)) and
-	# pass in here
-	# import ipdb;ipdb.set_trace()
 
-
-
-
-
-	# DO I EVEN NEED THIS?? or does it work from periods and tlperiods above?
-	# should be submitted vs. did submit
-	should =  list(tlcategories.values('category__name','physician'))
-	did = list(periods.values('timelog_category__physician', 'timelog_category__category__name','active','approved_at'))
+	# area for table - this makes dict of all tsperiods and if they have been submitted/created or not
+	should =  list(tlcategories.values('category__name','physician','physician__user__first_name','physician__user__last_name'))
+	did = list(periods.values('timelog_category__physician','timelog_category__physician__user__first_name', \
+		'timelog_category__physician__user__last_name', 'timelog_category__category__name','active','approved_at'))
 
 	for d in did:
 		d['physician-category'] = '{} - {}'.format(d['timelog_category__category__name'],d['timelog_category__physician'])
+		d['submitted'] = True
 		if not d['approved_at'] and d['active']:
 			d['pending'] = True
+		else:
+			d['pending'] = False
 
 	uniquephyscats = set([d['physician-category'] for d in did])
 
 	for i in should:
 		i['physician-category'] = '{} - {}'.format(i['category__name'],i['physician'])
 		if i['physician-category'] not in uniquephyscats:
-			add = {'timelog_category__category__name':i['category__name'] , 'did_not_submit': True, 'timelog_category__physician':i['physician']}
+			add = {'timelog_category__category__name':i['category__name'] , 'submitted': False, 'timelog_category__physician':i['physician'],\
+				'timelog_category__physician__user__first_name':i['physician__user__first_name'], \
+				'timelog_category__physician__user__last_name':i['physician__user__last_name'], \
+				'active':False, 'approved_at':None, 'pending':False}
 			did.append(add)
 
 	physician_categories = did
-	context= {'tlcategories':tlcategories, 'periods':periods, 'physician_categories':physician_categories}		
+	context= {'tlcategories':tlcategories, 'periods':periods, 'physician_categories':physician_categories,\
+		'last_month':last_month,'last_year':last_year,'next_year':next_year,'next_month':next_month}	
+
 	return render(request, 'main/timesheets_by_physician.html', context)
 
 
@@ -847,7 +901,6 @@ def timesheets_physician_one_period(request, month, year):
 def timesheets_user_one_period(request, periodid):
 	''' this is one category for one period for one physician---as viewed by an admin'''
 	tsperiod = models.PhysicianTimeLogPeriod.objects.get(id=periodid)
-	# import ipdb;ipdb.set_trace()
 	period = tsperiod.period
 	tlc = tsperiod.timelog_category
 

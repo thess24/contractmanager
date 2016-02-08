@@ -54,7 +54,7 @@
                         <form method='post'>
                             {% csrf_token %}
                                     <div class="table-responsive">
-                                <table class="table table-bordered table-hover table-conden" >
+                                <table class="table table-bordered table-hover table-conden dataTables" >
                                 <thead>
                                     <tr>
                                         <th>Name</th>
@@ -63,24 +63,32 @@
                                         <th>Contracted Time</th>
                                         <th>Time Sheet Time</th>
                                         <th>Date Submitted</th>
+                                        <th>Status</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {% for t in timesheets %}
                                     <tr>
-                                        <td><a href="{% url 'viewphysician' t.timelog_category__physician__npi %}">{{t.timelog_category__physician__user__first_name}} {{t.timelog_category__physician__user__last_name}}</a></td>
-                                        <td>{{t.timelog_category__category__name}}</td>
-                                        <td>{{t.month|floatformat:-1}} / {{t.year|floatformat:-1}}</td>
-                                        <td>{{t.timelog_category__hours_needed}}</td>
-                                        <td>{{t.time_sum}}</td>
+                                        <td><a href="{% url 'viewphysician' t.timelog_category.physician.npi %}">{{t.timelog_category.physician.user.first_name}} {{t.timelog_category.physician.user.last_name}}</a></td>
+                                        <td>{{t.timelog_category.category.name}}</td>
+                                        <td>{{t.period|date:"F Y"}}</td>
+                                        <td>{{t.timelog_category.hours_needed}}</td>
+                                        <td>{{t.mins_worked}}</td>
                                         <td>{{t.created_at}}</td>
+                                        <td> 
+                                            {% if t.approved_at%}
+                                            <span class='label label-primary'>Approved</span>
+                                            {% elif t.is_pending %}
+                                            <span class='label'>Pending</span>
+                                            {% else %}
+                                            <span class='label label-danger'>Denied</span>
+                                            {% endif %}
+
+
+                                        </td>
                                         <td>
-                                            <button class='btn btn-xs'>View</button>
-                                            <form method='post' style='display: inline'>
-                                                <input type='hidden' value='{{t.id}}'>
-                                                <button class='btn btn-xs btn-primary'>Approve</button>
-                                            </form>
+                                            <a class='btn btn-xs' href="">View</a>
                                         </td>
                                     </tr>
                                     {% endfor %}
@@ -115,6 +123,11 @@
             });
         });
 
+        $(document).ready(function() {
+            $('.dataTables').DataTable({
+            });
+
+        });
 
     </script>
     {% endblock %}
