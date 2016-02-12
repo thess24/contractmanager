@@ -7,7 +7,7 @@ import models
 import datetime
 from dateutil.relativedelta import relativedelta
 from django.contrib import messages
-
+from djqscsv import render_to_csv_response
 
 
 
@@ -532,6 +532,13 @@ def timesheets_view(request):
 	''' view all timesheets of physicians that a user has access to'''
 	timesheets = models.PhysicianTimeLogPeriod.objects.filter(timelog_category__approving_users=request.user)
 
+	if request.method=='GET':
+		download_bool = request.GET.get('download','')
+		if download_bool=='true':
+			ts = timesheets.values()
+			return render_to_csv_response(ts)
+
+
 	context= {'timesheets':timesheets}		
 	return render(request, 'main/timesheets_view.html', context)
 
@@ -566,6 +573,7 @@ def timesheets_approve_view(request):
 				# then this is the final step of approval
 				ts.approved_by = request.user
 				ts.approved_at = datetime.datetime.now()
+				ts.current_user = None
 				ts.save()
 
 			else:
@@ -913,8 +921,8 @@ def timesheets_user_one_period(request, periodid):
 	except models.PhysicianTimeLogApproval.DoesNotExist:
 		denial = []
 
-	if denial:
-		tsperiod = []
+	# if denial:
+	# 	tsperiod = []
 
 	timesheet_agg = models.PhysicianTimeLog.objects\
 		.filter(timelog_category=tlc, date__year=period.year, date__month=period.month,active=True)\
