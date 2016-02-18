@@ -536,7 +536,7 @@ def timesheets_view(request):
 		download_bool = request.GET.get('download','')
 		if download_bool=='true':
 			ts = timesheets.values()
-			return render_to_csv_response(ts)
+			return render_to_csv_response(ts, filename='timesheets_download', append_datestamp=True)
 
 
 	context= {'timesheets':timesheets}		
