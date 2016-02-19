@@ -176,7 +176,7 @@ urlpatterns = patterns('',
 # make sure no errors on fresh install (related to pythonpath and wsgipath)
 # make sure copying of http config apache stuff works
 # make https://baldurhealthcare.com work
-# add hsts header in /etc/httpd/wsgi.conf
+# add hsts header in /etc/httpd/conf.d/wsgi.conf
 
 
 # RewriteEngine On
