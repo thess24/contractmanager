@@ -663,6 +663,18 @@ def timesheets_by_physician(request, month, year):
 			did.append(add)
 
 	physician_categories = did
+
+
+	now = datetime.datetime.now()
+	for doc in physician_categories:
+		if not doc["submitted"]:
+			if now.day in [8,12,14]:
+				print 
+
+
+
+
+
 	context= {'tlcategories':tlcategories, 'periods':periods, 'physician_categories':physician_categories,\
 		'last_month':last_month,'last_year':last_year,'next_year':next_year,'next_month':next_month}	
 

@@ -250,9 +250,9 @@ class ContractApproval(models.Model):
 
 
 class Alert(models.Model):
-	''' alert to user that something happened that concerns them '''
+	''' alert to user that something happened that concerns them (specific contract) '''
 	user = models.ForeignKey(User)
-	contract = models.ForeignKey(Contract)
+	contract = models.ForeignKey(Contract, blank=True, null=True)
 	name = models.CharField(max_length=255)
 	active = models.BooleanField(default=True)
 	created_at = models.DateTimeField(auto_now_add=True)
@@ -261,6 +261,16 @@ class Alert(models.Model):
 	def __unicode__(self):
 		return self.name
 
+# class GenericAlert(models.Model):
+# 	''' alert to user that something happened that concerns them (generic version) '''
+# 	user = models.ForeignKey(User)
+# 	name = models.CharField(max_length=255)
+# 	active = models.BooleanField(default=True)
+# 	created_at = models.DateTimeField(auto_now_add=True)
+# 	level = models.IntegerField(default=2) # higher is more serious
+
+# 	def __unicode__(self):
+# 		return self.name
 
 class PhysicianTimeLogCategory(models.Model):
 	TIME_PERIODS = (
