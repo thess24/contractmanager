@@ -32,6 +32,20 @@
     margin-left: 100px;
     margin-right: 100px;
 }
+
+.rm-wf-btn{
+    background: none;
+    border: none;
+    color: #FF7878;
+    float: right;
+}
+
+.rm-wf-btn:focus{
+    border: 0;
+    outline: none;
+}
+
+
 </style>
     {% endblock %}
 
@@ -61,103 +75,48 @@
             <div class="col-lg-8">
 
 
-                <div class="ibox float-e-margins">
-                    
-                    <div class="ibox-content" id="ibox-content">
 
-                        <div class='input-box'>
-                            <h3>Workflow Name:</h3>
-                            <input type="text" class="form-control">
+                <form method='post'> {% csrf_token %}
+
+                    <div class="ibox float-e-margins">
+                        
+                        <div class="ibox-content" id="ibox-content">
+
+                            <div class='input-box'>
+                                <h3>Workflow Name:</h3>
+                                <input type="text" class="form-control">
+                            </div>
+
+                            <div>
+                                <button class='btn' id='add_user' type='button'>+ User</button>
+                                <button class='btn' id='add_group' type='button'>+ Group</button>
+                            </div>
+
+
+
+                            <div id='timeline-box'>
+                                <div id="vertical-timeline" class="vertical-container dark-timeline">
+           
+                                </div>
+                            </div>
+
+
+
+                            <button class='btn btn-lg btn-primary' name='add_workflow' type='submit'>Create Workflow</button>
                         </div>
+                        <!-- end ibox content -->
 
-
-
-                        <div id='timeline-box'>
-                        <div id="vertical-timeline" class="vertical-container dark-timeline">
-                            <div class="vertical-timeline-block">
-                                <div class="vertical-timeline-icon navy-bg">
-                                    <i class="fa fa-arrow-circle-down"></i>
-                                </div>
-
-                                <div class="vertical-timeline-content">
-                                    <h2>Meeting</h2>
-
-                                    <span class="vertical-date">
-                                        Today <br>
-                                        <small>Dec 24</small>
-                                    </span>
-                                </div>
-                            </div>
-
-                            <div class="vertical-timeline-block">
-                                <div class="vertical-timeline-icon blue-bg">
-                                    <i class="fa fa-arrow-circle-down"></i>
-                                </div>
-
-                                <div class="vertical-timeline-content">
-                                    <h2>Send documents to Mike</h2>
-
-                                    <span class="vertical-date">
-                                        Today <br>
-                                        <small>Dec 24</small>
-                                    </span>
-                                </div>
-                            </div>
-
-                            <div class="vertical-timeline-block">
-                                <div class="vertical-timeline-icon lazur-bg">
-                                    <i class="fa fa-arrow-circle-down"></i>
-                                </div>
-
-                                <div class="vertical-timeline-content">
-                                    <h2>Coffee Break</h2>
-
-                                </div>
-                            </div>
-
-                            <div class="vertical-timeline-block">
-                                <div class="vertical-timeline-icon yellow-bg">
-                                    <i class="fa fa-arrow-circle-down"></i>
-                                </div>
-
-                                <div class="vertical-timeline-content">
-                                    <h2>Phone with Jeronimo</h2>
-
-                                </div>
-                            </div>
-
-                            <div class="vertical-timeline-block">
-                                <div class="vertical-timeline-icon lazur-bg">
-                                    <i class="fa fa-arrow-circle-down"></i>
-                                </div>
-
-                                <div class="vertical-timeline-content">
-                                    <h2>Go to the doctor dr Smith</h2>
-
-                                </div>
-                            </div>
-
-                            <div class="vertical-timeline-block">
-                                <div class="vertical-timeline-icon navy-bg">
-                                    <i class="fa fa-arrow-circle-down"></i>
-                                </div>
-
-                                <div class="vertical-timeline-content">
-                                    <h2>Chat with Monica and Sandra</h2>
-
-                                </div>
-                            </div>
-                        </div>
-                        </div>
-
-
-
-                        <button class='btn btn-lg'>Add Workflow</button>
                     </div>
-                    <!-- end ibox content -->
 
+                </form>
 
-                </div>
+                <span style='display:none' id='add_user_input_id'>
+                    {{wfitemform.user}}
+                </span>
+
+                <span style='display:none' id='add_group_input_id'>
+                    {{wfitemform.team}}
+                </span>  
 
 
 
@@ -257,7 +216,7 @@
                  if (window.JSON) {
                      output.val(window.JSON.stringify(list.nestable('serialize')));//, null, 2));
                  } else {
-                     output.val('JSON browser support required for this demo.');
+                     output.val('JSON browser support required.');
                  }
              };
 
@@ -284,6 +243,56 @@
 
 
 
+
+
+
+             $('#add_user').on('click', function (e) {
+                e.preventDefault();
+                var add_input = $('#add_user_input_id').html();
+                var html_to_add = '<div class="vertical-timeline-block"> \
+                                        <div class="vertical-timeline-icon blue-bg">\
+                                            <i class="fa fa-arrow-circle-down"></i>\
+                                        </div>\
+                                        <div class="vertical-timeline-content">' + add_input + 
+                                        '<span class="vertical-date">\
+                                                <small>User</small>\
+                                        </span>\
+                                        <span><button class="rm-wf-btn">Remove</button></span>\
+                                        </div>\
+                                    </div>';
+
+                $('#vertical-timeline').append(html_to_add);
+
+             });
+
+
+
+             $('#add_group').on('click', function (e) {
+                e.preventDefault();
+                var add_input = $('#add_group_input_id').html();
+                var html_to_add = '<div class="vertical-timeline-block"> \
+                                        <div class="vertical-timeline-icon navy-bg">\
+                                            <i class="fa fa-arrow-circle-down"></i>\
+                                        </div>\
+                                        <div class="vertical-timeline-content">' + add_input + 
+                                        '<span class="vertical-date">\
+                                                <small>Group</small>\
+                                        </span>\
+                                        <span><button class="rm-wf-btn"type="button">Remove</button></span>\
+                                        </div>\
+                                    </div>';
+
+                $('#vertical-timeline').append(html_to_add);
+
+             });
+
+
+            $( document ).on( 'click', '.rm-wf-btn', function(e) {
+                e.preventDefault();
+                $( e.target ).closest(".vertical-timeline-block").remove();
+            });
+
+            
 
     </script>
     {% endblock %}

@@ -120,6 +120,7 @@ class Workflow(models.Model):
 	def __unicode__(self):
 		return self.name
 
+# make system-name unique
 
 class WorkflowItem(models.Model):
 	'''An individual chain in the workflow
@@ -498,6 +499,18 @@ class ContractInfoForm(ModelForm):
 		super(ContractInfoForm, self).__init__(*args, **kwargs)
 		for i in self.fields:
 			self.fields[i].widget.attrs['class'] = 'form-control'
+
+
+class WorkflowItemForm(ModelForm):
+	class Meta:
+		model = WorkflowItem
+		exclude = ('workflow','position')
+
+	def __init__(self, *args, **kwargs):
+		super(WorkflowItemForm, self).__init__(*args, **kwargs)
+		for i in self.fields:
+			self.fields[i].widget.attrs['class'] = 'form-control'
+
 
 class TeamForm(ModelForm):
 	class Meta:

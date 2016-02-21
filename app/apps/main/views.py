@@ -273,7 +273,20 @@ def workflows(request):
 
 @login_required
 def addworkflow(request):
-	context= {}
+
+	wfitemform = models.WorkflowItemForm()
+
+	if request.method=='POST':
+		if 'add_workflow' in request.POST:
+			# alert_id = request.POST.get('alert_id')
+			# alert = models.Alert.objects.get(id=alert_id)
+			# alert.active = False
+			# alert.save()
+
+			return HttpResponseRedirect(reverse('addworkflow'))
+
+
+	context= {'wfitemform':wfitemform}
 	return render(request, 'main/addworkflow.html', context)
 
 @login_required
