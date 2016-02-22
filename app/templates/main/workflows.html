@@ -23,7 +23,7 @@
     padding: 20px;
 }
 
-.input-box{
+.input-box{ 
     padding-top: 20px;
     padding-bottom: 20px;
 }
@@ -32,6 +32,23 @@
     margin-left: 100px;
     margin-right: 100px;
 }
+
+.wf-user{
+    font-weight: bold;
+    border: 1px solid #9AE8FF;
+    background: #C8F0FF;
+    padding: 2px;
+    border-radius: 5px;
+}
+
+.wf-group{
+    font-weight: bold;
+    border: 1px solid #FF9AAD;
+    background: #FFE0E0;
+    padding: 2px;
+    border-radius: 5px;
+}
+
 </style>
     {% endblock %}
 
@@ -41,10 +58,10 @@
 
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-12">
-                    <h2>Add A Workflow</h2>
+                    <h2>Workflows</h2>
                     <ol class="breadcrumb">
                         <li>
-                            <a href="index.html">Advocate Healthcare</a>
+                            <a>Advocate Healthcare</a>
                         </li>
                         <li>
                             <a>Workflows</a>
@@ -56,102 +73,49 @@
         <div class="wrapper wrapper-content animated fadeInRight">
 
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-12">
 
 
                 <div class="ibox float-e-margins">
                     
                     <div class="ibox-content" id="ibox-content">
 
-                        <div class='input-box'>
-                            <h3>Workflow Name:</h3>
-                            <input type="text" class="form-control">
-                        </div>
+                        <table class='table'>
+                            <thead>
+                                <th>Name</th>
+                                <th>Flow</th>
+                                <th>Date Added</th>
+                                <th>Added By</th>
+                            </thead>
+                            <tbody>
+                                {% for wf in workflows %}
+                                <tr>
+                                    <td>{{wf.name}}</td>
+                                    <td>
+                                        
+                                        {% for i in wf.workflowitem_set.all %}
+                                            {% if i.user %}
+                                            <span class='wf-user'>{{i.user}}</span> >>
+                                            {% else %}
+                                            <span class='wf-group'><i class='fa fa-group'></i> {{i.team}}</span> >>
+                                            {% endif %}
+                                        {% endfor %}
 
+                                        {% if wf.workflowitem_set.all %}
+                                            <span style='font-weight:bold'>Done</span>
+                                        {% else %}
+                                            <span style='font-weight:bold'>None</span>
+                                        {% endif %}
 
+                                    </td>
+                                    <td>{{wf.created_at}}</td>
+                                    <td>{{wf.created_by}}</td>
+                                </tr>
+                                {% endfor %}
 
-                        <div id='timeline-box'>
-                        <div id="vertical-timeline" class="vertical-container dark-timeline">
-                            <div class="vertical-timeline-block">
-                                <div class="vertical-timeline-icon navy-bg">
-                                    <i class="fa fa-arrow-circle-down"></i>
-                                </div>
+                            </tbody>
+                        </table>
 
-                                <div class="vertical-timeline-content">
-                                    <h2>Meeting</h2>
-                                    <input type='hidden' >
-
-                                    <span class="vertical-date">
-                                        Today <br>
-                                        <small>Dec 24</small>
-                                    </span>
-                                </div>
-                            </div>
-
-                            <div class="vertical-timeline-block">
-                                <div class="vertical-timeline-icon blue-bg">
-                                    <i class="fa fa-arrow-circle-down"></i>
-                                </div>
-
-                                <div class="vertical-timeline-content">
-                                    <h2>Send documents to Mike</h2>
-
-                                    <span class="vertical-date">
-                                        Today <br>
-                                        <small>Dec 24</small>
-                                    </span>
-                                </div>
-                            </div>
-
-                            <div class="vertical-timeline-block">
-                                <div class="vertical-timeline-icon lazur-bg">
-                                    <i class="fa fa-arrow-circle-down"></i>
-                                </div>
-
-                                <div class="vertical-timeline-content">
-                                    <h2>Coffee Break</h2>
-
-                                </div>
-                            </div>
-
-                            <div class="vertical-timeline-block">
-                                <div class="vertical-timeline-icon yellow-bg">
-                                    <i class="fa fa-arrow-circle-down"></i>
-                                </div>
-
-                                <div class="vertical-timeline-content">
-                                    <h2>Phone with Jeronimo</h2>
-
-                                </div>
-                            </div>
-
-                            <div class="vertical-timeline-block">
-                                <div class="vertical-timeline-icon lazur-bg">
-                                    <i class="fa fa-arrow-circle-down"></i>
-                                </div>
-
-                                <div class="vertical-timeline-content">
-                                    <h2>Go to the doctor dr Smith</h2>
-
-                                </div>
-                            </div>
-
-                            <div class="vertical-timeline-block">
-                                <div class="vertical-timeline-icon navy-bg">
-                                    <i class="fa fa-arrow-circle-down"></i>
-                                </div>
-
-                                <div class="vertical-timeline-content">
-                                    <h2>Chat with Monica and Sandra</h2>
-
-                                </div>
-                            </div>
-                        </div>
-                        </div>
-
-
-
-                        <button class='btn btn-lg'>Add Workflow</button>
                     </div>
                     <!-- end ibox content -->
 
@@ -161,76 +125,9 @@
 
 
             </div>
-            <!-- end col lg 8 -->
-
-            <div class="col-lg-4">
-
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Groups</h5>
-                    </div>
-                    <div class="ibox-content">
-
-                        <div id="nestable-menu">
-                            <button type="button" data-action="expand-all" class="btn btn-white btn-sm">Expand All</button>
-                            <button type="button" data-action="collapse-all" class="btn btn-white btn-sm">Collapse All</button>
-                        </div>
+            <!-- end col lg 12 -->
 
 
-                        <div class="dd" id="nestable2">
-                                <ol class="dd-list">
-                                    <li class="dd-item" data-id="1">
-                                        <div class="dd-handle">
-                                            <span class="label label-info"><i class="fa fa-users"></i></span> Cras ornare tristique.
-                                        </div>
-                                        <ol class="dd-list">
-                                            <li class="dd-item" data-id="2">
-                                                <div class="dd-handle">
-                                                    <span class="label label-info"><i class="fa fa-cog"></i></span> Vivamus vestibulum nulla nec ante.
-                                                </div>
-                                            </li>
-                                            <li class="dd-item" data-id="3">
-                                                <div class="dd-handle">
-                                                    <span class="label label-info"><i class="fa fa-bolt"></i></span> Nunc dignissim risus id metus.
-                                                </div>
-                                            </li>
-                                            <li class="dd-item" data-id="4">
-                                                <div class="dd-handle">
-                                                    <span class="label label-info"><i class="fa fa-laptop"></i></span> Vestibulum commodo
-                                                </div>
-                                            </li>
-                                        </ol>
-                                    </li>
-
-                                    <li class="dd-item" data-id="5">
-                                        <div class="dd-handle">
-                                            <span class="label label-warning"><i class="fa fa-users"></i></span> Integer vitae libero.
-                                        </div>
-                                        <ol class="dd-list">
-                                            <li class="dd-item" data-id="6">
-                                                <div class="dd-handle">
-                                                    <span class="label label-warning"><i class="fa fa-users"></i></span> Nam convallis pellentesque nisl.
-                                                </div>
-                                            </li>
-                                            <li class="dd-item" data-id="7">
-                                                <div class="dd-handle">
-                                                    <span class="label label-warning"><i class="fa fa-bomb"></i></span> Vivamus molestie gravida turpis
-                                                </div>
-                                            </li>
-                                            <li class="dd-item" data-id="8">
-                                                <div class="dd-handle">
-                                                    <span class="label label-warning"><i class="fa fa-child"></i></span> Ut aliquam sollicitudin leo.
-                                                </div>
-                                            </li>
-                                        </ol>
-                                    </li>
-                                </ol>
-                            </div>
-
-                    </div>
-                </div>
-
-            </div>
         </div>
 
 
@@ -241,50 +138,10 @@
     {% endblock %}
 
     {% block scripts %}
-
-    <!-- Page-Level Scripts -->
-    <script type="text/javascript" src='{{STATIC_URL}}js/jquery.nestable.js'></script>
-
-
+    
     <script>
-
-         $(document).ready(function(){
-
-             var updateOutput = function (e) {
-                 var list = e.length ? e : $(e.target),
-                         output = list.data('output');
-                 if (window.JSON) {
-                     output.val(window.JSON.stringify(list.nestable('serialize')));//, null, 2));
-                 } else {
-                     output.val('JSON browser support required for this demo.');
-                 }
-             };
-
-
-             // activate Nestable for list 2
-             $('#nestable2').nestable({
-                 group: 1
-             }).on('change', updateOutput);
-
-             // output initial serialised data
-             updateOutput($('#nestable2').data('output', $('#nestable2-output')));
-
-             $('#nestable-menu').on('click', function (e) {
-                 var target = $(e.target),
-                         action = target.data('action');
-                 if (action === 'expand-all') {
-                     $('.dd').nestable('expandAll');
-                 }
-                 if (action === 'collapse-all') {
-                     $('.dd').nestable('collapseAll');
-                 }
-             });
-         });
-
-
-
-
     </script>
+
     {% endblock %}
 
 

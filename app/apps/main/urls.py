@@ -111,6 +111,8 @@ urlpatterns = patterns('',
 # make addon template on form submit work (currently just adds to base template)
 # test login attempts security - make sure all usernames arent banned and check timeframe attempts last for
 # version numbers for reqs/prod.txt
+# template decorators to say what pages physicians can view
+
 
 
 # new contract page
@@ -127,7 +129,6 @@ urlpatterns = patterns('',
 	# - only can edit contract if you have it checked out
 # manage workflows page
 	# - groups actually loaded on right
-	# - ability to upload unknown number of inputs and create workflow object
 	# - Dragging box adds data to input
 # alerts
 

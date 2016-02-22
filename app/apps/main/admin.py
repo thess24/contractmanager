@@ -14,6 +14,9 @@ class PhysicianTimeLogPeriodAdmin(admin.ModelAdmin):
 class WorkflowItemAdmin(admin.ModelAdmin):
     list_display = ('workflow', 'user', 'position', 'team')
 
+class WorkflowAdmin(admin.ModelAdmin):
+    list_display = ('name', 'is_all_users')
+
 class PhysicianTimeLogCategoryAdmin(admin.ModelAdmin):
     list_display = ('physician', 'category', 'hours_needed')
 
@@ -27,7 +30,7 @@ admin.site.register(Physician)
 
 admin.site.register(Alert)
 
-admin.site.register(Workflow)
+admin.site.register(Workflow, WorkflowAdmin)
 admin.site.register(WorkflowItem, WorkflowItemAdmin)
 
 admin.site.register(Contract)

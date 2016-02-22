@@ -33,7 +33,7 @@ class HealthSite(models.Model):
 	street = models.CharField(max_length=100, blank=True, null=True)
 	city = models.CharField(max_length=100, blank=True, null=True)
 	state = models.CharField(max_length=30, blank=True, null=True)
-	zipcode = models.CharField(max_length=5)  # blank and null = True
+	zipcode = models.CharField(max_length=5, blank=True, null=True)
 	created_at = models.DateTimeField(auto_now_add=True)
 
 	def __unicode__(self):
@@ -45,7 +45,7 @@ class Team(models.Model):
 	''' a department/group/team within a healthsystem '''
 	system = models.ForeignKey(HealthSystem)
 	name = models.CharField(max_length=100)
-	description = models.TextField() # make optional?
+	description = models.TextField(blank=True, null=True)
 	admin = models.ForeignKey(User)
 
 	def __unicode__(self):
@@ -57,7 +57,7 @@ class UserProfile(models.Model):
 	user = models.OneToOneField(User)
 	system = models.ForeignKey(HealthSystem)
 	team = models.ForeignKey(Team)
-	sites = models.ManyToManyField(HealthSite, blank=True) # remove blank and null
+	sites = models.ManyToManyField(HealthSite)
 
 	superuser = models.BooleanField(default=False)  # can do anything and edit users? / change site settings
 	master = models.BooleanField(default=False)  # can do anything for sites listed
@@ -114,11 +114,14 @@ class Template(models.Model):
 class Workflow(models.Model):
 	''' done I think'''
 	system = models.ForeignKey(HealthSystem)
-	name = models.CharField(max_length=100)
+	name = models.CharField(max_length=100)  # make required
 	created_at = models.DateTimeField(auto_now_add=True)
+	created_by = models.ForeignKey(User)
+	is_all_users = models.BooleanField(default=True)
 
 	def __unicode__(self):
 		return self.name
+
 
 # make system-name unique
 
@@ -494,12 +497,20 @@ class ContractInfoForm(ModelForm):
 		model = ContractInfo
 		exclude = ('contract', 'html', 'html_output', 'version', 'created_by', 'prev_team', 'prev_user', 'grabbed_at', 'sent_at', 'current_user', 'current_team')
 
-
 	def __init__(self, *args, **kwargs):
 		super(ContractInfoForm, self).__init__(*args, **kwargs)
 		for i in self.fields:
 			self.fields[i].widget.attrs['class'] = 'form-control'
 
+class WorkflowForm(ModelForm):
+	class Meta:
+		model = Workflow
+		exclude = ('system','created_by')
+
+	def __init__(self, *args, **kwargs):
+		super(WorkflowForm, self).__init__(*args, **kwargs)
+		for i in self.fields:
+			self.fields[i].widget.attrs['class'] = 'form-control'
 
 class WorkflowItemForm(ModelForm):
 	class Meta:
@@ -656,8 +667,17 @@ class PhysicianTimeLogCategoryForm(ModelForm):
 		model = PhysicianTimeLogCategory
 		exclude = ('time_period',)
 
-	def __init__(self, *args, **kwargs):
+	def __init__(self, user, *args, **kwargs):
 		super(PhysicianTimeLogCategoryForm, self).__init__(*args, **kwargs)
 		for i in self.fields:
 			self.fields[i].widget.attrs['class'] = 'form-control'
+
+		self.fields['category'].queryset = ContractType.objects.filter(system=user.userprofile.system)
+		self.fields['physician'].queryset = Physician.objects.filter(system=user.userprofile.system)
+
+		# we can only pass from user to user for timesheets
+		self.fields['workflow_default'].queryset = Workflow.objects.filter(is_all_users=True, system=user.userprofile.system)
+
+		# approving users should be from the system, and not docs
+		self.fields['approving_users'].queryset = User.objects.filter(userprofile__system=user.userprofile.system)
 

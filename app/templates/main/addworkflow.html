@@ -61,7 +61,7 @@
                             <a href="index.html">Advocate Healthcare</a>
                         </li>
                         <li>
-                            <a>Workflow</a>
+                            <a href="{% url 'workflows' %}">Workflow</a>
                         </li>
                         <li>
                             <a>Add</a>
@@ -84,7 +84,8 @@
 
                             <div class='input-box'>
                                 <h3>Workflow Name:</h3>
-                                <input type="text" class="form-control">
+                                {{wfform.name.errors}}
+                                {{wfform.name}}
                             </div>
 
                             <div>
@@ -110,6 +111,8 @@
 
                 </form>
 
+
+
                 <span style='display:none' id='add_user_input_id'>
                     {{wfitemform.user}}
                 </span>
@@ -123,7 +126,7 @@
             </div>
             <!-- end col lg 8 -->
 
-            <div class="col-lg-4">
+<!--             <div class="col-lg-4">
 
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
@@ -190,7 +193,7 @@
                     </div>
                 </div>
 
-            </div>
+            </div> -->
         </div>
 
 
@@ -257,6 +260,7 @@
                                         '<span class="vertical-date">\
                                                 <small>User</small>\
                                         </span>\
+                                        <input type="hidden" name="wf_type_order" value="user" />\
                                         <span><button class="rm-wf-btn">Remove</button></span>\
                                         </div>\
                                     </div>';
@@ -278,6 +282,7 @@
                                         '<span class="vertical-date">\
                                                 <small>Group</small>\
                                         </span>\
+                                        <input type="hidden" name="wf_type_order" value="group" />\
                                         <span><button class="rm-wf-btn"type="button">Remove</button></span>\
                                         </div>\
                                     </div>';

@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.db.models import Count, Sum
+from django.contrib.auth.models import User
 import models
 import datetime
 from dateutil.relativedelta import relativedelta
@@ -268,25 +269,82 @@ def contract(request, contractid):
 
 @login_required
 def workflows(request):
-	context= {}
+	workflows = models.Workflow.objects.filter(system=request.user.userprofile.system)
+
+	context= {'workflows':workflows}
 	return render(request, 'main/workflows.html', context)
 
 @login_required
 def addworkflow(request):
 
 	wfitemform = models.WorkflowItemForm()
+	wfform = models.WorkflowForm()
 
 	if request.method=='POST':
 		if 'add_workflow' in request.POST:
-			# alert_id = request.POST.get('alert_id')
-			# alert = models.Alert.objects.get(id=alert_id)
-			# alert.active = False
-			# alert.save()
+
+			wfform = models.WorkflowForm(request.POST)
+
+			if wfform.is_valid():
+				wf = wfform.save(commit=False)
+				wf.system = request.user.userprofile.system
+				wf.created_by = request.user
+				wf_name = wf.name
+
+				if request.POST.getlist('team'):
+					wf.is_all_users = False
+				else:
+					wf.is_all_users = True
+
+				wf.save()
+
+
+			wf_type_order = request.POST.getlist('wf_type_order')
+			wf_users = (i for i in request.POST.getlist('user'))
+			wf_groups = (i for i in request.POST.getlist('team'))
+
+			position = 0
+
+			for w in wf_type_order:
+				# run through order of types and create workflow items in order
+
+				# need to do validation that all users/ team are valid before we save any - implement in future
+				if w=='group':
+					try:
+						team_id = next(wf_groups)
+					except:
+						continue
+
+					if team_id=='': continue
+
+					team = models.Team.objects.get(id=team_id)
+					models.WorkflowItem.objects.create(workflow=wf, position=position, team=team)
+
+				elif w=='user':
+					try:
+						user_id = next(wf_users)
+					except:
+						continue
+
+					if user_id=='': continue
+
+					user = User.objects.get(id=user_id)
+					models.WorkflowItem.objects.create(workflow=wf, position=position, user=user)
+				else:
+					# this shouldnt ever happen
+					pass
+
+				position += 1
+
+
+			msg = 'Created Workflow "{}"'.format(wf_name)
+			messages.add_message(request, messages.INFO, msg)
+
 
 			return HttpResponseRedirect(reverse('addworkflow'))
 
 
-	context= {'wfitemform':wfitemform}
+	context= {'wfitemform':wfitemform, 'wfform':wfform}
 	return render(request, 'main/addworkflow.html', context)
 
 @login_required
@@ -517,18 +575,20 @@ def timesheets(request):
 	except:
 		physician = None
 
-	context = {'physician':physician}
+	now = datetime.datetime.now()
+	last_month = now + relativedelta(months=-1)  # month that needs to be submitted -- aka last month
+	prev_month_dt = datetime.date(last_month.year,last_month.month,1)
+
+	context = {'physician':physician, 'prev_month_dt':prev_month_dt}
 
 	if physician:
 		denials = models.PhysicianTimeLogApproval.objects.filter(physiciantimelogperiod__timelog_category__physician__user=request.user, approved=False, active=True)
 		denials_count = denials.count()
 
-		now = datetime.datetime.now()
-		last_month = now + relativedelta(months=-1)  # month that needs to be submitted -- aka last month
-		prev_month_dt = datetime.date(last_month.year,last_month.month,1)
+
 		periods_previous = models.PhysicianTimeLogPeriod.objects.filter(timelog_category__physician=physician, active=True, period=prev_month_dt)
 
-	context.update({'denials_count':denials_count, 'periods_previous':periods_previous, 'prev_month_dt':prev_month_dt})
+		context.update({'denials_count':denials_count, 'periods_previous':periods_previous})
 	
 	if request.user.userprofile:
 		manager = True
@@ -696,11 +756,11 @@ def timesheets_by_physician(request, month, year):
 
 @login_required
 def timesheets_add_physician_category(request):
-	form = models.PhysicianTimeLogCategoryForm()
+	form = models.PhysicianTimeLogCategoryForm(user=request.user)
 
 	if request.method=='POST':
 		if 'addcategory' in request.POST:
-			form = models.PhysicianTimeLogCategoryForm(request.POST)
+			form = models.PhysicianTimeLogCategoryForm(request.user, request.POST)
 			if form.is_valid():
 				instance = form.save(commit=False)
 				instance.save()
