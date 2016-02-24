@@ -112,7 +112,7 @@ urlpatterns = patterns('',
 # test login attempts security - make sure all usernames arent banned and check timeframe attempts last for
 # version numbers for reqs/prod.txt
 # template decorators to say what pages physicians can view
-
+# test api to make sure vulnerabilities dont exist (users cant post to others accounts, access data, etc)
 
 
 # new contract page

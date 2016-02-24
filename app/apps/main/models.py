@@ -277,6 +277,17 @@ class Alert(models.Model):
 # 		return self.name
 
 class PhysicianTimeLogCategory(models.Model):
+	'''
+	The category that each physician has to submit times for.
+
+	approving_users:: 
+	first_elevation_users::
+	second_elevation_users::
+	final_elevation_users::
+
+	'''
+	
+
 	TIME_PERIODS = (
 		('Weekly', 'Weekly'),
 		('Monthly', 'Monthly'),
@@ -287,8 +298,12 @@ class PhysicianTimeLogCategory(models.Model):
 	workflow_default = models.ForeignKey(Workflow)
 	hours_needed = models.DecimalField(blank=True,null=True,decimal_places=2, max_digits=8)
 	time_period = models.CharField(max_length = 30, choices=TIME_PERIODS, default='Monthly')
-	approving_users = models.ManyToManyField(User)
+	approving_users = models.ManyToManyField(User, related_name='approving')
 	created_at = models.DateTimeField(auto_now_add=True)
+
+	first_elevation_users = models.ManyToManyField(User, blank=True, related_name='first_elevation')
+	second_elevation_users = models.ManyToManyField(User, blank=True, related_name='second_elevation')
+	final_elevation_users = models.ManyToManyField(User, blank=True, related_name='final_elevation')
 
 	# add unique constraint for physician - category?
 
@@ -665,7 +680,7 @@ class PhysicianTimeLogForm(ModelForm):
 class PhysicianTimeLogCategoryForm(ModelForm):
 	class Meta:
 		model = PhysicianTimeLogCategory
-		exclude = ('time_period',)
+		exclude = ('time_period','approving_users')
 
 	def __init__(self, user, *args, **kwargs):
 		super(PhysicianTimeLogCategoryForm, self).__init__(*args, **kwargs)
@@ -678,6 +693,8 @@ class PhysicianTimeLogCategoryForm(ModelForm):
 		# we can only pass from user to user for timesheets
 		self.fields['workflow_default'].queryset = Workflow.objects.filter(is_all_users=True, system=user.userprofile.system)
 
-		# approving users should be from the system, and not docs
-		self.fields['approving_users'].queryset = User.objects.filter(userprofile__system=user.userprofile.system)
+		# users should be from the system, and be managers (ie have userprofiles)
+		self.fields['first_elevation_users'].queryset = User.objects.filter(userprofile__system=user.userprofile.system)
+		self.fields['second_elevation_users'].queryset = User.objects.filter(userprofile__system=user.userprofile.system)
+		self.fields['final_elevation_users'].queryset = User.objects.filter(userprofile__system=user.userprofile.system)
 

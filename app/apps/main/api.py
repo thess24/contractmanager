@@ -4,7 +4,8 @@ from tastypie.authentication import BasicAuthentication
 from tastypie import fields
 
 from django.contrib.auth.models import User
-from apps.main.models import Physician, PhysicianTimeLog
+from apps.main.models import Physician, PhysicianTimeLog, Alert, PhysicianTimeLogCategory
+
 
 
 # 1. only let user post to their own user account				CHECKED
@@ -15,9 +16,18 @@ from apps.main.models import Physician, PhysicianTimeLog
 
 
 # AUTHORIZATION
+class PhysicianTimeLogAuthorization(Authorization):
+    def read_list(self, object_list, bundle):
+        return object_list.filter(timelog_category__physician__user=bundle.request.user)
+
+class UserAuthorization(Authorization):
+    def read_list(self, object_list, bundle):
+        return object_list.filter(user=bundle.request.user)
+
 class PhysicianAuthorization(Authorization):
     def read_list(self, object_list, bundle):
         return object_list.filter(physician__user=bundle.request.user)
+
 
 
 
@@ -28,6 +38,7 @@ class UserResource(ModelResource):
 		queryset = User.objects.all()
 		resource_name = 'user'
 		excludes = ['email', 'password', 'is_active', 'is_staff', 'is_superuser']
+		allowed_methods = ['get']
 		filtering = {
 			'username': ALL,
 		}
@@ -37,20 +48,21 @@ class PhysicianResource(ModelResource):
 
 	class Meta:
 		queryset = Physician.objects.all()
+		allowed_methods = ['get']
 		filtering = {
 			'user': ALL_WITH_RELATIONS,
 		}
 
 class PhysicianTimeLogResource(ModelResource):
-	physician = fields.ForeignKey(PhysicianResource, 'physician')
+	timelog_category = fields.ForeignKey(PhysicianResource, 'timelog_category')
 
 	class Meta:
 		queryset = PhysicianTimeLog.objects.all()
 		filtering = {
-			'physician': ALL_WITH_RELATIONS,
+			'timelog_category': ALL_WITH_RELATIONS,
 		}
 		authentication = BasicAuthentication()
-		authorization = PhysicianAuthorization()
+		authorization = PhysicianTimeLogAuthorization()
 
 	def hydrate(self, bundle):
 		# print bundle.obj
@@ -59,5 +71,35 @@ class PhysicianTimeLogResource(ModelResource):
 
 	def obj_create(self, bundle, **kwargs):
 		'''creates the object from the data passed in'''
-		physician = Physician.objects.get(user=bundle.request.user)
-		return super(PhysicianTimeLogResource, self).obj_create(bundle, physician = physician)
+		physician = Physician.objects.get(user=bundle.request.user) 
+		return super(PhysicianTimeLogResource, self).obj_create(bundle, timelog_category__physician = physician)
+
+
+
+class PhysicianAlertResource(ModelResource):
+	user = fields.ForeignKey(UserResource, 'user')
+
+	class Meta:
+		queryset = Alert.objects.all()
+		allowed_methods = ['get']
+		filtering = {
+			'user': ALL_WITH_RELATIONS,
+		}
+
+		authentication = BasicAuthentication()
+		authorization = UserAuthorization()
+
+
+class PhysicianTimeLogCategoryResource(ModelResource):
+	physician = fields.ForeignKey(PhysicianResource, 'physician')
+
+	class Meta:
+		queryset = PhysicianTimeLogCategory.objects.all()
+		excludes = ['first_elevation_users', 'second_elevation_users', 'final_elevation_users', 'approving_users', 'workflow_default']
+		allowed_methods = ['get']
+		filtering = {
+			'physician': ALL_WITH_RELATIONS,
+		}
+
+		authentication = BasicAuthentication()
+		authorization = PhysicianAuthorization()

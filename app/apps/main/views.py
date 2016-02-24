@@ -657,6 +657,11 @@ def timesheets_approve_view(request):
 			ptla = models.PhysicianTimeLogApproval(user=request.user, physiciantimelogperiod=ts)
 			ptla.save()
 
+
+			physician = ptla.physiciantimelogperiod.timelog_category.physician
+			msg = '{} has been approved'.format(physician)
+			messages.add_message(request, messages.INFO, msg)
+
 			return HttpResponseRedirect(reverse('timesheets_approve_view'))
 
 
@@ -670,7 +675,35 @@ def timesheets_approve_view(request):
 			ptla = models.PhysicianTimeLogApproval(user=request.user, physiciantimelogperiod=ts, approved=False)
 			ptla.save()
 
+
 			# check here if need to escalate or not and create alerts
+			physician = ptla.physiciantimelogperiod.timelog_category.physician
+			one_year_ago = datetime.now() - relativedelta(years=1)
+
+			denials = models.PhysicianTimeLogApproval.objects\
+				.filter(physiciantimelogperiod__timelog_category__physician=physician, approved=False, active=True, created_at__gte=one_year_ago)
+			denials_count = denials.count()
+
+
+			if denials_count==1:
+				elevation_users = ptla.physiciantimelogperiod.first_elevation_users
+			elif denials_count==2:
+				elevation_users = ptla.physiciantimelogperiod.second_elevation_users
+			else:
+				elevation_users = ptla.physiciantimelogperiod.final_elevation_users
+
+
+			for u in elevation_users.all():
+				alert_string = '{} has had {} denials in the past year'.format(physician, denials_count)
+				alert = models.Alert.objects.create(user=u, name=alert_string)
+
+				# alert emails should be sent out here
+
+				
+
+			msg = '{} has been denied'.format(physician)
+			messages.add_message(request, messages.INFO, msg)
+
 			return HttpResponseRedirect(reverse('timesheets_approve_view'))
 
 
@@ -738,14 +771,7 @@ def timesheets_by_physician(request, month, year):
 	physician_categories = did
 
 
-	now = datetime.datetime.now()
-	for doc in physician_categories:
-		if not doc["submitted"]:
-			if now.day in [8,12,14]:
-				print 
-
-
-
+	# import ipdb;ipdb.set_trace()
 
 
 	context= {'tlcategories':tlcategories, 'periods':periods, 'physician_categories':physician_categories,\
@@ -762,8 +788,21 @@ def timesheets_add_physician_category(request):
 		if 'addcategory' in request.POST:
 			form = models.PhysicianTimeLogCategoryForm(request.user, request.POST)
 			if form.is_valid():
+
 				instance = form.save(commit=False)
 				instance.save()
+				form.save_m2m()
+
+
+				wf_users = []
+				for i in instance.workflow_default.workflowitem_set.all(): 
+					wf_users.append(i.user)
+				instance.approving_users = wf_users
+				instance.save()
+
+
+				msg = 'Category Added for {}'.format(instance.physician)
+				messages.add_message(request, messages.INFO, msg)
 
 				return HttpResponseRedirect(reverse('timesheets_view'))
 

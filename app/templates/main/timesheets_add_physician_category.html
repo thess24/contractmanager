@@ -70,6 +70,7 @@
                                         </div> 
                                         {{form.physician}}
                                     </div>  
+                                    <a href="{% url 'allphysicians' %}" class='pull-right'>View Physicians</a>
                                 </div>
                                 <div class='col-md-4'>
                                     {{form.category.errors}}
@@ -77,7 +78,7 @@
                                     {{form.category}}
                                 </div>
                             </div>
-                            <div class='row'>
+                            <div class='row' style='padding-top:5px'>
                                 <div class='col-md-4'>
                                     {{form.workflow_default.errors}}
                                     {{form.workflow_default.label_tag}}
@@ -89,6 +90,7 @@
                                         </div> 
                                         {{form.workflow_default}}
                                     </div>  
+                                    <a href="{% url 'workflows' %}" class='pull-right'>View Workflows</a>
                                 </div>
                                 <div class='col-md-4'>
                                     {{form.hours_needed.errors}}
@@ -96,14 +98,23 @@
                                     {{form.hours_needed}}
                                 </div>
                             </div>
-                            <div class='row'>
-                                <div class='col-md-6'>
-                                    {{form.approving_users.errors}}
-                                    {{form.approving_users.label_tag}}
-                                    {{form.approving_users}}
+                            <div class='row' style='padding-top:30px'>
+                                <div class='col-md-3'>
+                                    {{form.first_elevation_users.errors}}
+                                    {{form.first_elevation_users.label_tag}}
+                                    {{form.first_elevation_users}}
+                                </div>
+                                <div class='col-md-3'>
+                                    {{form.second_elevation_users.errors}}
+                                    {{form.second_elevation_users.label_tag}}
+                                    {{form.second_elevation_users}}
+                                </div>
+                                <div class='col-md-3'>
+                                    {{form.final_elevation_users.errors}}
+                                    {{form.final_elevation_users.label_tag}}
+                                    {{form.final_elevation_users}}
                                 </div>
                             </div>
-
 
                             <br>
                             <br>

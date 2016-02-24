@@ -20,6 +20,10 @@ class WorkflowAdmin(admin.ModelAdmin):
 class PhysicianTimeLogCategoryAdmin(admin.ModelAdmin):
     list_display = ('physician', 'category', 'hours_needed')
 
+class AlertAdmin(admin.ModelAdmin):
+    list_display = ('name', 'user', 'active', 'level')
+    
+
 
 admin.site.register(HealthSystem)
 admin.site.register(HealthSite)
@@ -28,7 +32,7 @@ admin.site.register(UserProfile)
 admin.site.register(PhysicianGroup)
 admin.site.register(Physician)
 
-admin.site.register(Alert)
+admin.site.register(Alert, AlertAdmin)
 
 admin.site.register(Workflow, WorkflowAdmin)
 admin.site.register(WorkflowItem, WorkflowItemAdmin)
