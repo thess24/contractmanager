@@ -81,6 +81,31 @@
         font-weight: 200;
     }
 
+    .front-footer ul li{
+        list-style: none;
+    }
+
+    .front-footer ul li a{
+        color: rgba(26, 179, 148, 0.5);
+    }
+
+    .front-footer ul{
+        padding: 0px!important;
+    }
+
+    .front-footer h3{
+        margin-bottom: 30px;
+        margin-top: 30px;
+        border-bottom: 1px solid #505050;
+        padding-bottom: 20px;
+        font-weight: bold;
+    }
+
+    .front-footer-area{
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
     </style>
     {% block head %}
     {% endblock %}
@@ -143,34 +168,48 @@
 
 <section id="contact" class="contact front-footer">
     <div class="container">
-        <div class="row m-b-lg">
-            <div class="col-lg-12 text-center">
-                <div class="navy-line"></div>
-                <h1>Baldur Healthcare</h1>
+        <div class="row" style='margin-top:100px;margin-bottom:100px'>
+            <div class="col-lg-3">
+                <img src="{{ STATIC_URL }}img/logo_white.png" style='height:30px;margin-top:20px'>
+                
             </div>
-        </div>
-        <div class="row m-b-lg">
-            <div class="col-lg-3 col-lg-offset-3">
-                <address>
-                    <strong><span class="navy">Baldur Healthcare, Inc.</span></strong><br/>
+            <div class="col-lg-3">
+                <h3>About Us</h3>
+                <div class="text-color">
+                    Baldur Healthcare is dedicated to providing the best healthcare compliance software possible. Reach out to us with any questions and we will be happy to answer!
+                </div>
+            </div>
+            <div class="col-lg-3 front-footer-area">
+                <h3>Reach Out</h3>
+                <p class="text-color">
+                    <address>
+                    <strong><span class="">Baldur Health Care, Inc.</span></strong><br/>
                     Chicago, IL<br/>
                     <!-- <abbr title="Phone">P:</abbr> (123) 456-7890 -->
-                </address>
+                    </address>
+                    <!-- <div>info@baldurhealthcare.com</div> -->
+
+                </p>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-3 front-footer-area">
+                <h3>Links</h3>
                 <p class="text-color">
-                    Baldur Healthcare is dedicated to providing the best healthcare compliance software possible. Reach out to us with any questions and we will be happy to answer!
+                    <ul>
+                        <li><a href="{% url 'about' %}">About Us</a></li>
+                        <li><a href="{% url 'products' %}">Our Products</a></li>
+                        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                        <li><a href="/accounts/login">Sign In</a></li>
+                    </ul>
                 </p>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 text-center">
-                <a href="{% url 'contact' %}" class="btn btn-primary">Contact Us</a>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 text-center m-t-lg m-b-lg">
-                <p><strong>&copy; 2016 Baldur Healthcare</strong><br/></p>
+            <div class="text-center m-t-lg m-b-lg">
+                <div><strong>&copy; 2016 Baldur Healthcare</strong><br/></div>
             </div>
         </div>
     </div>
