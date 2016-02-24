@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.conf.urls import patterns, include, url
-from apps.main.api import PhysicianResource, PhysicianTimeLogResource, UserResource, PhysicianAlertResource, PhysicianTimeLogCategoryResource
+from apps.main.api import PhysicianResource, PhysicianTimeLogResource, UserResource, PhysicianAlertResource, PhysicianTimeLogCategoryResource, PhysicianTimeLogPeriodResource
 from tastypie.api import Api
 from django.views.generic import TemplateView
 from axes.decorators import watch_login
@@ -15,6 +15,7 @@ v1_api.register(PhysicianTimeLogResource())
 v1_api.register(UserResource())
 v1_api.register(PhysicianAlertResource())
 v1_api.register(PhysicianTimeLogCategoryResource())
+v1_api.register(PhysicianTimeLogPeriodResource())
 
 
 

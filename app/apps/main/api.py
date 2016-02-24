@@ -4,7 +4,7 @@ from tastypie.authentication import BasicAuthentication
 from tastypie import fields
 
 from django.contrib.auth.models import User
-from apps.main.models import Physician, PhysicianTimeLog, Alert, PhysicianTimeLogCategory
+from apps.main.models import Physician, PhysicianTimeLog, Alert, PhysicianTimeLogCategory, PhysicianTimeLogPeriod
 
 
 
@@ -53,8 +53,62 @@ class PhysicianResource(ModelResource):
 			'user': ALL_WITH_RELATIONS,
 		}
 
+
+class PhysicianAlertResource(ModelResource):
+	'''Alerts for an individual physician -- GET only'''
+
+	user = fields.ForeignKey(UserResource, 'user')
+
+	class Meta:
+		queryset = Alert.objects.all()
+		allowed_methods = ['get']
+		filtering = {
+			'user': ALL_WITH_RELATIONS,
+		}
+
+		authentication = BasicAuthentication()
+		authorization = UserAuthorization()
+
+
+class PhysicianTimeLogCategoryResource(ModelResource):
+	'''Physician Time Log Categories - GET only'''
+
+	physician = fields.ForeignKey(PhysicianResource, 'physician')
+
+	class Meta:
+		queryset = PhysicianTimeLogCategory.objects.all()
+		excludes = ['first_elevation_users', 'second_elevation_users', 'final_elevation_users', 'approving_users', 'workflow_default']
+		allowed_methods = ['get']
+		filtering = {
+			'physician': ALL_WITH_RELATIONS,
+		}
+
+		authentication = BasicAuthentication()
+		authorization = PhysicianAuthorization()
+
+
+
+class PhysicianTimeLogPeriodResource(ModelResource):
+	'''Physician Time Log Periods - GET only'''
+
+	timelog_category = fields.ForeignKey(PhysicianTimeLogCategoryResource, 'timelog_category')
+
+	class Meta:
+		queryset = PhysicianTimeLogPeriod.objects.all()
+		excludes = ['current_user', 'workflow', 'approval_num', 'paid_at', 'paid_by']
+		allowed_methods = ['get']
+		filtering = {
+			'timelog_category': ALL_WITH_RELATIONS,
+		}
+
+		authentication = BasicAuthentication()
+		authorization = PhysicianTimeLogAuthorization()
+
+
 class PhysicianTimeLogResource(ModelResource):
-	timelog_category = fields.ForeignKey(PhysicianResource, 'timelog_category')
+	''' Individual time logs for an individual physician --  POST and GET'''
+
+	timelog_category = fields.ForeignKey(PhysicianTimeLogCategoryResource, 'timelog_category')
 
 	class Meta:
 		queryset = PhysicianTimeLog.objects.all()
@@ -75,31 +129,10 @@ class PhysicianTimeLogResource(ModelResource):
 		return super(PhysicianTimeLogResource, self).obj_create(bundle, timelog_category__physician = physician)
 
 
+##### NEED TO ADD
 
-class PhysicianAlertResource(ModelResource):
-	user = fields.ForeignKey(UserResource, 'user')
-
-	class Meta:
-		queryset = Alert.objects.all()
-		allowed_methods = ['get']
-		filtering = {
-			'user': ALL_WITH_RELATIONS,
-		}
-
-		authentication = BasicAuthentication()
-		authorization = UserAuthorization()
+# Ability to submit period [POST]
+# Approve/Deny History [GET]
 
 
-class PhysicianTimeLogCategoryResource(ModelResource):
-	physician = fields.ForeignKey(PhysicianResource, 'physician')
 
-	class Meta:
-		queryset = PhysicianTimeLogCategory.objects.all()
-		excludes = ['first_elevation_users', 'second_elevation_users', 'final_elevation_users', 'approving_users', 'workflow_default']
-		allowed_methods = ['get']
-		filtering = {
-			'physician': ALL_WITH_RELATIONS,
-		}
-
-		authentication = BasicAuthentication()
-		authorization = PhysicianAuthorization()
