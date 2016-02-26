@@ -43,7 +43,6 @@
 
     .front-footer{
         background:#272727;
-        margin-top:250px!important;
     }
 
     .signin-label{
@@ -106,16 +105,58 @@
         padding-right: 15px;
     }
 
+/*    .preloader{
+        display: block;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: 9999999;
+        background-color: #ffffff;
+        top: 0;
+        left: 0;
+        color: #e1e1e1;
+    }
+
+    .preloader .preloader-content-wrapper {
+        display: table;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+    }
+
+    .preloader .preloader-content {
+        display: table-cell;
+        vertical-align: middle;
+    }
+*/
+    .carousel-caption{
+        top: 120px!important;
+    }
+
     </style>
     {% block head %}
     {% endblock %}
 
 </head>
 <body id="page-top" class="landing-page no-skin-config">
+
+
+    <!-- begin preloader -->
+<!-- <div class="preloader">
+    <div class="preloader-content-wrapper">
+        <div class="preloader-content">
+            <i class="fa fa-circle-o-notch fa-5x fa-spin"></i>
+        </div>
+    </div>
+</div> -->
+<!-- end preloader -->
+
+
+
 <div class="navbar-wrapper">
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <nav class="navbar navbar-default navbar-fixed-top navbar-scroll" role="navigation">
             <div class="container">
-                <div class="navbar-header page-scroll">
+                <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
@@ -123,8 +164,8 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a href="/">
-                        <img src="{{ STATIC_URL }}img/logo.png" style='height:30px;margin-top:20px' class='hidden' id='header_logo'>
-                        <img src="{{ STATIC_URL }}img/logo_white.png" style='height:30px;margin-top:20px' id='header_logo_white'>
+                        <img src="{{ STATIC_URL }}img/logo.png" style='height:30px;margin-top:20px'  id='header_logo'>
+                        <img src="{{ STATIC_URL }}img/logo_white.png" style='height:30px;margin-top:20px' id='header_logo_white' class='hidden'>
                     </a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
@@ -166,7 +207,7 @@
 
 
 
-<section id="contact" class="contact front-footer">
+<section class="front-footer">
     <div class="container">
         <div class="row" style='margin-top:100px;margin-bottom:100px'>
             <div class="col-lg-3">
@@ -242,56 +283,10 @@
 
 <script>
 
-    $(document).ready(function () {
-
-        $('body').scrollspy({
-            target: '.navbar-fixed-top',
-            offset: 80
-        });
-
-        // Page scrolling feature
-        $('a.page-scroll').bind('click', function(event) {
-            var link = $(this);
-            $('html, body').stop().animate({
-                scrollTop: $(link.attr('href')).offset().top - 50
-            }, 500);
-            event.preventDefault();
-        });
+    // Preloader
+    $(window).load(function(){
+      $('.preloader').fadeOut();
     });
-
-    var cbpAnimatedHeader = (function() {
-        var docElem = document.documentElement,
-                header = document.querySelector( '.navbar-default' ),
-                didScroll = false,
-                changeHeaderOn = 200;
-        function init() {
-            window.addEventListener( 'scroll', function( event ) {
-                if( !didScroll ) {
-                    didScroll = true;
-                    setTimeout( scrollPage, 250 );
-                }
-            }, false );
-        }
-        function scrollPage() {
-            var sy = scrollY();
-            if ( sy >= changeHeaderOn ) {
-                $(header).addClass('navbar-scroll');
-                $('#header_logo').removeClass('hidden');
-                $('#header_logo_white').addClass('hidden');
-            }
-            else {
-                $(header).removeClass('navbar-scroll');
-                $('#header_logo').addClass('hidden');
-                $('#header_logo_white').removeClass('hidden');
-            }
-            didScroll = false;
-        }
-        function scrollY() {
-            return window.pageYOffset || docElem.scrollTop;
-        }
-        init();
-
-    })();
 
     // Activate WOW.js plugin for animation on scrol
     new WOW().init();

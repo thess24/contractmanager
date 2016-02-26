@@ -13,7 +13,6 @@
     }
 
     .frontpage-header-style{
-
         background-image: linear-gradient(90deg, rgb(22, 160, 133) 24%, rgb(41, 128, 185) 100%);
         background-image: -moz-linear-gradient(left, rgb(22, 160, 133) 24%, rgb(41, 128, 185) 100%);
         background-image: -webkit-linear-gradient(left, rgb(22, 160, 133) 24%, rgb(41, 128, 185) 100%);
@@ -35,13 +34,8 @@
         padding-left: 0px;
     }
 
-    #violation-dollar-countup{
-        font-size: 7em;
-        font-weight: 600;
-    }
-
     .product-outline{
-        outline: 1px solid #E8E8E8;
+        outline: 3px solid #E8E8E8;
         outline-offset: -8px;
         padding: 15px 30px;
         text-align: center;
@@ -52,13 +46,20 @@
               transition: outline 0.7s ease; 
     }
 
+    .product-outline h2{
+        font-size: 20px;
+        letter-spacing: -1px;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
     .product-outline i{
         display: block;
         font-size: 8em;
     }
 
     .product-outline:hover{
-        outline: 1px solid #1AB394;
+        outline: 3px solid rgba(26,179,148,.3);
     }
 
     #benefits-row h2{
@@ -84,6 +85,10 @@
 
     .text-underline{
         border-bottom: 1px solid #55A97F;
+    }
+
+    .gray{
+        background: #FBFBFB;
     }
 
 </style>
@@ -112,7 +117,7 @@
 </div>
 
 
-<section id="features" class="container services" style='padding:175px 0px 100px 0px'>
+<section class="container services" style='padding:175px 0px 0px 0px'>
     <div class="row text-center" id='benefit-main'>
         <h1>A <span class='text-underline'>Simple</span>, <span class='text-underline'>Cost Effective</span> & <span class='text-underline'>Feature Rich</span> Compliance Software Solution</h1>
     </div>
@@ -136,36 +141,37 @@
         </p>
     </div>  
 
-<!--     <div class='row' style='padding-top:100px'>
-        <h1 id='violation-dollar-countup'>0</h1>
-        <h3>Total fines for Stark Violations in 2015 alone</h3>
-    </div>  -->
+</section>
 
-    <hr style='margin-top:100px;margin-bottom:50px'>
-    <div class="row" style='padding:0px 0px 50px 0px'>
-        <div class="col-lg-12 text-center">
-            <div class="navy-line"></div>
-            <h1>Our Products</h1>
+<hr style='margin-top:100px;margin-bottom:0px'>
+
+<section style='padding:0px 0px 100px 0px' class='gray'>
+    <div class='container'>
+        <div class="row" style='padding:0px 0px 50px 0px'>
+            <div class="col-lg-12 text-center">
+                <div class="navy-line"></div>
+                <h1>Our Products</h1>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-4 product-outline">
-            <i class='ion-ios-copy-outline'></i>
-            <h2>Contract Manager</h2>
-            <p>Create, Manage, and Track Physician Arrangement Contracts</p>
-            <p><a class="navy-link" href="{% url 'products_contractmanager' %}" role="button">Details &raquo;</a></p>
-        </div>
-        <div class="col-sm-4 product-outline">
-            <i class='ion-ios-time-outline'></i>
-            <h2>Physician Time Tracker</h2>
-            <p>Tracking physician arrangement times couldn't be easier</p>
-            <p><a class="navy-link" href="{% url 'products_timetracker' %}" role="button">Details &raquo;</a></p>
-        </div>
-        <div class="col-sm-4 product-outline">
-            <i class='ion-ios-pulse'></i>
-            <h2>Analytics Suite</h2>
-            <p>Use your data to help you make strategic decisions</p>
-            <p><a class="navy-link" href="{% url 'products_analytics' %}" role="button">Details &raquo;</a></p>
+        <div class="row">
+            <div class="col-sm-4 product-outline">
+                <i class='ion-ios-copy-outline'></i>
+                <h2>Contract Manager</h2>
+                <p>Create, Manage, and Track Physician Arrangement Contracts</p>
+                <p><a class="navy-link" href="{% url 'products_contractmanager' %}" role="button">Details &raquo;</a></p>
+            </div>
+            <div class="col-sm-4 product-outline">
+                <i class='ion-ios-time-outline'></i>
+                <h2>Physician Time Tracker</h2>
+                <p>Tracking physician arrangement times couldn't be easier</p>
+                <p><a class="navy-link" href="{% url 'products_timetracker' %}" role="button">Details &raquo;</a></p>
+            </div>
+            <div class="col-sm-4 product-outline">
+                <i class='ion-ios-pulse'></i>
+                <h2>Analytics Suite</h2>
+                <p>Use your data to help you make strategic decisions</p>
+                <p><a class="navy-link" href="{% url 'products_analytics' %}" role="button">Details &raquo;</a></p>
+            </div>
         </div>
     </div>
 </section>
@@ -199,32 +205,12 @@
     </div>
 
 </section> -->
-
-<section id="tryus" class="navy-section testimonials" style="margin-top: 0">
-
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center wow zoomIn">
-                <i class="fa fa-comment big-icon"></i>
-                <h1>
-                    Try Us Out
-                </h1>
-                <div class="testimonials-text">
-                    <i>Want to learn more about what we can do for you?  Check out our site and book a demo by clicking below</i>
-                </div>
-                <br>
-                <a href="{% url 'contact' %}" class='btn btn-lg btn-demo'>Contact Us</a>
-
-            </div>
-        </div>
-    </div>
-
-</section>
+    <hr style='margin-top:0px;margin-bottom:50px'>
 
 
-<section  class="container features" style='padding-top:40px'>
+<section  class="container" style='padding-bottom:100px'>
 
-<div class="row">
+    <div class="row">
         <div class="col-lg-12 text-center">
             <div class="navy-line"></div>
             <h1>Simplify Compliance</h1>
@@ -234,7 +220,7 @@
     <div class="row features-block">
 
         <div class='col-lg-6 wow fadeInLeft'>
-            <p style='margin-bottom:30px'>Our seamless system is designed to keep things easy for you.  We help you create and manage physician arrangements while making things as simple as possbile, so you can focus on getting things done quickly and effectively.</p>
+            <p style='margin-bottom:30px'>Our seamless system is designed to keep things easy for you.  We help you manage physician arrangements while making things as simple as possbile, so you can focus on getting things done quickly and effectively.</p>
         
             <div class='row'>
                 <div class="col-lg-6">
@@ -269,6 +255,27 @@
     </div>
 </section>
 
+<section id="tryus" class="navy-section testimonials">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center wow zoomIn">
+                <i class="fa fa-comment big-icon"></i>
+                <h1>
+                    Try Us Out
+                </h1>
+                <div class="testimonials-text">
+                    <i>Want to learn more about what we can do for you?  Check out our site and book a demo by clicking below</i>
+                </div>
+                <br>
+                <a href="{% url 'contact' %}" class='btn btn-lg btn-demo'>Contact Us</a>
+
+            </div>
+        </div>
+    </div>
+
+</section>
+
 {% endblock %}
 
 
@@ -277,7 +284,13 @@
 
 <script>
     
-    $(document).ready(function () {
+        header = document.querySelector( '.navbar-default' ),
+        $(header).removeClass('navbar-scroll');
+        $('#header_logo').addClass('hidden');
+        $('#header_logo_white').removeClass('hidden');
+
+      $(document).ready(function () {
+
 
         $('body').scrollspy({
             target: '.navbar-fixed-top',
@@ -292,13 +305,17 @@
             }, 500);
             event.preventDefault();
         });
+
+
+
+
     });
 
     var cbpAnimatedHeader = (function() {
         var docElem = document.documentElement,
                 header = document.querySelector( '.navbar-default' ),
                 didScroll = false,
-                changeHeaderOn = 200;
+                changeHeaderOn = 100;
         function init() {
             window.addEventListener( 'scroll', function( event ) {
                 if( !didScroll ) {
@@ -307,16 +324,20 @@
                 }
             }, false );
         }
-        // function scrollPage() {
-        //     var sy = scrollY();
-        //     if ( sy >= changeHeaderOn ) {
-        //         $(header).addClass('navbar-scroll')
-        //     }
-        //     else {
-        //         $(header).removeClass('navbar-scroll')
-        //     }
-        //     didScroll = false;
-        // }
+        function scrollPage() {
+            var sy = scrollY();
+            if ( sy >= changeHeaderOn ) {
+                $(header).addClass('navbar-scroll');
+                $('#header_logo').removeClass('hidden');
+                $('#header_logo_white').addClass('hidden');
+            }
+            else {
+                $(header).removeClass('navbar-scroll');
+                $('#header_logo').addClass('hidden');
+                $('#header_logo_white').removeClass('hidden');
+            }
+            didScroll = false;
+        }
         function scrollY() {
             return window.pageYOffset || docElem.scrollTop;
         }
@@ -324,35 +345,12 @@
 
     })();
 
-    // Activate WOW.js plugin for animation on scrol
+    // Activate WOW.js plugin for animation on scroll
     new WOW().init();
 
 </script>
 
-<script src="{{ STATIC_URL }}js/countUp.js"></script>
 <script type="text/javascript">
-
-    // $(document).ready(function () {
-
-    //     var options = {
-    //       useEasing : false, 
-    //       useGrouping : true, 
-    //       separator : ',', 
-    //       decimal : '.', 
-    //       prefix : '$', 
-    //       suffix : '' 
-    //     };
-
-
-    //     window.setTimeout(function (){
-    //         var numAnim = new CountUp("violation-dollar-countup", 0, 240000000, 0, 2, options);
-    //         numAnim.start();
-    //     }, 0)
-
-
-
-    // });
-
 
 </script>
     {% endblock %}
