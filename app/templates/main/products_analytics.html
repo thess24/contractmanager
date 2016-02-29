@@ -21,7 +21,146 @@
 </div>
 
 
-<section  class="container features">
+<section  class="container features last-section" >
+
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <div class="navy-line"></div>
+            <h1>Access all of your data</h1>
+            <p>Learn key insights from your current physician arranagements and strategically plan for the future.</p>
+        </div>
+    </div>
+
+    <div class="row" style='padding-bottom:60px;padding-top:60px'>
+        <div class="col-xs-4 sm-benefit-outline">
+            <div class=' pull-left'>
+                <i class='fa fa-download'></i>
+            </div>
+            <span class=' pull-right'>
+                <h3>Export Data</h3>
+                <p>Download all of you data in multiple preconfigured, and customized reports.</p>
+            </span>
+        </div>
+        <div class="col-xs-4 sm-benefit-outline">
+            <div class='column pull-left'>
+                <i class='fa fa-bar-chart'></i>
+            </div>
+            <div class='column pull-left'>
+                <h3>Custom Analytics</h3>
+                <p>Create custom reports, in addition to preconfigured reports below.</p>
+            </div>
+
+        </div>
+        <div class="col-xs-4 sm-benefit-outline">
+            <div class='column pull-left'>
+                <i class='fa fa-lock'></i>
+            </div>
+            <div class='column pull-left'>
+                <h3>Permission Based</h3>
+                <p>Control who has access to your data within your organization.</p>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="row products-area">
+        <div class="col-sm-6 wow fadeInLeft">
+            <h1>The Data</h1>
+
+            <div class='m-t-lg'>
+                <p style='font-weight:bold'>Dig Down</p>
+                <p>Filter your contracts to find exactly what you are looking for.  Search the full text of each contract, get summary statistics of contracts, and learn about the data you have</p>
+            </div>
+
+            <div class='m-t-lg'>
+                <p style='font-weight:bold'>One Touch Away</p>
+                <p>With our preconfigured reports, some of the most vital insights of your data are just a click away.  You can use these preconfigured reports, or create your own to look at the data in new ways.</p>
+            </div>
+
+        </div>
+        <div class="col-sm-6 text-right wow fadeInRight">
+            <img src="{{ STATIC_URL }}img/dashboard.png" alt="dashboard" class="img-responsive pull-right">
+        </div>
+    </div>
+
+    <hr>
+    <div class="row products-area">
+        <div class="col-lg-12 text-center">
+            <h1>Preconfigured reports</h1>
+            <p>Learn key insights from your current physician arranagements and strategically plan for the future.</p>
+        </div>
+
+        <div class='text-center' style='padding-top:160px'>
+            <div class="row">
+                <div class="col-sm-4">
+                    <i class='icon ion-compass' style='font-size:6em'></i>
+                    <h2>Expiration Analysis</h2>
+                    <p>View a snapshot of all contract areas to plan for contracts expiring soon</p>
+                </div>
+                <div class="col-sm-4">
+                    <i class='icon ion-map' style='font-size:6em'></i>
+                    <h2>Compare physician pay</h2>
+                    <p>Use your own data to graphically compare physician pay</p>
+                </div>
+                <div class="col-sm-4">
+                    <i class='icon ion-stats-bars' style='font-size:6em'></i>
+                    <h2>Deep dive into contracts</h2>
+                    <p>Filter your contracts to find exactly what you want to look at</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <i class='icon ion-levels' style='font-size:6em'></i>
+                    <h2>Service Line Analysis</h2>
+                    <p>Look at each physician arrangement by service line</p>
+                </div>
+                <div class="col-sm-4">
+                    <i class='fa fa-hospital-o' style='font-size:6em; padding: 15px 0px;'></i>
+                    <h2>Site Analysis</h2>
+                    <p>Inspect documents and contracts by site</p>
+                </div>
+                <div class="col-sm-4">
+                    <i class='icon ion-cash' style='font-size:6em'></i>
+                    <h2>Dollar value analysis</h2>
+                    <p>Know how much you spend on physician arrangements</p>
+                </div>
+            </div>
+
+            <div class="row" style='padding-bottom:100px'>
+                <div class="col-sm-4">
+                    <i class='icon ion-aperture' style='font-size:6em'></i>
+                    <h2>System Snapshot</h2>
+                    <p>Look at all your data at a glance</p>
+                </div>
+                <div class="col-sm-4">
+                    <i class='fa fa-user-md' style='font-size:6em; padding: 15px 0px;'></i>
+                    <h2>Physician View</h2>
+                    <p>All the data about a physician, all in one place</p>
+                </div>
+                <div class="col-sm-4">
+                    <i class='icon ion-ios-loop-strong' style='font-size:6em'></i>
+                    <h2>Change History</h2>
+                    <p>See what changes have been made to contracts, and who made them</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class='text-center'>
+            <a href="{% url 'contact' %}" class='btn btn-custom btn-xl'> Contact Us To Learn More</a>
+        </div>
+
+
+    </div>
+
+
+
+</section>
+
+
+<!-- <section  class="container features">
 
     <div class="row">
         <div class="col-lg-12 text-center">
@@ -89,7 +228,7 @@
         </div>
     </div>
 
-</section>
+</section> -->
 
 
 {% endblock %}

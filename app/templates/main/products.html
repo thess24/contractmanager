@@ -5,6 +5,17 @@
 <title>Baldur Healthcare - Compliance Software Products</title>
 {% endblock %}
 
+{% block head %} 
+<style type="text/css">
+
+.products-overview{
+    font-size: 2em;
+    font-weight: 200;
+}
+
+</style>
+{% endblock %}
+
 
 {% block content %}
 <div class="carousel front-header">
@@ -23,7 +34,262 @@
 
 
 <section  class="container features">
+
+
+
     <div class="row">
+        <div class="col-xs-12 text-center">
+            <div class="navy-line"></div>
+            <h1>Painlessly Manage Physician Arrangements</h1>
+            <h2>A centralized & integrated system</h2>
+        </div>
+    </div>
+
+<!--     <div class='row text-center' id='overall-phys-arr'>
+        <div class='col-sm-4 col-sm-offset-4'>
+            <i class='ion-ios-medkit-outline'></i>
+            <h2>Overall Physician Arrangment</h2>
+            <p>Document storage, physician database</p>
+        </div>
+    </div> -->
+
+    <div class='row products' style='padding:80px 0px 60px 0px'>
+        <div class='col-sm-6'>
+            <h2>The Overall Physician Arrangment</h2>
+            <p>At its base, Baldur is a system to manage the entire physician arrangement, including doucment storage, time sheets, and contracts.  We take care of alerts and tracking documents so you don't need to worry about your arrangements.</p>
+        </div>
+        <div class='col-sm-6'>
+            <h2>One Integrated System</h2>
+            <p>Baldur's one integrated system revolves around the physician.  All of our systems tie together around this point, and so the entire physician arrangement can be managed and tracked from Baldur.  Our system provides advanced analytics and centralized repository to take care of all compliance needs.</p>
+        </div>
+    </div>
+
+    <div class='row' style='padding:50px 0px'>
+        <div class='col-sm-3'>
+            <ul class='phys-arr-list'>
+                <li>Document storage</li>
+                <li>Signature verification</li>
+            </ul>
+        </div>
+        <div class='col-sm-3'>
+            <ul class='phys-arr-list'>
+                <li>Physician information</li>
+                <li>Alert system</li>
+            </ul>
+        </div>
+        <div class='col-sm-3'>
+            <ul class='phys-arr-list'>
+                <li>Physician groups</li>
+                <li>User permissions</li>
+            </ul>
+        </div>
+        <div class='col-sm-3'>
+            <ul class='phys-arr-list'>
+                <li>Version history</li>
+                <li>Easy download</li>
+            </ul>
+        </div>
+    </div>
+
+            
+
+    <div class='row products-area text-center'>
+        <div class='col-xs-4'>
+            <i class="ion-ios-copy-outline"></i>
+            <h2>Contract Manager</h2>
+            <p>Create, Manage, and Track Physician Arrangement Contracts</p>
+            <a href="{% url 'products_contractmanager' %}" class='btn btn-custom'>Learn More</a>
+        </div>
+        <div class='col-xs-4'>
+            <i class="ion-ios-time-outline"></i>
+            <h2>Time Sheets</h2>
+            <p>Tracking physician arrangement times couldn't be easier</p>
+            <a href="{% url 'products_timetracker' %}" class='btn btn-custom'>Learn More</a>
+        </div>
+        <div class='col-xs-4'>
+            <i class="ion-ios-pulse"></i>
+            <h2>Compliance Analytics</h2>
+            <p>Use your data to help you make better informed strategic decisions</p>
+            <a href="{% url 'products_analytics' %}" class='btn btn-custom'>Learn More</a>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row products-area">
+        <div class="col-sm-6">
+            <h1>Unlimited Document and </br>Contract Storage</h1>
+            <div class='m-t-lg'>
+                <p style='font-weight:bold'>Flexible storage</p>
+                <p>Expired contracts and wrongfully submitted time sheets can cause compliance issues.  Our fully automated system allows you to be alerted in real time of any possible issues.</p>
+            </div>
+            <div class='m-t-lg'>
+                <p style='font-weight:bold'>Backups built in</p>
+                <p>Expired contracts and wrongfully submitted time sheets can cause compliance issues.  Our fully automated system allows you to be alerted in real time of any possible issues.</p>
+            </div>
+        </div>
+        <div class='col-sm-6' style='padding-top: 60px'>
+            <i class='ion-ios-albums-outline' style='font-size:15em;padding-left:150px'></i>
+            <!-- ion-ios-cloud-upload-outline -->
+        </div>
+    </div>
+    <hr>
+
+    <div class="row products-area">
+        <div class="col-sm-6" style='padding-top: 60px'>
+            <i class='ion-ios-alarm-outline' style='font-size:16em;padding-left:160px'></i>
+        </div>
+        <div class="col-sm-6">
+            <h1>Set Reminders and Alerts</h1>
+            <div class='m-t-lg'>
+                <p style='font-weight:bold'>Never forget an important date again.</p>
+                <p>Expired contracts and wrongfully submitted time sheets can cause compliance issues.  Our fully automated system allows you to be alerted in real time of any possible issues.</p>
+            </div>
+            <ul class='check-list m-t-lg'>
+                <li>Expiring contracts</li>
+                <li>Physicians who need to submit time sheets</li>
+                <li>Auto renewals coming due soon</li>
+                <li>Errors in physician time sheets</li>
+                <li>Contract has been passed to user for approval</li>
+            </ul>
+        </div>
+    </div>
+    <hr>
+
+    <div class="row products-area">
+        <div class="col-sm-6">
+            <h1>Collaborate across teams</h1>
+            <div class='m-t-lg'>
+                <p style='font-weight:bold'>Work together to create contracts</p>
+                <p>Contracts can be passed across teams, as well as within teams to get feedback, make changes, and seek approvals.</p>
+            </div>
+            <div class='m-t-lg'>
+                <p style='font-weight:bold'>Manage your workflows</p>
+                <p>Preset to what department or person a time sheet or contract will travel to next for approval.  With our workflow manager tool, workflows can be created and edited in a snap. This streamlined process saves time and hassle.</p>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <i class='ion-ios-people-outline' style='font-size:20em;padding-left:160px'></i>
+        </div>
+    </div>
+    <hr>
+
+    <div class="row products-area">
+        <div class="col-lg-12 text-center">
+            <h1>Data and analytics at your fingertips</h1>
+            <p style='font-weight:bold'>Learn key insights from your current physician arranagements and strategically plan for the future.</p>
+        </div>
+
+        <div class='text-center' style='padding-top:160px'>
+            <div class="row">
+                <div class="col-sm-4">
+                    <i class='icon ion-compass' style='font-size:6em'></i>
+                    <h2>Expiration Analysis</h2>
+                    <p>View a snapshot of all contract areas to plan for contracts expiring soon</p>
+                </div>
+                <div class="col-sm-4">
+                    <i class='icon ion-map' style='font-size:6em'></i>
+                    <h2>Compare physician pay</h2>
+                    <p>Use your own data to graphically compare physician pay</p>
+                </div>
+                <div class="col-sm-4">
+                    <i class='icon ion-stats-bars' style='font-size:6em'></i>
+                    <h2>Deep dive into contracts</h2>
+                    <p>Filter your contracts to find exactly what you want to look at</p>
+                </div>
+            </div>
+
+            <div class="row" style='padding-bottom:120px'>
+                <div class="col-sm-4">
+                    <i class='icon ion-levels' style='font-size:6em'></i>
+                    <h2>Service Line Analysis</h2>
+                    <p>Look at each physician arrangement by service line</p>
+                </div>
+                <div class="col-sm-4">
+                    <i class='fa fa-hospital-o' style='font-size:6em; padding: 15px 0px;'></i>
+                    <h2>Site Analysis</h2>
+                    <p>Inspect documents and contracts by site</p>
+                </div>
+                <div class="col-sm-4">
+                    <i class='icon ion-cash' style='font-size:6em'></i>
+                    <h2>Dollar value analysis</h2>
+                    <p>Know how much you spend on physician arrangements</p>
+                </div>
+            </div>
+            <a href="{% url 'products_analytics' %}" class="btn btn-custom">Learn More About Compliance Analytics</a>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row products-area">
+        <div class="col-sm-6">
+            <h1>Audit ready</h1>
+            <div class='m-t-lg'>
+                <p style='font-weight:bold'>Your data is ready to download</p>
+                <p>All of your data is available to download in only a few clicks.</p>
+            </div>
+            <div class='m-t-lg'>
+                <ul class='check-list m-t-lg'>
+                    <li>Full time sheet history</li>
+                    <li>All contract versions</li>
+                    <li>Aggregated contract data</li>
+                    <li>History of approvals and signatures</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <i class='ion-ios-bookmarks-outline' style='font-size:15em;padding-left:100px'></i>
+        </div>
+    </div>
+
+
+
+<!--     <div class="row products-area">
+        <div class="col-lg-12">
+            <h1>Attentive support</h1>
+        </div>
+    </div>
+
+    <div class="row products-area">
+        <div class="col-lg-12">
+            <h1>Expert level security</h1>
+        </div>
+    </div>
+
+    <div class="row products-area">
+        <div class="col-lg-12">
+            <h1>Everything in one place</h1>
+            <p>Talk about how the system fully manages physician arrangements and includes everything you need to have</p>
+        </div>
+    </div> -->
+
+
+
+
+<!--                 <div>
+                    <i class='fa fa-bell'></i>  
+                </div>
+                <div>
+                    <i class='fa fa-file-text-o'></i>  
+                </div>
+                <div>
+                    <i class='fa fa-bar-chart'></i>  
+                </div>
+                <div>
+                    <i class='fa fa-calendar-o'></i>  
+                </div>
+ -->
+
+
+<!--                 <div>
+                    <i class='fa fa-copy'></i>  
+                </div> -->
+</section>
+
+
+<!-- <section  class="container products">
+    <div class="row products-header">
         <div class="col-lg-12 text-center">
             <div class="navy-line"></div>
             <h1>Contract Manager</h1>
@@ -31,45 +297,52 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-3 text-center wow fadeInLeft">
-            <div>
-                <i class="fa fa-file-o features-icon"></i>
-                <h2>Create Contracts Collaboratively</h2>
-                <p>Work together with members of your department, and throughout the organization to create contracts.  Use templates other members have created!</p>
+        <div class="col-md-6 wow fadeInLeft">
+            <div class='row cm-list m-t-lg'>
+                <div class='col-xs-10'>
+                    <h2 class='dashed-bottom'><i class="fa fa-file-o"></i>  Create Contracts Collaboratively</h2>
+                    <p>Work together with members of your department, and throughout the organization to create contracts.  Use templates other members have created!</p>
+                </div>
             </div>
-            <div class="m-t-lg">
-                <i class="fa fa-bell features-icon"></i>
-                <h2>Alerts</h2>
-                <p>Recieve alerts when contracts are ready for viewing, expire soon, and more!</p>
+
+            <div class='row cm-list m-t-lg'>
+                <div class='col-xs-10'>
+                    <h2 class='dashed-bottom'><i class="fa fa-bell"></i>  Alerts</h2>
+                    <p>Recieve alerts when contracts are ready for viewing, expire soon, and more!</p>
+                </div>
             </div>
+
+            <div class='row cm-list m-t-lg'>
+                <div class='col-xs-10'>
+                    <h2 class='dashed-bottom'><i class="fa fa-code-fork"></i>  Workflow</h2>
+                    <p>Set the workflow to dictate how contracts should be passed from department to department.  Make "default" workflows or choose who to send to!</p>
+                </div>
+            </div>
+
+            <div class='row cm-list m-t-lg'>
+                <div class='col-xs-10'>
+                    <h2 class='dashed-bottom'><i class="fa fa-retweet"></i>  Version Control</h2>
+                    <p>Every change to the contract is tracked. You can easily compare contract versions, view history, and see who made changes.</p>
+                </div>
+            </div>
+
         </div>
-        <div class="col-md-6 text-center  wow zoomIn">
+
+        <div class="col-md-6  wow zoomIn">
             <img src="{{ STATIC_URL }}img/perspective.png" alt="dashboard" class="img-responsive">
-        </div>
-        <div class="col-md-3 text-center wow fadeInRight">
-            <div>
-                <i class="fa fa-code-fork features-icon"></i>
-                <h2>Workflow</h2>
-                <p>Set the workflow to dictate how contracts should be passed from department to department.  Make "default" workflows or choose who to send to!</p>
-            </div>
-            <div class="m-t-lg">
-                <i class="fa fa-retweet features-icon"></i>
-                <h2>Version Control</h2>
-                <p>Every change to the contract is tracked. You can easily compare contract versions, view history, and see who made changes.</p>
-            </div>
         </div>
         
 
     </div>
     
-    <div class='text-center row'>
-        <a href="{% url 'products_contractmanager' %}" class="btn btn-primary">Learn More About Contract Manager</a>
+    <div class='text-center row' style='margin-top:70px'>
+        <a href="{% url 'products_contractmanager' %}" class="btn btn-custom">Learn More About Contract Manager</a>
     </div>
 
 </section>
 
 
-<section class="features gray-section">
+<section class="products gray-section">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -99,7 +372,26 @@
                 </div>
             </div>
 
-            <a href="{% url 'products_analytics' %}" class="btn btn-primary">Learn More About Compliance Analytics</a>
+            <div class="row" style='padding-bottom:120px'>
+                <div class="col-sm-4">
+                    <i class='icon ion-levels' style='font-size:6em'></i>
+                    <h2>Service Line Analysis</h2>
+                    <p>Look at each physician arrangement by service line</p>
+                </div>
+                <div class="col-sm-4">
+                    <i class='fa fa-hospital-o' style='font-size:6em; padding: 15px 0px;'></i>
+                    <h2>Site Analysis</h2>
+                    <p>Inspect documents and contracts by site</p>
+                </div>
+                <div class="col-sm-4">
+                    <i class='icon ion-cash' style='font-size:6em'></i>
+                    <h2>Dollar value analysis</h2>
+                    <p>Know how much you spend on physician arrangements</p>
+                </div>
+            </div>
+
+
+            <a href="{% url 'products_analytics' %}" class="btn btn-custom">Learn More About Compliance Analytics</a>
 
         </div>
 
@@ -108,7 +400,7 @@
 </section>
 
 
-<section id="team" class="team">
+<section class="last-section products">
     <div class="container">
         <div class="row m-b-lg">
             <div class="col-lg-12 text-center">
@@ -127,7 +419,7 @@
                 <div class="m-t-lg">
                     <i class="fa fa-bell features-icon"></i>
                     <h2>Alerts</h2>
-                    <p>When there are problems with the submitted times, the correct people will be automatically notified--saving time and hassle</p>
+                    <p>When there are problems with the submitted times, the correct people will be automatically notified-saving time and hassle</p>
                 </div>
             </div>
             <div class="col-md-6 text-center  wow zoomIn">
@@ -148,14 +440,14 @@
         </div>
 
         <div class='text-center row'>
-            <a href="{% url 'products_timetracker' %}" class="btn btn-primary">Learn More About TimeTracker</a>
+            <a href="{% url 'products_timetracker' %}" class="btn btn-custom">Learn More About TimeTracker</a>
         </div>
 
     </div>
 </section>
 
 
-
+ -->
 {% endblock %}
 
 
