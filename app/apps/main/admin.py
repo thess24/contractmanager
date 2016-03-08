@@ -23,6 +23,8 @@ class PhysicianTimeLogCategoryAdmin(admin.ModelAdmin):
 class AlertAdmin(admin.ModelAdmin):
     list_display = ('name', 'user', 'active', 'level')
     
+class ContactRequestAdmin(admin.ModelAdmin):
+    list_display = ('first_name', 'last_name', 'email', 'date')
 
 
 admin.site.register(HealthSystem)
@@ -48,6 +50,6 @@ admin.site.register(PhysicianTimeLogPeriod, PhysicianTimeLogPeriodAdmin)
 admin.site.register(PhysicianTimeLogApproval, PhysicianTimeLogApprovalAdmin)
 admin.site.register(PhysicianTimeLogCategory, PhysicianTimeLogCategoryAdmin)
 
-admin.site.register(ContactRequest)
+admin.site.register(ContactRequest, ContactRequestAdmin)
 
 
