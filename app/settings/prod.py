@@ -18,11 +18,11 @@ DEBUG = False
 ########## EMAIL CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
+EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
 
 
 # # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-use-tls
-# EMAIL_USE_TLS = True
+EMAIL_USE_TLS = True
 
 # # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-host
 # EMAIL_HOST = environ.get('EMAIL_HOST', 'smtp.mandrillapp.com')
@@ -31,7 +31,7 @@ DEBUG = False
 # EMAIL_HOST_PASSWORD = environ.get('EMAIL_HOST_PASSWORD', '')
 
 # # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-host-user
-# EMAIL_HOST_USER = environ.get('EMAIL_HOST_USER', 'your_email@example.com')
+EMAIL_HOST_USER = environ.get('EMAIL_HOST_USER', 'baldurhealthcare@gmail.com')
 
 # # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-port
 # EMAIL_PORT = environ.get('EMAIL_PORT', 587)
@@ -40,9 +40,9 @@ DEBUG = False
 # EMAIL_SUBJECT_PREFIX = '[%s] ' % SITE_NAME
 
 # # See: https://docs.djangoproject.com/en/dev/ref/settings/#server-email
-# SERVER_EMAIL = EMAIL_HOST_USER
+SERVER_EMAIL = EMAIL_HOST_USER
 
-# DEFAULT_FROM_EMAIL = environ.get('EMAIL_HOST_USER', '')  #for use with windows live 
+DEFAULT_FROM_EMAIL = environ.get('DEFAULT_FROM_EMAIL', 'taylor@baldurhealthcare.com')
 ########## END EMAIL CONFIGURATION
 
 
@@ -72,7 +72,7 @@ DATABASES = {
 # See: http://django-storages.readthedocs.org/en/latest/index.html
 INSTALLED_APPS += (
     'storages',
-    # 'djrill'
+    'djrill',
 )
 
 # See: http://django-storages.readthedocs.org/en/latest/backends/amazon-S3.html#settings
@@ -114,7 +114,7 @@ SECRET_KEY = environ.get('SECRET_KEY', SECRET_KEY)
 
 ########## ALLOWED HOSTS CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['.herokuapp.com', '.elasticbeanstalk.com', '.baldurhealthcare.com']
+ALLOWED_HOSTS = ['.elasticbeanstalk.com', '.baldurhealthcare.com']
 ########## END ALLOWED HOST CONFIGURATION
 
 
@@ -138,6 +138,6 @@ SECURE_FRAME_DENY = True
 
 ####### DJRILL - MANDRILL EMAIL
 
-# MANDRILL_API_KEY = environ.get('MANDRILL_API_KEY', "")
+MANDRILL_API_KEY = environ.get('MANDRILL_API_KEY', "")
 
 

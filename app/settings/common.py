@@ -34,7 +34,7 @@ DEBUG = False
 ########## MANAGER CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#admins
 ADMINS = (
-    ('Admin', 'admin@contractmanager.com'),
+    ('Baldur', 'baldurhealthcare@gmail.com'),
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#managers

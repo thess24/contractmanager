@@ -9,7 +9,7 @@ import datetime
 from dateutil.relativedelta import relativedelta
 from django.contrib import messages
 from djqscsv import render_to_csv_response
-
+from django.core.mail import send_mail
 
 
 def test(request):
@@ -28,7 +28,7 @@ def contact(request):
 		if form.is_valid():
 			form.save()
 
-			print 'FAKE SEND EMAIL'
+			send_mail("Contact Reqeust Recieved", "Someone submitted a contact request","Baldur Bot <taylor@baldurhealthcare.com>", ["baldurhealthcare@gmail.com"])
 
 			return HttpResponseRedirect(reverse('contact'))
 

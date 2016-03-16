@@ -1,3 +1,4 @@
 -r common.txt
 django-storages
 boto
+djrill==2.0

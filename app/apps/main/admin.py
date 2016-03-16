@@ -27,6 +27,8 @@ class ContactRequestAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'last_name', 'email', 'date')
 
 
+
+
 admin.site.register(HealthSystem)
 admin.site.register(HealthSite)
 admin.site.register(Team) 
