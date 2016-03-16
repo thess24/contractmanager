@@ -31,7 +31,7 @@ EMAIL_USE_TLS = True
 # EMAIL_HOST_PASSWORD = environ.get('EMAIL_HOST_PASSWORD', '')
 
 # # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-host-user
-EMAIL_HOST_USER = environ.get('EMAIL_HOST_USER', 'baldurhealthcare@gmail.com')
+# EMAIL_HOST_USER = environ.get('EMAIL_HOST_USER', 'baldurhealthcare@gmail.com')
 
 # # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-port
 # EMAIL_PORT = environ.get('EMAIL_PORT', 587)
@@ -40,7 +40,7 @@ EMAIL_HOST_USER = environ.get('EMAIL_HOST_USER', 'baldurhealthcare@gmail.com')
 # EMAIL_SUBJECT_PREFIX = '[%s] ' % SITE_NAME
 
 # # See: https://docs.djangoproject.com/en/dev/ref/settings/#server-email
-SERVER_EMAIL = EMAIL_HOST_USER
+# SERVER_EMAIL = EMAIL_HOST_USER
 
 DEFAULT_FROM_EMAIL = environ.get('DEFAULT_FROM_EMAIL', 'taylor@baldurhealthcare.com')
 ########## END EMAIL CONFIGURATION
@@ -114,7 +114,7 @@ SECRET_KEY = environ.get('SECRET_KEY', SECRET_KEY)
 
 ########## ALLOWED HOSTS CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['.elasticbeanstalk.com', '.baldurhealthcare.com']
+ALLOWED_HOSTS = ['.elasticbeanstalk.com', '.baldurhealthcare.com', 'localhost']
 ########## END ALLOWED HOST CONFIGURATION
 
 
